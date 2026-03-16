@@ -1,0 +1,1202 @@
+[
+  {
+    "cardId": 8193,
+    "cardIndex": "魏・軍師001",
+    "sortNo": 1,
+    "name": "Guo Jia",
+    "nameJapanese": "郭嘉",
+    "nameShort": "GuoJia",
+    "faction": "Wei",
+    "rarity": "R",
+    "artist": "塚本陽子",
+    "lore": "Cao Cao's strategist who excelled in countless battles. Against Yuan Shao, his predictions proved uncannily accurate. A master schemer, Cao Cao said: Only Guo Jia understands my mind.",
+    "battleCry": "Whatever schemes you devise,\nit all falls within my grasp.",
+    "birthYear": 170,
+    "deathYear": 207,
+    "tactics": {
+      "id": 22,
+      "name": "Rally",
+      "description": "Reduce revival time for allies",
+      "type": "Tactics",
+      "affinity": "Earth",
+      "target": "Ally",
+      "range": "all",
+      "rangeSize": {
+        "x": 0,
+        "y": 0
+      },
+      "gaugeMax": 4000,
+      "chargeTime": 0
+    },
+    "formation": {
+      "id": 82,
+      "name": "Assault",
+      "description": "Boost POW and charge damage",
+      "type": "Formation",
+      "affinity": "Earth",
+      "target": "Ally",
+      "range": "square_large",
+      "rangeSize": {
+        "x": 310,
+        "y": 310
+      },
+      "gaugeMax": 6000,
+      "chargeTime": 1
+    },
+    "dialogue": {
+      "greeting1": "So you're my lord for life?\nI'm Guo Jia. Pleased to meet you.",
+      "greeting2": "Master my abilities,\nand I expect you'll do great things.",
+      "greeting3": "",
+      "goBattleBefore": "Let me train the troops so we can\nexecute my strategies swiftly.",
+      "goBattle": "No loose ends? Good.\nLet's move out.",
+      "training": "I promise solid results.",
+      "trainingExpect": "The troops seem spirited today.",
+      "tokkun": "Intensive training, as I foresaw.",
+      "mockBattle": "Mock battle - just as I predicted.",
+      "hunting": "We can't miss this opportunity.",
+      "endTraining": "Not bad. Not bad at all.",
+      "success": "Flawless training.",
+      "failed": "Tch... I miscalculated."
+    }
+  },
+  {
+    "cardId": 8194,
+    "cardIndex": "魏・軍師002",
+    "sortNo": 2,
+    "name": "Sima Yi",
+    "nameJapanese": "司馬懿",
+    "nameShort": "SimaYi",
+    "faction": "Wei",
+    "rarity": "SR",
+    "artist": "wolfina",
+    "lore": "Wei's greatest strategist. Feigned illness to avoid service until Cao Cao summoned him. Served Emperors Cao Pi and Cao Rui, thwarting Zhuge Liang's invasions and crushing Gongsun Yuan's rebellion.",
+    "battleCry": "Prepare until victory is certain.\nGambling is for amateurs.",
+    "birthYear": 179,
+    "deathYear": 251,
+    "tactics": {
+      "id": 21,
+      "name": "Reinforce",
+      "description": "Restore HP to allied units",
+      "type": "Tactics",
+      "affinity": "Man",
+      "target": "Ally",
+      "range": "all",
+      "rangeSize": {
+        "x": 0,
+        "y": 0
+      },
+      "gaugeMax": 4000,
+      "chargeTime": 0
+    },
+    "formation": {
+      "id": 80,
+      "name": "Primal One",
+      "description": "Reduce enemy POW and SPD",
+      "type": "Formation",
+      "affinity": "Heaven",
+      "target": "Enemy",
+      "range": "circle",
+      "rangeSize": {
+        "x": 93,
+        "y": 93
+      },
+      "gaugeMax": 9000,
+      "chargeTime": 2
+    },
+    "dialogue": {
+      "greeting1": "Hmph. A pleasure to meet you.",
+      "greeting2": "I am Sima Yi Zhongda,\nand I shall serve as your advisor.",
+      "greeting3": "With my abilities,\nI'll bring certain doom to our foes.",
+      "goBattleBefore": "Allow me to train the troops\nto perfect my strategies.",
+      "goBattle": "With me here, victory is assured.",
+      "training": "Very well. Let's begin.",
+      "trainingExpect": "Hmph. I'll drill them thoroughly today.",
+      "tokkun": "Entrust this to a capable general.",
+      "mockBattle": "Entrust this to a capable general.",
+      "hunting": "Sometimes boldness is wise.",
+      "endTraining": "Hmph. The training paid off.",
+      "success": "Hmph. This training was flawless.",
+      "failed": "Impossible... to fail?!"
+    }
+  },
+  {
+    "cardId": 8195,
+    "cardIndex": "魏・軍師003",
+    "sortNo": 3,
+    "name": "Xun Yu",
+    "nameJapanese": "荀Θ",
+    "nameShort": "XunYu",
+    "faction": "Wei",
+    "rarity": "R",
+    "artist": "hippo",
+    "lore": "Born to nobility, praised as one who could aid a king since youth. As Cao Cao's chief advisor, he supported him in all military and state affairs, laying the foundation for conquest.",
+    "battleCry": "Use my wisdom\nto revive the nation.",
+    "birthYear": 163,
+    "deathYear": 212,
+    "tactics": {
+      "id": 84,
+      "name": "Regroup",
+      "description": "Return to castle and reduce revival",
+      "type": "Tactics",
+      "affinity": "Earth",
+      "target": "Ally",
+      "range": "all",
+      "rangeSize": {
+        "x": 0,
+        "y": 0
+      },
+      "gaugeMax": 6000,
+      "chargeTime": 1
+    },
+    "formation": {
+      "id": 74,
+      "name": "Rally Elite",
+      "description": "Boost POW of nearby allies",
+      "type": "Formation",
+      "affinity": "Man",
+      "target": "Ally",
+      "range": "square",
+      "rangeSize": {
+        "x": 280,
+        "y": 280
+      },
+      "gaugeMax": 8000,
+      "chargeTime": 2
+    },
+    "dialogue": {
+      "greeting1": "My lord, pleased to meet you.\nI am Xun Yu.",
+      "greeting2": "My abilities will help guide you\non the path to greatness.",
+      "greeting3": "",
+      "goBattleBefore": "I'd like to train the troops\nto sharpen our abilities.",
+      "goBattle": "Very well, let's be off.",
+      "training": "Very well. Let's train.",
+      "trainingExpect": "I sense today's training\nwill go well.",
+      "tokkun": "Let me select a general for this.",
+      "mockBattle": "Let me select a general for this.",
+      "hunting": "Let's face this without fear.",
+      "endTraining": "The training paid off.",
+      "success": "The training went splendidly.",
+      "failed": "Hmm, to fail..."
+    }
+  },
+  {
+    "cardId": 8196,
+    "cardIndex": "魏・軍師004",
+    "sortNo": 4,
+    "name": "Xun You",
+    "nameJapanese": "荀攸",
+    "nameShort": "XunYou",
+    "faction": "Wei",
+    "rarity": "C",
+    "artist": "風間雷太",
+    "lore": "Xun Yu's nephew who served Cao Cao on his recommendation. A meticulous planner who never revealed his schemes. Though outwardly dull, he hid courage within and loyally served as strategist.",
+    "battleCry": "Caution alone won't\nbring your plans to life.",
+    "birthYear": 157,
+    "deathYear": 214,
+    "tactics": {
+      "id": 21,
+      "name": "Reinforce",
+      "description": "Restore HP to allied units",
+      "type": "Tactics",
+      "affinity": "Man",
+      "target": "Ally",
+      "range": "all",
+      "rangeSize": {
+        "x": 0,
+        "y": 0
+      },
+      "gaugeMax": 4000,
+      "chargeTime": 0
+    },
+    "formation": {
+      "id": 81,
+      "name": "Link Force",
+      "description": "Reduce enemy SPD",
+      "type": "Formation",
+      "affinity": "Heaven",
+      "target": "Enemy",
+      "range": "wide_rect_narrow",
+      "rangeSize": {
+        "x": 520,
+        "y": 190
+      },
+      "gaugeMax": 4000,
+      "chargeTime": 0
+    },
+    "dialogue": {
+      "greeting1": "Hey, great to meet you!\nI'm Xun You. Let's work together.",
+      "greeting2": "My abilities are easy to use\nand handy in all sorts of situations.",
+      "greeting3": "They'll definitely come in handy\nin your battles!",
+      "goBattleBefore": "Let me run some training\nso we can use my skills better.",
+      "goBattle": "Alright, let's head out!",
+      "training": "Alright, let's get started!",
+      "trainingExpect": "Nice weather today!\nShould go well.",
+      "tokkun": "Special training! Who to ask...",
+      "mockBattle": "Mock battle! Who to ask...",
+      "hunting": "Good call - should work out!",
+      "endTraining": "That went pretty well!",
+      "success": "Alright! That went great!",
+      "failed": "Ahh man, that failed..."
+    }
+  },
+  {
+    "cardId": 8197,
+    "cardIndex": "魏・軍師005",
+    "sortNo": 5,
+    "name": "Chen Qun",
+    "nameJapanese": "陳羣",
+    "nameShort": "ChenQun",
+    "faction": "Wei",
+    "rarity": "C",
+    "artist": "小城崇志",
+    "lore": "Served three Wei rulers: Cao Cao, Cao Pi, and Cao Rui. His Nine Ranks system stabilized Wei's government. Advised Emperor Cao Rui in politics and war, rising to Minister of Works.",
+    "battleCry": "Let me shape the battle I envision.",
+    "birthYear": null,
+    "deathYear": 235,
+    "tactics": {
+      "id": 22,
+      "name": "Rally",
+      "description": "Reduce revival time for allies",
+      "type": "Tactics",
+      "affinity": "Earth",
+      "target": "Ally",
+      "range": "all",
+      "rangeSize": {
+        "x": 0,
+        "y": 0
+      },
+      "gaugeMax": 4000,
+      "chargeTime": 0
+    },
+    "formation": {
+      "id": 87,
+      "name": "Inspire",
+      "description": "Increase ally POW and INT",
+      "type": "Formation",
+      "affinity": "Man",
+      "target": "Ally",
+      "range": "wide_rect",
+      "rangeSize": {
+        "x": 530,
+        "y": 235
+      },
+      "gaugeMax": 4000,
+      "chargeTime": 0
+    },
+    "dialogue": {
+      "greeting1": "It's an honor to meet you.\nI am Chen Qun.",
+      "greeting2": "My abilities are tried and true techniques.",
+      "greeting3": "I promise to bring\ncertain victory to your battles.",
+      "goBattleBefore": "Let me conduct training\nto sharpen our abilities.",
+      "goBattle": "Time to show what we've learned!",
+      "training": "Let us begin then.",
+      "trainingExpect": "I sense today's training will go well.",
+      "tokkun": "I'll select a worthy general.",
+      "mockBattle": "I'll select a worthy general.",
+      "hunting": "A sound decision.",
+      "endTraining": "The training paid off.",
+      "success": "This training was a great success!",
+      "failed": "Did I misjudge...?"
+    }
+  },
+  {
+    "cardId": 24577,
+    "cardIndex": "蜀・軍師001",
+    "sortNo": 6,
+    "name": "Zhuge Liang",
+    "nameJapanese": "諸葛亮",
+    "nameShort": "Z.Liang",
+    "faction": "Shu",
+    "rarity": "SR",
+    "artist": "末弥純",
+    "lore": "Genius strategist who joined Liu Bei after the Three Visits. Crucial at Red Cliffs and Shu's conquest. As Chancellor, he managed all state affairs and led multiple northern campaigns against Wei.",
+    "battleCry": "Three kingdoms into one...\nMy plan won't end at division.",
+    "birthYear": 181,
+    "deathYear": 234,
+    "tactics": {
+      "id": 77,
+      "name": "Seven Stars",
+      "description": "Restore HP beyond maximum",
+      "type": "Tactics",
+      "affinity": "Man",
+      "target": "Ally",
+      "range": "all",
+      "rangeSize": {
+        "x": 0,
+        "y": 0
+      },
+      "gaugeMax": 8000,
+      "chargeTime": 2
+    },
+    "formation": {
+      "id": 74,
+      "name": "Rally Elite",
+      "description": "Boost POW of nearby allies",
+      "type": "Formation",
+      "affinity": "Man",
+      "target": "Ally",
+      "range": "square",
+      "rangeSize": {
+        "x": 280,
+        "y": 280
+      },
+      "gaugeMax": 8000,
+      "chargeTime": 2
+    },
+    "dialogue": {
+      "greeting1": "Pleased to meet you.\nI am Kongming.",
+      "greeting2": "From now on, I serve you as lord.\nLet us work for the realm together.",
+      "greeting3": "",
+      "goBattleBefore": "Let me conduct training\nto elevate our abilities.",
+      "goBattle": "Time to march.\nDo not let your guard down...",
+      "training": "A wise choice.",
+      "trainingExpect": "The spirits favor us today.\nExpect results.",
+      "tokkun": "Let me select a reliable general.",
+      "mockBattle": "Leave the selection to me.",
+      "hunting": "This is the best course.",
+      "endTraining": "The training paid off.",
+      "success": "Flawless training.",
+      "failed": "I misjudged..."
+    }
+  },
+  {
+    "cardId": 24578,
+    "cardIndex": "蜀・軍師002",
+    "sortNo": 7,
+    "name": "Ma Su",
+    "nameJapanese": "馬謖",
+    "nameShort": "MaSu",
+    "faction": "Shu",
+    "rarity": "R",
+    "artist": "清宮敦嗣",
+    "lore": "Joined Liu Bei with his brother Ma Liang. Zhuge Liang's prized pupil in politics and war. During the Nanman campaign, he advised sparing Meng Huo, winning submission and ending future threats.",
+    "battleCry": "My strategy is flawless!\nExecute it at once!",
+    "birthYear": 190,
+    "deathYear": 228,
+    "tactics": {
+      "id": 84,
+      "name": "Regroup",
+      "description": "Return to castle and reduce revival",
+      "type": "Tactics",
+      "affinity": "Earth",
+      "target": "Ally",
+      "range": "all",
+      "rangeSize": {
+        "x": 0,
+        "y": 0
+      },
+      "gaugeMax": 6000,
+      "chargeTime": 1
+    },
+    "formation": {
+      "id": 28,
+      "name": "Heal Rally",
+      "description": "Gradually restore ally HP",
+      "type": "Formation",
+      "affinity": "Heaven",
+      "target": "Ally",
+      "range": "square",
+      "rangeSize": {
+        "x": 180,
+        "y": 180
+      },
+      "gaugeMax": 6000,
+      "chargeTime": 1
+    },
+    "dialogue": {
+      "greeting1": "My lord, it's an honor to meet you!\nI am Ma Su.",
+      "greeting2": "With my perfect strategies,\nI'll deliver overwhelming victory!",
+      "greeting3": "",
+      "goBattleBefore": "Let me train the troops\nto perfect my strategies!",
+      "goBattle": "Our victory is certain!",
+      "training": "Behold my command!",
+      "trainingExpect": "My genius is overflowing today!",
+      "tokkun": "I'll select the finest generals!",
+      "mockBattle": "I'll select the finest generals!",
+      "hunting": "I'll surely succeed!",
+      "endTraining": "My training bore fruit!",
+      "success": "My training was superb!",
+      "failed": "How could I misjudge?!"
+    }
+  },
+  {
+    "cardId": 24579,
+    "cardIndex": "蜀・軍師003",
+    "sortNo": 8,
+    "name": "Mi Zhu",
+    "nameJapanese": "麋竺",
+    "nameShort": "MiZhu",
+    "faction": "Shu",
+    "rarity": "C",
+    "artist": "ハマサカキミオ",
+    "lore": "A wealthy merchant who became Liu Bei's patron during his wandering years, supporting him until Shu's conquest. So valued were his contributions that Liu Bei ranked him above even Zhuge Liang.",
+    "battleCry": "A...are you sure about this?\nI'm not very confident",
+    "birthYear": null,
+    "deathYear": null,
+    "tactics": {
+      "id": 22,
+      "name": "Rally",
+      "description": "Reduce revival time for allies",
+      "type": "Tactics",
+      "affinity": "Earth",
+      "target": "Ally",
+      "range": "all",
+      "rangeSize": {
+        "x": 0,
+        "y": 0
+      },
+      "gaugeMax": 4000,
+      "chargeTime": 0
+    },
+    "formation": {
+      "id": 87,
+      "name": "Inspire",
+      "description": "Increase ally POW and INT",
+      "type": "Formation",
+      "affinity": "Man",
+      "target": "Ally",
+      "range": "wide_rect",
+      "rangeSize": {
+        "x": 530,
+        "y": 235
+      },
+      "gaugeMax": 4000,
+      "chargeTime": 0
+    },
+    "dialogue": {
+      "greeting1": "Pleased to meet you.\nI am Mi Zhu.",
+      "greeting2": "I'd like to help you\nconquer the realm, if I may.",
+      "greeting3": "My abilities are easy to use,\nso please make full use of them.",
+      "goBattleBefore": "Well then, shall we train\nto sharpen our abilities?",
+      "goBattle": "Shall we be off?",
+      "training": "Shall we begin training?",
+      "trainingExpect": "I have a good feeling about today.",
+      "tokkun": "I'll go select a general then!",
+      "mockBattle": "I'll go select a general then!",
+      "hunting": "How rare! Let's make it count!",
+      "endTraining": "Training bore fruit...",
+      "success": "Today's training was a success!",
+      "failed": "No... to fail..."
+    }
+  },
+  {
+    "cardId": 24580,
+    "cardIndex": "蜀・軍師004",
+    "sortNo": 9,
+    "name": "Fa Zheng",
+    "nameJapanese": "法正",
+    "nameShort": "FaZheng",
+    "faction": "Shu",
+    "rarity": "C",
+    "artist": "wolfina",
+    "lore": "Once served Liu Zhang but, feeling undervalued, he encouraged Liu Bei to seize Shu. After joining Liu Bei, he urged the invasion of Hanzhong and was key to its capture as chief strategist.",
+    "battleCry": "At last, my talents\nsee the light of day...!",
+    "birthYear": 176,
+    "deathYear": 220,
+    "tactics": {
+      "id": 22,
+      "name": "Rally",
+      "description": "Reduce revival time for allies",
+      "type": "Tactics",
+      "affinity": "Earth",
+      "target": "Ally",
+      "range": "all",
+      "rangeSize": {
+        "x": 0,
+        "y": 0
+      },
+      "gaugeMax": 4000,
+      "chargeTime": 0
+    },
+    "formation": {
+      "id": 31,
+      "name": "Spear Flash",
+      "description": "Boost POW and spear length",
+      "type": "Formation",
+      "affinity": "Heaven",
+      "target": "Ally",
+      "range": "wide_rect",
+      "rangeSize": {
+        "x": 520,
+        "y": 120
+      },
+      "gaugeMax": 6000,
+      "chargeTime": 1
+    },
+    "dialogue": {
+      "greeting1": "I've been waiting to meet you!\nI am Fa Zheng.",
+      "greeting2": "With my abilities,\nI'll surely guide you to greatness!",
+      "greeting3": "",
+      "goBattleBefore": "Let me train the troops\nso we can act swiftly.",
+      "goBattle": "I'll guide you to victory!",
+      "training": "Shall we train them hard?",
+      "trainingExpect": "Today's training should go well.",
+      "tokkun": "Shall we train them hard?",
+      "mockBattle": "I'll pick two generals\nfor mock battle.",
+      "hunting": "Success leads to greater growth.",
+      "endTraining": "Solid training.",
+      "success": "Today's training was excellent!",
+      "failed": "To fail...?"
+    }
+  },
+  {
+    "cardId": 24581,
+    "cardIndex": "蜀・軍師005",
+    "sortNo": 10,
+    "name": "Pang Tong",
+    "nameJapanese": "Ⅰ統",
+    "nameShort": "P.Tong",
+    "faction": "Shu",
+    "rarity": "R",
+    "artist": "タカヤマトシアキ",
+    "lore": "Liu Bei's strategist called the Fledgling Phoenix, rivaling Zhuge Liang in wisdom. His Chained Ships scheme helped win Red Cliffs. After joining Liu Bei, he urged the conquest of Shu.",
+    "battleCry": "Now they're pinned down, easy as that!",
+    "birthYear": 179,
+    "deathYear": 214,
+    "tactics": {
+      "id": 21,
+      "name": "Reinforce",
+      "description": "Restore HP to allied units",
+      "type": "Tactics",
+      "affinity": "Man",
+      "target": "Ally",
+      "range": "all",
+      "rangeSize": {
+        "x": 0,
+        "y": 0
+      },
+      "gaugeMax": 4000,
+      "chargeTime": 0
+    },
+    "formation": {
+      "id": 88,
+      "name": "Iron Chain",
+      "description": "Slow nearby enemies",
+      "type": "Formation",
+      "affinity": "Heaven",
+      "target": "Enemy",
+      "range": "circle",
+      "rangeSize": {
+        "x": 110,
+        "y": 110
+      },
+      "gaugeMax": 8000,
+      "chargeTime": 2
+    },
+    "dialogue": {
+      "greeting1": "So you're my lord, huh?\nName's Pang Tong.",
+      "greeting2": "Use my unconventional strategies,\nand victory is guaranteed.",
+      "greeting3": "",
+      "goBattleBefore": "Let me train the troops\nso we can execute my plans better.",
+      "goBattle": "Let's head to the battlefield.",
+      "training": "Time for training.",
+      "trainingExpect": "Got a good feeling about today.",
+      "tokkun": "Time to test my eye for talent.",
+      "mockBattle": "Let's find someone compatible.",
+      "hunting": "Risky, but worth it.",
+      "endTraining": "Heh, training paid off.",
+      "success": "Heh, today's training was perfect!",
+      "failed": "Damn, it failed...!"
+    }
+  },
+  {
+    "cardId": 16385,
+    "cardIndex": "呉・軍師001",
+    "sortNo": 11,
+    "name": "Zhou Yu",
+    "nameJapanese": "周瑜",
+    "nameShort": "ZhouYu",
+    "faction": "Wu",
+    "rarity": "SR",
+    "artist": "山田章博",
+    "lore": "Sworn brother and strategist to Sun Ce. After his death, he served Sun Quan, defeating Cao Cao with fire at Red Cliffs. He planned to annex Shu but died at just 36.",
+    "battleCry": "Zhou Yu fights\nfor nothing less than the realm!",
+    "birthYear": 175,
+    "deathYear": 210,
+    "tactics": {
+      "id": 21,
+      "name": "Reinforce",
+      "description": "Restore HP to allied units",
+      "type": "Tactics",
+      "affinity": "Man",
+      "target": "Ally",
+      "range": "all",
+      "rangeSize": {
+        "x": 0,
+        "y": 0
+      },
+      "gaugeMax": 4000,
+      "chargeTime": 0
+    },
+    "formation": {
+      "id": 67,
+      "name": "Inferno",
+      "description": "Damage and slow enemies",
+      "type": "Formation",
+      "affinity": "Earth",
+      "target": "Both",
+      "range": "circle",
+      "rangeSize": {
+        "x": 80,
+        "y": 0
+      },
+      "gaugeMax": 8000,
+      "chargeTime": 2
+    },
+    "dialogue": {
+      "greeting1": "My lord, it's an honor.\nI am Zhou Yu.",
+      "greeting2": "With my abilities,\nI'll reduce our foes to ashes!",
+      "greeting3": "",
+      "goBattleBefore": "Let me train the troops\nto execute my strategies flawlessly.",
+      "goBattle": "Time to march.\nLet's show them our strength!",
+      "training": "Let's train for victory.",
+      "trainingExpect": "An auspicious day - I sense success.",
+      "tokkun": "This will be crucial training.",
+      "mockBattle": "A mock battle.\nI'd like to succeed.",
+      "hunting": "We must succeed at this.",
+      "endTraining": "The training paid off.",
+      "success": "This training was a success!",
+      "failed": "To fail...?"
+    }
+  },
+  {
+    "cardId": 16386,
+    "cardIndex": "呉・軍師002",
+    "sortNo": 12,
+    "name": "Zhang Zhao",
+    "nameJapanese": "張昭",
+    "nameShort": "Z.Zhao",
+    "faction": "Wu",
+    "rarity": "C",
+    "artist": "成庵",
+    "lore": "A wise man who answered Sun Ce's call. After Sun Ce's death, he served Sun Quan, supporting the young lord while often admonishing him. Though many thought him fit, he never became Chancellor.",
+    "battleCry": "My lord, please\nheed my counsel now!",
+    "birthYear": 156,
+    "deathYear": 236,
+    "tactics": {
+      "id": 84,
+      "name": "Regroup",
+      "description": "Return to castle and reduce revival",
+      "type": "Tactics",
+      "affinity": "Earth",
+      "target": "Ally",
+      "range": "all",
+      "rangeSize": {
+        "x": 0,
+        "y": 0
+      },
+      "gaugeMax": 6000,
+      "chargeTime": 1
+    },
+    "formation": {
+      "id": 42,
+      "name": "Wits Up",
+      "description": "Increase ally INT",
+      "type": "Formation",
+      "affinity": "Man",
+      "target": "Ally",
+      "range": "square",
+      "rangeSize": {
+        "x": 230,
+        "y": 230
+      },
+      "gaugeMax": 6000,
+      "chargeTime": 1
+    },
+    "dialogue": {
+      "greeting1": "A pleasure to meet you!\nI am Zhang Zhao!",
+      "greeting2": "My abilities will help you\nin your battles!",
+      "greeting3": "",
+      "goBattleBefore": "Let me train the troops\nso they don't mess up my plans!",
+      "goBattle": "Steel yourself and march forth!",
+      "training": "A wise choice indeed!",
+      "trainingExpect": "I sense today's training\nwill go splendidly!",
+      "tokkun": "Special training suits me.",
+      "mockBattle": "Now who shall I choose...",
+      "hunting": "Hm, this is our only option.",
+      "endTraining": "Training paid off!",
+      "success": "Hm! Splendid training!",
+      "failed": "Hmm, I misjudged..."
+    }
+  },
+  {
+    "cardId": 16387,
+    "cardIndex": "呉・軍師003",
+    "sortNo": 13,
+    "name": "Lu Xun",
+    "nameJapanese": "陸遜",
+    "nameShort": "LuXun",
+    "faction": "Wu",
+    "rarity": "R",
+    "artist": "三好載克",
+    "lore": "A great strategist who led Wu after Zhou Yu and Lu Meng. With Lu Meng, he defeated Guan Yu in Jing. At Yiling, he crushed Shu's army with fire. He repelled every Wei invasion and rose to Chancellor.",
+    "battleCry": "Lu Xun shall defend Wu's lands.",
+    "birthYear": 183,
+    "deathYear": 245,
+    "tactics": {
+      "id": 22,
+      "name": "Rally",
+      "description": "Reduce revival time for allies",
+      "type": "Tactics",
+      "affinity": "Earth",
+      "target": "Ally",
+      "range": "all",
+      "rangeSize": {
+        "x": 0,
+        "y": 0
+      },
+      "gaugeMax": 4000,
+      "chargeTime": 0
+    },
+    "formation": {
+      "id": 81,
+      "name": "Link Force",
+      "description": "Reduce enemy SPD",
+      "type": "Formation",
+      "affinity": "Heaven",
+      "target": "Enemy",
+      "range": "wide_rect_narrow",
+      "rangeSize": {
+        "x": 520,
+        "y": 190
+      },
+      "gaugeMax": 4000,
+      "chargeTime": 0
+    },
+    "dialogue": {
+      "greeting1": "It's an honor to meet you.\nI am Lu Xun.",
+      "greeting2": "With my abilities,\nI'll surely save you in times of peril.",
+      "greeting3": "",
+      "goBattleBefore": "Let me train the troops\nto ensure our strategies succeed.",
+      "goBattle": "Shall we march?",
+      "training": "Training isn't a bad choice.",
+      "trainingExpect": "I sense today's training\nwill go well.",
+      "tokkun": "Let's hope for good results.",
+      "mockBattle": "I'd like to succeed here.",
+      "hunting": "A rare chance - let's succeed.",
+      "endTraining": "The training paid off.",
+      "success": "Very fulfilling training.",
+      "failed": "Tch... I miscalculated."
+    }
+  },
+  {
+    "cardId": 16388,
+    "cardIndex": "呉・軍師004",
+    "sortNo": 14,
+    "name": "Lu Meng",
+    "nameJapanese": "呂蒙",
+    "nameShort": "LuMeng",
+    "faction": "Wu",
+    "rarity": "R",
+    "artist": "24no",
+    "lore": "Served Sun Quan from youth. Once just a warrior, he dedicated himself to learning at Sun Quan's urging. After Lu Su's death, he led Wu's forces, defeated Guan Yu, and conquered Jing Province.",
+    "battleCry": "Behold my brilliant strategy!",
+    "birthYear": 178,
+    "deathYear": 219,
+    "tactics": {
+      "id": 24,
+      "name": "Rebuild",
+      "description": "Restore and strengthen barriers",
+      "type": "Tactics",
+      "affinity": "Man",
+      "target": "Ally",
+      "range": "all",
+      "rangeSize": {
+        "x": 0,
+        "y": 0
+      },
+      "gaugeMax": 6000,
+      "chargeTime": 1
+    },
+    "formation": {
+      "id": 13,
+      "name": "Far Shot",
+      "description": "Boost POW and bow range",
+      "type": "Formation",
+      "affinity": "Heaven",
+      "target": "Ally",
+      "range": "wide_rect_narrow",
+      "rangeSize": {
+        "x": 520,
+        "y": 160
+      },
+      "gaugeMax": 6000,
+      "chargeTime": 1
+    },
+    "dialogue": {
+      "greeting1": "It's an honor to meet you.\nI am Lu Meng.",
+      "greeting2": "I've come to help you\nconquer the realm.",
+      "greeting3": "My strategies will maximize Wu's power.\nPlease make good use of them.",
+      "goBattleBefore": "Let me train the troops\nto sharpen our abilities.",
+      "goBattle": "To the battlefield!",
+      "training": "Shall we drill them?",
+      "trainingExpect": "The troops are eager.\nExpect results.",
+      "tokkun": "Shall we train them hard?",
+      "mockBattle": "I'll select two generals\nfor mock battle.",
+      "hunting": "Success leads to growth.",
+      "endTraining": "Solid training.",
+      "success": "Excellent training today.",
+      "failed": "I misjudged..."
+    }
+  },
+  {
+    "cardId": 16389,
+    "cardIndex": "呉・軍師005",
+    "sortNo": 15,
+    "name": "Lu Su",
+    "nameJapanese": "魯粛",
+    "nameShort": "LuSu",
+    "faction": "Wu",
+    "rarity": "C",
+    "artist": "Ｙｏｃｋｙ",
+    "lore": "Recommended by Zhou Yu to serve Sun Quan. He allied with Liu Bei, and when Cao Cao threatened Wu, urged battle. After Zhou Yu's death, he commanded all forces and maintained the alliance.",
+    "battleCry": "If we don't act now,\nCao Cao will swallow Wu whole!",
+    "birthYear": 172,
+    "deathYear": 217,
+    "tactics": {
+      "id": 22,
+      "name": "Rally",
+      "description": "Reduce revival time for allies",
+      "type": "Tactics",
+      "affinity": "Earth",
+      "target": "Ally",
+      "range": "all",
+      "rangeSize": {
+        "x": 0,
+        "y": 0
+      },
+      "gaugeMax": 4000,
+      "chargeTime": 0
+    },
+    "formation": {
+      "id": 87,
+      "name": "Inspire",
+      "description": "Increase ally POW and INT",
+      "type": "Formation",
+      "affinity": "Man",
+      "target": "Ally",
+      "range": "wide_rect",
+      "rangeSize": {
+        "x": 530,
+        "y": 235
+      },
+      "gaugeMax": 4000,
+      "chargeTime": 0
+    },
+    "dialogue": {
+      "greeting1": "A pleasure to meet you!\nI'm Lu Su - remember the name!",
+      "greeting2": "My abilities work well\nfor both offense and defense.",
+      "greeting3": "Use them however you see fit!",
+      "goBattleBefore": "Let me train the troops\nto sharpen our abilities!",
+      "goBattle": "Now, let's march!",
+      "training": "Let's begin training!",
+      "trainingExpect": "I sense today's training will go well!",
+      "tokkun": "I'll select a general\nfor special training!",
+      "mockBattle": "Let's start the mock battle!",
+      "hunting": "Success here would be huge!",
+      "endTraining": "Training paid off!",
+      "success": "Mm! Today was perfect!",
+      "failed": "Oh no, to fail..."
+    }
+  },
+  {
+    "cardId": 32769,
+    "cardIndex": "群・軍師001",
+    "sortNo": 16,
+    "name": "Jia Xu",
+    "nameJapanese": "賈⑪",
+    "nameShort": "JiaXu",
+    "faction": "Other",
+    "rarity": "C",
+    "artist": "戸橋ことみ",
+    "lore": "Dong Zhuo's strategist who served many lords. Later, as Zhang Xiu's advisor, he fought Cao Cao. His counsel was never wrong: when Zhang Xiu heeded him, he won; when he didn't, he lost.",
+    "battleCry": "My wisdom yields endless stratagems.",
+    "birthYear": 147,
+    "deathYear": 223,
+    "tactics": {
+      "id": 22,
+      "name": "Rally",
+      "description": "Reduce revival time for allies",
+      "type": "Tactics",
+      "affinity": "Earth",
+      "target": "Ally",
+      "range": "all",
+      "rangeSize": {
+        "x": 0,
+        "y": 0
+      },
+      "gaugeMax": 4000,
+      "chargeTime": 0
+    },
+    "formation": {
+      "id": 73,
+      "name": "Battle Form",
+      "description": "Boost POW of attacking units",
+      "type": "Formation",
+      "affinity": "Man",
+      "target": "Ally",
+      "range": "wide_rect",
+      "rangeSize": {
+        "x": 520,
+        "y": 180
+      },
+      "gaugeMax": 8000,
+      "chargeTime": 2
+    },
+    "dialogue": {
+      "greeting1": "I am Jia Xu.\nMy lord, please remember the name.",
+      "greeting2": "With my supreme strategies,\nI shall deliver victory to you.",
+      "greeting3": "",
+      "goBattleBefore": "Allow me to train the troops\nto perfect my strategies...",
+      "goBattle": "To battle with my plans.",
+      "training": "Training. A sound choice.",
+      "trainingExpect": "Especially today,\nI sense good results.",
+      "tokkun": "I see... Who to select...",
+      "mockBattle": "Mock battle. Not bad.",
+      "hunting": "A wise choice, I must say.",
+      "endTraining": "The training paid off.",
+      "success": "Splendid training.",
+      "failed": "I... miscalculated."
+    }
+  },
+  {
+    "cardId": 32770,
+    "cardIndex": "群・軍師002",
+    "sortNo": 17,
+    "name": "Zhang Jiao",
+    "nameJapanese": "張角",
+    "nameShort": "Z.Jiao",
+    "faction": "Other",
+    "rarity": "R",
+    "artist": "Ｙｏｃｋｙ",
+    "lore": "As leader of the Taiping faith, he led millions of Yellow Turbans against the Han. Though crushed, remnants rebelled for decades after, hastening the dynasty's collapse.",
+    "battleCry": "Fear not death! March on!\nHeaven wills the Yellow Turbans' age!",
+    "birthYear": null,
+    "deathYear": 184,
+    "tactics": {
+      "id": 47,
+      "name": "Taiping Art",
+      "description": "Reduce revival and restore HP",
+      "type": "Tactics",
+      "affinity": "Earth",
+      "target": "Ally",
+      "range": "all",
+      "rangeSize": {
+        "x": 0,
+        "y": 0
+      },
+      "gaugeMax": 8000,
+      "chargeTime": 2
+    },
+    "formation": {
+      "id": 87,
+      "name": "Inspire",
+      "description": "Increase ally POW and INT",
+      "type": "Formation",
+      "affinity": "Man",
+      "target": "Ally",
+      "range": "wide_rect",
+      "rangeSize": {
+        "x": 530,
+        "y": 235
+      },
+      "gaugeMax": 4000,
+      "chargeTime": 0
+    },
+    "dialogue": {
+      "greeting1": "A pleasure to meet you!\nI am Zhang Jiao!",
+      "greeting2": "Heaven itself guided us together!",
+      "greeting3": "With my power,\nwe shall build a Yellow Turban realm!",
+      "goBattleBefore": "Let me train to elevate\nmy abilities to the heavens!",
+      "goBattle": "Heaven is on our side!",
+      "training": "Heaven decrees training!",
+      "trainingExpect": "Heaven says we'll succeed today!",
+      "tokkun": "Heaven decrees special training!",
+      "mockBattle": "Heaven decrees mock battle!",
+      "hunting": "Follow heaven's voice to victory!",
+      "endTraining": "Training bore divine fruit!",
+      "success": "Heaven blessed this training!",
+      "failed": "Did I mishear heaven...?!"
+    }
+  },
+  {
+    "cardId": 32771,
+    "cardIndex": "群・軍師003",
+    "sortNo": 18,
+    "name": "Chen Gong",
+    "nameJapanese": "陳宮",
+    "nameShort": "C.Gong",
+    "faction": "Other",
+    "rarity": "C",
+    "artist": "塚本陽子",
+    "lore": "First served Cao Cao, then betrayed him to welcome Lu Bu. As his strategist, he fought Cao Cao but lost when Lu Bu ignored his counsel. Captured and executed.",
+    "battleCry": "Chen Gong shall guide you\nto victory...!!",
+    "birthYear": null,
+    "deathYear": 198,
+    "tactics": {
+      "id": 22,
+      "name": "Rally",
+      "description": "Reduce revival time for allies",
+      "type": "Tactics",
+      "affinity": "Earth",
+      "target": "Ally",
+      "range": "all",
+      "rangeSize": {
+        "x": 0,
+        "y": 0
+      },
+      "gaugeMax": 4000,
+      "chargeTime": 0
+    },
+    "formation": {
+      "id": 42,
+      "name": "Wits Up",
+      "description": "Increase ally INT",
+      "type": "Formation",
+      "affinity": "Man",
+      "target": "Ally",
+      "range": "square",
+      "rangeSize": {
+        "x": 230,
+        "y": 230
+      },
+      "gaugeMax": 6000,
+      "chargeTime": 1
+    },
+    "dialogue": {
+      "greeting1": "What an honor to meet you!\nI am Chen Gong!",
+      "greeting2": "With my abilities,\nI'll surely guide you to greatness!",
+      "greeting3": "",
+      "goBattleBefore": "Please let me train the troops\nto sharpen my strategies!",
+      "goBattle": "Victory will be ours!!",
+      "training": "Leave it to Chen Gong!",
+      "trainingExpect": "Morale is high!\nI promise results!",
+      "tokkun": "Special training! Very well!",
+      "mockBattle": "I'll make the mock battle succeed!",
+      "hunting": "This will be fine training!",
+      "endTraining": "Training paid off!",
+      "success": "This training was perfect!",
+      "failed": "Grr, to fail...!"
+    }
+  },
+  {
+    "cardId": 32772,
+    "cardIndex": "群・軍師004",
+    "sortNo": 19,
+    "name": "Mi Heng",
+    "nameJapanese": "禰衡",
+    "nameShort": "MiHeng",
+    "faction": "Other",
+    "rarity": "R",
+    "artist": "hippo",
+    "lore": "A civil official of keen insight and cunning. Yet his arrogant nature led him to criticize without restraint. He served Cao Cao and Liu Biao but was exiled from both for his sharp tongue.",
+    "battleCry": "Hah! As if fools could\nunderstand my genius!",
+    "birthYear": 173,
+    "deathYear": 198,
+    "tactics": {
+      "id": 21,
+      "name": "Reinforce",
+      "description": "Restore HP to allied units",
+      "type": "Tactics",
+      "affinity": "Man",
+      "target": "Ally",
+      "range": "all",
+      "rangeSize": {
+        "x": 0,
+        "y": 0
+      },
+      "gaugeMax": 4000,
+      "chargeTime": 0
+    },
+    "formation": {
+      "id": 89,
+      "name": "Deception",
+      "description": "Reduce enemy INT",
+      "type": "Formation",
+      "affinity": "Heaven",
+      "target": "Enemy",
+      "range": "circle",
+      "rangeSize": {
+        "x": 145,
+        "y": 145
+      },
+      "gaugeMax": 6000,
+      "chargeTime": 1
+    },
+    "dialogue": {
+      "greeting1": "Yo, nice to meet ya!\nI'm Mi Heng!",
+      "greeting2": "My strategies are nothing like\nthose other fools' plans!",
+      "greeting3": "I'm counting on you to use 'em right.\nLet's do this!",
+      "goBattleBefore": "Ugh, what a pain, but I'll train\nthe troops to pull off my plans!",
+      "goBattle": "What a drag, but let's fight!",
+      "training": "I'm leading - can't fail.",
+      "trainingExpect": "Feelin' good today!",
+      "tokkun": "Special training? Not my thing.",
+      "mockBattle": "Mock battle? Who to pick...",
+      "hunting": "Big gains if we succeed.",
+      "endTraining": "Training paid off!",
+      "success": "Hell yeah! Perfect training!",
+      "failed": "Damn, I miscalculated...!"
+    }
+  },
+  {
+    "cardId": 32773,
+    "cardIndex": "群・軍師005",
+    "sortNo": 20,
+    "name": "Li Ru",
+    "nameJapanese": "李儒",
+    "nameShort": "LiRu",
+    "faction": "Other",
+    "rarity": "SR",
+    "artist": "青木邦夫",
+    "lore": "Dong Zhuo's advisor who aided his terror. He poisoned the former emperor and Empress He. Facing the Coalition, he slew Yuan Shao's kin and defended Hulao Pass with Lu Bu.",
+    "battleCry": "Fools who defy us shall\npay for their sins in blood.",
+    "birthYear": null,
+    "deathYear": 192,
+    "tactics": {
+      "id": 21,
+      "name": "Reinforce",
+      "description": "Restore HP to allied units",
+      "type": "Tactics",
+      "affinity": "Man",
+      "target": "Ally",
+      "range": "all",
+      "rangeSize": {
+        "x": 0,
+        "y": 0
+      },
+      "gaugeMax": 4000,
+      "chargeTime": 0
+    },
+    "formation": {
+      "id": 81,
+      "name": "Link Force",
+      "description": "Reduce enemy SPD",
+      "type": "Formation",
+      "affinity": "Heaven",
+      "target": "Enemy",
+      "range": "wide_rect_narrow",
+      "rangeSize": {
+        "x": 520,
+        "y": 190
+      },
+      "gaugeMax": 4000,
+      "chargeTime": 0
+    },
+    "dialogue": {
+      "greeting1": "Heh heh, pleased to meet you, my lord.\nI am Li Ru.",
+      "greeting2": "With my versatile abilities,\nI shall aid your path to supremacy.",
+      "greeting3": "",
+      "goBattleBefore": "Allow me to train the troops\nto add power to my strategies.",
+      "goBattle": "To battle!\nThe realm shall be ours...!",
+      "training": "Expect the finest results.",
+      "trainingExpect": "Heh heh...\nHeh heh heh heh heh...",
+      "tokkun": "Very well, let them train.",
+      "mockBattle": "Mock battle... a fine choice.",
+      "hunting": "Good... We'll make them\nregret being born.",
+      "endTraining": "Heh heh. Training paid off.",
+      "success": "Heh heh. A great success.",
+      "failed": "Tch... I miscalculated."
+    }
+  }
+]

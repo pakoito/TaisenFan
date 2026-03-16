@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+@theme {
+	/* Typography */
+	--font-sans: Inter, system-ui, -apple-system, sans-serif;
+
+	/* === Brand Colors (from 3594t.net + Sangokushi Taisen 3 official site) === */
+
+	/* Crimson — primary accent, active tabs, title bars, submit buttons */
+	--color-crimson-50: #fef2f2;
+	--color-crimson-100: #fde3e3;
+	--color-crimson-200: #fccbcb;
+	--color-crimson-300: #f9a3a4;
+	--color-crimson-400: #f36b6d;
+	--color-crimson-500: #e8393c;
+	--color-crimson-600: #b4191b;
+	--color-crimson-700: #971517;
+	--color-crimson-800: #7d1517;
+	--color-crimson-900: #691819;
+	--color-crimson-950: #390708;
+
+	/* Gold — borders, trim, badges, hover states, section headers */
+	--color-gold-50: #fffbeb;
+	--color-gold-100: #fff3c6;
+	--color-gold-200: #ffe788;
+	--color-gold-300: #ffd100;
+	--color-gold-400: #ffc107;
+	--color-gold-500: #e7c835;
+	--color-gold-600: #d1b758;
+	--color-gold-700: #a38a2e;
+	--color-gold-800: #7a6820;
+	--color-gold-900: #574a16;
+	--color-gold-950: #332b0c;
+
+	/* Emerald — header bars, nav, sidebar, links, ornamental elements */
+	--color-emerald-50: #edfcf4;
+	--color-emerald-100: #d0f7e2;
+	--color-emerald-200: #a4eec9;
+	--color-emerald-300: #5eddaa;
+	--color-emerald-400: #28c488;
+	--color-emerald-500: #099960;
+	--color-emerald-600: #006633;
+	--color-emerald-700: #005533;
+	--color-emerald-800: #004429;
+	--color-emerald-900: #003822;
+	--color-emerald-950: #001f13;
+
+	/* Parchment — content areas, card backgrounds, ink-wash texture base */
+	--color-parchment-50: #faf9f6;
+	--color-parchment-100: #f3f1eb;
+	--color-parchment-200: #e8e5da;
+	--color-parchment-300: #d6d4c6;
+	--color-parchment-400: #c2bfad;
+	--color-parchment-500: #b0ab96;
+	--color-parchment-600: #9a9380;
+	--color-parchment-700: #807a69;
+	--color-parchment-800: #6b6558;
+	--color-parchment-900: #59544a;
+	--color-parchment-950: #2f2c26;
+
+	/* Ink — dark backgrounds, overlays, body text */
+	--color-ink-50: #f6f6f6;
+	--color-ink-100: #e7e7e7;
+	--color-ink-200: #d1d1d1;
+	--color-ink-300: #b0b0b0;
+	--color-ink-400: #888888;
+	--color-ink-500: #666666;
+	--color-ink-600: #555555;
+	--color-ink-700: #444444;
+	--color-ink-800: #333333;
+	--color-ink-900: #1a1a1a;
+	--color-ink-950: #0a0a0a;
+
+	/* === Faction Colors (Three Kingdoms — matched to official button sprites) === */
+	--color-wei: #b4191b;      /* Wei (魏) — crimson red */
+	--color-shu: #2e8b57;      /* Shu (蜀) — forest green */
+	--color-wu: #2563a8;       /* Wu (呉) — royal blue */
+	--color-han: #7b4fbf;      /* Han (漢) — purple */
+	--color-shin: #d4841a;     /* Shin (晋) — orange */
+	--color-gun: #808080;      /* Gun (群) — gray */
+
+	/* === Semantic Aliases === */
+	--color-primary: var(--color-crimson-600);
+	--color-accent: var(--color-gold-300);
+	--color-link: var(--color-emerald-600);
+	--color-surface: var(--color-parchment-100);
+	--color-surface-dark: var(--color-ink-900);
+}
