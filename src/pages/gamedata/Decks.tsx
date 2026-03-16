@@ -116,7 +116,7 @@ function DeckCard({deck}: {deck: DuelDeck}) {
 				</div>
 
 				{/* Sage */}
-				{deck.sage && (
+				{deck.sage !== null ? (
 					<div className='mb-3 text-sm'>
 						<span className='font-medium text-gold-500'>Sage:</span>{' '}
 						<span className='text-ink-600 dark:text-parchment-300'>
@@ -126,15 +126,15 @@ function DeckCard({deck}: {deck: DuelDeck}) {
 								: deck.sage.formationName}
 						</span>
 					</div>
-				)}
+				) : null}
 
 				{/* Lords list */}
 				{deck.lords.length > 0 && (
 					<div className='space-y-1'>
-						{deck.lords.map((lord, i) => (
+						{deck.lords.map(lord => (
 							<div
 								className='flex items-center justify-between rounded bg-parchment-50 px-2 py-1 text-sm dark:bg-ink-900'
-								key={`${lord.cardId}-${i}`}
+								key={lord.cardId}
 							>
 								<span className='min-w-0 truncate font-medium text-ink-700 dark:text-parchment-200'>
 									{lord.name}{' '}

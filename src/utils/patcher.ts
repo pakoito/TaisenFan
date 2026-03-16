@@ -62,24 +62,30 @@ class BpsReader {
 	}
 
 	readU8(): number {
-		return this.u8[this.offset++]!
+		const val = this.u8[this.offset] ?? 0
+		this.offset += 1
+		return val
 	}
 
 	readU32(): number {
-		const v = this.view.getUint32(this.offset, true) // little-endian
+		const v = this.view.getUint32(this.offset, true)
 		this.offset += 4
 		return v
 	}
 
 	readString(len: number): string {
 		let s = ''
-		for (let i = 0; i < len; i++) s += String.fromCharCode(this.readU8())
+		for (let i = 0; i < len; i += 1) {
+			s += String.fromCharCode(this.readU8())
+		}
 		return s
 	}
 
 	readBytes(len: number): number[] {
 		const bytes: number[] = []
-		for (let i = 0; i < len; i++) bytes.push(this.readU8())
+		for (let i = 0; i < len; i += 1) {
+			bytes.push(this.readU8())
+		}
 		return bytes
 	}
 
@@ -106,7 +112,7 @@ function parseBps(buffer: ArrayBuffer): BpsPatch {
 	const sourceSize = r.readVLV()
 	const targetSize = r.readVLV()
 	const metaLen = r.readVLV()
-	if (metaLen) r.readString(metaLen) // skip metadata
+	if (metaLen) r.readString(metaLen)
 
 	const actions: BpsAction[] = []
 	const endOffset = r.size - 12
@@ -144,9 +150,9 @@ function parseBps(buffer: ArrayBuffer): BpsPatch {
 
 const crc32Table = (() => {
 	const table = new Uint32Array(256)
-	for (let i = 0; i < 256; i++) {
+	for (let i = 0; i < 256; i += 1) {
 		let c = i
-		for (let j = 0; j < 8; j++) {
+		for (let j = 0; j < 8; j += 1) {
 			c = c & 1 ? 0xed_b8_83_20 ^ (c >>> 1) : c >>> 1
 		}
 		table[i] = c
@@ -156,8 +162,8 @@ const crc32Table = (() => {
 
 function crc32(data: Uint8Array, start = 0, end = data.length): number {
 	let crc = 0xff_ff_ff_ff
-	for (let i = start; i < end; i++) {
-		crc = crc32Table[(crc ^ data[i]!) & 0xff]! ^ (crc >>> 8)
+	for (let i = start; i < end; i += 1) {
+		crc = (crc32Table[(crc ^ (data[i] ?? 0)) & 0xff] ?? 0) ^ (crc >>> 8)
 	}
 	return (crc ^ 0xff_ff_ff_ff) >>> 0
 }
@@ -167,7 +173,6 @@ function crc32(data: Uint8Array, start = 0, end = data.length): number {
 // ============================================================================
 
 function applyBps(sourceData: Uint8Array, patch: BpsPatch): Uint8Array {
-	// Validate source
 	const srcCrc = crc32(sourceData)
 	if (srcCrc !== patch.sourceChecksum) {
 		throw new Error(
@@ -177,42 +182,50 @@ function applyBps(sourceData: Uint8Array, patch: BpsPatch): Uint8Array {
 	}
 
 	const target = new Uint8Array(patch.targetSize)
-	let targetOffset = 0
-	let sourceRelOffset = 0
-	let targetRelOffset = 0
+	let tOff = 0
+	let srcRel = 0
+	let tgtRel = 0
 
 	for (const action of patch.actions) {
+		const relOff = action.relativeOffset ?? 0
 		switch (action.type) {
 			case ACTION_SOURCE_READ:
-				for (let i = 0; i < action.length; i++) {
-					target[targetOffset] = sourceData[targetOffset]!
-					targetOffset++
+				for (let i = 0; i < action.length; i += 1) {
+					target[tOff] = sourceData[tOff] ?? 0
+					tOff += 1
 				}
 				break
 
 			case ACTION_TARGET_READ:
-				for (let i = 0; i < action.length; i++) {
-					target[targetOffset++] = action.bytes?.[i]!
+				for (let i = 0; i < action.length; i += 1) {
+					target[tOff] = action.bytes?.[i] ?? 0
+					tOff += 1
 				}
 				break
 
 			case ACTION_SOURCE_COPY:
-				sourceRelOffset += action.relativeOffset!
-				for (let i = 0; i < action.length; i++) {
-					target[targetOffset++] = sourceData[sourceRelOffset++]!
+				srcRel += relOff
+				for (let i = 0; i < action.length; i += 1) {
+					target[tOff] = sourceData[srcRel] ?? 0
+					tOff += 1
+					srcRel += 1
 				}
 				break
 
 			case ACTION_TARGET_COPY:
-				targetRelOffset += action.relativeOffset!
-				for (let i = 0; i < action.length; i++) {
-					target[targetOffset++] = target[targetRelOffset++]!
+				tgtRel += relOff
+				for (let i = 0; i < action.length; i += 1) {
+					target[tOff] = target[tgtRel] ?? 0
+					tOff += 1
+					tgtRel += 1
 				}
+				break
+
+			default:
 				break
 		}
 	}
 
-	// Validate target
 	const tgtCrc = crc32(target)
 	if (tgtCrc !== patch.targetChecksum) {
 		throw new Error('Patched ROM checksum mismatch — patch may be corrupted.')

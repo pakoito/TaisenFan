@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useCallback, useState} from 'react'
 import type {SageAbility, SageCard as SageCardType} from '@/types/gamedata'
 import {factionBorder, factionHeaderBg} from '@/utils/faction'
 import {RangeImage} from './RangeImage'
@@ -10,6 +10,9 @@ interface Props {
 
 export function SageCard({sage}: Props) {
 	const [collapsed, setCollapsed] = useState(true)
+	const toggleCollapsed = useCallback(() => {
+		setCollapsed(c => !c)
+	}, [])
 
 	return (
 		<article
@@ -41,7 +44,7 @@ export function SageCard({sage}: Props) {
 				{/* Lore (collapsible) */}
 				<button
 					className='mb-1 w-full text-left font-medium text-ink-500 text-sm hover:text-ink-700 dark:text-parchment-400 dark:hover:text-parchment-200'
-					onClick={() => setCollapsed(c => !c)}
+					onClick={toggleCollapsed}
 					type='button'
 				>
 					{collapsed ? '▶' : '▼'} Lore &amp; Dialogue

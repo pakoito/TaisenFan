@@ -5,9 +5,12 @@ import {SearchFilter, SelectFilter} from '@/components/FilterBar'
 import {PageHead} from '@/components/PageHead'
 import {SageCard} from '@/components/SageCard'
 import {FACTIONS} from '@/types/gamedata'
-import {factionLabel} from '@/utils/faction'
+import {getFactionLabel} from '@/utils/faction'
 
-const FACTION_OPTIONS = FACTIONS.map(f => ({value: f, label: factionLabel(f)}))
+const FACTION_OPTIONS = FACTIONS.map(f => ({
+	value: f,
+	label: getFactionLabel(f)
+}))
 
 export function Sages() {
 	const {data: sages} = useSuspenseQuery({

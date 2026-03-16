@@ -1,3 +1,5 @@
+import {useCallback} from 'react'
+
 interface SelectFilterProps {
 	label: string
 	value: string
@@ -11,6 +13,13 @@ export function SelectFilter({
 	onChange,
 	options
 }: SelectFilterProps) {
+	const handleChange = useCallback(
+		(e: React.ChangeEvent<HTMLSelectElement>) => {
+			onChange(e.target.value)
+		},
+		[onChange]
+	)
+
 	return (
 		<label className='flex items-center gap-2 text-sm'>
 			<span className='font-medium text-ink-600 dark:text-parchment-400'>
@@ -18,7 +27,7 @@ export function SelectFilter({
 			</span>
 			<select
 				className='rounded border border-parchment-300 bg-white px-2 py-1.5 text-ink-800 text-sm dark:border-ink-600 dark:bg-ink-800 dark:text-parchment-100'
-				onChange={e => onChange(e.target.value)}
+				onChange={handleChange}
 				value={value}
 			>
 				<option value=''>All</option>
@@ -43,6 +52,13 @@ export function SearchFilter({
 	onChange,
 	placeholder = 'Search…'
 }: SearchFilterProps) {
+	const handleChange = useCallback(
+		(e: React.ChangeEvent<HTMLInputElement>) => {
+			onChange(e.target.value)
+		},
+		[onChange]
+	)
+
 	return (
 		<label className='flex items-center gap-2 text-sm'>
 			<span className='font-medium text-ink-600 dark:text-parchment-400'>
@@ -50,7 +66,7 @@ export function SearchFilter({
 			</span>
 			<input
 				className='rounded border border-parchment-300 bg-white px-2 py-1.5 text-ink-800 text-sm dark:border-ink-600 dark:bg-ink-800 dark:text-parchment-100'
-				onChange={e => onChange(e.target.value)}
+				onChange={handleChange}
 				placeholder={placeholder}
 				spellCheck={false}
 				type='text'

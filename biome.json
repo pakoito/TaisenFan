@@ -79,7 +79,13 @@
 							"level": "error",
 							"options": {
 								"strictCase": false,
-								"requireAscii": true
+								"requireAscii": true,
+								"conventions": [
+									{
+										"selector": { "kind": "objectLiteralProperty" },
+										"formats": ["camelCase", "PascalCase", "CONSTANT_CASE"]
+									}
+								]
 							}
 						},
 						"useFilenamingConvention": {
@@ -123,6 +129,47 @@
 					"performance": {
 						"useTopLevelRegex": "off"
 					}
+				}
+			}
+		},
+		{
+			"includes": ["src/global.css"],
+			"linter": {
+				"rules": {
+					"nursery": {
+						"noHexColors": "off"
+					}
+				}
+			}
+		},
+		{
+			"includes": ["src/utils/patcher.ts"],
+			"linter": {
+				"rules": {
+					"suspicious": {
+						"noBitwiseOperators": "off"
+					}
+				}
+			}
+		},
+		{
+			"includes": ["src/utils/patcher.ts"],
+			"linter": {
+				"rules": {
+					"suspicious": { "noBitwiseOperators": "off" },
+					"style": { "useForOf": "off" },
+					"complexity": {
+						"noExcessiveCognitiveComplexity": "off",
+						"noExcessiveLinesPerFunction": "off"
+					}
+				}
+			}
+		},
+		{
+			"includes": ["src/global.css"],
+			"linter": {
+				"rules": {
+					"nursery": { "noHexColors": "off" }
 				}
 			}
 		},
