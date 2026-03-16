@@ -61,11 +61,11 @@ export function Decks() {
 				))}
 			</div>
 
-			{filtered.length === 0 && (
+			{filtered.length === 0 ? (
 				<p className='py-12 text-center text-ink-400'>
 					No decks match your filters.
 				</p>
-			)}
+			) : null}
 		</>
 	)
 }
@@ -129,7 +129,7 @@ function DeckCard({deck}: {deck: DuelDeck}) {
 				) : null}
 
 				{/* Lords list */}
-				{deck.lords.length > 0 && (
+				{deck.lords.length > 0 ? (
 					<div className='space-y-1'>
 						{deck.lords.map(lord => (
 							<div
@@ -146,15 +146,15 @@ function DeckCard({deck}: {deck: DuelDeck}) {
 							</div>
 						))}
 					</div>
-				)}
+				) : null}
 
 				{/* Special units */}
-				{deck.specialUnits.length > 0 && deck.lords.length === 0 && (
+				{deck.specialUnits.length > 0 && deck.lords.length === 0 ? (
 					<div className='text-ink-400 text-sm'>
 						{deck.specialUnits.length} special unit
 						{deck.specialUnits.length > 1 ? 's' : ''} (tutorial)
 					</div>
-				)}
+				) : null}
 			</div>
 		</article>
 	)

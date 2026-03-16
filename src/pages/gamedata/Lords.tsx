@@ -197,7 +197,9 @@ function FilterBar(props: {
 		<div className='mb-3 flex flex-wrap items-end gap-x-4 gap-y-2 rounded-lg border border-parchment-300 bg-parchment-100 p-3 dark:border-ink-600 dark:bg-ink-800'>
 			<Field label='Search'>
 				<input
-					className='h-8 w-48 rounded border border-parchment-300 bg-white px-2 text-sm dark:border-ink-600 dark:bg-ink-800 dark:text-parchment-100'
+					autoComplete='off'
+					className='h-8 w-48 rounded border border-parchment-300 bg-white px-2 text-sm focus-visible:outline-2 focus-visible:outline-emerald-600 focus-visible:outline-offset-1 dark:border-ink-600 dark:bg-ink-800 dark:text-parchment-100'
+					name='lord-search'
 					onChange={onSearch}
 					placeholder='Name or skill…'
 					spellCheck={false}
@@ -273,7 +275,9 @@ function Select({
 	return (
 		<Field label={label}>
 			<select
-				className='h-8 rounded border border-parchment-300 bg-white px-2 pr-6 text-sm dark:border-ink-600 dark:bg-ink-800 dark:text-parchment-100'
+				autoComplete='off'
+				className='h-8 rounded border border-parchment-300 bg-white px-2 pr-6 text-sm focus-visible:outline-2 focus-visible:outline-emerald-600 focus-visible:outline-offset-1 dark:border-ink-600 dark:bg-ink-800 dark:text-parchment-100'
+				name={label.toLowerCase()}
 				onChange={onChange}
 				value={value}
 			>

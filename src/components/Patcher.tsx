@@ -69,7 +69,8 @@ export function Patcher() {
 		// biome-ignore lint/a11y/noStaticElementInteractions: drop zone requires drag handlers
 		// biome-ignore lint/a11y/noNoninteractiveElementInteractions: drop zone requires drag handlers
 		<div
-			className={`relative flex flex-col items-center gap-3 rounded-lg border-2 border-dashed py-8 transition-colors ${zoneClass(step)}`}
+			aria-live='polite'
+			className={`relative flex flex-col items-center gap-3 rounded-lg border-2 border-dashed py-8 transition-colors motion-reduce:transition-none ${zoneClass(step)}`}
 			onDragOver={isProcessing ? undefined : onDragOver}
 			onDrop={isProcessing ? undefined : onDrop}
 		>
@@ -80,7 +81,7 @@ export function Patcher() {
 			{step === 'patching' ? (
 				<ProcessingState
 					message='Applying patch…'
-					subtitle='Downloading patch file & patching in your browser'
+					subtitle='Downloading patch file &amp; patching in your browser'
 				/>
 			) : null}
 			{step === 'success' ? (
@@ -117,18 +118,21 @@ function IdleState({
 }) {
 	return (
 		<>
-			<span className='text-3xl'>🎮</span>
+			<span aria-hidden='true' className='text-3xl'>
+				🎮
+			</span>
 			<p className='font-medium text-ink-500 text-sm dark:text-parchment-400'>
 				Drop your ROM here or click to select
 			</p>
 			<p className='text-ink-400 text-xs'>
 				Expects the original Japanese .nds file
 			</p>
-			<label className='cursor-pointer rounded bg-emerald-600 px-4 py-2 font-medium text-sm text-white transition-colors hover:bg-emerald-700'>
+			<label className='cursor-pointer rounded bg-emerald-600 px-4 py-2 font-medium text-sm text-white transition-colors focus-within:outline-2 focus-within:outline-emerald-400 focus-within:outline-offset-2 hover:bg-emerald-700 motion-reduce:transition-none'>
 				Select ROM File
 				<input
 					accept='.nds'
-					className='hidden'
+					className='sr-only'
+					name='rom-file'
 					onChange={onFileChange}
 					ref={inputRef}
 					type='file'
@@ -147,7 +151,9 @@ function ProcessingState({
 }) {
 	return (
 		<>
-			<div className='h-8 w-8 animate-spin rounded-full border-4 border-gold-300 border-t-gold-600' />
+			<output className='block h-8 w-8 animate-spin rounded-full border-4 border-gold-300 border-t-gold-600 motion-reduce:animate-none motion-reduce:border-gold-500'>
+				<span className='sr-only'>Processing…</span>
+			</output>
 			<p className='font-medium text-gold-600 text-sm'>{message}</p>
 			{subtitle ? <p className='text-ink-400 text-xs'>{subtitle}</p> : null}
 		</>
@@ -163,7 +169,9 @@ function SuccessState({
 }) {
 	return (
 		<>
-			<span className='text-3xl'>✅</span>
+			<span aria-hidden='true' className='text-3xl'>
+				✅
+			</span>
 			<p className='font-bold text-emerald-600 text-sm'>
 				Patched successfully!
 			</p>
@@ -172,7 +180,7 @@ function SuccessState({
 			</p>
 			<div className='flex gap-2'>
 				<button
-					className='rounded bg-emerald-600 px-3 py-1.5 font-medium text-sm text-white transition-colors hover:bg-emerald-700'
+					className='rounded bg-emerald-600 px-3 py-1.5 font-medium text-sm text-white transition-colors hover:bg-emerald-700 focus-visible:outline-2 focus-visible:outline-emerald-400 focus-visible:outline-offset-2 motion-reduce:transition-none'
 					onClick={onRedownload}
 					type='button'
 				>
@@ -184,14 +192,14 @@ function SuccessState({
 	)
 }
 
-function ErrorState({error, onReset}: {error?: string; onReset: () => void}) {
+function ErrorState({error, onReset}: {error: string; onReset: () => void}) {
 	return (
 		<>
-			<span className='text-3xl'>❌</span>
+			<span aria-hidden='true' className='text-3xl'>
+				❌
+			</span>
 			<p className='font-bold text-crimson-600 text-sm'>Patching failed</p>
-			{error ? (
-				<p className='max-w-sm text-center text-ink-500 text-xs'>{error}</p>
-			) : null}
+			<p className='max-w-sm text-center text-ink-500 text-xs'>{error}</p>
 			<ResetButton onClick={onReset} />
 		</>
 	)
@@ -200,7 +208,7 @@ function ErrorState({error, onReset}: {error?: string; onReset: () => void}) {
 function ResetButton({onClick}: {onClick: () => void}) {
 	return (
 		<button
-			className='rounded bg-ink-200 px-3 py-1.5 font-medium text-ink-600 text-sm transition-colors hover:bg-ink-300 dark:bg-ink-700 dark:text-parchment-300'
+			className='rounded bg-ink-200 px-3 py-1.5 font-medium text-ink-600 text-sm transition-colors hover:bg-ink-300 focus-visible:outline-2 focus-visible:outline-ink-500 focus-visible:outline-offset-2 motion-reduce:transition-none dark:bg-ink-700 dark:text-parchment-300'
 			onClick={onClick}
 			type='button'
 		>

@@ -65,7 +65,7 @@ export function LordRow({lord, expanded, onToggle}: LordRowProps) {
 	return (
 		<>
 			<tr
-				className={`cursor-pointer border-parchment-200 border-b transition-colors duration-75 hover:bg-parchment-200/60 dark:border-ink-700 dark:hover:bg-ink-700/50 ${cfg.rowBg}`}
+				className={`cursor-pointer border-parchment-200 border-b transition-colors duration-75 hover:bg-parchment-200/60 focus-visible:outline-2 focus-visible:outline-emerald-600 focus-visible:outline-offset-[-2px] motion-reduce:transition-none dark:border-ink-700 dark:hover:bg-ink-700/50 ${cfg.rowBg}`}
 				onClick={handleClick}
 				onKeyDown={handleKeyDown}
 				tabIndex={0}
@@ -176,7 +176,7 @@ function LoreDetail({lord}: {lord: LordCard}) {
 				{lord.lore}
 			</p>
 			<p className='whitespace-pre-line text-ink-600 text-sm dark:text-parchment-300'>
-				"{lord.battleCry}"
+				&ldquo;{lord.battleCry}&rdquo;
 			</p>
 			<div className='mt-3 flex justify-between text-[10px] text-ink-400'>
 				<span>Art: {lord.artist}</span>

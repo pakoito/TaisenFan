@@ -20,13 +20,17 @@ export function SelectFilter({
 		[onChange]
 	)
 
+	const fieldName = label.toLowerCase().replaceAll(' ', '-')
+
 	return (
 		<label className='flex items-center gap-2 text-sm'>
 			<span className='font-medium text-ink-600 dark:text-parchment-400'>
 				{label}
 			</span>
 			<select
-				className='rounded border border-parchment-300 bg-white px-2 py-1.5 text-ink-800 text-sm dark:border-ink-600 dark:bg-ink-800 dark:text-parchment-100'
+				autoComplete='off'
+				className='rounded border border-parchment-300 bg-white px-2 py-1.5 text-ink-800 text-sm focus-visible:outline-2 focus-visible:outline-emerald-600 focus-visible:outline-offset-1 dark:border-ink-600 dark:bg-ink-800 dark:text-parchment-100'
+				name={fieldName}
 				onChange={handleChange}
 				value={value}
 			>
@@ -65,7 +69,9 @@ export function SearchFilter({
 				Search
 			</span>
 			<input
-				className='rounded border border-parchment-300 bg-white px-2 py-1.5 text-ink-800 text-sm dark:border-ink-600 dark:bg-ink-800 dark:text-parchment-100'
+				autoComplete='off'
+				className='rounded border border-parchment-300 bg-white px-2 py-1.5 text-ink-800 text-sm focus-visible:outline-2 focus-visible:outline-emerald-600 focus-visible:outline-offset-1 dark:border-ink-600 dark:bg-ink-800 dark:text-parchment-100'
+				name='search'
 				onChange={handleChange}
 				placeholder={placeholder}
 				spellCheck={false}

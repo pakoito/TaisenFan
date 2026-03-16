@@ -10,7 +10,7 @@ const NAV_LINKS = [
 
 function navClass({isActive}: {isActive: boolean}): string {
 	const base =
-		'px-3 py-2 text-sm font-medium rounded transition-colors duration-150'
+		'px-3 py-2 text-sm font-medium rounded transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-300 motion-reduce:transition-none'
 	return isActive
 		? `${base} bg-crimson-600 text-white`
 		: `${base} text-parchment-200 hover:bg-emerald-700 hover:text-white`
@@ -20,8 +20,14 @@ export function Layout({children}: PropsWithChildren) {
 	return (
 		<div className='flex min-h-screen flex-col'>
 			<header className='bg-emerald-700'>
-				<nav className='mx-auto flex max-w-7xl items-center gap-1 px-4 py-3'>
-					<NavLink className='mr-4 font-bold text-gold-300 text-lg' to='/'>
+				<nav
+					aria-label='Main navigation'
+					className='mx-auto flex max-w-7xl items-center gap-1 px-4 py-3'
+				>
+					<NavLink
+						className='mr-4 font-bold text-gold-300 text-lg focus-visible:outline-2 focus-visible:outline-gold-300 focus-visible:outline-offset-2'
+						to='/'
+					>
 						TaisenFan
 					</NavLink>
 					{NAV_LINKS.map(({to, label}) => (
@@ -31,7 +37,11 @@ export function Layout({children}: PropsWithChildren) {
 					))}
 				</nav>
 			</header>
-			<main className='mx-auto w-full max-w-7xl flex-1 px-4 py-6'>
+			{/* biome-ignore lint/correctness/useUniqueElementIds: static landmark ID for skip-link */}
+			<main
+				className='mx-auto w-full max-w-7xl flex-1 px-4 py-6'
+				id='main-content'
+			>
 				{children}
 			</main>
 			<footer className='border-parchment-300 border-t bg-parchment-100 py-4 text-center text-ink-400 text-sm dark:border-ink-700 dark:bg-ink-900'>

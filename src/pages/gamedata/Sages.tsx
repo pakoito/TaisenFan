@@ -64,11 +64,11 @@ export function Sages() {
 				))}
 			</div>
 
-			{filtered.length === 0 && (
+			{filtered.length === 0 ? (
 				<p className='py-12 text-center text-ink-400'>
 					No cards match your filters.
 				</p>
-			)}
+			) : null}
 		</>
 	)
 }

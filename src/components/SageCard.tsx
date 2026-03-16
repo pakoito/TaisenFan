@@ -16,7 +16,7 @@ export function SageCard({sage}: Props) {
 
 	return (
 		<article
-			className={`overflow-hidden rounded-lg border-2 bg-white shadow transition-transform duration-150 hover:-translate-y-1 hover:shadow-lg dark:bg-ink-800 ${factionBorder(sage.faction)}`}
+			className={`overflow-hidden rounded-lg border-2 bg-white shadow transition-transform duration-150 hover:-translate-y-1 hover:shadow-lg motion-reduce:transform-none motion-reduce:transition-none dark:bg-ink-800 ${factionBorder(sage.faction)}`}
 		>
 			{/* Header */}
 			<div
@@ -49,13 +49,13 @@ export function SageCard({sage}: Props) {
 				>
 					{collapsed ? '▶' : '▼'} Lore &amp; Dialogue
 				</button>
-				{!collapsed && (
+				{collapsed ? null : (
 					<div>
 						<p className='mb-2 whitespace-pre-line border-parchment-300 border-l-2 pl-3 text-ink-400 text-sm italic dark:border-ink-600 dark:text-parchment-500'>
 							{sage.lore}
 						</p>
 						<p className='text-ink-500 text-sm dark:text-parchment-400'>
-							"{sage.battleCry}"
+							&ldquo;{sage.battleCry}&rdquo;
 						</p>
 					</div>
 				)}

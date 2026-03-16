@@ -142,7 +142,7 @@ export function Home() {
 function SectionHeader({children}: {children: string}) {
 	return (
 		<div className='mb-3 border-gold-500 border-y-2 bg-gradient-to-r from-crimson-700 via-crimson-600 to-crimson-700 px-4 py-2'>
-			<h2 className='text-center font-bold text-gold-300 text-sm uppercase tracking-widest'>
+			<h2 className='text-pretty text-center font-bold text-gold-300 text-sm uppercase tracking-widest'>
 				{children}
 			</h2>
 		</div>
