@@ -1,16 +1,16 @@
-import {useMemo, useState} from 'react'
 import {useSuspenseQuery} from '@tanstack/react-query'
+import {useMemo, useState} from 'react'
 import {getLords} from '@/api/gamedata'
 import {PageHead} from '@/components/PageHead'
 import {RangeImage} from '@/components/RangeImage'
 import {
-	FACTIONS,
-	UNIT_TYPES,
-	RARITIES,
 	ATTRIBUTES,
-	TRAITS,
+	FACTIONS,
 	type LordCard,
+	RARITIES,
+	TRAITS,
 	type Trait,
+	UNIT_TYPES
 } from '@/types/gamedata'
 
 // ============================================================================
@@ -74,44 +74,44 @@ const FACTION_CFG: Record<
 		kanji: '魏',
 		cls: 'bg-wei text-white',
 		rowBg: 'bg-wei/5',
-		label: 'Wei (魏)',
+		label: 'Wei (魏)'
 	},
 	Shu: {
 		kanji: '蜀',
 		cls: 'bg-shu text-white',
 		rowBg: 'bg-shu/5',
-		label: 'Shu (蜀)',
+		label: 'Shu (蜀)'
 	},
 	Wu: {
 		kanji: '呉',
 		cls: 'bg-wu text-white',
 		rowBg: 'bg-wu/5',
-		label: 'Wu (呉)',
+		label: 'Wu (呉)'
 	},
 	Other: {
 		kanji: '群',
 		cls: 'bg-gun text-white',
 		rowBg: 'bg-gun/5',
-		label: 'Other (群)',
+		label: 'Other (群)'
 	},
 	LE: {
 		kanji: 'LE',
 		cls: 'bg-gold-400 text-ink-900',
 		rowBg: 'bg-gold-300/10',
-		label: 'Legendary',
+		label: 'Legendary'
 	},
 	DS: {
 		kanji: 'DS',
 		cls: 'bg-emerald-600 text-white',
 		rowBg: 'bg-emerald-600/5',
-		label: 'DS',
+		label: 'DS'
 	},
 	EX: {
 		kanji: 'EX',
 		cls: 'bg-crimson-500 text-white',
 		rowBg: 'bg-crimson-500/5',
-		label: 'EX',
-	},
+		label: 'EX'
+	}
 }
 
 function factionCfg(faction: string) {
@@ -124,7 +124,7 @@ function factionCfg(faction: string) {
 
 const FACTION_OPTS = FACTIONS.map(f => ({
 	value: f,
-	label: factionCfg(f).label,
+	label: factionCfg(f).label
 }))
 const UNIT_OPTS = UNIT_TYPES.map(u => ({value: u, label: u}))
 const RARITY_OPTS = RARITIES.map(r => ({value: r, label: r}))
@@ -138,7 +138,7 @@ const TRAIT_OPTS = TRAITS.map(t => ({value: t, label: t}))
 export function Lords() {
 	const {data: lords} = useSuspenseQuery({
 		queryFn: getLords,
-		queryKey: ['lords'],
+		queryKey: ['lords']
 	})
 
 	// Filters
@@ -182,11 +182,19 @@ export function Lords() {
 				return false
 			return true
 		})
-		result = [...result].sort((a, b) =>
-			compareLords(a, b, sortField, sortDir)
-		)
+		result = [...result].sort((a, b) => compareLords(a, b, sortField, sortDir))
 		return result
-	}, [lords, faction, unitType, rarity, attribute, trait, search, sortField, sortDir])
+	}, [
+		lords,
+		faction,
+		unitType,
+		rarity,
+		attribute,
+		trait,
+		search,
+		sortField,
+		sortDir
+	])
 
 	const hasFilters =
 		faction || unitType || rarity || attribute || trait || search
@@ -198,7 +206,7 @@ export function Lords() {
 			{/* Filters */}
 			<div className='mb-3 flex flex-wrap items-end gap-x-4 gap-y-2 rounded-lg border border-parchment-300 bg-parchment-100 p-3 dark:border-ink-600 dark:bg-ink-800'>
 				<div className='flex flex-col gap-0.5'>
-					<span className='text-[10px] font-medium uppercase tracking-wider text-ink-400'>
+					<span className='font-medium text-[10px] text-ink-400 uppercase tracking-wider'>
 						Search
 					</span>
 					<input
@@ -242,7 +250,7 @@ export function Lords() {
 				/>
 				{hasFilters && (
 					<button
-						className='h-8 rounded bg-ink-200 px-3 text-xs font-medium text-ink-600 hover:bg-ink-300 dark:bg-ink-700 dark:text-parchment-300 dark:hover:bg-ink-600'
+						className='h-8 rounded bg-ink-200 px-3 font-medium text-ink-600 text-xs hover:bg-ink-300 dark:bg-ink-700 dark:text-parchment-300 dark:hover:bg-ink-600'
 						onClick={() => {
 							setFaction('')
 							setUnitType('')
@@ -259,7 +267,7 @@ export function Lords() {
 			</div>
 
 			{/* Count */}
-			<div className='mb-2 text-sm text-ink-400'>
+			<div className='mb-2 text-ink-400 text-sm'>
 				{filtered.length} of {lords.length} cards
 			</div>
 
@@ -267,13 +275,13 @@ export function Lords() {
 			<div className='overflow-x-auto rounded-lg border border-parchment-300 shadow-sm dark:border-ink-600'>
 				<table className='w-full border-collapse text-sm'>
 					<thead>
-						<tr className='bg-ink-700 text-[11px] uppercase tracking-wider text-parchment-200'>
+						<tr className='bg-ink-700 text-[11px] text-parchment-200 uppercase tracking-wider'>
 							<th className='w-8 px-2 py-2.5' />
 							<SortTh
 								active={sortField === 'name'}
 								dir={sortDir}
 								label='Name'
-								left
+								left={true}
 								onClick={() => toggleSort('name')}
 							/>
 							<SortTh
@@ -300,18 +308,10 @@ export function Lords() {
 								label='INT'
 								onClick={() => toggleSort('int')}
 							/>
-							<th className='px-2 py-2.5 text-center font-medium'>
-								Type
-							</th>
-							<th className='px-2 py-2.5 text-center font-medium'>
-								Attr
-							</th>
-							<th className='px-2 py-2.5 text-left font-medium'>
-								Traits
-							</th>
-							<th className='px-2 py-2.5 text-left font-medium'>
-								Skill
-							</th>
+							<th className='px-2 py-2.5 text-center font-medium'>Type</th>
+							<th className='px-2 py-2.5 text-center font-medium'>Attr</th>
+							<th className='px-2 py-2.5 text-left font-medium'>Traits</th>
+							<th className='px-2 py-2.5 text-left font-medium'>Skill</th>
 							<SortTh
 								active={sortField === 'morale'}
 								dir={sortDir}
@@ -330,9 +330,7 @@ export function Lords() {
 								key={lord.cardId}
 								lord={lord}
 								onToggle={() =>
-									setExpanded(e =>
-										e === lord.cardId ? null : lord.cardId
-									)
+									setExpanded(e => (e === lord.cardId ? null : lord.cardId))
 								}
 							/>
 						))}
@@ -356,7 +354,7 @@ export function Lords() {
 function LordRow({
 	lord,
 	expanded,
-	onToggle,
+	onToggle
 }: {
 	lord: LordCard
 	expanded: boolean
@@ -367,13 +365,13 @@ function LordRow({
 	return (
 		<>
 			<tr
-				className={`cursor-pointer border-b border-parchment-200 transition-colors duration-75 hover:bg-parchment-200/60 dark:border-ink-700 dark:hover:bg-ink-700/50 ${cfg.rowBg}`}
+				className={`cursor-pointer border-parchment-200 border-b transition-colors duration-75 hover:bg-parchment-200/60 dark:border-ink-700 dark:hover:bg-ink-700/50 ${cfg.rowBg}`}
 				onClick={onToggle}
 			>
 				{/* Faction badge */}
 				<td className='px-2 py-1.5 text-center'>
 					<span
-						className={`inline-flex h-7 w-7 items-center justify-center rounded text-[11px] font-black ${cfg.cls}`}
+						className={`inline-flex h-7 w-7 items-center justify-center rounded font-black text-[11px] ${cfg.cls}`}
 						title={cfg.label}
 					>
 						{cfg.kanji}
@@ -385,14 +383,14 @@ function LordRow({
 					<span className='font-medium text-ink-800 dark:text-parchment-100'>
 						{lord.name}
 					</span>
-					<span className='ml-1.5 text-xs text-ink-400'>
+					<span className='ml-1.5 text-ink-400 text-xs'>
 						{lord.nameJapanese}
 					</span>
 				</td>
 
 				{/* Rarity */}
 				<td className='px-2 py-1.5 text-center'>
-					<span className={`text-xs font-bold ${rarityColor(lord.rarity)}`}>
+					<span className={`font-bold text-xs ${rarityColor(lord.rarity)}`}>
 						{lord.rarity}
 					</span>
 				</td>
@@ -403,23 +401,17 @@ function LordRow({
 				</td>
 
 				{/* POW */}
-				<td className='px-2 py-1.5 text-center tabular-nums'>
-					{lord.pow}
-				</td>
+				<td className='px-2 py-1.5 text-center tabular-nums'>{lord.pow}</td>
 
 				{/* INT */}
-				<td className='px-2 py-1.5 text-center tabular-nums'>
-					{lord.int}
-				</td>
+				<td className='px-2 py-1.5 text-center tabular-nums'>{lord.int}</td>
 
 				{/* Unit type */}
-				<td className='px-2 py-1.5 text-center text-xs'>
-					{lord.unitType}
-				</td>
+				<td className='px-2 py-1.5 text-center text-xs'>{lord.unitType}</td>
 
 				{/* Attribute */}
 				<td
-					className={`px-2 py-1.5 text-center text-xs font-medium ${attrColor(lord.attribute)}`}
+					className={`px-2 py-1.5 text-center font-medium text-xs ${attrColor(lord.attribute)}`}
 				>
 					{lord.attribute}
 				</td>
@@ -430,7 +422,7 @@ function LordRow({
 						<div className='flex flex-wrap gap-0.5'>
 							{lord.traits.map(t => (
 								<span
-									className='rounded bg-emerald-700/15 px-1 py-px text-[10px] font-medium text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-400'
+									className='rounded bg-emerald-700/15 px-1 py-px font-medium text-[10px] text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-400'
 									key={t}
 								>
 									{t}
@@ -438,7 +430,7 @@ function LordRow({
 							))}
 						</div>
 					) : (
-						<span className='text-xs text-ink-300'>—</span>
+						<span className='text-ink-300 text-xs'>—</span>
 					)}
 				</td>
 
@@ -477,9 +469,7 @@ function ExpandedRow({lord}: {lord: LordCard}) {
 	const cfg = factionCfg(lord.faction)
 
 	return (
-		<tr
-			className={`border-b-2 border-gold-500/30 ${cfg.rowBg}`}
-		>
+		<tr className={`border-gold-500/30 border-b-2 ${cfg.rowBg}`}>
 			<td className='px-4 py-4' colSpan={12}>
 				<div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
 					{/* Skill detail */}
@@ -493,26 +483,25 @@ function ExpandedRow({lord}: {lord: LordCard}) {
 									className='rounded border border-parchment-300 bg-parchment-50 dark:border-ink-600 dark:bg-ink-800'
 									range={lord.skill.range}
 								/>
-								<span className='rounded bg-crimson-600 px-1.5 py-0.5 text-[10px] font-bold text-white'>
+								<span className='rounded bg-crimson-600 px-1.5 py-0.5 font-bold text-[10px] text-white'>
 									{lord.skill.morale} MP
 								</span>
 							</div>
 						</div>
-						<div className='mb-1 text-xs text-ink-400'>
-							{lord.skill.range.replaceAll('_', ' ')} ·{' '}
-							{lord.skill.duration}
+						<div className='mb-1 text-ink-400 text-xs'>
+							{lord.skill.range.replaceAll('_', ' ')} · {lord.skill.duration}
 						</div>
-						<p className='whitespace-pre-line text-sm leading-relaxed text-ink-600 dark:text-parchment-300'>
+						<p className='whitespace-pre-line text-ink-600 text-sm leading-relaxed dark:text-parchment-300'>
 							{lord.skill.description}
 						</p>
 					</div>
 
 					{/* Lore */}
 					<div className='rounded-lg border border-gold-500/20 bg-white/60 p-3 dark:bg-ink-900/60'>
-						<p className='mb-3 whitespace-pre-line border-l-2 border-gold-400/50 pl-3 text-sm italic leading-relaxed text-ink-500 dark:text-parchment-400'>
+						<p className='mb-3 whitespace-pre-line border-gold-400/50 border-l-2 pl-3 text-ink-500 text-sm italic leading-relaxed dark:text-parchment-400'>
 							{lord.lore}
 						</p>
-						<p className='whitespace-pre-line text-sm text-ink-600 dark:text-parchment-300'>
+						<p className='whitespace-pre-line text-ink-600 text-sm dark:text-parchment-300'>
 							"{lord.battleCry}"
 						</p>
 						<div className='mt-3 flex justify-between text-[10px] text-ink-400'>
@@ -537,7 +526,7 @@ function SortTh({
 	active,
 	dir,
 	onClick,
-	left = false,
+	left = false
 }: {
 	label: string
 	active: boolean
@@ -567,7 +556,7 @@ function Filter({
 	label,
 	value,
 	onChange,
-	options,
+	options
 }: {
 	label: string
 	value: string
@@ -576,7 +565,7 @@ function Filter({
 }) {
 	return (
 		<div className='flex flex-col gap-0.5'>
-			<span className='text-[10px] font-medium uppercase tracking-wider text-ink-400'>
+			<span className='font-medium text-[10px] text-ink-400 uppercase tracking-wider'>
 				{label}
 			</span>
 			<select

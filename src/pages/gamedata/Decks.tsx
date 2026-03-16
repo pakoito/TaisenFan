@@ -1,7 +1,7 @@
-import {useMemo, useState} from 'react'
 import {useSuspenseQuery} from '@tanstack/react-query'
+import {useMemo, useState} from 'react'
 import {getDecks} from '@/api/gamedata'
-import {SelectFilter, SearchFilter} from '@/components/FilterBar'
+import {SearchFilter, SelectFilter} from '@/components/FilterBar'
 import {PageHead} from '@/components/PageHead'
 import {DIFFICULTIES, type DuelDeck} from '@/types/gamedata'
 import {factionBorder, factionHeaderBg} from '@/utils/faction'
@@ -11,13 +11,13 @@ const DIFFICULTY_OPTIONS = DIFFICULTIES.map(d => ({value: d, label: d}))
 const DIFFICULTY_COLORS: Record<string, string> = {
 	Easy: 'bg-emerald-600 text-white',
 	Normal: 'bg-gold-500 text-ink-900',
-	Hard: 'bg-han text-white',
+	Hard: 'bg-han text-white'
 }
 
 export function Decks() {
 	const {data: decks} = useSuspenseQuery({
 		queryFn: getDecks,
-		queryKey: ['decks'],
+		queryKey: ['decks']
 	})
 
 	const [difficulty, setDifficulty] = useState('')
@@ -51,7 +51,7 @@ export function Decks() {
 				/>
 			</div>
 
-			<p className='mb-4 text-sm text-ink-400'>
+			<p className='mb-4 text-ink-400 text-sm'>
 				Showing {filtered.length} of {decks.length} decks
 			</p>
 
@@ -84,33 +84,33 @@ function DeckCard({deck}: {deck: DuelDeck}) {
 					<div className='truncate font-bold'>{deck.name}</div>
 				</div>
 				<span
-					className={`rounded px-2 py-0.5 text-xs font-bold ${DIFFICULTY_COLORS[deck.difficulty]}`}
+					className={`rounded px-2 py-0.5 font-bold text-xs ${DIFFICULTY_COLORS[deck.difficulty]}`}
 				>
 					{deck.difficulty}
 				</span>
 			</div>
 
 			<div className='p-3'>
-				<p className='mb-3 whitespace-pre-line text-sm text-ink-600 dark:text-parchment-300'>
+				<p className='mb-3 whitespace-pre-line text-ink-600 text-sm dark:text-parchment-300'>
 					{deck.description}
 				</p>
 
 				{/* Deck stats */}
 				<div className='mb-3 grid grid-cols-4 gap-1 rounded bg-parchment-50 p-2 text-center text-sm dark:bg-ink-900'>
 					<div>
-						<div className='text-[10px] uppercase text-ink-400'>Cost</div>
+						<div className='text-[10px] text-ink-400 uppercase'>Cost</div>
 						<div className='font-bold tabular-nums'>{deck.totalCost}</div>
 					</div>
 					<div>
-						<div className='text-[10px] uppercase text-ink-400'>Lords</div>
+						<div className='text-[10px] text-ink-400 uppercase'>Lords</div>
 						<div className='font-bold tabular-nums'>{deck.lordCount}</div>
 					</div>
 					<div>
-						<div className='text-[10px] uppercase text-ink-400'>POW</div>
+						<div className='text-[10px] text-ink-400 uppercase'>POW</div>
 						<div className='font-bold tabular-nums'>{deck.totalPow}</div>
 					</div>
 					<div>
-						<div className='text-[10px] uppercase text-ink-400'>INT</div>
+						<div className='text-[10px] text-ink-400 uppercase'>INT</div>
 						<div className='font-bold tabular-nums'>{deck.totalInt}</div>
 					</div>
 				</div>
@@ -138,11 +138,9 @@ function DeckCard({deck}: {deck: DuelDeck}) {
 							>
 								<span className='min-w-0 truncate font-medium text-ink-700 dark:text-parchment-200'>
 									{lord.name}{' '}
-									<span className='text-ink-400'>
-										{lord.nameJapanese}
-									</span>
+									<span className='text-ink-400'>{lord.nameJapanese}</span>
 								</span>
-								<span className='ml-2 shrink-0 text-xs text-ink-400'>
+								<span className='ml-2 shrink-0 text-ink-400 text-xs'>
 									{lord.cost} · {lord.unitType} · {lord.pow}/{lord.int}
 								</span>
 							</div>
@@ -152,7 +150,7 @@ function DeckCard({deck}: {deck: DuelDeck}) {
 
 				{/* Special units */}
 				{deck.specialUnits.length > 0 && deck.lords.length === 0 && (
-					<div className='text-sm text-ink-400'>
+					<div className='text-ink-400 text-sm'>
 						{deck.specialUnits.length} special unit
 						{deck.specialUnits.length > 1 ? 's' : ''} (tutorial)
 					</div>

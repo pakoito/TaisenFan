@@ -11,7 +11,7 @@
  * All processing happens client-side — no data leaves the browser.
  */
 
-const PATCH_URL = '/data/patch.bps'
+const PATCH_URL = `${import.meta.env.BASE_URL}data/patch.bps`
 const PATCHED_FILENAME = 'Sangokushi_Taisen_Ten_Japan_EN.nds'
 
 const BPS_MAGIC = 'BPS1'
@@ -48,8 +48,8 @@ interface BpsPatch {
 }
 
 class BpsReader {
-	private view: DataView
-	private u8: Uint8Array
+	private readonly view: DataView
+	private readonly u8: Uint8Array
 	offset = 0
 
 	constructor(buffer: ArrayBuffer) {
@@ -134,7 +134,7 @@ function parseBps(buffer: ArrayBuffer): BpsPatch {
 		actions,
 		sourceChecksum: r.readU32(),
 		targetChecksum: r.readU32(),
-		patchChecksum: r.readU32(),
+		patchChecksum: r.readU32()
 	}
 }
 
@@ -147,7 +147,7 @@ const crc32Table = (() => {
 	for (let i = 0; i < 256; i++) {
 		let c = i
 		for (let j = 0; j < 8; j++) {
-			c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1
+			c = c & 1 ? 0xed_b8_83_20 ^ (c >>> 1) : c >>> 1
 		}
 		table[i] = c
 	}
@@ -155,21 +155,18 @@ const crc32Table = (() => {
 })()
 
 function crc32(data: Uint8Array, start = 0, end = data.length): number {
-	let crc = 0xffffffff
+	let crc = 0xff_ff_ff_ff
 	for (let i = start; i < end; i++) {
 		crc = crc32Table[(crc ^ data[i]!) & 0xff]! ^ (crc >>> 8)
 	}
-	return (crc ^ 0xffffffff) >>> 0
+	return (crc ^ 0xff_ff_ff_ff) >>> 0
 }
 
 // ============================================================================
 // BPS apply
 // ============================================================================
 
-function applyBps(
-	sourceData: Uint8Array,
-	patch: BpsPatch
-): Uint8Array {
+function applyBps(sourceData: Uint8Array, patch: BpsPatch): Uint8Array {
 	// Validate source
 	const srcCrc = crc32(sourceData)
 	if (srcCrc !== patch.sourceChecksum) {
@@ -195,7 +192,7 @@ function applyBps(
 
 			case ACTION_TARGET_READ:
 				for (let i = 0; i < action.length; i++) {
-					target[targetOffset++] = action.bytes![i]!
+					target[targetOffset++] = action.bytes?.[i]!
 				}
 				break
 
@@ -241,9 +238,7 @@ async function fetchPatch(): Promise<BpsPatch> {
 	return cachedPatch
 }
 
-export async function applyPatch(
-	romBuffer: ArrayBuffer
-): Promise<PatchResult> {
+export async function applyPatch(romBuffer: ArrayBuffer): Promise<PatchResult> {
 	try {
 		const patch = await fetchPatch()
 		const source = new Uint8Array(romBuffer)
@@ -252,19 +247,19 @@ export async function applyPatch(
 		return {
 			success: true,
 			data: patched,
-			filename: PATCHED_FILENAME,
+			filename: PATCHED_FILENAME
 		}
 	} catch (err) {
 		return {
 			success: false,
-			error: err instanceof Error ? err.message : 'Unknown patching error.',
+			error: err instanceof Error ? err.message : 'Unknown patching error.'
 		}
 	}
 }
 
 export function downloadBlob(data: Uint8Array, filename: string) {
 	const blob = new Blob([data.buffer as ArrayBuffer], {
-		type: 'application/octet-stream',
+		type: 'application/octet-stream'
 	})
 	const url = URL.createObjectURL(blob)
 	const a = document.createElement('a')

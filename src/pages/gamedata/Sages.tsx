@@ -1,7 +1,7 @@
-import {useMemo, useState} from 'react'
 import {useSuspenseQuery} from '@tanstack/react-query'
+import {useMemo, useState} from 'react'
 import {getSages} from '@/api/gamedata'
-import {SelectFilter, SearchFilter} from '@/components/FilterBar'
+import {SearchFilter, SelectFilter} from '@/components/FilterBar'
 import {PageHead} from '@/components/PageHead'
 import {SageCard} from '@/components/SageCard'
 import {FACTIONS} from '@/types/gamedata'
@@ -12,7 +12,7 @@ const FACTION_OPTIONS = FACTIONS.map(f => ({value: f, label: factionLabel(f)}))
 export function Sages() {
 	const {data: sages} = useSuspenseQuery({
 		queryFn: getSages,
-		queryKey: ['sages'],
+		queryKey: ['sages']
 	})
 
 	const [faction, setFaction] = useState('')
@@ -51,7 +51,7 @@ export function Sages() {
 				/>
 			</div>
 
-			<p className='mb-4 text-sm text-ink-400'>
+			<p className='mb-4 text-ink-400 text-sm'>
 				Showing {filtered.length} of {sages.length} cards
 			</p>
 

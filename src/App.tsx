@@ -16,7 +16,7 @@ const Decks = lazy(() =>
 function Loading() {
 	return (
 		<div className='flex min-h-[50vh] items-center justify-center'>
-			<p className='text-lg text-ink-400'>Loading…</p>
+			<p className='text-ink-400 text-lg'>Loading…</p>
 		</div>
 	)
 }
@@ -26,7 +26,7 @@ export function App() {
 		<Layout>
 			<Suspense fallback={<Loading />}>
 				<Routes>
-					<Route element={<Home />} index />
+					<Route element={<Home />} index={true} />
 					<Route element={<Lords />} path='gamedata/lords' />
 					<Route element={<Sages />} path='gamedata/sages' />
 					<Route element={<Decks />} path='gamedata/decks' />

@@ -27,7 +27,7 @@ export function Patcher() {
 		} catch {
 			setState({
 				step: 'done',
-				result: {success: false, error: 'Failed to read ROM file.'},
+				result: {success: false, error: 'Failed to read ROM file.'}
 			})
 		}
 	}, [])
@@ -79,19 +79,19 @@ export function Patcher() {
 				{state.step === 'idle' && (
 					<>
 						<span className='text-3xl'>🎮</span>
-						<p className='text-sm font-medium text-ink-500 dark:text-parchment-400'>
+						<p className='font-medium text-ink-500 text-sm dark:text-parchment-400'>
 							Drop your ROM here or click to select
 						</p>
-						<p className='text-xs text-ink-400'>
+						<p className='text-ink-400 text-xs'>
 							Expects the original Japanese .nds file
 						</p>
-						<label className='cursor-pointer rounded bg-emerald-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-emerald-700'>
+						<label className='cursor-pointer rounded bg-emerald-600 px-4 py-2 font-medium text-sm text-white transition-colors hover:bg-emerald-700'>
 							Select ROM File
 							<input
-								ref={inputRef}
 								accept='.nds'
 								className='hidden'
 								onChange={onFileChange}
+								ref={inputRef}
 								type='file'
 							/>
 						</label>
@@ -102,9 +102,7 @@ export function Patcher() {
 				{state.step === 'reading' && (
 					<>
 						<Spinner />
-						<p className='text-sm font-medium text-gold-600'>
-							Reading ROM…
-						</p>
+						<p className='font-medium text-gold-600 text-sm'>Reading ROM…</p>
 					</>
 				)}
 
@@ -112,10 +110,8 @@ export function Patcher() {
 				{state.step === 'patching' && (
 					<>
 						<Spinner />
-						<p className='text-sm font-medium text-gold-600'>
-							Applying patch…
-						</p>
-						<p className='text-xs text-ink-400'>
+						<p className='font-medium text-gold-600 text-sm'>Applying patch…</p>
+						<p className='text-ink-400 text-xs'>
 							Downloading patch file &amp; patching in your browser
 						</p>
 					</>
@@ -125,21 +121,18 @@ export function Patcher() {
 				{isSuccess && (
 					<>
 						<span className='text-3xl'>✅</span>
-						<p className='text-sm font-bold text-emerald-600'>
+						<p className='font-bold text-emerald-600 text-sm'>
 							Patched successfully!
 						</p>
-						<p className='text-xs text-ink-400'>
+						<p className='text-ink-400 text-xs'>
 							Your download should start automatically.
 						</p>
 						<div className='flex gap-2'>
 							{state.result.data && state.result.filename && (
 								<button
-									className='rounded bg-emerald-600 px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-emerald-700'
+									className='rounded bg-emerald-600 px-3 py-1.5 font-medium text-sm text-white transition-colors hover:bg-emerald-700'
 									onClick={() =>
-										downloadBlob(
-											state.result.data!,
-											state.result.filename!
-										)
+										downloadBlob(state.result.data!, state.result.filename!)
 									}
 									type='button'
 								>
@@ -147,7 +140,7 @@ export function Patcher() {
 								</button>
 							)}
 							<button
-								className='rounded bg-ink-200 px-3 py-1.5 text-sm font-medium text-ink-600 transition-colors hover:bg-ink-300 dark:bg-ink-700 dark:text-parchment-300'
+								className='rounded bg-ink-200 px-3 py-1.5 font-medium text-ink-600 text-sm transition-colors hover:bg-ink-300 dark:bg-ink-700 dark:text-parchment-300'
 								onClick={reset}
 								type='button'
 							>
@@ -161,14 +154,14 @@ export function Patcher() {
 				{isError && (
 					<>
 						<span className='text-3xl'>❌</span>
-						<p className='text-sm font-bold text-crimson-600'>
+						<p className='font-bold text-crimson-600 text-sm'>
 							Patching failed
 						</p>
-						<p className='max-w-sm text-center text-xs text-ink-500'>
+						<p className='max-w-sm text-center text-ink-500 text-xs'>
 							{state.result.error}
 						</p>
 						<button
-							className='rounded bg-ink-200 px-3 py-1.5 text-sm font-medium text-ink-600 transition-colors hover:bg-ink-300 dark:bg-ink-700 dark:text-parchment-300'
+							className='rounded bg-ink-200 px-3 py-1.5 font-medium text-ink-600 text-sm transition-colors hover:bg-ink-300 dark:bg-ink-700 dark:text-parchment-300'
 							onClick={reset}
 							type='button'
 						>

@@ -5,7 +5,10 @@ interface Props {
 }
 
 export function RangeImage({range, sage = false, className = ''}: Props) {
-	const src = sage ? `/ranges/sage/${range}.png` : `/ranges/${range}.png`
+	const base = import.meta.env.BASE_URL
+	const src = sage
+		? `${base}ranges/sage/${range}.png`
+		: `${base}ranges/${range}.png`
 	const label = range.replaceAll('_', ' ')
 
 	return (

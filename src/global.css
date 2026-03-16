@@ -72,12 +72,12 @@
 	--color-ink-950: #0a0a0a;
 
 	/* === Faction Colors (Three Kingdoms — matched to official button sprites) === */
-	--color-wei: #b4191b;      /* Wei (魏) — crimson red */
-	--color-shu: #2e8b57;      /* Shu (蜀) — forest green */
-	--color-wu: #2563a8;       /* Wu (呉) — royal blue */
-	--color-han: #7b4fbf;      /* Han (漢) — purple */
-	--color-shin: #d4841a;     /* Shin (晋) — orange */
-	--color-gun: #808080;      /* Gun (群) — gray */
+	--color-wei: #b4191b; /* Wei (魏) — crimson red */
+	--color-shu: #2e8b57; /* Shu (蜀) — forest green */
+	--color-wu: #2563a8; /* Wu (呉) — royal blue */
+	--color-han: #7b4fbf; /* Han (漢) — purple */
+	--color-shin: #d4841a; /* Shin (晋) — orange */
+	--color-gun: #808080; /* Gun (群) — gray */
 
 	/* === Semantic Aliases === */
 	--color-primary: var(--color-crimson-600);

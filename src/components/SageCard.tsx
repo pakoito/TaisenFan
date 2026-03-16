@@ -32,11 +32,15 @@ export function SageCard({sage}: Props) {
 			<div className='p-3'>
 				{/* Abilities */}
 				<AbilityBlock ability={sage.tactics} label='Tactics (兵略)' />
-				<AbilityBlock ability={sage.formation} label='Formation (陣略)' sage />
+				<AbilityBlock
+					ability={sage.formation}
+					label='Formation (陣略)'
+					sage={true}
+				/>
 
 				{/* Lore (collapsible) */}
 				<button
-					className='mb-1 w-full text-left text-sm font-medium text-ink-500 hover:text-ink-700 dark:text-parchment-400 dark:hover:text-parchment-200'
+					className='mb-1 w-full text-left font-medium text-ink-500 text-sm hover:text-ink-700 dark:text-parchment-400 dark:hover:text-parchment-200'
 					onClick={() => setCollapsed(c => !c)}
 					type='button'
 				>
@@ -44,17 +48,17 @@ export function SageCard({sage}: Props) {
 				</button>
 				{!collapsed && (
 					<div>
-						<p className='mb-2 whitespace-pre-line border-l-2 border-parchment-300 pl-3 text-sm italic text-ink-400 dark:border-ink-600 dark:text-parchment-500'>
+						<p className='mb-2 whitespace-pre-line border-parchment-300 border-l-2 pl-3 text-ink-400 text-sm italic dark:border-ink-600 dark:text-parchment-500'>
 							{sage.lore}
 						</p>
-						<p className='text-sm text-ink-500 dark:text-parchment-400'>
+						<p className='text-ink-500 text-sm dark:text-parchment-400'>
 							"{sage.battleCry}"
 						</p>
 					</div>
 				)}
 
 				{/* Meta */}
-				<div className='mt-3 flex justify-between text-xs text-ink-400'>
+				<div className='mt-3 flex justify-between text-ink-400 text-xs'>
 					<span>Artist: {sage.artist}</span>
 					<span>
 						{sage.birthYear ?? '?'} – {sage.deathYear ?? '?'}
@@ -68,7 +72,7 @@ export function SageCard({sage}: Props) {
 function AbilityBlock({
 	ability,
 	label,
-	sage = false,
+	sage = false
 }: {
 	ability: SageAbility
 	label: string
@@ -76,12 +80,12 @@ function AbilityBlock({
 }) {
 	return (
 		<div className='mb-3 rounded-lg bg-parchment-50 p-3 dark:bg-ink-900'>
-			<div className='mb-1 text-xs font-medium uppercase tracking-wide text-ink-400'>
+			<div className='mb-1 font-medium text-ink-400 text-xs uppercase tracking-wide'>
 				{label}
 			</div>
 			<div className='mb-2 flex items-center justify-between'>
 				<span className='font-bold text-gold-500'>{ability.name}</span>
-				<span className='text-xs text-ink-400'>
+				<span className='text-ink-400 text-xs'>
 					Gauge: {ability.gaugeMax} · {ability.affinity}
 				</span>
 			</div>
@@ -91,11 +95,11 @@ function AbilityBlock({
 					range={ability.range}
 					sage={sage}
 				/>
-				<span className='text-sm text-ink-400'>
+				<span className='text-ink-400 text-sm'>
 					{ability.range.replaceAll('_', ' ')} · Target: {ability.target}
 				</span>
 			</div>
-			<p className='whitespace-pre-line text-sm text-ink-600 dark:text-parchment-300'>
+			<p className='whitespace-pre-line text-ink-600 text-sm dark:text-parchment-300'>
 				{ability.description}
 			</p>
 		</div>

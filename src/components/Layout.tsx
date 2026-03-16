@@ -5,7 +5,7 @@ const NAV_LINKS = [
 	{to: '/', label: 'Home'},
 	{to: '/gamedata/lords', label: 'Lord Cards'},
 	{to: '/gamedata/sages', label: 'Sage Cards'},
-	{to: '/gamedata/decks', label: 'Duel Decks'},
+	{to: '/gamedata/decks', label: 'Duel Decks'}
 ] as const
 
 function navClass({isActive}: {isActive: boolean}): string {
@@ -21,10 +21,7 @@ export function Layout({children}: PropsWithChildren) {
 		<div className='flex min-h-screen flex-col'>
 			<header className='bg-emerald-700'>
 				<nav className='mx-auto flex max-w-7xl items-center gap-1 px-4 py-3'>
-					<NavLink
-						className='mr-4 text-lg font-bold text-gold-300'
-						to='/'
-					>
+					<NavLink className='mr-4 font-bold text-gold-300 text-lg' to='/'>
 						TaisenFan
 					</NavLink>
 					{NAV_LINKS.map(({to, label}) => (
@@ -37,7 +34,7 @@ export function Layout({children}: PropsWithChildren) {
 			<main className='mx-auto w-full max-w-7xl flex-1 px-4 py-6'>
 				{children}
 			</main>
-			<footer className='border-t border-parchment-300 bg-parchment-100 py-4 text-center text-sm text-ink-400 dark:border-ink-700 dark:bg-ink-900'>
+			<footer className='border-parchment-300 border-t bg-parchment-100 py-4 text-center text-ink-400 text-sm dark:border-ink-700 dark:bg-ink-900'>
 				TaisenFan — Fan site for Sangokushi Taisen Ten (三国志大戦DS)
 			</footer>
 		</div>

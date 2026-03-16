@@ -14,7 +14,7 @@ export const UNIT_TYPES = [
 	'Horse',
 	'Bow',
 	'Infantry',
-	'Siege',
+	'Siege'
 ] as const
 export type UnitType = (typeof UNIT_TYPES)[number]
 
@@ -25,7 +25,7 @@ export const TRAITS = [
 	'Barricade',
 	'Charm',
 	'Recruit',
-	'FlyingGeneral',
+	'FlyingGeneral'
 ] as const
 export type Trait = (typeof TRAITS)[number]
 
@@ -37,7 +37,7 @@ export const EFFECT_DURATIONS = [
 	'Brief',
 	'Scales with INT',
 	'Until defeated',
-	'While active',
+	'While active'
 ] as const
 export type EffectDuration = (typeof EFFECT_DURATIONS)[number]
 
@@ -56,7 +56,7 @@ export const SAGE_RANGE_TYPES = [
 	'square_large',
 	'wide_rect',
 	'wide_rect_narrow',
-	'circle',
+	'circle'
 ] as const
 export type SageRangeType = (typeof SAGE_RANGE_TYPES)[number]
 
@@ -102,7 +102,7 @@ export interface SageAbility {
 	affinity: Attribute
 	target: SkillTarget
 	range: SageRangeType
-	rangeSize: { x: number; y: number }
+	rangeSize: {x: number; y: number}
 	gaugeMax: number
 	chargeTime: number
 }

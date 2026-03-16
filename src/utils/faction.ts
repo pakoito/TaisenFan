@@ -12,7 +12,7 @@ const FACTION_BORDER: Record<Faction, string> = {
 	Other: 'border-gun',
 	LE: 'border-gold-500',
 	DS: 'border-emerald-600',
-	EX: 'border-crimson-500',
+	EX: 'border-crimson-500'
 }
 
 const FACTION_HEADER_BG: Record<Faction, string> = {
@@ -22,7 +22,7 @@ const FACTION_HEADER_BG: Record<Faction, string> = {
 	Other: 'bg-gun text-white',
 	LE: 'bg-gradient-to-r from-gold-400 to-gold-600 text-ink-900',
 	DS: 'bg-emerald-600 text-white',
-	EX: 'bg-crimson-500 text-white',
+	EX: 'bg-crimson-500 text-white'
 }
 
 const FACTION_ROW_TINT: Record<Faction, string> = {
@@ -32,7 +32,7 @@ const FACTION_ROW_TINT: Record<Faction, string> = {
 	Other: 'bg-gun/10',
 	LE: 'bg-gold-300/15',
 	DS: 'bg-emerald-600/10',
-	EX: 'bg-crimson-500/10',
+	EX: 'bg-crimson-500/10'
 }
 
 const FACTION_LABEL: Record<Faction, string> = {
@@ -42,7 +42,7 @@ const FACTION_LABEL: Record<Faction, string> = {
 	Other: 'Other (群)',
 	LE: 'Legendary',
 	DS: 'DS',
-	EX: 'EX',
+	EX: 'EX'
 }
 
 export function factionBorder(faction: Faction): string {
