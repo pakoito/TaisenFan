@@ -40,7 +40,7 @@ export function Sages() {
 		<>
 			<PageHead title='Sage Cards' />
 
-			<div className='mb-4 flex flex-wrap gap-3 rounded-lg bg-parchment-100 p-3 dark:bg-ink-800'>
+			<div className='mb-5 flex flex-wrap gap-4 bg-surface-high p-4'>
 				<SearchFilter
 					onChange={setSearch}
 					placeholder='Name or ability…'
@@ -54,18 +54,18 @@ export function Sages() {
 				/>
 			</div>
 
-			<p className='mb-4 text-ink-400 text-sm'>
+			<p className='mb-5 font-sans text-sm text-text-faint'>
 				Showing {filtered.length} of {sages.length} cards
 			</p>
 
-			<div className='grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3'>
+			<div className='grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3'>
 				{filtered.map(sage => (
 					<SageCard key={sage.cardId} sage={sage} />
 				))}
 			</div>
 
 			{filtered.length === 0 ? (
-				<p className='py-12 text-center text-ink-400'>
+				<p className='py-12 text-center text-text-faint'>
 					No cards match your filters.
 				</p>
 			) : null}

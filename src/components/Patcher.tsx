@@ -70,7 +70,7 @@ export function Patcher() {
 		// biome-ignore lint/a11y/noNoninteractiveElementInteractions: drop zone requires drag handlers
 		<div
 			aria-live='polite'
-			className={`relative flex flex-col items-center gap-3 rounded-lg border-2 border-dashed py-8 transition-colors motion-reduce:transition-none ${zoneClass(step)}`}
+			className={`relative flex flex-col items-center gap-4 border-2 border-dashed py-10 transition-colors motion-reduce:transition-none ${zoneClass(step)}`}
 			onDragOver={isProcessing ? undefined : onDragOver}
 			onDrop={isProcessing ? undefined : onDrop}
 		>
@@ -99,13 +99,13 @@ function zoneClass(step: PatchStep): string {
 	switch (step) {
 		case 'reading':
 		case 'patching':
-			return 'cursor-wait border-gold-400 bg-gold-50/30 dark:bg-gold-500/5'
+			return 'cursor-wait border-gold-dim bg-gold/5'
 		case 'success':
-			return 'border-emerald-500 bg-emerald-50/30 dark:bg-emerald-500/5'
+			return 'border-shu bg-shu/5'
 		case 'error':
-			return 'border-crimson-400 bg-crimson-50/30 dark:bg-crimson-500/5'
+			return 'border-cinnabar bg-cinnabar/5'
 		default:
-			return 'cursor-pointer border-parchment-400 bg-parchment-50/50 hover:border-emerald-500 hover:bg-emerald-50/20 dark:border-ink-600 dark:bg-ink-800/50 dark:hover:border-emerald-600'
+			return 'cursor-pointer border-border-dim bg-surface-mid hover:border-gold-muted hover:bg-surface-high'
 	}
 }
 
@@ -121,13 +121,14 @@ function IdleState({
 			<span aria-hidden='true' className='text-3xl'>
 				🎮
 			</span>
-			<p className='font-medium text-ink-500 text-sm dark:text-parchment-400'>
+			<p className='font-medium text-sm text-text-muted'>
 				Drop your ROM here or click to select
 			</p>
-			<p className='text-ink-400 text-xs'>
+			<p className='text-text-dim text-xs'>
 				Expects the original Japanese .nds file
 			</p>
-			<label className='cursor-pointer rounded bg-emerald-600 px-4 py-2 font-medium text-sm text-white transition-colors focus-within:outline-2 focus-within:outline-emerald-400 focus-within:outline-offset-2 hover:bg-emerald-700 motion-reduce:transition-none'>
+			{/* Imperial Seal — cinnabar action button */}
+			<label className='cursor-pointer bg-cinnabar px-6 py-2.5 font-bold font-sans text-gold text-sm uppercase tracking-wider transition-colors focus-within:outline-2 focus-within:outline-gold focus-within:outline-offset-2 hover:bg-cinnabar-light motion-reduce:transition-none'>
 				Select ROM File
 				<input
 					accept='.nds'
@@ -151,11 +152,11 @@ function ProcessingState({
 }) {
 	return (
 		<>
-			<output className='block h-8 w-8 animate-spin rounded-full border-4 border-gold-300 border-t-gold-600 motion-reduce:animate-none motion-reduce:border-gold-500'>
+			<output className='block h-8 w-8 animate-spin border-4 border-gold-muted border-t-gold motion-reduce:animate-none motion-reduce:border-gold'>
 				<span className='sr-only'>Processing…</span>
 			</output>
-			<p className='font-medium text-gold-600 text-sm'>{message}</p>
-			{subtitle ? <p className='text-ink-400 text-xs'>{subtitle}</p> : null}
+			<p className='font-bold font-serif text-gold text-sm'>{message}</p>
+			{subtitle ? <p className='text-text-dim text-xs'>{subtitle}</p> : null}
 		</>
 	)
 }
@@ -172,15 +173,15 @@ function SuccessState({
 			<span aria-hidden='true' className='text-3xl'>
 				✅
 			</span>
-			<p className='font-bold text-emerald-600 text-sm'>
+			<p className='font-bold font-serif text-shu text-sm'>
 				Patched successfully!
 			</p>
-			<p className='text-ink-400 text-xs'>
+			<p className='text-text-dim text-xs'>
 				Your download should start automatically.
 			</p>
-			<div className='flex gap-2'>
+			<div className='flex gap-3'>
 				<button
-					className='rounded bg-emerald-600 px-3 py-1.5 font-medium text-sm text-white transition-colors hover:bg-emerald-700 focus-visible:outline-2 focus-visible:outline-emerald-400 focus-visible:outline-offset-2 motion-reduce:transition-none'
+					className='bg-cinnabar px-5 py-2 font-bold font-sans text-gold text-sm uppercase tracking-wider transition-colors hover:bg-cinnabar-light focus-visible:outline-2 focus-visible:outline-gold focus-visible:outline-offset-2 motion-reduce:transition-none'
 					onClick={onRedownload}
 					type='button'
 				>
@@ -198,8 +199,10 @@ function ErrorState({error, onReset}: {error: string; onReset: () => void}) {
 			<span aria-hidden='true' className='text-3xl'>
 				❌
 			</span>
-			<p className='font-bold text-crimson-600 text-sm'>Patching failed</p>
-			<p className='max-w-sm text-center text-ink-500 text-xs'>{error}</p>
+			<p className='font-bold font-serif text-cinnabar-light text-sm'>
+				Patching failed
+			</p>
+			<p className='max-w-sm text-center text-text-faint text-xs'>{error}</p>
 			<ResetButton onClick={onReset} />
 		</>
 	)
@@ -208,7 +211,7 @@ function ErrorState({error, onReset}: {error: string; onReset: () => void}) {
 function ResetButton({onClick}: {onClick: () => void}) {
 	return (
 		<button
-			className='rounded bg-ink-200 px-3 py-1.5 font-medium text-ink-600 text-sm transition-colors hover:bg-ink-300 focus-visible:outline-2 focus-visible:outline-ink-500 focus-visible:outline-offset-2 motion-reduce:transition-none dark:bg-ink-700 dark:text-parchment-300'
+			className='border border-border bg-transparent px-5 py-2 font-medium font-sans text-sm text-text-muted uppercase tracking-wider transition-colors hover:bg-surface-highest hover:text-gold focus-visible:outline-2 focus-visible:outline-gold focus-visible:outline-offset-2 motion-reduce:transition-none'
 			onClick={onClick}
 			type='button'
 		>

@@ -9,9 +9,9 @@ import {factionBorder, factionHeaderBg} from '@/utils/faction'
 const DIFFICULTY_OPTIONS = DIFFICULTIES.map(d => ({value: d, label: d}))
 
 const DIFFICULTY_COLORS: Record<string, string> = {
-	Easy: 'bg-emerald-600 text-white',
-	Normal: 'bg-gold-500 text-ink-900',
-	Hard: 'bg-han text-white'
+	Easy: 'bg-shu text-white',
+	Normal: 'bg-gold-dark text-gold',
+	Hard: 'bg-cinnabar text-gold'
 }
 
 export function Decks() {
@@ -37,7 +37,7 @@ export function Decks() {
 		<>
 			<PageHead title='Duel Decks' />
 
-			<div className='mb-4 flex flex-wrap gap-3 rounded-lg bg-parchment-100 p-3 dark:bg-ink-800'>
+			<div className='mb-5 flex flex-wrap gap-4 bg-surface-high p-4'>
 				<SearchFilter
 					onChange={setSearch}
 					placeholder='Name or description…'
@@ -51,18 +51,18 @@ export function Decks() {
 				/>
 			</div>
 
-			<p className='mb-4 text-ink-400 text-sm'>
+			<p className='mb-5 font-sans text-sm text-text-faint'>
 				Showing {filtered.length} of {decks.length} decks
 			</p>
 
-			<div className='grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3'>
+			<div className='grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3'>
 				{filtered.map(deck => (
 					<DeckCard deck={deck} key={`${deck.difficulty}-${deck.deckNo}`} />
 				))}
 			</div>
 
 			{filtered.length === 0 ? (
-				<p className='py-12 text-center text-ink-400'>
+				<p className='py-12 text-center text-text-faint'>
 					No decks match your filters.
 				</p>
 			) : null}
@@ -75,51 +75,67 @@ function DeckCard({deck}: {deck: DuelDeck}) {
 
 	return (
 		<article
-			className={`overflow-hidden rounded-lg border-2 bg-white shadow dark:bg-ink-800 ${factionBorder(sageFaction)}`}
+			className={`overflow-hidden border-l-2 bg-surface-high ${factionBorder(sageFaction)}`}
 		>
 			<div
-				className={`flex items-center justify-between px-3 py-2 ${factionHeaderBg(sageFaction)}`}
+				className={`flex items-center justify-between px-4 py-3 ${factionHeaderBg(sageFaction)}`}
 			>
 				<div className='min-w-0'>
-					<div className='truncate font-bold'>{deck.name}</div>
+					<div className='truncate font-bold font-serif'>{deck.name}</div>
 				</div>
 				<span
-					className={`rounded px-2 py-0.5 font-bold text-xs ${DIFFICULTY_COLORS[deck.difficulty]}`}
+					className={`px-2 py-0.5 font-black font-sans text-xs ${DIFFICULTY_COLORS[deck.difficulty]}`}
 				>
 					{deck.difficulty}
 				</span>
 			</div>
 
-			<div className='p-3'>
-				<p className='mb-3 whitespace-pre-line text-ink-600 text-sm dark:text-parchment-300'>
+			<div className='p-4'>
+				<p className='mb-4 whitespace-pre-line text-sm text-text-muted'>
 					{deck.description}
 				</p>
 
 				{/* Deck stats */}
-				<div className='mb-3 grid grid-cols-4 gap-1 rounded bg-parchment-50 p-2 text-center text-sm dark:bg-ink-900'>
+				<div className='mb-4 grid grid-cols-4 gap-1 bg-surface-mid p-2 text-center font-sans text-sm'>
 					<div>
-						<div className='text-[10px] text-ink-400 uppercase'>Cost</div>
-						<div className='font-bold tabular-nums'>{deck.totalCost}</div>
+						<div className='text-[10px] text-text-dim uppercase tracking-wider'>
+							Cost
+						</div>
+						<div className='font-bold text-text tabular-nums'>
+							{deck.totalCost}
+						</div>
 					</div>
 					<div>
-						<div className='text-[10px] text-ink-400 uppercase'>Lords</div>
-						<div className='font-bold tabular-nums'>{deck.lordCount}</div>
+						<div className='text-[10px] text-text-dim uppercase tracking-wider'>
+							Lords
+						</div>
+						<div className='font-bold text-text tabular-nums'>
+							{deck.lordCount}
+						</div>
 					</div>
 					<div>
-						<div className='text-[10px] text-ink-400 uppercase'>POW</div>
-						<div className='font-bold tabular-nums'>{deck.totalPow}</div>
+						<div className='text-[10px] text-text-dim uppercase tracking-wider'>
+							POW
+						</div>
+						<div className='font-bold text-text tabular-nums'>
+							{deck.totalPow}
+						</div>
 					</div>
 					<div>
-						<div className='text-[10px] text-ink-400 uppercase'>INT</div>
-						<div className='font-bold tabular-nums'>{deck.totalInt}</div>
+						<div className='text-[10px] text-text-dim uppercase tracking-wider'>
+							INT
+						</div>
+						<div className='font-bold text-text tabular-nums'>
+							{deck.totalInt}
+						</div>
 					</div>
 				</div>
 
 				{/* Sage */}
 				{deck.sage !== null ? (
-					<div className='mb-3 text-sm'>
-						<span className='font-medium text-gold-500'>Sage:</span>{' '}
-						<span className='text-ink-600 dark:text-parchment-300'>
+					<div className='mb-4 text-sm'>
+						<span className='font-bold font-serif text-gold'>Sage:</span>{' '}
+						<span className='text-text-muted'>
 							{deck.sage.name} ({deck.sage.nameJapanese}) —{' '}
 							{deck.sage.selectedAbility === 'Tactics'
 								? deck.sage.tacticsName
@@ -133,14 +149,14 @@ function DeckCard({deck}: {deck: DuelDeck}) {
 					<div className='space-y-1'>
 						{deck.lords.map(lord => (
 							<div
-								className='flex items-center justify-between rounded bg-parchment-50 px-2 py-1 text-sm dark:bg-ink-900'
+								className='flex items-center justify-between bg-surface-mid px-3 py-1.5 font-sans text-sm'
 								key={lord.cardId}
 							>
-								<span className='min-w-0 truncate font-medium text-ink-700 dark:text-parchment-200'>
+								<span className='min-w-0 truncate font-medium text-text'>
 									{lord.name}{' '}
-									<span className='text-ink-400'>{lord.nameJapanese}</span>
+									<span className='text-text-dim'>{lord.nameJapanese}</span>
 								</span>
-								<span className='ml-2 shrink-0 text-ink-400 text-xs'>
+								<span className='ml-2 shrink-0 text-text-faint text-xs'>
 									{lord.cost} · {lord.unitType} · {lord.pow}/{lord.int}
 								</span>
 							</div>
@@ -150,7 +166,7 @@ function DeckCard({deck}: {deck: DuelDeck}) {
 
 				{/* Special units */}
 				{deck.specialUnits.length > 0 && deck.lords.length === 0 ? (
-					<div className='text-ink-400 text-sm'>
+					<div className='text-sm text-text-faint'>
 						{deck.specialUnits.length} special unit
 						{deck.specialUnits.length > 1 ? 's' : ''} (tutorial)
 					</div>

@@ -16,7 +16,7 @@ const Decks = lazy(() =>
 function Loading() {
 	return (
 		<div className='flex min-h-[50vh] items-center justify-center'>
-			<p className='text-ink-400 text-lg'>Loading…</p>
+			<p className='font-serif text-lg text-text-faint'>Loading…</p>
 		</div>
 	)
 }

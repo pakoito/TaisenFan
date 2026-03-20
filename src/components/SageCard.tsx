@@ -16,23 +16,23 @@ export function SageCard({sage}: Props) {
 
 	return (
 		<article
-			className={`overflow-hidden rounded-lg border-2 bg-white shadow transition-transform duration-150 hover:-translate-y-1 hover:shadow-lg motion-reduce:transform-none motion-reduce:transition-none dark:bg-ink-800 ${factionBorder(sage.faction)}`}
+			className={`overflow-hidden border-l-2 bg-surface-high transition-transform duration-150 hover:-translate-y-0.5 motion-reduce:transform-none motion-reduce:transition-none ${factionBorder(sage.faction)}`}
 		>
 			{/* Header */}
 			<div
-				className={`flex items-center justify-between px-3 py-2 ${factionHeaderBg(sage.faction)}`}
+				className={`flex items-center justify-between px-4 py-3 ${factionHeaderBg(sage.faction)}`}
 			>
 				<div className='min-w-0'>
-					<div className='truncate font-bold'>{sage.name}</div>
-					<div className='text-sm opacity-90'>{sage.nameJapanese}</div>
+					<div className='truncate font-bold font-serif'>{sage.name}</div>
+					<div className='text-sm opacity-80'>{sage.nameJapanese}</div>
 				</div>
 				<div className='flex flex-col items-end gap-1'>
 					<RarityBadge rarity={sage.rarity} />
-					<span className='text-xs opacity-80'>{sage.cardIndex}</span>
+					<span className='font-sans text-xs opacity-60'>{sage.cardIndex}</span>
 				</div>
 			</div>
 
-			<div className='p-3'>
+			<div className='p-4'>
 				{/* Abilities */}
 				<AbilityBlock ability={sage.tactics} label='Tactics (兵略)' />
 				<AbilityBlock
@@ -43,7 +43,7 @@ export function SageCard({sage}: Props) {
 
 				{/* Lore (collapsible) */}
 				<button
-					className='mb-1 w-full text-left font-medium text-ink-500 text-sm hover:text-ink-700 dark:text-parchment-400 dark:hover:text-parchment-200'
+					className='mb-2 w-full text-left font-medium font-sans text-sm text-text-faint uppercase tracking-wider hover:text-gold'
 					onClick={toggleCollapsed}
 					type='button'
 				>
@@ -51,18 +51,19 @@ export function SageCard({sage}: Props) {
 				</button>
 				{collapsed ? null : (
 					<div>
-						<p className='mb-2 whitespace-pre-line border-parchment-300 border-l-2 pl-3 text-ink-400 text-sm italic dark:border-ink-600 dark:text-parchment-500'>
+						<p className='mb-3 whitespace-pre-line border-cinnabar/30 border-l-2 pl-3 text-sm text-text-faint italic'>
 							{sage.lore}
 						</p>
-						<p className='text-ink-500 text-sm dark:text-parchment-400'>
+						<p className='text-sm text-text-muted'>
 							&ldquo;{sage.battleCry}&rdquo;
 						</p>
 					</div>
 				)}
 
 				{/* Meta */}
-				<div className='mt-3 flex justify-between text-ink-400 text-xs'>
-					<span>Artist: {sage.artist}</span>
+				<div className='brushstroke-sep mt-4 mb-2' />
+				<div className='flex justify-between font-sans text-text-dim text-xs uppercase tracking-wider'>
+					<span>Art: {sage.artist}</span>
 					<span>
 						{sage.birthYear ?? '?'} – {sage.deathYear ?? '?'}
 					</span>
@@ -82,27 +83,27 @@ function AbilityBlock({
 	sage?: boolean
 }) {
 	return (
-		<div className='mb-3 rounded-lg bg-parchment-50 p-3 dark:bg-ink-900'>
-			<div className='mb-1 font-medium text-ink-400 text-xs uppercase tracking-wide'>
+		<div className='mb-4 bg-surface-mid p-3'>
+			<div className='mb-1 font-medium font-sans text-text-dim text-xs uppercase tracking-wider'>
 				{label}
 			</div>
 			<div className='mb-2 flex items-center justify-between'>
-				<span className='font-bold text-gold-500'>{ability.name}</span>
-				<span className='text-ink-400 text-xs'>
+				<span className='font-bold font-serif text-gold'>{ability.name}</span>
+				<span className='font-sans text-text-dim text-xs'>
 					Gauge: {ability.gaugeMax} · {ability.affinity}
 				</span>
 			</div>
 			<div className='mb-2 flex items-center gap-2'>
 				<RangeImage
-					className='rounded border border-parchment-300 bg-parchment-100 dark:border-ink-600 dark:bg-ink-800'
+					className='border border-surface-highest bg-surface-high'
 					range={ability.range}
 					sage={sage}
 				/>
-				<span className='text-ink-400 text-sm'>
+				<span className='text-sm text-text-faint'>
 					{ability.range.replaceAll('_', ' ')} · Target: {ability.target}
 				</span>
 			</div>
-			<p className='whitespace-pre-line text-ink-600 text-sm dark:text-parchment-300'>
+			<p className='whitespace-pre-line text-sm text-text-muted'>
 				{ability.description}
 			</p>
 		</div>

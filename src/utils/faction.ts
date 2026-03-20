@@ -1,5 +1,5 @@
 /**
- * Faction display config and helpers.
+ * Faction display config and helpers — adapted for The Digital Scribe aesthetic.
  */
 
 export interface FactionConfig {
@@ -13,43 +13,43 @@ const FACTION_CFG: Record<string, FactionConfig> = {
 	Wei: {
 		kanji: '魏',
 		cls: 'bg-wei text-white',
-		rowBg: 'bg-wei/5',
+		rowBg: 'bg-wei/8',
 		label: 'Wei (魏)'
 	},
 	Shu: {
 		kanji: '蜀',
 		cls: 'bg-shu text-white',
-		rowBg: 'bg-shu/5',
+		rowBg: 'bg-shu/8',
 		label: 'Shu (蜀)'
 	},
 	Wu: {
 		kanji: '呉',
 		cls: 'bg-wu text-white',
-		rowBg: 'bg-wu/5',
+		rowBg: 'bg-wu/8',
 		label: 'Wu (呉)'
 	},
 	Other: {
 		kanji: '群',
 		cls: 'bg-gun text-white',
-		rowBg: 'bg-gun/5',
+		rowBg: 'bg-gun/8',
 		label: 'Other (群)'
 	},
 	LE: {
 		kanji: 'LE',
-		cls: 'bg-gold-400 text-ink-900',
-		rowBg: 'bg-gold-300/10',
+		cls: 'bg-gold-dark text-gold',
+		rowBg: 'bg-gold/5',
 		label: 'Legendary'
 	},
 	DS: {
 		kanji: 'DS',
-		cls: 'bg-emerald-600 text-white',
-		rowBg: 'bg-emerald-600/5',
+		cls: 'bg-shu text-white',
+		rowBg: 'bg-shu/5',
 		label: 'DS'
 	},
 	EX: {
 		kanji: 'EX',
-		cls: 'bg-crimson-500 text-white',
-		rowBg: 'bg-crimson-500/5',
+		cls: 'bg-cinnabar text-gold',
+		rowBg: 'bg-cinnabar/5',
 		label: 'EX'
 	}
 }
@@ -70,11 +70,11 @@ export function factionBorder(faction: string): string {
 		Shu: 'border-shu',
 		Wu: 'border-wu',
 		Other: 'border-gun',
-		LE: 'border-gold-500',
-		DS: 'border-emerald-600',
-		EX: 'border-crimson-500'
+		LE: 'border-gold-muted',
+		DS: 'border-shu',
+		EX: 'border-cinnabar'
 	}
-	return borders[faction] ?? 'border-ink-300'
+	return borders[faction] ?? 'border-border-dim'
 }
 
 export function factionHeaderBg(faction: string): string {
@@ -83,9 +83,9 @@ export function factionHeaderBg(faction: string): string {
 		Shu: 'bg-shu text-white',
 		Wu: 'bg-wu text-white',
 		Other: 'bg-gun text-white',
-		LE: 'bg-gradient-to-r from-gold-400 to-gold-600 text-ink-900',
-		DS: 'bg-emerald-600 text-white',
-		EX: 'bg-crimson-500 text-white'
+		LE: 'bg-gold-dark text-gold',
+		DS: 'bg-shu text-white',
+		EX: 'bg-cinnabar text-gold'
 	}
-	return headers[faction] ?? 'bg-ink-500 text-white'
+	return headers[faction] ?? 'bg-surface-highest text-text'
 }

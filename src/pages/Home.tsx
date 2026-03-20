@@ -11,35 +11,37 @@ export function Home() {
 		<>
 			<PageHead title='Home' />
 
-			{/* Hero */}
-			<section className='py-12 text-center'>
-				<h1 className='mb-2 font-bold text-4xl text-crimson-600 md:text-5xl'>
-					三国志大戦<span className='text-gold-500'>DS</span>
+			{/* Hero — Embrace the Void */}
+			<section className='py-20 text-center'>
+				<h1 className='mb-4 font-black text-5xl text-gold tracking-tight md:text-7xl'>
+					三国志大戦
+					<span className='text-cinnabar-light'>天</span>
 				</h1>
-				<p className='mb-1 font-medium text-ink-700 text-xl dark:text-parchment-200'>
-					Sangokushi Taisen Ten — English Translation
+				<p className='mb-2 font-serif text-text-muted text-xl tracking-wide'>
+					Sangokushi Taisen Ten
 				</p>
-				<p className='mx-auto max-w-xl text-ink-500 dark:text-parchment-400'>
+				<div className='brushstroke-sep mx-auto my-6 max-w-xs' />
+				<p className='mx-auto max-w-lg text-text-faint leading-relaxed'>
 					A fan translation patch for the Nintendo DS real-time strategy card
 					game set in the Three Kingdoms era of China. All menus, cards, skills,
 					cutscenes, and guides — in English.
 				</p>
 			</section>
 
-			{/* Patcher */}
-			<section className='mx-auto mb-12 max-w-2xl'>
-				<div className='rounded-lg border-2 border-gold-500 bg-gradient-to-b from-parchment-50 to-parchment-100 p-6 shadow-md dark:from-ink-800 dark:to-ink-900'>
-					<h2 className='mb-3 text-center font-bold text-crimson-600 text-lg'>
+			{/* Patcher — Gold-stroked chronicle container */}
+			<section className='mx-auto mb-20 max-w-2xl'>
+				<div className='gold-stroke bg-surface-high p-8'>
+					<h2 className='mb-4 text-center font-black font-serif text-gold text-lg uppercase tracking-widest'>
 						Patch Your ROM
 					</h2>
-					<p className='mb-4 text-center text-ink-500 text-sm dark:text-parchment-400'>
+					<p className='mb-6 text-center text-sm text-text-faint'>
 						Select your original Japanese ROM and the patch will be applied in
 						your browser. Nothing is uploaded — everything runs locally.
 					</p>
 
 					<Suspense
 						fallback={
-							<div className='py-8 text-center text-ink-400 text-sm'>
+							<div className='py-8 text-center text-sm text-text-dim'>
 								Loading patcher…
 							</div>
 						}
@@ -49,38 +51,38 @@ export function Home() {
 				</div>
 			</section>
 
-			{/* What's translated */}
-			<section className='mx-auto mb-12 max-w-3xl'>
-				<SectionHeader>What's Translated</SectionHeader>
-				<div className='grid grid-cols-2 gap-3 md:grid-cols-4'>
-					<StatBox label='Card Data' value='192 Lords' />
-					<StatBox label='Sage Cards' value='20 Sages' />
-					<StatBox label='Scripts' value='200+ Scenes' />
-					<StatBox label='UI Strings' value='Menus & HUD' />
+			{/* What's Translated */}
+			<section className='mx-auto mb-20 max-w-3xl'>
+				<InscriptionHeader>What's Translated</InscriptionHeader>
+				<div className='mt-8 grid grid-cols-2 gap-6 md:grid-cols-4'>
+					<StatBlock label='Card Data' value='192 Lords' />
+					<StatBlock label='Sage Cards' value='20 Sages' />
+					<StatBlock label='Scripts' value='200+ Scenes' />
+					<StatBlock label='UI Strings' value='Menus & HUD' />
 				</div>
-				<div className='mt-3 grid grid-cols-2 gap-3 md:grid-cols-4'>
-					<StatBox label='Skill Descriptions' value='All 192' />
-					<StatBox label='Campaign' value='6 Chapters' />
-					<StatBox label='Duel Mode' value='80 CPU Decks' />
-					<StatBox label='Tutorials' value='All Modes' />
+				<div className='mt-6 grid grid-cols-2 gap-6 md:grid-cols-4'>
+					<StatBlock label='Skill Descriptions' value='All 192' />
+					<StatBlock label='Campaign' value='6 Chapters' />
+					<StatBlock label='Duel Mode' value='80 CPU Decks' />
+					<StatBlock label='Tutorials' value='All Modes' />
 				</div>
 			</section>
 
-			{/* Game data */}
-			<section className='mx-auto mb-12 max-w-3xl'>
-				<SectionHeader>Game Data</SectionHeader>
-				<div className='grid grid-cols-1 gap-3 md:grid-cols-3'>
-					<SectionLink
+			{/* Game Data */}
+			<section className='mx-auto mb-20 max-w-3xl'>
+				<InscriptionHeader>Game Data</InscriptionHeader>
+				<div className='mt-8 grid grid-cols-1 gap-6 md:grid-cols-3'>
+					<DataLink
 						description='All 192 warriors — stats, skills, traits, and lore.'
 						title='Lord Cards'
 						to='/gamedata/lords'
 					/>
-					<SectionLink
+					<DataLink
 						description='20 advisors with tactics and formation abilities.'
 						title='Sage Cards'
 						to='/gamedata/sages'
 					/>
-					<SectionLink
+					<DataLink
 						description='80 CPU decks across Easy, Normal, and Hard.'
 						title='Duel Decks'
 						to='/gamedata/decks'
@@ -89,9 +91,9 @@ export function Home() {
 			</section>
 
 			{/* Guides */}
-			<section className='mx-auto mb-12 max-w-3xl'>
-				<SectionHeader>Guides</SectionHeader>
-				<div className='grid grid-cols-1 gap-3 md:grid-cols-2'>
+			<section className='mx-auto mb-20 max-w-3xl'>
+				<InscriptionHeader>Guides</InscriptionHeader>
+				<div className='mt-8 grid grid-cols-1 gap-6 md:grid-cols-2'>
 					<GuideLink
 						description='Factions, units, mechanics, and terminology.'
 						title="Beginner's Guide"
@@ -111,18 +113,19 @@ export function Home() {
 				</div>
 			</section>
 
-			{/* About */}
-			<section className='mx-auto mb-12 max-w-3xl'>
-				<SectionHeader>About the Game</SectionHeader>
-				<div className='rounded-lg border border-parchment-300 bg-white p-4 text-ink-600 text-sm leading-relaxed dark:border-ink-600 dark:bg-ink-800 dark:text-parchment-300'>
-					<p className='mb-3'>
-						<strong>Sangokushi Taisen Ten</strong> (三国志大戦・天) is the
-						Nintendo DS adaptation of SEGA's popular arcade card game. Command
-						legendary Three Kingdoms heroes in real-time tactical battles —
-						place cards on the touch screen, maneuver units, and activate
-						devastating skills to breach the enemy castle.
+			{/* About — Chronicle Scroll */}
+			<section className='mx-auto mb-20 max-w-3xl'>
+				<InscriptionHeader>About the Game</InscriptionHeader>
+				<div className='chronicle-scroll mt-8 bg-surface-low p-6 text-sm text-text-muted leading-relaxed'>
+					<p className='mb-4'>
+						<strong className='text-gold-dim'>Sangokushi Taisen Ten</strong>{' '}
+						(三国志大戦・天) is the Nintendo DS adaptation of SEGA's popular
+						arcade card game. Command legendary Three Kingdoms heroes in
+						real-time tactical battles — place cards on the touch screen,
+						maneuver units, and activate devastating skills to breach the enemy
+						castle.
 					</p>
-					<p className='mb-3'>
+					<p className='mb-4'>
 						The game features a 6-chapter campaign, 80 duel stages across 3
 						difficulties, 192 lord cards across 4 factions (Wei, Shu, Wu, and
 						Other), 20 sage advisors, and deep deck-building mechanics with an
@@ -139,26 +142,41 @@ export function Home() {
 	)
 }
 
-function SectionHeader({children}: {children: string}) {
+/* ======================================================================== */
+/* Inscription Header — gold text, cinnabar underline                       */
+/* ======================================================================== */
+
+function InscriptionHeader({children}: {children: string}) {
 	return (
-		<div className='mb-3 border-gold-500 border-y-2 bg-gradient-to-r from-crimson-700 via-crimson-600 to-crimson-700 px-4 py-2'>
-			<h2 className='text-pretty text-center font-bold text-gold-300 text-sm uppercase tracking-widest'>
+		<div className='text-center'>
+			<h2 className='font-bold font-serif text-gold text-sm uppercase tracking-[0.2em]'>
 				{children}
 			</h2>
+			<div className='mx-auto mt-2 h-0.5 w-12 bg-cinnabar' />
 		</div>
 	)
 }
 
-function StatBox({label, value}: {label: string; value: string}) {
+/* ======================================================================== */
+/* Stat Block — tonal lift, no borders                                     */
+/* ======================================================================== */
+
+function StatBlock({label, value}: {label: string; value: string}) {
 	return (
-		<div className='rounded-lg border border-parchment-300 bg-white p-3 text-center dark:border-ink-600 dark:bg-ink-800'>
-			<div className='font-bold text-crimson-600 text-lg'>{value}</div>
-			<div className='text-ink-400 text-xs'>{label}</div>
+		<div className='bg-surface-high p-4 text-center'>
+			<div className='font-bold font-serif text-gold text-lg'>{value}</div>
+			<div className='mt-1 font-sans text-text-dim text-xs uppercase tracking-wider'>
+				{label}
+			</div>
 		</div>
 	)
 }
 
-function SectionLink({
+/* ======================================================================== */
+/* Data Link — tonal layering with gold hover                              */
+/* ======================================================================== */
+
+function DataLink({
 	to,
 	title,
 	description
@@ -169,31 +187,34 @@ function SectionLink({
 }) {
 	return (
 		<Link
-			className='group rounded-lg border border-parchment-300 bg-white p-4 transition-colors hover:border-emerald-600 dark:border-ink-600 dark:bg-ink-800 dark:hover:border-emerald-600'
+			className='group bg-surface-high p-5 transition-colors duration-150 hover:bg-surface-highest'
 			to={to}
 		>
-			<h3 className='mb-1 font-bold text-ink-800 group-hover:text-emerald-600 dark:text-parchment-100'>
+			<h3 className='mb-2 font-bold font-serif text-text group-hover:text-gold'>
 				{title}
 			</h3>
-			<p className='text-ink-500 text-sm dark:text-parchment-400'>
-				{description}
-			</p>
+			<p className='text-sm text-text-faint'>{description}</p>
+			<div className='mt-3 font-sans text-cinnabar-light text-xs uppercase tracking-wider opacity-0 transition-opacity duration-150 group-hover:opacity-100'>
+				View →
+			</div>
 		</Link>
 	)
 }
 
+/* ======================================================================== */
+/* Guide Link — muted, coming soon                                         */
+/* ======================================================================== */
+
 function GuideLink({title, description}: {title: string; description: string}) {
 	return (
-		<div className='rounded-lg border border-parchment-300 bg-white p-4 opacity-75 dark:border-ink-600 dark:bg-ink-800'>
-			<h3 className='mb-1 font-bold text-ink-600 dark:text-parchment-300'>
+		<div className='bg-surface-high p-5 opacity-50'>
+			<h3 className='mb-2 font-bold font-serif text-text-muted'>
 				{title}
-				<span className='ml-2 font-normal text-ink-400 text-xs'>
+				<span className='ml-2 font-normal font-sans text-text-dim text-xs'>
 					Coming soon
 				</span>
 			</h3>
-			<p className='text-ink-400 text-sm dark:text-parchment-500'>
-				{description}
-			</p>
+			<p className='text-sm text-text-dim'>{description}</p>
 		</div>
 	)
 }

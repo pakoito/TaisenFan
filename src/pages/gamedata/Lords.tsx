@@ -115,7 +115,7 @@ export function Lords() {
 				trait={trait}
 				unitType={unitType}
 			/>
-			<div className='mb-2 text-ink-400 text-sm'>
+			<div className='mb-3 font-sans text-sm text-text-faint'>
 				{filtered.length} of {lords.length} cards
 			</div>
 			<LordTable
@@ -127,7 +127,7 @@ export function Lords() {
 				sortField={sortField}
 			/>
 			{filtered.length === 0 ? (
-				<p className='py-12 text-center text-ink-400'>
+				<p className='py-12 text-center text-text-faint'>
 					No cards match your filters.
 				</p>
 			) : null}
@@ -194,11 +194,11 @@ function FilterBar(props: {
 	)
 
 	return (
-		<div className='mb-3 flex flex-wrap items-end gap-x-4 gap-y-2 rounded-lg border border-parchment-300 bg-parchment-100 p-3 dark:border-ink-600 dark:bg-ink-800'>
+		<div className='mb-4 flex flex-wrap items-end gap-x-5 gap-y-3 bg-surface-high p-4'>
 			<Field label='Search'>
 				<input
 					autoComplete='off'
-					className='h-8 w-48 rounded border border-parchment-300 bg-white px-2 text-sm focus-visible:outline-2 focus-visible:outline-emerald-600 focus-visible:outline-offset-1 dark:border-ink-600 dark:bg-ink-800 dark:text-parchment-100'
+					className='h-8 w-48 border-0 border-border-dim border-b bg-transparent px-1 font-sans text-sm text-text placeholder:text-text-dim focus-visible:border-gold focus-visible:outline-none'
 					name='lord-search'
 					onChange={onSearch}
 					placeholder='Name or skill…'
@@ -239,7 +239,7 @@ function FilterBar(props: {
 			/>
 			{props.hasFilters ? (
 				<button
-					className='h-8 rounded bg-ink-200 px-3 font-medium text-ink-600 text-xs hover:bg-ink-300 dark:bg-ink-700 dark:text-parchment-300'
+					className='h-8 border border-border bg-transparent px-4 font-medium font-sans text-text-muted text-xs uppercase tracking-wider hover:bg-surface-highest hover:text-gold'
 					onClick={props.onClear}
 					type='button'
 				>
@@ -253,7 +253,7 @@ function FilterBar(props: {
 function Field({label, children}: {label: string; children: React.ReactNode}) {
 	return (
 		<div className='flex flex-col gap-0.5'>
-			<span className='font-medium text-[10px] text-ink-400 uppercase tracking-wider'>
+			<span className='font-medium font-sans text-[10px] text-text-dim uppercase tracking-wider'>
 				{label}
 			</span>
 			{children}
@@ -276,7 +276,7 @@ function Select({
 		<Field label={label}>
 			<select
 				autoComplete='off'
-				className='h-8 rounded border border-parchment-300 bg-white px-2 pr-6 text-sm focus-visible:outline-2 focus-visible:outline-emerald-600 focus-visible:outline-offset-1 dark:border-ink-600 dark:bg-ink-800 dark:text-parchment-100'
+				className='h-8 border-0 border-border-dim border-b bg-transparent px-1 pr-6 font-sans text-sm text-text focus-visible:border-gold focus-visible:outline-none'
 				name={label.toLowerCase()}
 				onChange={onChange}
 				value={value}

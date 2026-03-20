@@ -23,13 +23,13 @@ export function SelectFilter({
 	const fieldName = label.toLowerCase().replaceAll(' ', '-')
 
 	return (
-		<label className='flex items-center gap-2 text-sm'>
-			<span className='font-medium text-ink-600 dark:text-parchment-400'>
+		<label className='flex items-center gap-2 font-sans text-sm'>
+			<span className='font-medium text-text-faint text-xs uppercase tracking-wider'>
 				{label}
 			</span>
 			<select
 				autoComplete='off'
-				className='rounded border border-parchment-300 bg-white px-2 py-1.5 text-ink-800 text-sm focus-visible:outline-2 focus-visible:outline-emerald-600 focus-visible:outline-offset-1 dark:border-ink-600 dark:bg-ink-800 dark:text-parchment-100'
+				className='border-0 border-border-dim border-b bg-transparent px-1 py-1.5 text-text focus-visible:border-gold focus-visible:outline-none'
 				name={fieldName}
 				onChange={handleChange}
 				value={value}
@@ -64,13 +64,13 @@ export function SearchFilter({
 	)
 
 	return (
-		<label className='flex items-center gap-2 text-sm'>
-			<span className='font-medium text-ink-600 dark:text-parchment-400'>
+		<label className='flex items-center gap-2 font-sans text-sm'>
+			<span className='font-medium text-text-faint text-xs uppercase tracking-wider'>
 				Search
 			</span>
 			<input
 				autoComplete='off'
-				className='rounded border border-parchment-300 bg-white px-2 py-1.5 text-ink-800 text-sm focus-visible:outline-2 focus-visible:outline-emerald-600 focus-visible:outline-offset-1 dark:border-ink-600 dark:bg-ink-800 dark:text-parchment-100'
+				className='border-0 border-border-dim border-b bg-transparent px-1 py-1.5 text-text placeholder:text-text-dim focus-visible:border-gold focus-visible:outline-none'
 				name='search'
 				onChange={handleChange}
 				placeholder={placeholder}

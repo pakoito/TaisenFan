@@ -19,11 +19,11 @@ export function LordTable({
 	onToggleSort: (field: SortField) => void
 }) {
 	return (
-		<div className='overflow-x-auto rounded-lg border border-parchment-300 shadow-sm dark:border-ink-600'>
-			<table className='w-full border-collapse text-sm'>
+		<div className='overflow-x-auto'>
+			<table className='w-full border-collapse font-sans text-sm'>
 				<thead>
-					<tr className='bg-ink-700 text-[11px] text-parchment-200 uppercase tracking-wider'>
-						<th className='w-8 px-2 py-2.5' />
+					<tr className='bg-surface-highest font-sans text-[11px] text-text-faint uppercase tracking-wider'>
+						<th className='w-8 px-2 py-3' />
 						<SortTh
 							active={sortField === 'name'}
 							dir={sortDir}
@@ -60,10 +60,10 @@ export function LordTable({
 							label='INT'
 							onClick={onToggleSort}
 						/>
-						<th className='px-2 py-2.5 text-center font-medium'>Type</th>
-						<th className='px-2 py-2.5 text-center font-medium'>Attr</th>
-						<th className='px-2 py-2.5 text-left font-medium'>Traits</th>
-						<th className='px-2 py-2.5 text-left font-medium'>Skill</th>
+						<th className='px-2 py-3 text-center font-medium'>Type</th>
+						<th className='px-2 py-3 text-center font-medium'>Attr</th>
+						<th className='px-2 py-3 text-left font-medium'>Traits</th>
+						<th className='px-2 py-3 text-left font-medium'>Skill</th>
 						<SortTh
 							active={sortField === 'morale'}
 							dir={sortDir}
@@ -71,7 +71,7 @@ export function LordTable({
 							label='MP'
 							onClick={onToggleSort}
 						/>
-						<th className='w-11 px-2 py-2.5 text-center font-medium'>Range</th>
+						<th className='w-11 px-2 py-3 text-center font-medium'>Range</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -113,7 +113,7 @@ function SortTh({
 	}
 	return (
 		<th
-			className={`cursor-pointer select-none px-2 py-2.5 font-medium transition-colors hover:text-gold-300 ${left ? 'text-left' : 'text-center'} ${active ? 'text-gold-300' : ''}`}
+			className={`cursor-pointer select-none px-2 py-3 font-medium transition-colors hover:text-gold ${left ? 'text-left' : 'text-center'} ${active ? 'text-gold' : ''}`}
 			onClick={handleClick}
 		>
 			{label}
