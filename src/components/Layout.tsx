@@ -1,31 +1,75 @@
 import type {PropsWithChildren} from 'react'
-import {NavLink} from 'react-router'
-import {NavDropdown, type NavDropdownItem} from '@/components/NavDropdown'
+import {Link, NavLink, useLocation} from 'react-router'
+import {
+	NavigationMenu,
+	NavigationMenuContent,
+	NavigationMenuItem,
+	NavigationMenuLink,
+	NavigationMenuList,
+	NavigationMenuTrigger
+} from '@/components/ui/navigation-menu'
+import {navigationMenuTriggerStyle} from '@/components/ui/navigation-menu-styles'
+import {cn} from '@/lib/utils'
 
-const GUIDE_ITEMS: readonly NavDropdownItem[] = [
+/* ======================================================================== */
+/* Menu data                                                                */
+/* ======================================================================== */
+
+interface DropdownItem {
+	readonly to: string
+	readonly label: string
+	readonly disabled?: boolean
+}
+
+const GUIDE_ITEMS: readonly DropdownItem[] = [
 	{to: '/guides/beginners', label: "Beginner's Guide", disabled: true},
-	{to: '/guides/campaign', label: 'Campaign Walkthrough', disabled: true},
-	{to: '/guides/campaign-merchants', label: 'Campaign Merchants', disabled: true},
+	{
+		to: '/guides/campaign',
+		label: 'Campaign Walkthrough',
+		disabled: true
+	},
+	{
+		to: '/guides/campaign-merchants',
+		label: 'Campaign Merchants',
+		disabled: true
+	},
 	{to: '/guides/combat', label: 'Combat Mechanics', disabled: true},
-	{to: '/guides/deck-archetypes', label: 'Deck Archetypes', disabled: true},
-	{to: '/guides/deck-strategies', label: 'Deck Strategies', disabled: true},
+	{
+		to: '/guides/deck-archetypes',
+		label: 'Deck Archetypes',
+		disabled: true
+	},
+	{
+		to: '/guides/deck-strategies',
+		label: 'Deck Strategies',
+		disabled: true
+	},
 	{to: '/guides/duel', label: 'DUEL Guide', disabled: true},
 	{to: '/guides/tactics', label: 'Tactics Guide', disabled: true}
 ]
 
-const GAMEDATA_ITEMS: readonly NavDropdownItem[] = [
+const GAMEDATA_ITEMS: readonly DropdownItem[] = [
 	{to: '/gamedata/lords', label: 'Lord Cards'},
 	{to: '/gamedata/sages', label: 'Sage Cards'},
 	{to: '/gamedata/decks', label: 'Duel Decks'}
 ]
 
+/* ======================================================================== */
+/* Shared styles                                                            */
+/* ======================================================================== */
+
+const LINK_BASE =
+	'px-4 py-2 text-sm font-sans font-medium tracking-wide uppercase transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold motion-reduce:transition-none'
+
 function navLinkClass({isActive}: {isActive: boolean}): string {
-	const base =
-		'px-4 py-2 text-sm font-sans font-medium tracking-wide uppercase transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold motion-reduce:transition-none'
 	return isActive
-		? `${base} bg-cinnabar text-gold`
-		: `${base} text-text-muted hover:bg-surface-highest hover:text-gold`
+		? `${LINK_BASE} bg-cinnabar text-gold`
+		: `${LINK_BASE} text-text-muted hover:bg-surface-highest hover:text-gold`
 }
+
+/* ======================================================================== */
+/* Layout                                                                   */
+/* ======================================================================== */
 
 export function Layout({children}: PropsWithChildren) {
 	return (
@@ -44,31 +88,41 @@ export function Layout({children}: PropsWithChildren) {
 						<span className='text-gold-dim'>FAN</span>
 					</NavLink>
 
-					<div className='flex items-center gap-0.5'>
-						<NavLink className={navLinkClass} end={true} to='/'>
-							Home
-						</NavLink>
+					<NavigationMenu>
+						<NavigationMenuList>
+							{/* Home — direct link */}
+							<NavigationMenuItem>
+								<NavLink className={navLinkClass} end={true} to='/'>
+									Home
+								</NavLink>
+							</NavigationMenuItem>
 
-						<NavDropdown
-							activePrefix='/guides'
-							items={GUIDE_ITEMS}
-							label='Guides'
-						/>
+							{/* Guides dropdown */}
+							<NavDropdown
+								activePrefix='/guides'
+								items={GUIDE_ITEMS}
+								label='Guides'
+							/>
 
-						<NavDropdown
-							activePrefix='/gamedata'
-							items={GAMEDATA_ITEMS}
-							label='Game Data'
-						/>
+							{/* Game Data dropdown */}
+							<NavDropdown
+								activePrefix='/gamedata'
+								items={GAMEDATA_ITEMS}
+								label='Game Data'
+							/>
 
-						<span
-							aria-disabled='true'
-							className='px-4 py-2 font-sans text-sm font-medium uppercase tracking-wide text-text-dim'
-							title='Coming soon'
-						>
-							Save Editor
-						</span>
-					</div>
+							{/* Save Editor — disabled placeholder */}
+							<NavigationMenuItem>
+								<span
+									aria-disabled='true'
+									className={cn(LINK_BASE, 'cursor-default text-text-dim')}
+									title='Coming soon'
+								>
+									Save Editor
+								</span>
+							</NavigationMenuItem>
+						</NavigationMenuList>
+					</NavigationMenu>
 				</nav>
 			</header>
 
@@ -89,5 +143,65 @@ export function Layout({children}: PropsWithChildren) {
 				</p>
 			</footer>
 		</div>
+	)
+}
+
+/* ======================================================================== */
+/* NavDropdown — shadcn NavigationMenu item with our styling                */
+/* ======================================================================== */
+
+function NavDropdown({
+	label,
+	items,
+	activePrefix
+}: {
+	label: string
+	items: readonly DropdownItem[]
+	activePrefix: string
+}) {
+	const location = useLocation()
+	const isGroupActive = location.pathname.startsWith(activePrefix)
+
+	return (
+		<NavigationMenuItem>
+			<NavigationMenuTrigger
+				className={cn(
+					navigationMenuTriggerStyle(),
+					LINK_BASE,
+					'h-auto bg-transparent',
+					isGroupActive
+						? 'bg-cinnabar text-gold hover:bg-cinnabar'
+						: 'text-text-muted hover:bg-surface-highest hover:text-gold'
+				)}
+			>
+				{label}
+			</NavigationMenuTrigger>
+			<NavigationMenuContent className='min-w-56'>
+				<ul className='flex flex-col'>
+					{items.map(item => (
+						<li key={item.to}>
+							{item.disabled ? (
+								<span className='flex items-center justify-between px-4 py-2.5 font-sans text-sm text-text-dim'>
+									{item.label}
+									<span className='text-xs opacity-60'>Soon</span>
+								</span>
+							) : (
+								<NavigationMenuLink asChild={true}>
+									<Link
+										className={cn(
+											'block px-4 py-2.5 font-sans text-sm text-text-muted transition-colors duration-100 hover:bg-surface-highest hover:text-gold motion-reduce:transition-none',
+											location.pathname === item.to && 'bg-cinnabar text-gold'
+										)}
+										to={item.to}
+									>
+										{item.label}
+									</Link>
+								</NavigationMenuLink>
+							)}
+						</li>
+					))}
+				</ul>
+			</NavigationMenuContent>
+		</NavigationMenuItem>
 	)
 }
