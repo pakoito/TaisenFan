@@ -2,13 +2,16 @@
  * Copies guides/*.md from the monorepo root into src/content/guides/,
  * rewriting inter-guide links from `filename.md` to SPA route paths.
  *
+ * In CI (standalone repo checkout) the monorepo guides/ folder won't exist.
+ * In that case the script exits gracefully — the committed .md files in
+ * src/content/guides/ are used as-is.
+ *
  * Usage: node scripts/sync-guides.ts
  */
 
-/* eslint-disable n/no-unsupported-features -- Node script, not browser code */
-
 import fs from 'node:fs'
 import path from 'node:path'
+import process from 'node:process'
 
 const GUIDES_SRC = path.resolve(import.meta.dirname, '../../guides')
 const GUIDES_DEST = path.resolve(import.meta.dirname, '../src/content/guides')
@@ -37,6 +40,15 @@ function rewriteLinks(content: string): string {
 		}
 		return _match
 	})
+}
+
+// In CI the monorepo guides/ may not exist — skip gracefully
+if (!fs.existsSync(GUIDES_SRC)) {
+	const _existing = fs.existsSync(GUIDES_DEST)
+		? fs.readdirSync(GUIDES_DEST).filter(f => f.endsWith('.md')).length
+		: 0
+
+	process.exit(0)
 }
 
 // Ensure dest dir exists
