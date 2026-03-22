@@ -1,4 +1,5 @@
 import {useCallback, useRef, useState} from 'react'
+import {Button} from '@/components/ui/button'
 import {applyPatch, downloadBlob, type PatchResult} from '@/utils/patcher'
 
 type PatchStep = 'idle' | 'reading' | 'patching' | 'success' | 'error'
@@ -127,9 +128,14 @@ function IdleState({
 			<p className='text-text-dim text-xs'>
 				Expects the original Japanese .nds file
 			</p>
-			{/* Imperial Seal — cinnabar action button */}
-			<label className='cursor-pointer bg-cinnabar px-6 py-2.5 font-bold font-sans text-gold text-sm uppercase tracking-wider transition-colors focus-within:outline-2 focus-within:outline-gold focus-within:outline-offset-2 hover:bg-cinnabar-light motion-reduce:transition-none'>
-				Select ROM File
+			{/* Imperial Seal — cinnabar action button wrapping hidden file input */}
+			<label className='cursor-pointer'>
+				<Button
+					asChild={true}
+					className='bg-cinnabar px-6 py-2.5 font-bold text-gold text-sm uppercase tracking-wider hover:bg-cinnabar-light'
+				>
+					<span>Select ROM File</span>
+				</Button>
 				<input
 					accept='.nds'
 					className='sr-only'
@@ -180,14 +186,15 @@ function SuccessState({
 				Your download should start automatically.
 			</p>
 			<div className='flex gap-3'>
-				<button
-					className='bg-cinnabar px-5 py-2 font-bold font-sans text-gold text-sm uppercase tracking-wider transition-colors hover:bg-cinnabar-light focus-visible:outline-2 focus-visible:outline-gold focus-visible:outline-offset-2 motion-reduce:transition-none'
+				<Button
+					className='bg-cinnabar px-5 py-2 font-bold text-gold text-sm uppercase tracking-wider hover:bg-cinnabar-light'
 					onClick={onRedownload}
-					type='button'
 				>
 					Download Again
-				</button>
-				<ResetButton onClick={onReset} />
+				</Button>
+				<Button onClick={onReset} variant='outline'>
+					Try Again
+				</Button>
 			</div>
 		</>
 	)
@@ -203,19 +210,9 @@ function ErrorState({error, onReset}: {error: string; onReset: () => void}) {
 				Patching failed
 			</p>
 			<p className='max-w-sm text-center text-text-faint text-xs'>{error}</p>
-			<ResetButton onClick={onReset} />
+			<Button onClick={onReset} variant='outline'>
+				Try Again
+			</Button>
 		</>
-	)
-}
-
-function ResetButton({onClick}: {onClick: () => void}) {
-	return (
-		<button
-			className='border border-border bg-transparent px-5 py-2 font-medium font-sans text-sm text-text-muted uppercase tracking-wider transition-colors hover:bg-surface-highest hover:text-gold focus-visible:outline-2 focus-visible:outline-gold focus-visible:outline-offset-2 motion-reduce:transition-none'
-			onClick={onClick}
-			type='button'
-		>
-			Try Again
-		</button>
 	)
 }

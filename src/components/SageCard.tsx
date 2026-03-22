@@ -1,4 +1,9 @@
-import {useCallback, useState} from 'react'
+import {useState} from 'react'
+import {
+	Collapsible,
+	CollapsibleContent,
+	CollapsibleTrigger
+} from '@/components/ui/collapsible'
 import type {SageAbility, SageCard as SageCardType} from '@/types/gamedata'
 import {factionBorder, factionHeaderBg} from '@/utils/faction'
 import {RangeImage} from './RangeImage'
@@ -9,10 +14,7 @@ interface Props {
 }
 
 export function SageCard({sage}: Props) {
-	const [collapsed, setCollapsed] = useState(true)
-	const toggleCollapsed = useCallback(() => {
-		setCollapsed(c => !c)
-	}, [])
+	const [open, setOpen] = useState(false)
 
 	return (
 		<article
@@ -42,23 +44,19 @@ export function SageCard({sage}: Props) {
 				/>
 
 				{/* Lore (collapsible) */}
-				<button
-					className='mb-2 w-full text-left font-medium font-sans text-sm text-text-faint uppercase tracking-wider hover:text-gold'
-					onClick={toggleCollapsed}
-					type='button'
-				>
-					{collapsed ? '▶' : '▼'} Lore &amp; Dialogue
-				</button>
-				{collapsed ? null : (
-					<div>
+				<Collapsible onOpenChange={setOpen} open={open}>
+					<CollapsibleTrigger className='mb-2 w-full text-left font-medium font-sans text-sm text-text-faint uppercase tracking-wider hover:text-gold'>
+						{open ? '▼' : '▶'} Lore &amp; Dialogue
+					</CollapsibleTrigger>
+					<CollapsibleContent>
 						<p className='mb-3 whitespace-pre-line border-cinnabar/30 border-l-2 pl-3 text-sm text-text-faint italic'>
 							{sage.lore}
 						</p>
 						<p className='text-sm text-text-muted'>
 							&ldquo;{sage.battleCry}&rdquo;
 						</p>
-					</div>
-				)}
+					</CollapsibleContent>
+				</Collapsible>
 
 				{/* Meta */}
 				<div className='brushstroke-sep mt-4 mb-2' />

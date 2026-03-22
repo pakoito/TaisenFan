@@ -1,3 +1,4 @@
+import {Badge} from '@/components/ui/badge'
 import type {Rarity} from '@/types/gamedata'
 
 const RARITY_CLASS: Record<Rarity, string> = {
@@ -14,10 +15,8 @@ interface Props {
 
 export function RarityBadge({rarity}: Props) {
 	return (
-		<span
-			className={`inline-block px-1.5 py-0.5 font-black font-sans text-xs ${RARITY_CLASS[rarity]}`}
-		>
+		<Badge className={`font-black ${RARITY_CLASS[rarity]}`} variant='ghost'>
 			{rarity}
-		</span>
+		</Badge>
 	)
 }

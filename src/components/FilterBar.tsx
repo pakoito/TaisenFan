@@ -1,4 +1,16 @@
 import {useCallback} from 'react'
+import {Input} from '@/components/ui/input'
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue
+} from '@/components/ui/select'
+
+/* ======================================================================== */
+/* SelectFilter                                                             */
+/* ======================================================================== */
 
 interface SelectFilterProps {
 	label: string
@@ -14,36 +26,37 @@ export function SelectFilter({
 	options
 }: SelectFilterProps) {
 	const handleChange = useCallback(
-		(e: React.ChangeEvent<HTMLSelectElement>) => {
-			onChange(e.target.value)
+		(v: string) => {
+			onChange(v === '__all__' ? '' : v)
 		},
 		[onChange]
 	)
 
-	const fieldName = label.toLowerCase().replaceAll(' ', '-')
-
 	return (
-		<label className='flex items-center gap-2 font-sans text-sm'>
-			<span className='font-medium text-text-faint text-xs uppercase tracking-wider'>
+		<div className='flex flex-col gap-0.5'>
+			<span className='font-medium font-sans text-[10px] text-text-dim uppercase tracking-wider'>
 				{label}
 			</span>
-			<select
-				autoComplete='off'
-				className='border-0 border-border-dim border-b bg-transparent px-1 py-1.5 text-text focus-visible:border-gold focus-visible:outline-none'
-				name={fieldName}
-				onChange={handleChange}
-				value={value}
-			>
-				<option value=''>All</option>
-				{options.map(opt => (
-					<option key={opt.value} value={opt.value}>
-						{opt.label}
-					</option>
-				))}
-			</select>
-		</label>
+			<Select onValueChange={handleChange} value={value || '__all__'}>
+				<SelectTrigger className='h-8 w-auto min-w-24 border-0 border-border-dim border-b bg-transparent font-sans text-sm text-text'>
+					<SelectValue />
+				</SelectTrigger>
+				<SelectContent>
+					<SelectItem value='__all__'>All</SelectItem>
+					{options.map(opt => (
+						<SelectItem key={opt.value} value={opt.value}>
+							{opt.label}
+						</SelectItem>
+					))}
+				</SelectContent>
+			</Select>
+		</div>
 	)
 }
+
+/* ======================================================================== */
+/* SearchFilter                                                             */
+/* ======================================================================== */
 
 interface SearchFilterProps {
 	value: string
@@ -64,13 +77,13 @@ export function SearchFilter({
 	)
 
 	return (
-		<label className='flex items-center gap-2 font-sans text-sm'>
-			<span className='font-medium text-text-faint text-xs uppercase tracking-wider'>
+		<div className='flex flex-col gap-0.5'>
+			<span className='font-medium font-sans text-[10px] text-text-dim uppercase tracking-wider'>
 				Search
 			</span>
-			<input
+			<Input
 				autoComplete='off'
-				className='border-0 border-border-dim border-b bg-transparent px-1 py-1.5 text-text placeholder:text-text-dim focus-visible:border-gold focus-visible:outline-none'
+				className='h-8 w-48 border-0 border-border-dim border-b bg-transparent px-1 font-sans text-sm text-text placeholder:text-text-dim focus-visible:border-gold'
 				name='search'
 				onChange={handleChange}
 				placeholder={placeholder}
@@ -78,6 +91,6 @@ export function SearchFilter({
 				type='text'
 				value={value}
 			/>
-		</label>
+		</div>
 	)
 }

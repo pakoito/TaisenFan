@@ -1,5 +1,8 @@
-import {useCallback} from 'react'
+import {LORD_GRID} from '@/components/lord-grid'
 import {RangeImage} from '@/components/RangeImage'
+import {AccordionContent, AccordionTrigger} from '@/components/ui/accordion'
+import {Badge} from '@/components/ui/badge'
+import {cn} from '@/lib/utils'
 import type {LordCard} from '@/types/gamedata'
 import {getFactionConfig} from '@/utils/faction'
 
@@ -36,89 +39,82 @@ function attrColor(attr: string): string {
 }
 
 // ============================================================================
-// Row component
+// Row component (AccordionTrigger + AccordionContent)
 // ============================================================================
 
 interface LordRowProps {
 	lord: LordCard
-	expanded: boolean
-	onToggle: (cardId: number) => void
 }
 
-export function LordRow({lord, expanded, onToggle}: LordRowProps) {
+export function LordRow({lord}: LordRowProps) {
 	const cfg = getFactionConfig(lord.faction)
-
-	const handleClick = useCallback(() => {
-		onToggle(lord.cardId)
-	}, [lord.cardId, onToggle])
-
-	const handleKeyDown = useCallback(
-		(e: React.KeyboardEvent) => {
-			if (e.key === 'Enter' || e.key === ' ') {
-				e.preventDefault()
-				onToggle(lord.cardId)
-			}
-		},
-		[lord.cardId, onToggle]
-	)
 
 	return (
 		<>
-			<tr
-				className={`cursor-pointer transition-colors duration-75 hover:bg-surface-highest focus-visible:outline-2 focus-visible:outline-gold focus-visible:outline-offset-[-2px] motion-reduce:transition-none ${cfg.rowBg}`}
-				onClick={handleClick}
-				onKeyDown={handleKeyDown}
-				tabIndex={0}
+			<AccordionTrigger
+				className={cn(
+					LORD_GRID,
+					'cursor-pointer py-2 transition-colors duration-75 hover:bg-surface-highest hover:no-underline focus-visible:outline-2 focus-visible:outline-gold focus-visible:outline-offset-[-2px] motion-reduce:transition-none',
+					'[&>*[data-slot=accordion-trigger-icon]]:hidden',
+					cfg.rowBg
+				)}
 			>
-				<td className='px-2 py-2 text-center'>
+				<span className='text-center'>
 					<span
-						className={`inline-flex h-7 w-7 items-center justify-center font-black font-serif text-[11px] ${cfg.cls}`}
+						className={cn(
+							'inline-flex h-7 w-7 items-center justify-center font-black font-serif text-[11px]',
+							cfg.cls
+						)}
 						title={cfg.label}
 					>
 						{cfg.kanji}
 					</span>
-				</td>
-				<td className='px-2 py-2'>
+				</span>
+				<span>
 					<span className='font-medium text-text'>{lord.name}</span>
 					<span className='ml-1.5 text-text-dim text-xs'>
 						{lord.nameJapanese}
 					</span>
-				</td>
-				<td className='px-2 py-2 text-center'>
-					<span className={`font-bold text-xs ${rarityColor(lord.rarity)}`}>
+				</span>
+				<span className='text-center'>
+					<span className={cn('font-bold text-xs', rarityColor(lord.rarity))}>
 						{lord.rarity}
 					</span>
-				</td>
-				<td className='px-2 py-2 text-center font-bold tabular-nums'>
-					{lord.cost}
-				</td>
-				<td className='px-2 py-2 text-center tabular-nums'>{lord.pow}</td>
-				<td className='px-2 py-2 text-center tabular-nums'>{lord.int}</td>
-				<td className='px-2 py-2 text-center text-text-muted text-xs'>
+				</span>
+				<span className='text-center font-bold tabular-nums'>{lord.cost}</span>
+				<span className='text-center tabular-nums'>{lord.pow}</span>
+				<span className='text-center tabular-nums'>{lord.int}</span>
+				<span className='text-center text-text-muted text-xs'>
 					{lord.unitType}
-				</td>
-				<td
-					className={`px-2 py-2 text-center font-medium text-xs ${attrColor(lord.attribute)}`}
+				</span>
+				<span
+					className={cn(
+						'text-center font-medium text-xs',
+						attrColor(lord.attribute)
+					)}
 				>
 					{lord.attribute}
-				</td>
-				<td className='px-2 py-2'>
+				</span>
+				<span>
 					<TraitBadges traits={lord.traits} />
-				</td>
-				<td className='px-2 py-2 font-medium text-gold-dim'>
-					{lord.skill.name}
-				</td>
-				<td className='px-2 py-2 text-center tabular-nums'>
-					{lord.skill.morale}
-				</td>
-				<td className='px-2 py-2 text-center'>
+				</span>
+				<span className='font-medium text-gold-dim'>{lord.skill.name}</span>
+				<span className='text-center tabular-nums'>{lord.skill.morale}</span>
+				<span className='text-center'>
 					<RangeImage
 						className='mx-auto border border-surface-highest bg-surface-high'
 						range={lord.skill.range}
 					/>
-				</td>
-			</tr>
-			{expanded ? <ExpandedRow lord={lord} /> : null}
+				</span>
+			</AccordionTrigger>
+			<AccordionContent>
+				<div className={cn('px-4 py-5', cfg.rowBg)}>
+					<div className='grid grid-cols-1 gap-5 md:grid-cols-2'>
+						<SkillDetail lord={lord} />
+						<LoreDetail lord={lord} />
+					</div>
+				</div>
+			</AccordionContent>
 		</>
 	)
 }
@@ -126,21 +122,6 @@ export function LordRow({lord, expanded, onToggle}: LordRowProps) {
 // ============================================================================
 // Expanded detail
 // ============================================================================
-
-function ExpandedRow({lord}: {lord: LordCard}) {
-	const cfg = getFactionConfig(lord.faction)
-
-	return (
-		<tr className={`${cfg.rowBg}`}>
-			<td className='px-4 py-5' colSpan={12}>
-				<div className='grid grid-cols-1 gap-5 md:grid-cols-2'>
-					<SkillDetail lord={lord} />
-					<LoreDetail lord={lord} />
-				</div>
-			</td>
-		</tr>
-	)
-}
 
 function SkillDetail({lord}: {lord: LordCard}) {
 	return (
@@ -199,15 +180,16 @@ function TraitBadges({traits}: {traits: readonly string[]}) {
 	}
 
 	return (
-		<div className='flex flex-wrap gap-0.5'>
+		<span className='flex flex-wrap gap-0.5'>
 			{traits.map(t => (
-				<span
+				<Badge
 					className='bg-shu/10 px-1 py-px font-medium font-sans text-[10px] text-shu'
 					key={t}
+					variant='ghost'
 				>
 					{t}
-				</span>
+				</Badge>
 			))}
-		</div>
+		</span>
 	)
 }

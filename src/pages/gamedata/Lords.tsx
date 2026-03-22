@@ -1,8 +1,10 @@
 import {useSuspenseQuery} from '@tanstack/react-query'
 import {useCallback, useMemo, useState} from 'react'
 import {getLords} from '@/api/gamedata'
+import {SearchFilter, SelectFilter} from '@/components/FilterBar'
 import {LordTable} from '@/components/LordTable'
 import {PageHead} from '@/components/PageHead'
+import {Button} from '@/components/ui/button'
 import {
 	ATTRIBUTES,
 	FACTIONS,
@@ -48,8 +50,8 @@ export function Lords() {
 		})
 	}, [])
 
-	const toggleExpand = useCallback((cardId: number) => {
-		setExpanded(prev => (prev === cardId ? null : cardId))
+	const handleAccordionChange = useCallback((value: string) => {
+		setExpanded(value ? Number(value) : null)
 	}, [])
 
 	const clearFilters = useCallback(() => {
@@ -99,29 +101,55 @@ export function Lords() {
 	return (
 		<>
 			<PageHead title='Lord Cards' />
-			<FilterBar
-				attribute={attribute}
-				faction={faction}
-				hasFilters={hasFilters}
-				onClear={clearFilters}
-				rarity={rarity}
-				search={search}
-				setAttribute={setAttribute}
-				setFaction={setFaction}
-				setRarity={setRarity}
-				setSearch={setSearch}
-				setTrait={setTrait}
-				setUnitType={setUnitType}
-				trait={trait}
-				unitType={unitType}
-			/>
+			<div className='mb-4 flex flex-wrap items-end gap-x-5 gap-y-3 bg-surface-high p-4'>
+				<SearchFilter
+					onChange={setSearch}
+					placeholder='Name or skill…'
+					value={search}
+				/>
+				<SelectFilter
+					label='Faction'
+					onChange={setFaction}
+					options={FACTION_OPTS}
+					value={faction}
+				/>
+				<SelectFilter
+					label='Type'
+					onChange={setUnitType}
+					options={UNIT_OPTS}
+					value={unitType}
+				/>
+				<SelectFilter
+					label='Rarity'
+					onChange={setRarity}
+					options={RARITY_OPTS}
+					value={rarity}
+				/>
+				<SelectFilter
+					label='Attr'
+					onChange={setAttribute}
+					options={ATTR_OPTS}
+					value={attribute}
+				/>
+				<SelectFilter
+					label='Trait'
+					onChange={setTrait}
+					options={TRAIT_OPTS}
+					value={trait}
+				/>
+				{hasFilters ? (
+					<Button onClick={clearFilters} size='sm' variant='outline'>
+						Clear
+					</Button>
+				) : null}
+			</div>
 			<div className='mb-3 font-sans text-sm text-text-faint'>
 				{filtered.length} of {lords.length} cards
 			</div>
 			<LordTable
 				expanded={expanded}
 				lords={filtered}
-				onToggleExpand={toggleExpand}
+				onToggleExpand={handleAccordionChange}
 				onToggleSort={toggleSort}
 				sortDir={sortDir}
 				sortField={sortField}
@@ -132,162 +160,5 @@ export function Lords() {
 				</p>
 			) : null}
 		</>
-	)
-}
-
-// ============================================================================
-// Filter bar (private to this page)
-// ============================================================================
-
-// biome-ignore lint/complexity/noExcessiveLinesPerFunction: filter bar has 6 controlled selects requiring individual callbacks
-function FilterBar(props: {
-	search: string
-	setSearch: (v: string) => void
-	faction: string
-	setFaction: (v: string) => void
-	unitType: string
-	setUnitType: (v: string) => void
-	rarity: string
-	setRarity: (v: string) => void
-	attribute: string
-	setAttribute: (v: string) => void
-	trait: string
-	setTrait: (v: string) => void
-	hasFilters: boolean
-	onClear: () => void
-}) {
-	const onSearch = useCallback(
-		(e: React.ChangeEvent<HTMLInputElement>) => {
-			props.setSearch(e.target.value)
-		},
-		[props.setSearch]
-	)
-	const onFaction = useCallback(
-		(e: React.ChangeEvent<HTMLSelectElement>) => {
-			props.setFaction(e.target.value)
-		},
-		[props.setFaction]
-	)
-	const onUnit = useCallback(
-		(e: React.ChangeEvent<HTMLSelectElement>) => {
-			props.setUnitType(e.target.value)
-		},
-		[props.setUnitType]
-	)
-	const onRarity = useCallback(
-		(e: React.ChangeEvent<HTMLSelectElement>) => {
-			props.setRarity(e.target.value)
-		},
-		[props.setRarity]
-	)
-	const onAttr = useCallback(
-		(e: React.ChangeEvent<HTMLSelectElement>) => {
-			props.setAttribute(e.target.value)
-		},
-		[props.setAttribute]
-	)
-	const onTrait = useCallback(
-		(e: React.ChangeEvent<HTMLSelectElement>) => {
-			props.setTrait(e.target.value)
-		},
-		[props.setTrait]
-	)
-
-	return (
-		<div className='mb-4 flex flex-wrap items-end gap-x-5 gap-y-3 bg-surface-high p-4'>
-			<Field label='Search'>
-				<input
-					autoComplete='off'
-					className='h-8 w-48 border-0 border-border-dim border-b bg-transparent px-1 font-sans text-sm text-text placeholder:text-text-dim focus-visible:border-gold focus-visible:outline-none'
-					name='lord-search'
-					onChange={onSearch}
-					placeholder='Name or skill…'
-					spellCheck={false}
-					type='text'
-					value={props.search}
-				/>
-			</Field>
-			<Select
-				label='Faction'
-				onChange={onFaction}
-				options={FACTION_OPTS}
-				value={props.faction}
-			/>
-			<Select
-				label='Type'
-				onChange={onUnit}
-				options={UNIT_OPTS}
-				value={props.unitType}
-			/>
-			<Select
-				label='Rarity'
-				onChange={onRarity}
-				options={RARITY_OPTS}
-				value={props.rarity}
-			/>
-			<Select
-				label='Attr'
-				onChange={onAttr}
-				options={ATTR_OPTS}
-				value={props.attribute}
-			/>
-			<Select
-				label='Trait'
-				onChange={onTrait}
-				options={TRAIT_OPTS}
-				value={props.trait}
-			/>
-			{props.hasFilters ? (
-				<button
-					className='h-8 border border-border bg-transparent px-4 font-medium font-sans text-text-muted text-xs uppercase tracking-wider hover:bg-surface-highest hover:text-gold'
-					onClick={props.onClear}
-					type='button'
-				>
-					Clear
-				</button>
-			) : null}
-		</div>
-	)
-}
-
-function Field({label, children}: {label: string; children: React.ReactNode}) {
-	return (
-		<div className='flex flex-col gap-0.5'>
-			<span className='font-medium font-sans text-[10px] text-text-dim uppercase tracking-wider'>
-				{label}
-			</span>
-			{children}
-		</div>
-	)
-}
-
-function Select({
-	label,
-	value,
-	onChange,
-	options
-}: {
-	label: string
-	value: string
-	onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void
-	options: readonly {value: string; label: string}[]
-}) {
-	return (
-		<Field label={label}>
-			<select
-				autoComplete='off'
-				className='h-8 border-0 border-border-dim border-b bg-transparent px-1 pr-6 font-sans text-sm text-text focus-visible:border-gold focus-visible:outline-none'
-				name={label.toLowerCase()}
-				onChange={onChange}
-				value={value}
-			>
-				<option value=''>All</option>
-				{options.map(o => (
-					<option key={o.value} value={o.value}>
-						{o.label}
-					</option>
-				))}
-			</select>
-		</Field>
 	)
 }

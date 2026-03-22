@@ -1,5 +1,6 @@
 import type {FallbackProps} from 'react-error-boundary'
 import {Link} from 'react-router'
+import {Button} from '@/components/ui/button'
 
 export function RouteErrorFallback({error, resetErrorBoundary}: FallbackProps) {
 	return (
@@ -25,22 +26,16 @@ export function RouteErrorFallback({error, resetErrorBoundary}: FallbackProps) {
 			</div>
 
 			<div className='flex items-center gap-4'>
-				{/* Secondary ghost button */}
-				<button
-					className='border border-border bg-transparent px-8 py-3 font-bold font-sans text-gold text-sm uppercase tracking-wider transition-colors hover:bg-surface-highest focus-visible:outline-2 focus-visible:outline-gold focus-visible:outline-offset-2 motion-reduce:transition-none'
-					onClick={resetErrorBoundary}
-					type='button'
-				>
+				<Button onClick={resetErrorBoundary} variant='outline'>
 					Try Again
-				</button>
+				</Button>
 
-				{/* Imperial Seal — cinnabar action button */}
-				<Link
-					className='bg-cinnabar px-8 py-3 font-bold font-sans text-gold text-sm uppercase tracking-wider transition-colors hover:bg-cinnabar-light focus-visible:outline-2 focus-visible:outline-gold focus-visible:outline-offset-2 motion-reduce:transition-none'
-					to='/'
+				<Button
+					asChild={true}
+					className='bg-cinnabar font-bold text-gold uppercase tracking-wider hover:bg-cinnabar-light'
 				>
-					Return to the Chronicle
-				</Link>
+					<Link to='/'>Return to the Chronicle</Link>
+				</Button>
 			</div>
 		</section>
 	)
