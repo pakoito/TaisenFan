@@ -1,3 +1,6 @@
+# Generated guides (synced from monorepo root at build time)
+src/content/guides/*.md
+
 node_modules
 .DS_Store
 dist

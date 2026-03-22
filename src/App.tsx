@@ -15,6 +15,12 @@ const Sages = lazy(() =>
 const Decks = lazy(() =>
 	import('@/pages/gamedata/Decks').then(m => ({default: m.Decks}))
 )
+const GuideIndex = lazy(() =>
+	import('@/pages/guides/GuideIndex').then(m => ({default: m.GuideIndex}))
+)
+const GuidePage = lazy(() =>
+	import('@/pages/guides/GuidePage').then(m => ({default: m.GuidePage}))
+)
 
 function Loading() {
 	return (
@@ -31,6 +37,8 @@ export function App() {
 				<Suspense fallback={<Loading />}>
 					<Routes>
 						<Route element={<Home />} index={true} />
+						<Route element={<GuideIndex />} path='guides' />
+						<Route element={<GuidePage />} path='guides/:slug' />
 						<Route element={<Lords />} path='gamedata/lords' />
 						<Route element={<Sages />} path='gamedata/sages' />
 						<Route element={<Decks />} path='gamedata/decks' />

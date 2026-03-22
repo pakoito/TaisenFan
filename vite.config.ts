@@ -2,8 +2,11 @@
 
 import fs from 'node:fs'
 import path from 'node:path'
+import mdx from '@mdx-js/rollup'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
+import remarkFrontmatter from 'remark-frontmatter'
+import remarkGfm from 'remark-gfm'
 import {defineConfig, type Plugin} from 'vite'
 
 /**
@@ -28,9 +31,16 @@ function ghPages404(): Plugin {
 	}
 }
 
+const REACT_INCLUDE = /\.(?:jsx|tsx|md|mdx)$/u
+
 export default defineConfig(() => ({
 	base: '/TaisenFan/',
-	plugins: [react(), tailwindcss(), ghPages404()],
+	plugins: [
+		mdx({remarkPlugins: [remarkGfm, remarkFrontmatter]}),
+		react({include: REACT_INCLUDE}),
+		tailwindcss(),
+		ghPages404()
+	],
 	resolve: {
 		alias: {
 			'@': path.resolve(import.meta.dirname, './src')

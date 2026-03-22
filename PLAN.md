@@ -56,13 +56,13 @@ Render the 8 existing markdown guides from `guides/` as SPA pages.
 
 ### Tasks
 
-- [ ] **Markdown rendering** — pick a lightweight md→HTML lib (e.g. `marked` or `markdown-it`) or use Vite plugin to import `.md` as HTML at build time
-- [ ] **Guide page component** — `src/pages/guides/GuidePage.tsx`: renders markdown content with the Digital Scribe styling (headings = gold, tables = surface-high, code blocks = surface-mid, blockquotes = chronicle-scroll)
-- [ ] **Guide routes** — add routes: `/guides/beginners`, `/guides/campaign`, `/guides/campaign-merchants`, `/guides/combat`, `/guides/deck-archetypes`, `/guides/deck-strategies`, `/guides/duel`, `/guides/tactics`
-- [ ] **Guide index page** — `/guides` landing with all 8 guides listed (replace the "Coming soon" stubs on Home)
-- [ ] **Navigation update** — add "Guides" to the nav bar (dropdown or top-level link to index)
-- [ ] **Inter-guide links** — the markdown files reference each other (e.g. `[Beginner's Guide](beginners-guide.md)`); rewrite these to SPA route links
-- [ ] **Copy guide files** — copy `guides/*.md` into `TaisenFan/` (either `public/guides/` for runtime fetch or `src/content/` for build-time import)
+- [x] **Markdown rendering** — `@mdx-js/rollup` compiles `.md` → React components at build time (zero runtime parser). `remark-gfm` for tables, `remark-frontmatter` for future metadata.
+- [x] **Guide page component** — `src/pages/guides/GuidePage.tsx` with MDXProvider mapping elements to Digital Scribe styles (gold headings, chronicle-scroll blockquotes, shadcn Table for markdown tables)
+- [x] **Guide routes** — `/guides` index + `/guides/:slug` for all 8 guides, lazy-loaded
+- [x] **Guide index page** — `/guides` landing with all 8 guides listed. Home page "Guides" section now links to real guides.
+- [x] **Navigation update** — "Guides" dropdown in nav bar enabled with all 8 links
+- [x] **Inter-guide links** — `scripts/sync-guides.ts` rewrites `filename.md` → `/guides/slug` at sync time. Internal links rendered as react-router `<Link>`.
+- [x] **Copy guide files** — `npm run guides:sync` copies `guides/*.md` → `src/content/guides/` with link rewriting. Runs automatically before `dev` and `build`.
 
 ## M3 · Save Editor
 

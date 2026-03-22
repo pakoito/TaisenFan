@@ -22,30 +22,26 @@ interface DropdownItem {
 }
 
 const GUIDE_ITEMS: readonly DropdownItem[] = [
-	{to: '/guides/beginners', label: "Beginner's Guide", disabled: true},
+	{to: '/guides/beginners', label: "Beginner's Guide"},
 	{
 		to: '/guides/campaign',
-		label: 'Campaign Walkthrough',
-		disabled: true
+		label: 'Campaign Walkthrough'
 	},
 	{
 		to: '/guides/campaign-merchants',
-		label: 'Campaign Merchants',
-		disabled: true
+		label: 'Campaign Merchants'
 	},
-	{to: '/guides/combat', label: 'Combat Mechanics', disabled: true},
+	{to: '/guides/combat', label: 'Combat Mechanics'},
 	{
 		to: '/guides/deck-archetypes',
-		label: 'Deck Archetypes',
-		disabled: true
+		label: 'Deck Archetypes'
 	},
 	{
 		to: '/guides/deck-strategies',
-		label: 'Deck Strategies',
-		disabled: true
+		label: 'Deck Strategies'
 	},
-	{to: '/guides/duel', label: 'DUEL Guide', disabled: true},
-	{to: '/guides/tactics', label: 'Tactics Guide', disabled: true}
+	{to: '/guides/duel', label: 'DUEL Guide'},
+	{to: '/guides/tactics', label: 'Tactics Guide'}
 ]
 
 const GAMEDATA_ITEMS: readonly DropdownItem[] = [

@@ -94,22 +94,34 @@ export function Home() {
 			<section className='mx-auto mb-20 max-w-3xl'>
 				<InscriptionHeader>Guides</InscriptionHeader>
 				<div className='mt-8 grid grid-cols-1 gap-6 md:grid-cols-2'>
-					<GuideLink
+					<DataLink
 						description='Factions, units, mechanics, and terminology.'
 						title="Beginner's Guide"
+						to='/guides/beginners'
 					/>
-					<GuideLink
+					<DataLink
 						description='All 6 chapters plus Warring States mode.'
 						title='Campaign Walkthrough'
+						to='/guides/campaign'
 					/>
-					<GuideLink
+					<DataLink
 						description='Damage formulas, speed tables, and counters.'
 						title='Combat Mechanics'
+						to='/guides/combat'
 					/>
-					<GuideLink
+					<DataLink
 						description='Proven decks for S-rank Duel clears.'
 						title='Deck Strategies'
+						to='/guides/deck-strategies'
 					/>
+				</div>
+				<div className='mt-4 text-center'>
+					<Link
+						className='font-sans text-text-faint text-xs uppercase tracking-wider hover:text-gold'
+						to='/guides'
+					>
+						View all 8 guides →
+					</Link>
 				</div>
 			</section>
 
@@ -198,23 +210,5 @@ function DataLink({
 				View →
 			</div>
 		</Link>
-	)
-}
-
-/* ======================================================================== */
-/* Guide Link — muted, coming soon                                         */
-/* ======================================================================== */
-
-function GuideLink({title, description}: {title: string; description: string}) {
-	return (
-		<div className='bg-surface-high p-5 opacity-50'>
-			<h3 className='mb-2 font-bold font-serif text-text-muted'>
-				{title}
-				<span className='ml-2 font-normal font-sans text-text-dim text-xs'>
-					Coming soon
-				</span>
-			</h3>
-			<p className='text-sm text-text-dim'>{description}</p>
-		</div>
 	)
 }
