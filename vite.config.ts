@@ -55,6 +55,7 @@ export default defineConfig(() => ({
 		css: false,
 		environment: 'happy-dom',
 		globals: true,
-		include: ['src/**/*.test.ts?(x)']
+		include: ['src/**/*.test.ts?(x)'],
+		passWithNoTests: true
 	}
 }))
