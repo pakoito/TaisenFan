@@ -91,18 +91,24 @@ export const mdxComponents: MDXComponents = {
 		/>
 	),
 
-	// Code — surface-mid for inline, surface-high for blocks
-	code: props => (
+	// Code — surface-mid for inline, transparent when inside pre
+	code: ({className, ...props}) => (
 		<code
-			className='bg-surface-mid px-1.5 py-0.5 font-mono text-text-muted text-xs'
+			className={`font-mono text-text-muted text-xs ${
+				className?.includes('language-') || props['data-language']
+					? ''
+					: 'bg-surface-mid px-1.5 py-0.5'
+			} ${className ?? ''}`}
 			{...props}
 		/>
 	),
-	pre: props => (
+	pre: ({children, ...props}) => (
 		<pre
-			className='mb-4 overflow-x-auto bg-surface-high p-4 font-mono text-text-muted text-xs leading-relaxed'
+			className='mb-4 overflow-x-auto bg-surface-high p-4 font-mono text-text-muted text-xs leading-relaxed [&_code]:bg-transparent [&_code]:p-0'
 			{...props}
-		/>
+		>
+			{children}
+		</pre>
 	),
 
 	// Horizontal rule — brushstroke separator

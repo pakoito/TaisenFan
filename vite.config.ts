@@ -36,7 +36,10 @@ const REACT_INCLUDE = /\.(?:jsx|tsx|md|mdx)$/u
 export default defineConfig(() => ({
 	base: '/TaisenFan/',
 	plugins: [
-		mdx({remarkPlugins: [remarkGfm, remarkFrontmatter]}),
+		mdx({
+			providerImportSource: '@mdx-js/react',
+			remarkPlugins: [remarkGfm, remarkFrontmatter]
+		}),
 		react({include: REACT_INCLUDE}),
 		tailwindcss(),
 		ghPages404()
