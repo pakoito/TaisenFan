@@ -1,14 +1,25 @@
 import type {PropsWithChildren} from 'react'
 import {NavLink} from 'react-router'
+import {NavDropdown, type NavDropdownItem} from '@/components/NavDropdown'
 
-const NAV_LINKS = [
-	{to: '/', label: 'Home'},
+const GUIDE_ITEMS: readonly NavDropdownItem[] = [
+	{to: '/guides/beginners', label: "Beginner's Guide", disabled: true},
+	{to: '/guides/campaign', label: 'Campaign Walkthrough', disabled: true},
+	{to: '/guides/campaign-merchants', label: 'Campaign Merchants', disabled: true},
+	{to: '/guides/combat', label: 'Combat Mechanics', disabled: true},
+	{to: '/guides/deck-archetypes', label: 'Deck Archetypes', disabled: true},
+	{to: '/guides/deck-strategies', label: 'Deck Strategies', disabled: true},
+	{to: '/guides/duel', label: 'DUEL Guide', disabled: true},
+	{to: '/guides/tactics', label: 'Tactics Guide', disabled: true}
+]
+
+const GAMEDATA_ITEMS: readonly NavDropdownItem[] = [
 	{to: '/gamedata/lords', label: 'Lord Cards'},
 	{to: '/gamedata/sages', label: 'Sage Cards'},
 	{to: '/gamedata/decks', label: 'Duel Decks'}
-] as const
+]
 
-function navClass({isActive}: {isActive: boolean}): string {
+function navLinkClass({isActive}: {isActive: boolean}): string {
 	const base =
 		'px-4 py-2 text-sm font-sans font-medium tracking-wide uppercase transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold motion-reduce:transition-none'
 	return isActive
@@ -32,12 +43,31 @@ export function Layout({children}: PropsWithChildren) {
 						<span className='text-cinnabar-light'>大戦</span>
 						<span className='text-gold-dim'>FAN</span>
 					</NavLink>
+
 					<div className='flex items-center gap-0.5'>
-						{NAV_LINKS.map(({to, label}) => (
-							<NavLink className={navClass} key={to} to={to}>
-								{label}
-							</NavLink>
-						))}
+						<NavLink className={navLinkClass} end={true} to='/'>
+							Home
+						</NavLink>
+
+						<NavDropdown
+							activePrefix='/guides'
+							items={GUIDE_ITEMS}
+							label='Guides'
+						/>
+
+						<NavDropdown
+							activePrefix='/gamedata'
+							items={GAMEDATA_ITEMS}
+							label='Game Data'
+						/>
+
+						<span
+							aria-disabled='true'
+							className='px-4 py-2 font-sans text-sm font-medium uppercase tracking-wide text-text-dim'
+							title='Coming soon'
+						>
+							Save Editor
+						</span>
 					</div>
 				</nav>
 			</header>
