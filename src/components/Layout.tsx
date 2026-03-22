@@ -88,7 +88,7 @@ export function Layout({children}: PropsWithChildren) {
 						<span className='text-gold-dim'>FAN</span>
 					</NavLink>
 
-					<NavigationMenu>
+					<NavigationMenu viewport={false}>
 						<NavigationMenuList>
 							{/* Home — direct link */}
 							<NavigationMenuItem>
