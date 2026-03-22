@@ -1,7 +1,10 @@
 import {lazy, Suspense} from 'react'
+import {ErrorBoundary} from 'react-error-boundary'
 import {Route, Routes} from 'react-router'
 import {Layout} from '@/components/Layout'
+import {RouteErrorFallback} from '@/components/RouteErrorFallback'
 import {Home} from '@/pages/Home'
+import {NotFound} from '@/pages/NotFound'
 
 const Lords = lazy(() =>
 	import('@/pages/gamedata/Lords').then(m => ({default: m.Lords}))
@@ -24,14 +27,17 @@ function Loading() {
 export function App() {
 	return (
 		<Layout>
-			<Suspense fallback={<Loading />}>
-				<Routes>
-					<Route element={<Home />} index={true} />
-					<Route element={<Lords />} path='gamedata/lords' />
-					<Route element={<Sages />} path='gamedata/sages' />
-					<Route element={<Decks />} path='gamedata/decks' />
-				</Routes>
-			</Suspense>
+			<ErrorBoundary FallbackComponent={RouteErrorFallback}>
+				<Suspense fallback={<Loading />}>
+					<Routes>
+						<Route element={<Home />} index={true} />
+						<Route element={<Lords />} path='gamedata/lords' />
+						<Route element={<Sages />} path='gamedata/sages' />
+						<Route element={<Decks />} path='gamedata/decks' />
+						<Route element={<NotFound />} path='*' />
+					</Routes>
+				</Suspense>
+			</ErrorBoundary>
 		</Layout>
 	)
 }

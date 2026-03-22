@@ -18,7 +18,7 @@ export default defineConfig({
 	retries: process.env.CI ? 2 : 0,
 	testDir: './tests',
 	use: {
-		baseURL: 'http://localhost:5173',
+		baseURL: 'http://localhost:5173/TaisenFan/',
 		trace: 'on-first-retry'
 	},
 	webServer: {
