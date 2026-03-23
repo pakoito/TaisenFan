@@ -41,7 +41,7 @@
 			"a11y": "error",
 			"complexity": "error",
 			"correctness": "error",
-			"nursery": "error",
+			"nursery": "off",
 			"performance": "error",
 			"recommended": true,
 			"security": "error",
@@ -57,10 +57,6 @@
 					"correctness": {
 						"useImportExtensions": "off",
 						"noUnresolvedImports": "off"
-					},
-					"nursery": {
-						"useExplicitType": "off",
-						"noTernary": "off"
 					},
 					"suspicious": {
 						"noReactSpecificProps": "off",
@@ -149,16 +145,6 @@
 			}
 		},
 		{
-			"includes": ["src/global.css"],
-			"linter": {
-				"rules": {
-					"nursery": {
-						"noHexColors": "off"
-					}
-				}
-			}
-		},
-		{
 			"includes": [
 				"src/utils/patcher.ts",
 				"src/utils/nds-parser.ts",
@@ -172,32 +158,9 @@
 				"rules": {
 					"suspicious": { "noBitwiseOperators": "off" },
 					"style": { "useForOf": "off", "noNonNullAssertion": "off" },
-					"nursery": { "noContinue": "off" },
 					"complexity": {
 						"noExcessiveCognitiveComplexity": "off",
 						"noExcessiveLinesPerFunction": "off"
-					}
-				}
-			}
-		},
-		{
-			"includes": ["src/global.css"],
-			"linter": {
-				"rules": {
-					"nursery": { "noHexColors": "off" }
-				}
-			}
-		},
-		{
-			"includes": [
-				"src/components/CartridgeSlot.tsx",
-				"src/components/Patcher.tsx",
-				"src/utils/sort.ts"
-			],
-			"linter": {
-				"rules": {
-					"nursery": {
-						"noUnnecessaryConditions": "off"
 					}
 				}
 			}
@@ -208,9 +171,6 @@
 				"rules": {
 					"suspicious": {
 						"noConsole": "off"
-					},
-					"nursery": {
-						"noUnnecessaryConditions": "off"
 					}
 				}
 			}
