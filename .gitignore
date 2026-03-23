@@ -9,3 +9,6 @@ coverage
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+# Test fixtures (extracted from ROM, not committed)
+src/utils/__fixtures__/*.bin
+src/utils/__fixtures__/*.nfp

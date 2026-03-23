@@ -110,7 +110,13 @@
 			}
 		},
 		{
-			"includes": ["vite.config.ts", "playwright.config.ts", "scripts/**"],
+			"includes": [
+				"vite.config.ts",
+				"playwright.config.ts",
+				"scripts/**",
+				"src/**/*.test.ts",
+				"src/**/*.test.tsx"
+			],
 			"linter": {
 				"rules": {
 					"correctness": {
@@ -153,21 +159,18 @@
 			}
 		},
 		{
-			"includes": ["src/utils/patcher.ts"],
-			"linter": {
-				"rules": {
-					"suspicious": {
-						"noBitwiseOperators": "off"
-					}
-				}
-			}
-		},
-		{
-			"includes": ["src/utils/patcher.ts"],
+			"includes": [
+				"src/utils/patcher.ts",
+				"src/utils/nds-parser.ts",
+				"src/utils/nfp-unpack.ts",
+				"src/utils/kpc-decode.ts",
+				"src/utils/image-cache.ts"
+			],
 			"linter": {
 				"rules": {
 					"suspicious": { "noBitwiseOperators": "off" },
-					"style": { "useForOf": "off" },
+					"style": { "useForOf": "off", "noNonNullAssertion": "off" },
+					"nursery": { "noContinue": "off" },
 					"complexity": {
 						"noExcessiveCognitiveComplexity": "off",
 						"noExcessiveLinesPerFunction": "off"
