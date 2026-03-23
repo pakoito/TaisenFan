@@ -1,8 +1,8 @@
 import {useEffect} from 'react';
 
-interface Props {
+type Props = {
 	title: string;
-}
+};
 
 export function PageHead({title}: Props) {
 	useEffect(() => {

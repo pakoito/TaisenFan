@@ -7,7 +7,7 @@
 
 import type {WorkerCommand, WorkerResponse} from '@/workers/rom-worker-types';
 
-export interface RomWorkerCallbacks {
+export type RomWorkerCallbacks = {
 	onProgress?: (
 		phase: 'parsing' | 'unpacking' | 'decoding',
 		current: number,
@@ -20,7 +20,7 @@ export interface RomWorkerCallbacks {
 	onPatchProgress?: (step: 'fetching' | 'verifying' | 'patching') => void;
 	onPatched?: (data: ArrayBuffer, filename: string) => void;
 	onPatchError?: (error: string) => void;
-}
+};
 
 export class RomWorkerClient {
 	private readonly worker: Worker;

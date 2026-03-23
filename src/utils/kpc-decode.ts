@@ -8,14 +8,14 @@
 
 import {lz10Decompress} from '@/utils/nfp-unpack';
 
-export interface DecodedImage {
+export type DecodedImage = {
 	/** RGBA pixel data */
 	rgba: Uint8Array;
 	/** Width after auto-crop */
 	width: number;
 	/** Height after auto-crop */
 	height: number;
-}
+};
 
 // ============================================================================
 // Helpers

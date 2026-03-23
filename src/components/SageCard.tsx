@@ -9,9 +9,9 @@ import {factionBorder, factionHeaderBg} from '@/utils/faction';
 import {RangeImage} from './RangeImage';
 import {RarityBadge} from './RarityBadge';
 
-interface Props {
+type Props = {
 	sage: SageCardType;
-}
+};
 
 export function SageCard({sage}: Props) {
 	const [open, setOpen] = useState(false);

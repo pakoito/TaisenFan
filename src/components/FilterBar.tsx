@@ -12,12 +12,12 @@ import {
 /* SelectFilter                                                             */
 /* ======================================================================== */
 
-interface SelectFilterProps {
+type SelectFilterProps = {
 	label: string;
 	value: string;
 	onChange: (value: string) => void;
 	options: readonly {value: string; label: string}[];
-}
+};
 
 export function SelectFilter({
 	label,
@@ -58,11 +58,11 @@ export function SelectFilter({
 /* SearchFilter                                                             */
 /* ======================================================================== */
 
-interface SearchFilterProps {
+type SearchFilterProps = {
 	value: string;
 	onChange: (value: string) => void;
 	placeholder?: string;
-}
+};
 
 export function SearchFilter({
 	value,

@@ -15,17 +15,17 @@ const DB_VERSION = 1;
 const STORE_NAME = 'cache';
 const CACHE_KEY = 'images';
 
-interface CacheRecord {
+type CacheRecord = {
 	version: number;
 	images: Record<string, Blob>;
-}
+};
 
-export interface CacheResult {
+export type CacheResult = {
 	/** The cached images as blob URLs (caller must revoke when done) */
 	images: Map<string, string>;
 	/** Whether the cache version matches the current extraction version */
 	current: boolean;
-}
+};
 
 // ============================================================================
 // IndexedDB helpers

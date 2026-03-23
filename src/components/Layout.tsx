@@ -16,11 +16,11 @@ import {cn} from '@/lib/utils';
 /* Menu data                                                                */
 /* ======================================================================== */
 
-interface DropdownItem {
+type DropdownItem = {
 	readonly to: string;
 	readonly label: string;
 	readonly disabled?: boolean;
-}
+};
 
 const GUIDE_ITEMS: readonly DropdownItem[] = [
 	{to: '/guides/beginners', label: "Beginner's Guide"},

@@ -9,9 +9,9 @@ const RARITY_CLASS: Record<Rarity, string> = {
 	LE: 'bg-gold-dark text-gold',
 };
 
-interface Props {
+type Props = {
 	rarity: Rarity;
-}
+};
 
 export function RarityBadge({rarity}: Props) {
 	return (

@@ -1,10 +1,10 @@
 import type {ComponentType} from 'react';
 
-export interface GuideEntry {
+export type GuideEntry = {
 	readonly slug: string;
 	readonly title: string;
 	readonly load: () => Promise<{default: ComponentType}>;
-}
+};
 
 /**
  * All guides, lazily loaded. The MDX plugin compiles each .md to a React

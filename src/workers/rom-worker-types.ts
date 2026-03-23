@@ -9,20 +9,20 @@
 // Main → Worker
 // ============================================================================
 
-export interface ExtractCommand {
+export type ExtractCommand = {
 	type: 'extract';
 	rom: ArrayBuffer;
-}
+};
 
-export interface PatchCommand {
+export type PatchCommand = {
 	type: 'patch';
 	/** Base URL for fetching patch.bps (import.meta.env.BASE_URL from main thread) */
 	baseUrl: string;
-}
+};
 
-export interface EjectCommand {
+export type EjectCommand = {
 	type: 'eject';
-}
+};
 
 export type WorkerCommand = ExtractCommand | PatchCommand | EjectCommand;
 
@@ -30,45 +30,45 @@ export type WorkerCommand = ExtractCommand | PatchCommand | EjectCommand;
 // Worker → Main
 // ============================================================================
 
-export interface ProgressMessage {
+export type ProgressMessage = {
 	type: 'progress';
 	phase: 'parsing' | 'unpacking' | 'decoding';
 	current: number;
 	total: number;
-}
+};
 
-export interface ExtractedImage {
+export type ExtractedImage = {
 	name: string;
 	rgba: ArrayBuffer;
 	width: number;
 	height: number;
-}
+};
 
-export interface ExtractDoneMessage {
+export type ExtractDoneMessage = {
 	type: 'extract-done';
 	images: ExtractedImage[];
-}
+};
 
-export interface ExtractErrorMessage {
+export type ExtractErrorMessage = {
 	type: 'extract-error';
 	error: string;
-}
+};
 
-export interface PatchProgressMessage {
+export type PatchProgressMessage = {
 	type: 'patch-progress';
 	step: 'fetching' | 'verifying' | 'patching';
-}
+};
 
-export interface PatchDoneMessage {
+export type PatchDoneMessage = {
 	type: 'patch-done';
 	data: ArrayBuffer;
 	filename: string;
-}
+};
 
-export interface PatchErrorMessage {
+export type PatchErrorMessage = {
 	type: 'patch-error';
 	error: string;
-}
+};
 
 export type WorkerResponse =
 	| ProgressMessage

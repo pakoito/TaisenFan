@@ -92,7 +92,13 @@
 								"filenameCases": ["camelCase", "kebab-case", "PascalCase"]
 							}
 						},
-						"noJsxLiterals": "off"
+						"noJsxLiterals": "off",
+						"useConsistentTypeDefinitions": {
+							"level": "error",
+							"options": {
+								"style": "type"
+							}
+						}
 					},
 					"security": {
 						"noSecrets": {

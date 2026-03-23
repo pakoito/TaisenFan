@@ -7,20 +7,20 @@
 
 const BPS_MAGIC = 'BPS1';
 
-interface BpsAction {
+type BpsAction = {
 	type: number;
 	length: number;
 	bytes?: number[];
 	relativeOffset?: number;
-}
+};
 
-export interface BpsPatch {
+export type BpsPatch = {
 	sourceSize: number;
 	targetSize: number;
 	actions: BpsAction[];
 	sourceChecksum: number;
 	targetChecksum: number;
-}
+};
 
 function readVlv(u8: Uint8Array, offset: {v: number}): number {
 	let data = 0;

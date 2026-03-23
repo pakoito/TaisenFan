@@ -5,10 +5,10 @@
  * SEGA's NFP archive format used by Sangokushi Taisen DS.
  */
 
-export interface NfpFile {
+export type NfpFile = {
 	name: string;
 	data: Uint8Array;
-}
+};
 
 /** Copy a slice into a fresh Uint8Array backed by a plain ArrayBuffer */
 function copySlice(src: Uint8Array, start: number, end: number): Uint8Array {
@@ -204,12 +204,12 @@ export function unpackNfp(buf: Uint8Array): NfpFile[] {
 		table.byteLength,
 	);
 
-	interface Entry {
+	type Entry = {
 		name: string;
 		offset: number;
 		determinant: number;
 		entryBytes: Uint8Array;
-	}
+	};
 	const entries: Entry[] = [];
 	const decoder = new TextDecoder();
 

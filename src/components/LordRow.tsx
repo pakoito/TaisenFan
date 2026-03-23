@@ -42,9 +42,9 @@ function attrColor(attr: string): string {
 // Row component (AccordionTrigger + AccordionContent)
 // ============================================================================
 
-interface LordRowProps {
+type LordRowProps = {
 	lord: LordCard;
-}
+};
 
 export function LordRow({lord}: LordRowProps) {
 	const cfg = getFactionConfig(lord.faction);

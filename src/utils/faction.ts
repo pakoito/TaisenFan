@@ -2,12 +2,12 @@
  * Faction display config and helpers — adapted for The Digital Scribe aesthetic.
  */
 
-export interface FactionConfig {
+export type FactionConfig = {
 	kanji: string;
 	cls: string;
 	rowBg: string;
 	label: string;
-}
+};
 
 const FACTION_CFG: Record<string, FactionConfig> = {
 	Wei: {

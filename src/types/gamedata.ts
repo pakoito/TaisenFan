@@ -69,7 +69,7 @@ export const SAGE_RANGE_TYPES = [
 export type SageRangeType = (typeof SAGE_RANGE_TYPES)[number];
 
 // Lord Card
-export interface LordCard {
+export type LordCard = {
 	cardId: number;
 	cardIndex: string;
 	sortNo: number;
@@ -99,10 +99,10 @@ export interface LordCard {
 		duration: EffectDuration;
 		range: string;
 	};
-}
+};
 
 // Sage Ability
-export interface SageAbility {
+export type SageAbility = {
 	id: number;
 	name: string;
 	description: string;
@@ -113,10 +113,10 @@ export interface SageAbility {
 	rangeSize: {x: number; y: number};
 	gaugeMax: number;
 	chargeTime: number;
-}
+};
 
 // Sage Dialogue
-export interface SageDialogue {
+export type SageDialogue = {
 	greeting1: string;
 	greeting2: string;
 	greeting3: string;
@@ -130,10 +130,10 @@ export interface SageDialogue {
 	endTraining: string;
 	success: string;
 	failed: string;
-}
+};
 
 // Sage Card
-export interface SageCard {
+export type SageCard = {
 	cardId: number;
 	cardIndex: string;
 	sortNo: number;
@@ -150,10 +150,10 @@ export interface SageCard {
 	tactics: SageAbility;
 	formation: SageAbility;
 	dialogue: SageDialogue;
-}
+};
 
 // Duel Deck
-export interface DeckLordInfo {
+export type DeckLordInfo = {
 	cardId: number;
 	name: string;
 	nameJapanese: string;
@@ -165,18 +165,18 @@ export interface DeckLordInfo {
 	skillName: string;
 	traits: Trait[];
 	attribute: Attribute;
-}
+};
 
-export interface SpecialUnitInfo {
+export type SpecialUnitInfo = {
 	cardId: number;
 	name: string;
 	cost: number;
 	pow: number;
 	int: number;
 	faction: Faction;
-}
+};
 
-export interface DeckSageInfo {
+export type DeckSageInfo = {
 	cardId: number;
 	name: string;
 	nameJapanese: string;
@@ -185,9 +185,9 @@ export interface DeckSageInfo {
 	formationName: string;
 	selectedAbility: 'Tactics' | 'Formation';
 	abilityLevel: number;
-}
+};
 
-export interface DuelDeck {
+export type DuelDeck = {
 	difficulty: Difficulty;
 	deckNo: number;
 	deckIndex: number;
@@ -206,4 +206,4 @@ export interface DuelDeck {
 	totalInt: number;
 	traitCounts: Record<string, number>;
 	attributeCounts: Record<string, number>;
-}
+};

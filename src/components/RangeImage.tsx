@@ -1,8 +1,8 @@
-interface Props {
+type Props = {
 	range: string;
 	sage?: boolean;
 	className?: string;
-}
+};
 
 export function RangeImage({range, sage = false, className = ''}: Props) {
 	const base = import.meta.env.BASE_URL;

@@ -12,17 +12,17 @@ export type RomStatus =
 	| 'extracting'
 	| 'loaded';
 
-export interface RomProgress {
+export type RomProgress = {
 	phase: 'parsing' | 'unpacking' | 'decoding';
 	current: number;
 	total: number;
-}
+};
 
-export interface PatchProgress {
+export type PatchProgress = {
 	step: 'fetching' | 'verifying' | 'patching';
-}
+};
 
-export interface RomContextValue {
+export type RomContextValue = {
 	/** Current state of the ROM loader */
 	status: RomStatus;
 	/** Extraction progress (only meaningful during 'extracting') */
@@ -45,6 +45,6 @@ export interface RomContextValue {
 	clearAll: () => void;
 	/** Last error message, if any */
 	error: string | null;
-}
+};
 
 export const RomContext = createContext<RomContextValue | null>(null);

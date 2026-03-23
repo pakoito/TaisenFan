@@ -6,7 +6,7 @@
  * flat list of files with their ROM offsets and sizes.
  */
 
-export interface NdsFile {
+export type NdsFile = {
 	/** Filename without path */
 	name: string;
 	/** Full path including parent directories */
@@ -17,14 +17,14 @@ export interface NdsFile {
 	offset: number;
 	/** File size in bytes */
 	size: number;
-}
+};
 
-export interface NdsRom {
+export type NdsRom = {
 	/** Game title from the NDS header (first 12 bytes, null-trimmed) */
 	title: string;
 	/** All files in the NitroFS filesystem */
 	files: NdsFile[];
-}
+};
 
 const NULL_CHAR = /\0/gu;
 
@@ -45,10 +45,10 @@ export function parseNds(rom: Uint8Array): NdsRom {
 	const numDirs = view.getUint16(fntOff + 6, true);
 
 	// Parse FNT directory table
-	interface DirEntry {
+	type DirEntry = {
 		subtableOff: number;
 		firstFileId: number;
-	}
+	};
 	const dirs: DirEntry[] = [];
 	for (let i = 0; i < numDirs; i += 1) {
 		const base = fntOff + i * 8;
