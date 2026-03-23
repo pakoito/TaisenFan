@@ -268,7 +268,7 @@ function FilePickerButton({
 // ============================================================================
 
 export function CartridgeSlot() {
-	const {status, loadRom} = useRom();
+	const {status, progress, loadRom} = useRom();
 	const inputRef = useRef<HTMLInputElement>(null);
 
 	const handleFileChange = useCallback(
@@ -283,12 +283,22 @@ export function CartridgeSlot() {
 
 	const isProcessing = status === 'loading' || status === 'extracting';
 
+	// During processing, show progress inline — no popover
+	if (isProcessing) {
+		const label = progress
+			? `${progress.phase} ${progress.current}/${progress.total}`
+			: 'Reading…';
+		return (
+			<div className='ml-auto flex shrink-0 items-center gap-2 px-3 py-2'>
+				<CartridgeIcon status={status} />
+				<span className='font-sans text-xs text-text-muted'>{label}</span>
+			</div>
+		);
+	}
+
 	return (
 		<Popover>
-			<PopoverTrigger
-				className='ml-auto flex shrink-0 items-center gap-1.5 px-3 py-2 font-medium font-sans text-xs uppercase tracking-wide transition-colors hover:text-gold focus-visible:outline-2 focus-visible:outline-gold focus-visible:outline-offset-2'
-				disabled={isProcessing}
-			>
+			<PopoverTrigger className='ml-auto flex shrink-0 items-center gap-1.5 px-3 py-2 font-medium font-sans text-xs uppercase tracking-wide transition-colors hover:text-gold focus-visible:outline-2 focus-visible:outline-gold focus-visible:outline-offset-2'>
 				<CartridgeIcon status={status} />
 				<span className='hidden sm:inline'>{statusLabel(status)}</span>
 			</PopoverTrigger>
