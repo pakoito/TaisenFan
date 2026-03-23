@@ -3,6 +3,7 @@
  */
 
 import {createContext} from 'react';
+import type {ImageKey} from '@/utils/image-catalog';
 
 export type RomStatus =
 	| 'empty'
@@ -32,7 +33,7 @@ export type RomContextValue = {
 	/** Whether patching is in progress */
 	isPatching: boolean;
 	/** Decoded images as blob URLs, keyed by KPC filename */
-	images: Map<string, string>;
+	images: Map<ImageKey, string>;
 	/** Whether images are available (cached, stale, or loaded) */
 	hasImages: boolean;
 	/** Load a ROM file — triggers extraction and caching */

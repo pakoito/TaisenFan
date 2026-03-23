@@ -3,6 +3,8 @@
  * Mirrors gamedata-tools/types.ts for frontend consumption.
  */
 
+import type {ImageKey} from '@/utils/image-catalog';
+
 export const FACTIONS = [
 	'Wei',
 	'Shu',
@@ -101,9 +103,9 @@ export type LordCard = {
 	};
 
 	// Image keys (for ROM image extraction)
-	bustupKey: string;
-	miniBustupKey: string;
-	faceKey: string;
+	bustupKey: ImageKey;
+	miniBustupKey: ImageKey;
+	faceKey: ImageKey;
 };
 
 // Sage Ability
@@ -155,6 +157,10 @@ export type SageCard = {
 	tactics: SageAbility;
 	formation: SageAbility;
 	dialogue: SageDialogue;
+
+	// Image keys (for ROM image extraction)
+	bustupKey: ImageKey;
+	faceKey: ImageKey;
 };
 
 // Duel Deck

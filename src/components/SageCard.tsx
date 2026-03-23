@@ -4,6 +4,7 @@ import {
 	CollapsibleContent,
 	CollapsibleTrigger,
 } from '@/components/ui/collapsible';
+import {useRom} from '@/contexts/useRom';
 import type {SageAbility, SageCard as SageCardType} from '@/types/gamedata';
 import {factionBorder, factionHeaderBg} from '@/utils/faction';
 import {RangeImage} from './RangeImage';
@@ -15,6 +16,9 @@ type Props = {
 
 export function SageCard({sage}: Props) {
 	const [open, setOpen] = useState(false);
+	const {images} = useRom();
+	const faceUrl = images.get(sage.faceKey);
+	const bustupUrl = images.get(sage.bustupKey);
 
 	return (
 		<article
@@ -24,9 +28,20 @@ export function SageCard({sage}: Props) {
 			<div
 				className={`flex items-center justify-between px-4 py-3 ${factionHeaderBg(sage.faction)}`}
 			>
-				<div className='min-w-0'>
-					<div className='truncate font-bold font-serif'>{sage.name}</div>
-					<div className='text-sm opacity-80'>{sage.nameJapanese}</div>
+				<div className='flex min-w-0 items-center gap-3'>
+					{faceUrl ? (
+						<img
+							alt={sage.name}
+							className='h-8 w-8 shrink-0 object-contain [image-rendering:pixelated]'
+							height={32}
+							src={faceUrl}
+							width={32}
+						/>
+					) : null}
+					<div className='min-w-0'>
+						<div className='truncate font-bold font-serif'>{sage.name}</div>
+						<div className='text-sm opacity-80'>{sage.nameJapanese}</div>
+					</div>
 				</div>
 				<div className='flex flex-col items-end gap-1'>
 					<RarityBadge rarity={sage.rarity} />
@@ -49,12 +64,25 @@ export function SageCard({sage}: Props) {
 						{open ? '▼' : '▶'} Lore &amp; Dialogue
 					</CollapsibleTrigger>
 					<CollapsibleContent>
-						<p className='mb-3 whitespace-pre-line border-cinnabar/30 border-l-2 pl-3 text-sm text-text-faint italic'>
-							{sage.lore}
-						</p>
-						<p className='text-sm text-text-muted'>
-							&ldquo;{sage.battleCry}&rdquo;
-						</p>
+						<div className={bustupUrl ? 'flex gap-4' : ''}>
+							{bustupUrl ? (
+								<img
+									alt={sage.name}
+									className='max-h-48 w-auto shrink-0 object-contain [image-rendering:pixelated]'
+									height={192}
+									src={bustupUrl}
+									width={144}
+								/>
+							) : null}
+							<div>
+								<p className='mb-3 whitespace-pre-line border-cinnabar/30 border-l-2 pl-3 text-sm text-text-faint italic'>
+									{sage.lore}
+								</p>
+								<p className='text-sm text-text-muted'>
+									&ldquo;{sage.battleCry}&rdquo;
+								</p>
+							</div>
+						</div>
 					</CollapsibleContent>
 				</Collapsible>
 

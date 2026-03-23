@@ -30,10 +30,11 @@ import {
 	loadCachedImages,
 	savePngBlobsToCache,
 } from '@/utils/image-cache';
+import type {ImageKey} from '@/utils/image-catalog';
 import {RomWorkerClient} from '@/workers/rom-worker-client';
 
 /** Fire-and-forget cache save (receives pre-encoded PNG blobs) */
-function backgroundCacheSavePngs(pngMap: Map<string, Blob>): void {
+function backgroundCacheSavePngs(pngMap: Map<ImageKey, Blob>): void {
 	savePngBlobsToCache(pngMap).catch((err: unknown) => {
 		console.warn('[RomContext] Cache save failed:', err);
 	});
@@ -62,16 +63,17 @@ function downloadArrayBuffer(data: ArrayBuffer, filename: string): void {
 
 /** Create blob URLs from PNG ArrayBuffers (already encoded by the worker) */
 function pngsToBlobUrls(images: {name: string; png: ArrayBuffer}[]): {
-	blobMap: Map<string, string>;
-	pngMap: Map<string, Blob>;
+	blobMap: Map<ImageKey, string>;
+	pngMap: Map<ImageKey, Blob>;
 } {
-	const blobMap = new Map<string, string>();
-	const pngMap = new Map<string, Blob>();
+	const blobMap = new Map<ImageKey, string>();
+	const pngMap = new Map<ImageKey, Blob>();
 
 	for (const img of images) {
+		const key = img.name as ImageKey;
 		const blob = new Blob([img.png], {type: 'image/png'});
-		blobMap.set(img.name, URL.createObjectURL(blob));
-		pngMap.set(img.name, blob);
+		blobMap.set(key, URL.createObjectURL(blob));
+		pngMap.set(key, blob);
 	}
 
 	return {blobMap, pngMap};
@@ -89,7 +91,7 @@ export function RomProvider({children}: PropsWithChildren) {
 		null,
 	);
 	const [isPatching, setIsPatching] = useState(false);
-	const [images, setImages] = useState<Map<string, string>>(new Map());
+	const [images, setImages] = useState<Map<ImageKey, string>>(new Map());
 	const [error, setError] = useState<string | null>(null);
 	const workerRef = useRef<RomWorkerClient | null>(null);
 

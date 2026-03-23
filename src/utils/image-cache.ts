@@ -1,3 +1,4 @@
+import type {ImageKey} from '@/utils/image-catalog';
 /**
  * IndexedDB cache for extracted ROM images.
  *
@@ -38,7 +39,7 @@ type CacheRecord = {
 
 export type CacheResult = {
 	/** The cached images as blob URLs (caller must revoke when done) */
-	images: Map<string, string>;
+	images: Map<ImageKey, string>;
 	/** Whether the cache version matches the current extraction version */
 	current: boolean;
 };
@@ -121,9 +122,9 @@ export async function loadCachedImages(): Promise<CacheResult | null> {
 		const record = await txGet<CacheRecord>(db, CACHE_KEY);
 		if (!record) return null;
 
-		const images = new Map<string, string>();
+		const images = new Map<ImageKey, string>();
 		for (const [name, blob] of Object.entries(record.images)) {
-			images.set(name, URL.createObjectURL(blob));
+			images.set(name as ImageKey, URL.createObjectURL(blob));
 		}
 		return {
 			images,
@@ -140,7 +141,7 @@ export async function loadCachedImages(): Promise<CacheResult | null> {
  * @param pngs - Map of image key → PNG Blob (already encoded by the worker)
  */
 export async function savePngBlobsToCache(
-	pngs: Map<string, Blob>,
+	pngs: Map<ImageKey, Blob>,
 ): Promise<void> {
 	const blobs: Record<string, Blob> = {};
 	for (const [name, blob] of pngs) {

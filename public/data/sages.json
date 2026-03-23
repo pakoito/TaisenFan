@@ -57,7 +57,9 @@
       "endTraining": "Not bad. Not bad at all.",
       "success": "Flawless training.",
       "failed": "Tch... I miscalculated."
-    }
+    },
+    "bustupKey": "kpcbustup:BU_2001.KPC",
+    "faceKey": "face:BF_2001.ABP"
   },
   {
     "cardId": 8194,
@@ -117,7 +119,9 @@
       "endTraining": "Hmph. The training paid off.",
       "success": "Hmph. This training was flawless.",
       "failed": "Impossible... to fail?!"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_2002.KPC",
+    "faceKey": "face:BF_2002.ABP"
   },
   {
     "cardId": 8195,
@@ -177,7 +181,9 @@
       "endTraining": "The training paid off.",
       "success": "The training went splendidly.",
       "failed": "Hmm, to fail..."
-    }
+    },
+    "bustupKey": "kpcbustup:BU_2003.KPC",
+    "faceKey": "face:BF_2003.ABP"
   },
   {
     "cardId": 8196,
@@ -237,7 +243,9 @@
       "endTraining": "That went pretty well!",
       "success": "Alright! That went great!",
       "failed": "Ahh man, that failed..."
-    }
+    },
+    "bustupKey": "kpcbustup:BU_2004.KPC",
+    "faceKey": "face:BF_2004.ABP"
   },
   {
     "cardId": 8197,
@@ -297,7 +305,9 @@
       "endTraining": "The training paid off.",
       "success": "This training was a great success!",
       "failed": "Did I misjudge...?"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_2005.KPC",
+    "faceKey": "face:BF_2005.ABP"
   },
   {
     "cardId": 24577,
@@ -357,7 +367,9 @@
       "endTraining": "The training paid off.",
       "success": "Flawless training.",
       "failed": "I misjudged..."
-    }
+    },
+    "bustupKey": "kpcbustup:BU_6001.KPC",
+    "faceKey": "face:BF_6001.ABP"
   },
   {
     "cardId": 24578,
@@ -417,7 +429,9 @@
       "endTraining": "My training bore fruit!",
       "success": "My training was superb!",
       "failed": "How could I misjudge?!"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_6002.KPC",
+    "faceKey": "face:BF_6002.ABP"
   },
   {
     "cardId": 24579,
@@ -477,7 +491,9 @@
       "endTraining": "Training bore fruit...",
       "success": "Today's training was a success!",
       "failed": "No... to fail..."
-    }
+    },
+    "bustupKey": "kpcbustup:BU_6003.KPC",
+    "faceKey": "face:BF_6003.ABP"
   },
   {
     "cardId": 24580,
@@ -537,7 +553,9 @@
       "endTraining": "Solid training.",
       "success": "Today's training was excellent!",
       "failed": "To fail...?"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_6004.KPC",
+    "faceKey": "face:BF_6004.ABP"
   },
   {
     "cardId": 24581,
@@ -597,7 +615,9 @@
       "endTraining": "Heh, training paid off.",
       "success": "Heh, today's training was perfect!",
       "failed": "Damn, it failed...!"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_6005.KPC",
+    "faceKey": "face:BF_6005.ABP"
   },
   {
     "cardId": 16385,
@@ -657,7 +677,9 @@
       "endTraining": "The training paid off.",
       "success": "This training was a success!",
       "failed": "To fail...?"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_4001.KPC",
+    "faceKey": "face:BF_4001.ABP"
   },
   {
     "cardId": 16386,
@@ -717,7 +739,9 @@
       "endTraining": "Training paid off!",
       "success": "Hm! Splendid training!",
       "failed": "Hmm, I misjudged..."
-    }
+    },
+    "bustupKey": "kpcbustup:BU_4002.KPC",
+    "faceKey": "face:BF_4002.ABP"
   },
   {
     "cardId": 16387,
@@ -777,7 +801,9 @@
       "endTraining": "The training paid off.",
       "success": "Very fulfilling training.",
       "failed": "Tch... I miscalculated."
-    }
+    },
+    "bustupKey": "kpcbustup:BU_4003.KPC",
+    "faceKey": "face:BF_4003.ABP"
   },
   {
     "cardId": 16388,
@@ -837,7 +863,9 @@
       "endTraining": "Solid training.",
       "success": "Excellent training today.",
       "failed": "I misjudged..."
-    }
+    },
+    "bustupKey": "kpcbustup:BU_4004.KPC",
+    "faceKey": "face:BF_4004.ABP"
   },
   {
     "cardId": 16389,
@@ -897,7 +925,9 @@
       "endTraining": "Training paid off!",
       "success": "Mm! Today was perfect!",
       "failed": "Oh no, to fail..."
-    }
+    },
+    "bustupKey": "kpcbustup:BU_4005.KPC",
+    "faceKey": "face:BF_4005.ABP"
   },
   {
     "cardId": 32769,
@@ -957,7 +987,9 @@
       "endTraining": "The training paid off.",
       "success": "Splendid training.",
       "failed": "I... miscalculated."
-    }
+    },
+    "bustupKey": "kpcbustup:BU_8001.KPC",
+    "faceKey": "face:BF_8001.ABP"
   },
   {
     "cardId": 32770,
@@ -1017,7 +1049,9 @@
       "endTraining": "Training bore divine fruit!",
       "success": "Heaven blessed this training!",
       "failed": "Did I mishear heaven...?!"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_8002.KPC",
+    "faceKey": "face:BF_8002.ABP"
   },
   {
     "cardId": 32771,
@@ -1077,7 +1111,9 @@
       "endTraining": "Training paid off!",
       "success": "This training was perfect!",
       "failed": "Grr, to fail...!"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_8003.KPC",
+    "faceKey": "face:BF_8003.ABP"
   },
   {
     "cardId": 32772,
@@ -1137,7 +1173,9 @@
       "endTraining": "Training paid off!",
       "success": "Hell yeah! Perfect training!",
       "failed": "Damn, I miscalculated...!"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_8004.KPC",
+    "faceKey": "face:BF_8004.ABP"
   },
   {
     "cardId": 32773,
@@ -1197,6 +1235,8 @@
       "endTraining": "Heh heh. Training paid off.",
       "success": "Heh heh. A great success.",
       "failed": "Tch... I miscalculated."
-    }
+    },
+    "bustupKey": "kpcbustup:BU_8005.KPC",
+    "faceKey": "face:BF_8005.ABP"
   }
 ]
