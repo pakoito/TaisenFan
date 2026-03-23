@@ -32,10 +32,10 @@ export function SageCard({sage}: Props) {
 					{faceUrl ? (
 						<img
 							alt={sage.name}
-							className='h-8 w-8 shrink-0 object-contain [image-rendering:pixelated]'
+							className='h-10 w-auto shrink-0 [image-rendering:pixelated]'
 							height={32}
 							src={faceUrl}
-							width={32}
+							width={40}
 						/>
 					) : null}
 					<div className='min-w-0'>
@@ -68,10 +68,10 @@ export function SageCard({sage}: Props) {
 							{bustupUrl ? (
 								<img
 									alt={sage.name}
-									className='max-h-48 w-auto shrink-0 object-contain [image-rendering:pixelated]'
-									height={192}
+									className='w-auto shrink-0 [image-rendering:pixelated]'
+									height={256}
 									src={bustupUrl}
-									width={144}
+									width={256}
 								/>
 							) : null}
 							<div>

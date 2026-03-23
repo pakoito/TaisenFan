@@ -62,14 +62,14 @@ export function LordRow({lord}: LordRowProps) {
 					cfg.rowBg,
 				)}
 			>
-				<span className='text-center'>
+				<span className='flex items-center justify-center'>
 					{miniBustupUrl ? (
 						<img
 							alt={lord.name}
-							className='inline-block h-7 w-7 object-contain [image-rendering:pixelated]'
-							height={28}
+							className='h-10 w-10 object-contain [image-rendering:pixelated]'
+							height={64}
 							src={miniBustupUrl}
-							width={28}
+							width={64}
 						/>
 					) : (
 						<span
@@ -158,10 +158,10 @@ function ExpandedDetail({
 					<div className='flex items-start justify-center'>
 						<img
 							alt={lord.name}
-							className='max-h-64 w-auto object-contain [image-rendering:pixelated]'
+							className='w-auto [image-rendering:pixelated]'
 							height={256}
 							src={bustupUrl}
-							width={192}
+							width={256}
 						/>
 					</div>
 				) : null}

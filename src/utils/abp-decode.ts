@@ -162,8 +162,9 @@ function decodeBitmap(
  * Decode an ABP file into RGBA pixel data.
  *
  * @param buf - Raw ABP file bytes
+ * @param crop - If true, auto-crop to non-transparent bounding box (default: false)
  */
-export function decodeAbp(buf: Uint8Array): DecodedAbp {
+export function decodeAbp(buf: Uint8Array, crop = false): DecodedAbp {
 	const header = parseHeader(buf);
 
 	const bpp = header.bppType <= 4 ? 4 : 8;
@@ -188,5 +189,41 @@ export function decodeAbp(buf: Uint8Array): DecodedAbp {
 		? detile(pixelData, header.width, header.height, bpp, palette)
 		: decodeBitmap(pixelData, header.width, header.height, bpp, palette);
 
+	if (crop) {
+		return autoCrop(rgba, header.width, header.height);
+	}
 	return {rgba, width: header.width, height: header.height};
+}
+
+function autoCrop(rgba: Uint8Array, imgW: number, imgH: number): DecodedAbp {
+	let minX = imgW;
+	let minY = imgH;
+	let maxX = 0;
+	let maxY = 0;
+	for (let y = 0; y < imgH; y += 1) {
+		for (let x = 0; x < imgW; x += 1) {
+			if ((rgba[(y * imgW + x) * 4 + 3] ?? 0) > 0) {
+				if (x < minX) minX = x;
+				if (x > maxX) maxX = x;
+				if (y < minY) minY = y;
+				if (y > maxY) maxY = y;
+			}
+		}
+	}
+	if (maxX < minX) return {rgba: new Uint8Array(4), width: 1, height: 1};
+
+	const cw = maxX - minX + 1;
+	const ch = maxY - minY + 1;
+	const cropped = new Uint8Array(cw * ch * 4);
+	for (let y = 0; y < ch; y += 1) {
+		for (let x = 0; x < cw; x += 1) {
+			const si = ((minY + y) * imgW + (minX + x)) * 4;
+			const di = (y * cw + x) * 4;
+			cropped[di] = rgba[si] ?? 0;
+			cropped[di + 1] = rgba[si + 1] ?? 0;
+			cropped[di + 2] = rgba[si + 2] ?? 0;
+			cropped[di + 3] = rgba[si + 3] ?? 0;
+		}
+	}
+	return {rgba: cropped, width: cw, height: ch};
 }

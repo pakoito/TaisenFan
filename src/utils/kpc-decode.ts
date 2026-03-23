@@ -38,11 +38,12 @@ function readBlock(
 // ============================================================================
 
 /**
- * Decode a KPC file into RGBA pixel data, auto-cropped.
+ * Decode a KPC file into RGBA pixel data.
  *
  * @param buf - Raw KPC file bytes
+ * @param crop - If true, auto-crop to non-transparent bounding box (default: false)
  */
-export function decodeKpc(buf: Uint8Array): DecodedImage {
+export function decodeKpc(buf: Uint8Array, crop = false): DecodedImage {
 	const magic = String.fromCharCode(
 		buf[0] ?? 0,
 		buf[1] ?? 0,
@@ -131,8 +132,10 @@ export function decodeKpc(buf: Uint8Array): DecodedImage {
 		}
 	}
 
-	// Auto-crop to non-transparent content
-	return autoCrop(rgba, imgW, imgH);
+	if (crop) {
+		return autoCrop(rgba, imgW, imgH);
+	}
+	return {rgba, width: imgW, height: imgH};
 }
 
 function autoCrop(rgba: Uint8Array, imgW: number, imgH: number): DecodedImage {
