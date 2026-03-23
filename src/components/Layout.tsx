@@ -75,7 +75,7 @@ export function Layout({children}: PropsWithChildren) {
 			<header className='border-border-dim border-b bg-surface-dim'>
 				<nav
 					aria-label='Main navigation'
-					className='mx-auto flex max-w-7xl items-center gap-1 overflow-x-auto px-6 py-4'
+					className='mx-auto flex max-w-7xl items-center gap-1 px-6 py-4'
 				>
 					<NavLink
 						className='mr-8 shrink-0 font-black font-serif text-gold text-xl tracking-widest focus-visible:outline-2 focus-visible:outline-gold focus-visible:outline-offset-2'
