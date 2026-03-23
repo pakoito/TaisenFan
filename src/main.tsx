@@ -4,6 +4,7 @@ import {StrictMode} from 'react';
 import {createRoot} from 'react-dom/client';
 import {BrowserRouter} from 'react-router';
 import {App} from './App';
+import {RomProvider} from './contexts/RomContext';
 
 const queryClient = new QueryClient();
 
@@ -14,7 +15,9 @@ if (container) {
 		<StrictMode>
 			<QueryClientProvider client={queryClient}>
 				<BrowserRouter basename={import.meta.env.BASE_URL}>
-					<App />
+					<RomProvider>
+						<App />
+					</RomProvider>
 				</BrowserRouter>
 			</QueryClientProvider>
 		</StrictMode>,

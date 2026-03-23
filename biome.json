@@ -64,7 +64,8 @@
 					},
 					"suspicious": {
 						"noReactSpecificProps": "off",
-						"noUnknownAtRules": "off"
+						"noUnknownAtRules": "off",
+						"noConsole": "off"
 					},
 					"performance": {
 						"noImgElement": "off",
