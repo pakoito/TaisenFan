@@ -32,6 +32,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_1001.KPC",
+    "miniBustupKey": "minibustup:BUH_1001.ABP",
     "faceKey": "face:BF_1001.ABP"
   },
   {
@@ -68,6 +69,7 @@
       "range": "medium_circle_ahead"
     },
     "bustupKey": "kpcbustup:BU_1002.KPC",
+    "miniBustupKey": "minibustup:BUH_1002.ABP",
     "faceKey": "face:BF_1002.ABP"
   },
   {
@@ -103,6 +105,7 @@
       "range": "medium_circle_ahead"
     },
     "bustupKey": "kpcbustup:BU_1003.KPC",
+    "miniBustupKey": "minibustup:BUH_1003.ABP",
     "faceKey": "face:BF_1003.ABP"
   },
   {
@@ -138,6 +141,7 @@
       "range": "medium_circle_ahead"
     },
     "bustupKey": "kpcbustup:BU_1004.KPC",
+    "miniBustupKey": "minibustup:BUH_1004.ABP",
     "faceKey": "face:BF_1004.ABP"
   },
   {
@@ -173,6 +177,7 @@
       "range": "medium_circle_ahead"
     },
     "bustupKey": "kpcbustup:BU_1005.KPC",
+    "miniBustupKey": "minibustup:BUH_1005.ABP",
     "faceKey": "face:BF_1005.ABP"
   },
   {
@@ -206,6 +211,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_1006.KPC",
+    "miniBustupKey": "minibustup:BUH_1006.ABP",
     "faceKey": "face:BF_1006.ABP"
   },
   {
@@ -242,6 +248,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_1007.KPC",
+    "miniBustupKey": "minibustup:BUH_1007.ABP",
     "faceKey": "face:BF_1007.ABP"
   },
   {
@@ -277,6 +284,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_1008.KPC",
+    "miniBustupKey": "minibustup:BUH_1008.ABP",
     "faceKey": "face:BF_1008.ABP"
   },
   {
@@ -313,6 +321,7 @@
       "range": "aura_small"
     },
     "bustupKey": "kpcbustup:BU_1009.KPC",
+    "miniBustupKey": "minibustup:BUH_1009.ABP",
     "faceKey": "face:BF_1009.ABP"
   },
   {
@@ -349,6 +358,7 @@
       "range": "aura_small"
     },
     "bustupKey": "kpcbustup:BU_1010.KPC",
+    "miniBustupKey": "minibustup:BUH_1010.ABP",
     "faceKey": "face:BF_1010.ABP"
   },
   {
@@ -384,6 +394,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_1011.KPC",
+    "miniBustupKey": "minibustup:BUH_1011.ABP",
     "faceKey": "face:BF_1011.ABP"
   },
   {
@@ -419,6 +430,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_1012.KPC",
+    "miniBustupKey": "minibustup:BUH_1012.ABP",
     "faceKey": "face:BF_1012.ABP"
   },
   {
@@ -454,6 +466,7 @@
       "range": "dance_board"
     },
     "bustupKey": "kpcbustup:BU_1013.KPC",
+    "miniBustupKey": "minibustup:BUH_1013.ABP",
     "faceKey": "face:BF_1013.ABP"
   },
   {
@@ -487,6 +500,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_1014.KPC",
+    "miniBustupKey": "minibustup:BUH_1014.ABP",
     "faceKey": "face:BF_1014.ABP"
   },
   {
@@ -523,6 +537,7 @@
       "range": "medium_circle_ahead"
     },
     "bustupKey": "kpcbustup:BU_1015.KPC",
+    "miniBustupKey": "minibustup:BUH_1015.ABP",
     "faceKey": "face:BF_1015.ABP"
   },
   {
@@ -556,6 +571,7 @@
       "range": "beam_medium"
     },
     "bustupKey": "kpcbustup:BU_1016.KPC",
+    "miniBustupKey": "minibustup:BUH_1016.ABP",
     "faceKey": "face:BF_1016.ABP"
   },
   {
@@ -592,6 +608,7 @@
       "range": "row"
     },
     "bustupKey": "kpcbustup:BU_1017.KPC",
+    "miniBustupKey": "minibustup:BUH_1017.ABP",
     "faceKey": "face:BF_1017.ABP"
   },
   {
@@ -625,6 +642,7 @@
       "range": "row"
     },
     "bustupKey": "kpcbustup:BU_1018.KPC",
+    "miniBustupKey": "minibustup:BUH_1018.ABP",
     "faceKey": "face:BF_1018.ABP"
   },
   {
@@ -658,6 +676,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_1019.KPC",
+    "miniBustupKey": "minibustup:BUH_1019.ABP",
     "faceKey": "face:BF_1019.ABP"
   },
   {
@@ -694,6 +713,7 @@
       "range": "dance_board"
     },
     "bustupKey": "kpcbustup:BU_1020.KPC",
+    "miniBustupKey": "minibustup:BUH_1020.ABP",
     "faceKey": "face:BF_1020.ABP"
   },
   {
@@ -729,6 +749,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_1021.KPC",
+    "miniBustupKey": "minibustup:BUH_1021.ABP",
     "faceKey": "face:BF_1021.ABP"
   },
   {
@@ -762,6 +783,7 @@
       "range": "circle_behind"
     },
     "bustupKey": "kpcbustup:BU_1022.KPC",
+    "miniBustupKey": "minibustup:BUH_1022.ABP",
     "faceKey": "face:BF_1022.ABP"
   },
   {
@@ -797,6 +819,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_1023.KPC",
+    "miniBustupKey": "minibustup:BUH_1023.ABP",
     "faceKey": "face:BF_1023.ABP"
   },
   {
@@ -833,6 +856,7 @@
       "range": "medium_circle_ahead"
     },
     "bustupKey": "kpcbustup:BU_1024.KPC",
+    "miniBustupKey": "minibustup:BUH_1024.ABP",
     "faceKey": "face:BF_1024.ABP"
   },
   {
@@ -866,6 +890,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_1025.KPC",
+    "miniBustupKey": "minibustup:BUH_1025.ABP",
     "faceKey": "face:BF_1025.ABP"
   },
   {
@@ -902,6 +927,7 @@
       "range": "large_rectangle_self"
     },
     "bustupKey": "kpcbustup:BU_1026.KPC",
+    "miniBustupKey": "minibustup:BUH_1026.ABP",
     "faceKey": "face:BF_1026.ABP"
   },
   {
@@ -938,6 +964,7 @@
       "range": "large_rectangle_self"
     },
     "bustupKey": "kpcbustup:BU_1027.KPC",
+    "miniBustupKey": "minibustup:BUH_1027.ABP",
     "faceKey": "face:BF_1027.ABP"
   },
   {
@@ -973,6 +1000,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_1028.KPC",
+    "miniBustupKey": "minibustup:BUH_1028.ABP",
     "faceKey": "face:BF_1028.ABP"
   },
   {
@@ -1009,6 +1037,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_1029.KPC",
+    "miniBustupKey": "minibustup:BUH_1029.ABP",
     "faceKey": "face:BF_1029.ABP"
   },
   {
@@ -1044,6 +1073,7 @@
       "range": "large_rectangle_self"
     },
     "bustupKey": "kpcbustup:BU_1030.KPC",
+    "miniBustupKey": "minibustup:BUH_1030.ABP",
     "faceKey": "face:BF_1030.ABP"
   },
   {
@@ -1079,6 +1109,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_1031.KPC",
+    "miniBustupKey": "minibustup:BUH_1031.ABP",
     "faceKey": "face:BF_1031.ABP"
   },
   {
@@ -1115,6 +1146,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_1032.KPC",
+    "miniBustupKey": "minibustup:BUH_1032.ABP",
     "faceKey": "face:BF_1032.ABP"
   },
   {
@@ -1150,6 +1182,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_1033.KPC",
+    "miniBustupKey": "minibustup:BUH_1033.ABP",
     "faceKey": "face:BF_1033.ABP"
   },
   {
@@ -1185,6 +1218,7 @@
       "range": "dance_board"
     },
     "bustupKey": "kpcbustup:BU_1034.KPC",
+    "miniBustupKey": "minibustup:BUH_1034.ABP",
     "faceKey": "face:BF_1034.ABP"
   },
   {
@@ -1218,6 +1252,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_1035.KPC",
+    "miniBustupKey": "minibustup:BUH_1035.ABP",
     "faceKey": "face:BF_1035.ABP"
   },
   {
@@ -1253,6 +1288,7 @@
       "range": "medium_circle_ahead"
     },
     "bustupKey": "kpcbustup:BU_1036.KPC",
+    "miniBustupKey": "minibustup:BUH_1036.ABP",
     "faceKey": "face:BF_1036.ABP"
   },
   {
@@ -1288,6 +1324,7 @@
       "range": "aura_small"
     },
     "bustupKey": "kpcbustup:BU_1037.KPC",
+    "miniBustupKey": "minibustup:BUH_1037.ABP",
     "faceKey": "face:BF_1037.ABP"
   },
   {
@@ -1321,6 +1358,7 @@
       "range": "aura_small"
     },
     "bustupKey": "kpcbustup:BU_1038.KPC",
+    "miniBustupKey": "minibustup:BUH_1038.ABP",
     "faceKey": "face:BF_1038.ABP"
   },
   {
@@ -1356,6 +1394,7 @@
       "range": "aura_small"
     },
     "bustupKey": "kpcbustup:BU_1039.KPC",
+    "miniBustupKey": "minibustup:BUH_1039.ABP",
     "faceKey": "face:BF_1039.ABP"
   },
   {
@@ -1389,6 +1428,7 @@
       "range": "medium_circle_ahead"
     },
     "bustupKey": "kpcbustup:BU_5001.KPC",
+    "miniBustupKey": "minibustup:BUH_5001.ABP",
     "faceKey": "face:BF_5001.ABP"
   },
   {
@@ -1425,6 +1465,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_5002.KPC",
+    "miniBustupKey": "minibustup:BUH_5002.ABP",
     "faceKey": "face:BF_5002.ABP"
   },
   {
@@ -1460,6 +1501,7 @@
       "range": "medium_circle_ahead"
     },
     "bustupKey": "kpcbustup:BU_5003.KPC",
+    "miniBustupKey": "minibustup:BUH_5003.ABP",
     "faceKey": "face:BF_5003.ABP"
   },
   {
@@ -1497,6 +1539,7 @@
       "range": "aura_small"
     },
     "bustupKey": "kpcbustup:BU_5004.KPC",
+    "miniBustupKey": "minibustup:BUH_5004.ABP",
     "faceKey": "face:BF_5004.ABP"
   },
   {
@@ -1532,6 +1575,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_5005.KPC",
+    "miniBustupKey": "minibustup:BUH_5005.ABP",
     "faceKey": "face:BF_5005.ABP"
   },
   {
@@ -1568,6 +1612,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_5006.KPC",
+    "miniBustupKey": "minibustup:BUH_5006.ABP",
     "faceKey": "face:BF_5006.ABP"
   },
   {
@@ -1603,6 +1648,7 @@
       "range": "dance_board"
     },
     "bustupKey": "kpcbustup:BU_5007.KPC",
+    "miniBustupKey": "minibustup:BUH_5007.ABP",
     "faceKey": "face:BF_5007.ABP"
   },
   {
@@ -1638,6 +1684,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_5008.KPC",
+    "miniBustupKey": "minibustup:BUH_5008.ABP",
     "faceKey": "face:BF_5008.ABP"
   },
   {
@@ -1673,6 +1720,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_5009.KPC",
+    "miniBustupKey": "minibustup:BUH_5009.ABP",
     "faceKey": "face:BF_5009.ABP"
   },
   {
@@ -1706,6 +1754,7 @@
       "range": "aura_small"
     },
     "bustupKey": "kpcbustup:BU_5010.KPC",
+    "miniBustupKey": "minibustup:BUH_5010.ABP",
     "faceKey": "face:BF_5010.ABP"
   },
   {
@@ -1741,6 +1790,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_5011.KPC",
+    "miniBustupKey": "minibustup:BUH_5011.ABP",
     "faceKey": "face:BF_5011.ABP"
   },
   {
@@ -1776,6 +1826,7 @@
       "range": "medium_circle_ahead"
     },
     "bustupKey": "kpcbustup:BU_5012.KPC",
+    "miniBustupKey": "minibustup:BUH_5012.ABP",
     "faceKey": "face:BF_5012.ABP"
   },
   {
@@ -1811,6 +1862,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_5013.KPC",
+    "miniBustupKey": "minibustup:BUH_5013.ABP",
     "faceKey": "face:BF_5013.ABP"
   },
   {
@@ -1844,6 +1896,7 @@
       "range": "medium_circle_ahead"
     },
     "bustupKey": "kpcbustup:BU_5014.KPC",
+    "miniBustupKey": "minibustup:BUH_5014.ABP",
     "faceKey": "face:BF_5014.ABP"
   },
   {
@@ -1879,6 +1932,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_5015.KPC",
+    "miniBustupKey": "minibustup:BUH_5015.ABP",
     "faceKey": "face:BF_5015.ABP"
   },
   {
@@ -1915,6 +1969,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_5016.KPC",
+    "miniBustupKey": "minibustup:BUH_5016.ABP",
     "faceKey": "face:BF_5016.ABP"
   },
   {
@@ -1951,6 +2006,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_5017.KPC",
+    "miniBustupKey": "minibustup:BUH_5017.ABP",
     "faceKey": "face:BF_5017.ABP"
   },
   {
@@ -1986,6 +2042,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_5018.KPC",
+    "miniBustupKey": "minibustup:BUH_5018.ABP",
     "faceKey": "face:BF_5018.ABP"
   },
   {
@@ -2023,6 +2080,7 @@
       "range": "medium_circle_ahead"
     },
     "bustupKey": "kpcbustup:BU_5019.KPC",
+    "miniBustupKey": "minibustup:BUH_5019.ABP",
     "faceKey": "face:BF_5019.ABP"
   },
   {
@@ -2058,6 +2116,7 @@
       "range": "medium_circle_ahead"
     },
     "bustupKey": "kpcbustup:BU_5020.KPC",
+    "miniBustupKey": "minibustup:BUH_5020.ABP",
     "faceKey": "face:BF_5020.ABP"
   },
   {
@@ -2094,6 +2153,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_5021.KPC",
+    "miniBustupKey": "minibustup:BUH_5021.ABP",
     "faceKey": "face:BF_5021.ABP"
   },
   {
@@ -2131,6 +2191,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_5022.KPC",
+    "miniBustupKey": "minibustup:BUH_5022.ABP",
     "faceKey": "face:BF_5022.ABP"
   },
   {
@@ -2166,6 +2227,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_5023.KPC",
+    "miniBustupKey": "minibustup:BUH_5023.ABP",
     "faceKey": "face:BF_5023.ABP"
   },
   {
@@ -2199,6 +2261,7 @@
       "range": "medium_circle_ahead"
     },
     "bustupKey": "kpcbustup:BU_5024.KPC",
+    "miniBustupKey": "minibustup:BUH_5024.ABP",
     "faceKey": "face:BF_5024.ABP"
   },
   {
@@ -2234,6 +2297,7 @@
       "range": "medium_circle_ahead"
     },
     "bustupKey": "kpcbustup:BU_5025.KPC",
+    "miniBustupKey": "minibustup:BUH_5025.ABP",
     "faceKey": "face:BF_5025.ABP"
   },
   {
@@ -2269,6 +2333,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_5026.KPC",
+    "miniBustupKey": "minibustup:BUH_5026.ABP",
     "faceKey": "face:BF_5026.ABP"
   },
   {
@@ -2304,6 +2369,7 @@
       "range": "circle_behind"
     },
     "bustupKey": "kpcbustup:BU_5027.KPC",
+    "miniBustupKey": "minibustup:BUH_5027.ABP",
     "faceKey": "face:BF_5027.ABP"
   },
   {
@@ -2339,6 +2405,7 @@
       "range": "medium_circle_ahead"
     },
     "bustupKey": "kpcbustup:BU_5028.KPC",
+    "miniBustupKey": "minibustup:BUH_5028.ABP",
     "faceKey": "face:BF_5028.ABP"
   },
   {
@@ -2374,6 +2441,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_5029.KPC",
+    "miniBustupKey": "minibustup:BUH_5029.ABP",
     "faceKey": "face:BF_5029.ABP"
   },
   {
@@ -2409,6 +2477,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_5030.KPC",
+    "miniBustupKey": "minibustup:BUH_5030.ABP",
     "faceKey": "face:BF_5030.ABP"
   },
   {
@@ -2445,6 +2514,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_5031.KPC",
+    "miniBustupKey": "minibustup:BUH_5031.ABP",
     "faceKey": "face:BF_5031.ABP"
   },
   {
@@ -2478,6 +2548,7 @@
       "range": "circle_behind"
     },
     "bustupKey": "kpcbustup:BU_5032.KPC",
+    "miniBustupKey": "minibustup:BUH_5032.ABP",
     "faceKey": "face:BF_5032.ABP"
   },
   {
@@ -2513,6 +2584,7 @@
       "range": "dance_castles"
     },
     "bustupKey": "kpcbustup:BU_5033.KPC",
+    "miniBustupKey": "minibustup:BUH_5033.ABP",
     "faceKey": "face:BF_5033.ABP"
   },
   {
@@ -2548,6 +2620,7 @@
       "range": "medium_circle_ahead"
     },
     "bustupKey": "kpcbustup:BU_5034.KPC",
+    "miniBustupKey": "minibustup:BUH_5034.ABP",
     "faceKey": "face:BF_5034.ABP"
   },
   {
@@ -2583,6 +2656,7 @@
       "range": "medium_circle_ahead"
     },
     "bustupKey": "kpcbustup:BU_5035.KPC",
+    "miniBustupKey": "minibustup:BUH_5035.ABP",
     "faceKey": "face:BF_5035.ABP"
   },
   {
@@ -2618,6 +2692,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_5036.KPC",
+    "miniBustupKey": "minibustup:BUH_5036.ABP",
     "faceKey": "face:BF_5036.ABP"
   },
   {
@@ -2655,6 +2730,7 @@
       "range": "aura_medium"
     },
     "bustupKey": "kpcbustup:BU_5037.KPC",
+    "miniBustupKey": "minibustup:BUH_5037.ABP",
     "faceKey": "face:BF_5037.ABP"
   },
   {
@@ -2691,6 +2767,7 @@
       "range": "aura_small"
     },
     "bustupKey": "kpcbustup:BU_5038.KPC",
+    "miniBustupKey": "minibustup:BUH_5038.ABP",
     "faceKey": "face:BF_5038.ABP"
   },
   {
@@ -2724,6 +2801,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_5039.KPC",
+    "miniBustupKey": "minibustup:BUH_5039.ABP",
     "faceKey": "face:BF_5039.ABP"
   },
   {
@@ -2757,6 +2835,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_5040.KPC",
+    "miniBustupKey": "minibustup:BUH_5040.ABP",
     "faceKey": "face:BF_5040.ABP"
   },
   {
@@ -2792,6 +2871,7 @@
       "range": "circle_behind"
     },
     "bustupKey": "kpcbustup:BU_3001.KPC",
+    "miniBustupKey": "minibustup:BUH_3001.ABP",
     "faceKey": "face:BF_3001.ABP"
   },
   {
@@ -2827,6 +2907,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_3002.KPC",
+    "miniBustupKey": "minibustup:BUH_3002.ABP",
     "faceKey": "face:BF_3002.ABP"
   },
   {
@@ -2862,6 +2943,7 @@
       "range": "aura_small"
     },
     "bustupKey": "kpcbustup:BU_3003.KPC",
+    "miniBustupKey": "minibustup:BUH_3003.ABP",
     "faceKey": "face:BF_3003.ABP"
   },
   {
@@ -2895,6 +2977,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_3004.KPC",
+    "miniBustupKey": "minibustup:BUH_3004.ABP",
     "faceKey": "face:BF_3004.ABP"
   },
   {
@@ -2930,6 +3013,7 @@
       "range": "beam_medium"
     },
     "bustupKey": "kpcbustup:BU_3005.KPC",
+    "miniBustupKey": "minibustup:BUH_3005.ABP",
     "faceKey": "face:BF_3005.ABP"
   },
   {
@@ -2963,6 +3047,7 @@
       "range": "enemy_castle"
     },
     "bustupKey": "kpcbustup:BU_3006.KPC",
+    "miniBustupKey": "minibustup:BUH_3006.ABP",
     "faceKey": "face:BF_3006.ABP"
   },
   {
@@ -2998,6 +3083,7 @@
       "range": "dance_board"
     },
     "bustupKey": "kpcbustup:BU_3007.KPC",
+    "miniBustupKey": "minibustup:BUH_3007.ABP",
     "faceKey": "face:BF_3007.ABP"
   },
   {
@@ -3033,6 +3119,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_3008.KPC",
+    "miniBustupKey": "minibustup:BUH_3008.ABP",
     "faceKey": "face:BF_3008.ABP"
   },
   {
@@ -3069,6 +3156,7 @@
       "range": "beam_medium"
     },
     "bustupKey": "kpcbustup:BU_3009.KPC",
+    "miniBustupKey": "minibustup:BUH_3009.ABP",
     "faceKey": "face:BF_3009.ABP"
   },
   {
@@ -3102,6 +3190,7 @@
       "range": "beam_medium"
     },
     "bustupKey": "kpcbustup:BU_3010.KPC",
+    "miniBustupKey": "minibustup:BUH_3010.ABP",
     "faceKey": "face:BF_3010.ABP"
   },
   {
@@ -3135,6 +3224,7 @@
       "range": "medium_circle_ahead"
     },
     "bustupKey": "kpcbustup:BU_3011.KPC",
+    "miniBustupKey": "minibustup:BUH_3011.ABP",
     "faceKey": "face:BF_3011.ABP"
   },
   {
@@ -3171,6 +3261,7 @@
       "range": "enemy_castle"
     },
     "bustupKey": "kpcbustup:BU_3012.KPC",
+    "miniBustupKey": "minibustup:BUH_3012.ABP",
     "faceKey": "face:BF_3012.ABP"
   },
   {
@@ -3204,6 +3295,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_3013.KPC",
+    "miniBustupKey": "minibustup:BUH_3013.ABP",
     "faceKey": "face:BF_3013.ABP"
   },
   {
@@ -3239,6 +3331,7 @@
       "range": "aura_small"
     },
     "bustupKey": "kpcbustup:BU_3014.KPC",
+    "miniBustupKey": "minibustup:BUH_3014.ABP",
     "faceKey": "face:BF_3014.ABP"
   },
   {
@@ -3275,6 +3368,7 @@
       "range": "square_near"
     },
     "bustupKey": "kpcbustup:BU_3015.KPC",
+    "miniBustupKey": "minibustup:BUH_3015.ABP",
     "faceKey": "face:BF_3015.ABP"
   },
   {
@@ -3308,6 +3402,7 @@
       "range": "square_near"
     },
     "bustupKey": "kpcbustup:BU_3016.KPC",
+    "miniBustupKey": "minibustup:BUH_3016.ABP",
     "faceKey": "face:BF_3016.ABP"
   },
   {
@@ -3341,6 +3436,7 @@
       "range": "beam_medium"
     },
     "bustupKey": "kpcbustup:BU_3017.KPC",
+    "miniBustupKey": "minibustup:BUH_3017.ABP",
     "faceKey": "face:BF_3017.ABP"
   },
   {
@@ -3376,6 +3472,7 @@
       "range": "large_rectangle_self"
     },
     "bustupKey": "kpcbustup:BU_3018.KPC",
+    "miniBustupKey": "minibustup:BUH_3018.ABP",
     "faceKey": "face:BF_3018.ABP"
   },
   {
@@ -3412,6 +3509,7 @@
       "range": "large_rectangle_self"
     },
     "bustupKey": "kpcbustup:BU_3019.KPC",
+    "miniBustupKey": "minibustup:BUH_3019.ABP",
     "faceKey": "face:BF_3019.ABP"
   },
   {
@@ -3447,6 +3545,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_3020.KPC",
+    "miniBustupKey": "minibustup:BUH_3020.ABP",
     "faceKey": "face:BF_3020.ABP"
   },
   {
@@ -3483,6 +3582,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_3021.KPC",
+    "miniBustupKey": "minibustup:BUH_3021.ABP",
     "faceKey": "face:BF_3021.ABP"
   },
   {
@@ -3519,6 +3619,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_3022.KPC",
+    "miniBustupKey": "minibustup:BUH_3022.ABP",
     "faceKey": "face:BF_3022.ABP"
   },
   {
@@ -3554,6 +3655,7 @@
       "range": "enemy_castle"
     },
     "bustupKey": "kpcbustup:BU_3023.KPC",
+    "miniBustupKey": "minibustup:BUH_3023.ABP",
     "faceKey": "face:BF_3023.ABP"
   },
   {
@@ -3589,6 +3691,7 @@
       "range": "square_near"
     },
     "bustupKey": "kpcbustup:BU_3024.KPC",
+    "miniBustupKey": "minibustup:BUH_3024.ABP",
     "faceKey": "face:BF_3024.ABP"
   },
   {
@@ -3624,6 +3727,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_3025.KPC",
+    "miniBustupKey": "minibustup:BUH_3025.ABP",
     "faceKey": "face:BF_3025.ABP"
   },
   {
@@ -3659,6 +3763,7 @@
       "range": "aura_small"
     },
     "bustupKey": "kpcbustup:BU_3026.KPC",
+    "miniBustupKey": "minibustup:BUH_3026.ABP",
     "faceKey": "face:BF_3026.ABP"
   },
   {
@@ -3694,6 +3799,7 @@
       "range": "circle_behind"
     },
     "bustupKey": "kpcbustup:BU_3027.KPC",
+    "miniBustupKey": "minibustup:BUH_3027.ABP",
     "faceKey": "face:BF_3027.ABP"
   },
   {
@@ -3729,6 +3835,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_3028.KPC",
+    "miniBustupKey": "minibustup:BUH_3028.ABP",
     "faceKey": "face:BF_3028.ABP"
   },
   {
@@ -3764,6 +3871,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_3029.KPC",
+    "miniBustupKey": "minibustup:BUH_3029.ABP",
     "faceKey": "face:BF_3029.ABP"
   },
   {
@@ -3799,6 +3907,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_3030.KPC",
+    "miniBustupKey": "minibustup:BUH_3030.ABP",
     "faceKey": "face:BF_3030.ABP"
   },
   {
@@ -3834,6 +3943,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_3031.KPC",
+    "miniBustupKey": "minibustup:BUH_3031.ABP",
     "faceKey": "face:BF_3031.ABP"
   },
   {
@@ -3869,6 +3979,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_3032.KPC",
+    "miniBustupKey": "minibustup:BUH_3032.ABP",
     "faceKey": "face:BF_3032.ABP"
   },
   {
@@ -3902,6 +4013,7 @@
       "range": "medium_circle_ahead"
     },
     "bustupKey": "kpcbustup:BU_3033.KPC",
+    "miniBustupKey": "minibustup:BUH_3033.ABP",
     "faceKey": "face:BF_3033.ABP"
   },
   {
@@ -3935,6 +4047,7 @@
       "range": "large_rectangle_self"
     },
     "bustupKey": "kpcbustup:BU_3034.KPC",
+    "miniBustupKey": "minibustup:BUH_3034.ABP",
     "faceKey": "face:BF_3034.ABP"
   },
   {
@@ -3968,6 +4081,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_3035.KPC",
+    "miniBustupKey": "minibustup:BUH_3035.ABP",
     "faceKey": "face:BF_3035.ABP"
   },
   {
@@ -4003,6 +4117,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_3036.KPC",
+    "miniBustupKey": "minibustup:BUH_3036.ABP",
     "faceKey": "face:BF_3036.ABP"
   },
   {
@@ -4038,6 +4153,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_3037.KPC",
+    "miniBustupKey": "minibustup:BUH_3037.ABP",
     "faceKey": "face:BF_3037.ABP"
   },
   {
@@ -4073,6 +4189,7 @@
       "range": "large_rectangle_self"
     },
     "bustupKey": "kpcbustup:BU_3038.KPC",
+    "miniBustupKey": "minibustup:BUH_3038.ABP",
     "faceKey": "face:BF_3038.ABP"
   },
   {
@@ -4108,6 +4225,7 @@
       "range": "square_near"
     },
     "bustupKey": "kpcbustup:BU_3039.KPC",
+    "miniBustupKey": "minibustup:BUH_3039.ABP",
     "faceKey": "face:BF_3039.ABP"
   },
   {
@@ -4143,6 +4261,7 @@
       "range": "row"
     },
     "bustupKey": "kpcbustup:BU_7001.KPC",
+    "miniBustupKey": "minibustup:BUH_7001.ABP",
     "faceKey": "face:BF_7001.ABP"
   },
   {
@@ -4178,6 +4297,7 @@
       "range": "aura_small"
     },
     "bustupKey": "kpcbustup:BU_7002.KPC",
+    "miniBustupKey": "minibustup:BUH_7002.ABP",
     "faceKey": "face:BF_7002.ABP"
   },
   {
@@ -4213,6 +4333,7 @@
       "range": "medium_circle_ahead"
     },
     "bustupKey": "kpcbustup:BU_7003.KPC",
+    "miniBustupKey": "minibustup:BUH_7003.ABP",
     "faceKey": "face:BF_7003.ABP"
   },
   {
@@ -4248,6 +4369,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_7004.KPC",
+    "miniBustupKey": "minibustup:BUH_7004.ABP",
     "faceKey": "face:BF_7004.ABP"
   },
   {
@@ -4283,6 +4405,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_7005.KPC",
+    "miniBustupKey": "minibustup:BUH_7005.ABP",
     "faceKey": "face:BF_7005.ABP"
   },
   {
@@ -4319,6 +4442,7 @@
       "range": "dance_castles"
     },
     "bustupKey": "kpcbustup:BU_7006.KPC",
+    "miniBustupKey": "minibustup:BUH_7006.ABP",
     "faceKey": "face:BF_7006.ABP"
   },
   {
@@ -4354,6 +4478,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_7007.KPC",
+    "miniBustupKey": "minibustup:BUH_7007.ABP",
     "faceKey": "face:BF_7007.ABP"
   },
   {
@@ -4390,6 +4515,7 @@
       "range": "large_rectangle_self"
     },
     "bustupKey": "kpcbustup:BU_7008.KPC",
+    "miniBustupKey": "minibustup:BUH_7008.ABP",
     "faceKey": "face:BF_7008.ABP"
   },
   {
@@ -4423,6 +4549,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_7009.KPC",
+    "miniBustupKey": "minibustup:BUH_7009.ABP",
     "faceKey": "face:BF_7009.ABP"
   },
   {
@@ -4459,6 +4586,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_7010.KPC",
+    "miniBustupKey": "minibustup:BUH_7010.ABP",
     "faceKey": "face:BF_7010.ABP"
   },
   {
@@ -4494,6 +4622,7 @@
       "range": "dance_board"
     },
     "bustupKey": "kpcbustup:BU_7011.KPC",
+    "miniBustupKey": "minibustup:BUH_7011.ABP",
     "faceKey": "face:BF_7011.ABP"
   },
   {
@@ -4530,6 +4659,7 @@
       "range": "board"
     },
     "bustupKey": "kpcbustup:BU_7012.KPC",
+    "miniBustupKey": "minibustup:BUH_7012.ABP",
     "faceKey": "face:BF_7012.ABP"
   },
   {
@@ -4565,6 +4695,7 @@
       "range": "board"
     },
     "bustupKey": "kpcbustup:BU_7013.KPC",
+    "miniBustupKey": "minibustup:BUH_7013.ABP",
     "faceKey": "face:BF_7013.ABP"
   },
   {
@@ -4600,6 +4731,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_7014.KPC",
+    "miniBustupKey": "minibustup:BUH_7014.ABP",
     "faceKey": "face:BF_7014.ABP"
   },
   {
@@ -4635,6 +4767,7 @@
       "range": "dance_enemy_castle"
     },
     "bustupKey": "kpcbustup:BU_7015.KPC",
+    "miniBustupKey": "minibustup:BUH_7015.ABP",
     "faceKey": "face:BF_7015.ABP"
   },
   {
@@ -4670,6 +4803,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_7016.KPC",
+    "miniBustupKey": "minibustup:BUH_7016.ABP",
     "faceKey": "face:BF_7016.ABP"
   },
   {
@@ -4703,6 +4837,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_7017.KPC",
+    "miniBustupKey": "minibustup:BUH_7017.ABP",
     "faceKey": "face:BF_7017.ABP"
   },
   {
@@ -4736,6 +4871,7 @@
       "range": "circle_behind"
     },
     "bustupKey": "kpcbustup:BU_7018.KPC",
+    "miniBustupKey": "minibustup:BUH_7018.ABP",
     "faceKey": "face:BF_7018.ABP"
   },
   {
@@ -4771,6 +4907,7 @@
       "range": "circle_behind"
     },
     "bustupKey": "kpcbustup:BU_7019.KPC",
+    "miniBustupKey": "minibustup:BUH_7019.ABP",
     "faceKey": "face:BF_7019.ABP"
   },
   {
@@ -4804,6 +4941,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_7020.KPC",
+    "miniBustupKey": "minibustup:BUH_7020.ABP",
     "faceKey": "face:BF_7020.ABP"
   },
   {
@@ -4839,6 +4977,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_7021.KPC",
+    "miniBustupKey": "minibustup:BUH_7021.ABP",
     "faceKey": "face:BF_7021.ABP"
   },
   {
@@ -4875,6 +5014,7 @@
       "range": "large_rectangle_self"
     },
     "bustupKey": "kpcbustup:BU_7022.KPC",
+    "miniBustupKey": "minibustup:BUH_7022.ABP",
     "faceKey": "face:BF_7022.ABP"
   },
   {
@@ -4910,6 +5050,7 @@
       "range": "medium_circle_ahead"
     },
     "bustupKey": "kpcbustup:BU_7023.KPC",
+    "miniBustupKey": "minibustup:BUH_7023.ABP",
     "faceKey": "face:BF_7023.ABP"
   },
   {
@@ -4945,6 +5086,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_7024.KPC",
+    "miniBustupKey": "minibustup:BUH_7024.ABP",
     "faceKey": "face:BF_7024.ABP"
   },
   {
@@ -4980,6 +5122,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_7025.KPC",
+    "miniBustupKey": "minibustup:BUH_7025.ABP",
     "faceKey": "face:BF_7025.ABP"
   },
   {
@@ -5013,6 +5156,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_7026.KPC",
+    "miniBustupKey": "minibustup:BUH_7026.ABP",
     "faceKey": "face:BF_7026.ABP"
   },
   {
@@ -5046,6 +5190,7 @@
       "range": "medium_circle_ahead"
     },
     "bustupKey": "kpcbustup:BU_7027.KPC",
+    "miniBustupKey": "minibustup:BUH_7027.ABP",
     "faceKey": "face:BF_7027.ABP"
   },
   {
@@ -5081,6 +5226,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_7028.KPC",
+    "miniBustupKey": "minibustup:BUH_7028.ABP",
     "faceKey": "face:BF_7028.ABP"
   },
   {
@@ -5116,6 +5262,7 @@
       "range": "medium_circle_ahead"
     },
     "bustupKey": "kpcbustup:BU_7029.KPC",
+    "miniBustupKey": "minibustup:BUH_7029.ABP",
     "faceKey": "face:BF_7029.ABP"
   },
   {
@@ -5152,6 +5299,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_7030.KPC",
+    "miniBustupKey": "minibustup:BUH_7030.ABP",
     "faceKey": "face:BF_7030.ABP"
   },
   {
@@ -5188,6 +5336,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_7031.KPC",
+    "miniBustupKey": "minibustup:BUH_7031.ABP",
     "faceKey": "face:BF_7031.ABP"
   },
   {
@@ -5223,6 +5372,7 @@
       "range": "medium_circle_ahead"
     },
     "bustupKey": "kpcbustup:BU_9006.KPC",
+    "miniBustupKey": "minibustup:BUH_9006.ABP",
     "faceKey": "face:BF_9006.ABP"
   },
   {
@@ -5258,6 +5408,7 @@
       "range": "medium_circle_ahead"
     },
     "bustupKey": "kpcbustup:BU_9005.KPC",
+    "miniBustupKey": "minibustup:BUH_9005.ABP",
     "faceKey": "face:BF_9005.ABP"
   },
   {
@@ -5291,6 +5442,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_9008.KPC",
+    "miniBustupKey": "minibustup:BUH_9008.ABP",
     "faceKey": "face:BF_9008.ABP"
   },
   {
@@ -5327,6 +5479,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_9003.KPC",
+    "miniBustupKey": "minibustup:BUH_9003.ABP",
     "faceKey": "face:BF_9003.ABP"
   },
   {
@@ -5363,6 +5516,7 @@
       "range": "aura_small"
     },
     "bustupKey": "kpcbustup:BU_9002.KPC",
+    "miniBustupKey": "minibustup:BUH_9002.ABP",
     "faceKey": "face:BF_9002.ABP"
   },
   {
@@ -5398,6 +5552,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_9009.KPC",
+    "miniBustupKey": "minibustup:BUH_9009.ABP",
     "faceKey": "face:BF_9009.ABP"
   },
   {
@@ -5431,6 +5586,7 @@
       "range": "beam_medium"
     },
     "bustupKey": "kpcbustup:BU_9004.KPC",
+    "miniBustupKey": "minibustup:BUH_9004.ABP",
     "faceKey": "face:BF_9004.ABP"
   },
   {
@@ -5467,6 +5623,7 @@
       "range": "row"
     },
     "bustupKey": "kpcbustup:BU_9011.KPC",
+    "miniBustupKey": "minibustup:BUH_9011.ABP",
     "faceKey": "face:BF_9011.ABP"
   },
   {
@@ -5500,6 +5657,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_9010.KPC",
+    "miniBustupKey": "minibustup:BUH_9010.ABP",
     "faceKey": "face:BF_9010.ABP"
   },
   {
@@ -5533,6 +5691,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_9012.KPC",
+    "miniBustupKey": "minibustup:BUH_9012.ABP",
     "faceKey": "face:BF_9012.ABP"
   },
   {
@@ -5569,6 +5728,7 @@
       "range": "large_rectangle_self"
     },
     "bustupKey": "kpcbustup:BU_9001.KPC",
+    "miniBustupKey": "minibustup:BUH_9001.ABP",
     "faceKey": "face:BF_9001.ABP"
   },
   {
@@ -5604,6 +5764,7 @@
       "range": "large_rectangle_self"
     },
     "bustupKey": "kpcbustup:BU_9007.KPC",
+    "miniBustupKey": "minibustup:BUH_9007.ABP",
     "faceKey": "face:BF_9007.ABP"
   },
   {
@@ -5637,6 +5798,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_B006.KPC",
+    "miniBustupKey": "minibustup:BUH_B006.ABP",
     "faceKey": "face:BF_B006.ABP"
   },
   {
@@ -5672,6 +5834,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_B007.KPC",
+    "miniBustupKey": "minibustup:BUH_B007.ABP",
     "faceKey": "face:BF_B007.ABP"
   },
   {
@@ -5705,6 +5868,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_B008.KPC",
+    "miniBustupKey": "minibustup:BUH_B008.ABP",
     "faceKey": "face:BF_B008.ABP"
   },
   {
@@ -5741,6 +5905,7 @@
       "range": "row"
     },
     "bustupKey": "kpcbustup:BU_B013.KPC",
+    "miniBustupKey": "minibustup:BUH_B013.ABP",
     "faceKey": "face:BF_B013.ABP"
   },
   {
@@ -5777,6 +5942,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_B014.KPC",
+    "miniBustupKey": "minibustup:BUH_B014.ABP",
     "faceKey": "face:BF_B014.ABP"
   },
   {
@@ -5812,6 +5978,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_B015.KPC",
+    "miniBustupKey": "minibustup:BUH_B015.ABP",
     "faceKey": "face:BF_B015.ABP"
   },
   {
@@ -5847,6 +6014,7 @@
       "range": "medium_circle_ahead"
     },
     "bustupKey": "kpcbustup:BU_B016.KPC",
+    "miniBustupKey": "minibustup:BUH_B016.ABP",
     "faceKey": "face:BF_B016.ABP"
   },
   {
@@ -5882,6 +6050,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_B017.KPC",
+    "miniBustupKey": "minibustup:BUH_B017.ABP",
     "faceKey": "face:BF_B017.ABP"
   },
   {
@@ -5917,6 +6086,7 @@
       "range": "aura_small"
     },
     "bustupKey": "kpcbustup:BU_B018.KPC",
+    "miniBustupKey": "minibustup:BUH_B018.ABP",
     "faceKey": "face:BF_B018.ABP"
   },
   {
@@ -5953,6 +6123,7 @@
       "range": "medium_circle_ahead"
     },
     "bustupKey": "kpcbustup:BU_B019.KPC",
+    "miniBustupKey": "minibustup:BUH_B019.ABP",
     "faceKey": "face:BF_B019.ABP"
   },
   {
@@ -5989,6 +6160,7 @@
       "range": "medium_circle_ahead"
     },
     "bustupKey": "kpcbustup:BU_B020.KPC",
+    "miniBustupKey": "minibustup:BUH_B020.ABP",
     "faceKey": "face:BF_B020.ABP"
   },
   {
@@ -6024,6 +6196,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_B021.KPC",
+    "miniBustupKey": "minibustup:BUH_B021.ABP",
     "faceKey": "face:BF_B021.ABP"
   },
   {
@@ -6059,6 +6232,7 @@
       "range": "medium_circle_ahead"
     },
     "bustupKey": "kpcbustup:BU_B022.KPC",
+    "miniBustupKey": "minibustup:BUH_B022.ABP",
     "faceKey": "face:BF_B022.ABP"
   },
   {
@@ -6094,6 +6268,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_B023.KPC",
+    "miniBustupKey": "minibustup:BUH_B023.ABP",
     "faceKey": "face:BF_B023.ABP"
   },
   {
@@ -6129,6 +6304,7 @@
       "range": "aura_small"
     },
     "bustupKey": "kpcbustup:BU_B024.KPC",
+    "miniBustupKey": "minibustup:BUH_B024.ABP",
     "faceKey": "face:BF_B024.ABP"
   },
   {
@@ -6164,6 +6340,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_B025.KPC",
+    "miniBustupKey": "minibustup:BUH_B025.ABP",
     "faceKey": "face:BF_B025.ABP"
   },
   {
@@ -6200,6 +6377,7 @@
       "range": "medium_circle_ahead"
     },
     "bustupKey": "kpcbustup:BU_B011.KPC",
+    "miniBustupKey": "minibustup:BUH_B011.ABP",
     "faceKey": "face:BF_B011.ABP"
   },
   {
@@ -6236,6 +6414,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_B026.KPC",
+    "miniBustupKey": "minibustup:BUH_B026.ABP",
     "faceKey": "face:BF_B026.ABP"
   },
   {
@@ -6271,6 +6450,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_B027.KPC",
+    "miniBustupKey": "minibustup:BUH_B027.ABP",
     "faceKey": "face:BF_B027.ABP"
   },
   {
@@ -6307,6 +6487,7 @@
       "range": "aura_small"
     },
     "bustupKey": "kpcbustup:BU_B028.KPC",
+    "miniBustupKey": "minibustup:BUH_B028.ABP",
     "faceKey": "face:BF_B028.ABP"
   },
   {
@@ -6342,6 +6523,7 @@
       "range": "ally_board"
     },
     "bustupKey": "kpcbustup:BU_B029.KPC",
+    "miniBustupKey": "minibustup:BUH_B029.ABP",
     "faceKey": "face:BF_B029.ABP"
   },
   {
@@ -6377,6 +6559,7 @@
       "range": "beam_medium"
     },
     "bustupKey": "kpcbustup:BU_B030.KPC",
+    "miniBustupKey": "minibustup:BUH_B030.ABP",
     "faceKey": "face:BF_B030.ABP"
   },
   {
@@ -6410,6 +6593,7 @@
       "range": "dance_board"
     },
     "bustupKey": "kpcbustup:BU_B001.KPC",
+    "miniBustupKey": "minibustup:BUH_B001.ABP",
     "faceKey": "face:BF_B001.ABP"
   },
   {
@@ -6445,6 +6629,7 @@
       "range": "medium_circle_ahead"
     },
     "bustupKey": "kpcbustup:BU_B002.KPC",
+    "miniBustupKey": "minibustup:BUH_B002.ABP",
     "faceKey": "face:BF_B002.ABP"
   },
   {
@@ -6480,6 +6665,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_B005.KPC",
+    "miniBustupKey": "minibustup:BUH_B005.ABP",
     "faceKey": "face:BF_B005.ABP"
   },
   {
@@ -6515,6 +6701,7 @@
       "range": "medium_circle_ahead"
     },
     "bustupKey": "kpcbustup:BU_B004.KPC",
+    "miniBustupKey": "minibustup:BUH_B004.ABP",
     "faceKey": "face:BF_B004.ABP"
   },
   {
@@ -6550,6 +6737,7 @@
       "range": "aura_small"
     },
     "bustupKey": "kpcbustup:BU_B003.KPC",
+    "miniBustupKey": "minibustup:BUH_B003.ABP",
     "faceKey": "face:BF_B003.ABP"
   },
   {
@@ -6583,6 +6771,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_B031.KPC",
+    "miniBustupKey": "minibustup:BUH_B031.ABP",
     "faceKey": "face:BF_B031.ABP"
   },
   {
@@ -6618,6 +6807,7 @@
       "range": "medium_circle_ahead"
     },
     "bustupKey": "kpcbustup:BU_B032.KPC",
+    "miniBustupKey": "minibustup:BUH_B032.ABP",
     "faceKey": "face:BF_B032.ABP"
   },
   {
@@ -6655,6 +6845,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_B033.KPC",
+    "miniBustupKey": "minibustup:BUH_B033.ABP",
     "faceKey": "face:BF_B033.ABP"
   },
   {
@@ -6691,6 +6882,7 @@
       "range": "self"
     },
     "bustupKey": "kpcbustup:BU_B034.KPC",
+    "miniBustupKey": "minibustup:BUH_B034.ABP",
     "faceKey": "face:BF_B034.ABP"
   }
 ]

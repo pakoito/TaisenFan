@@ -102,6 +102,7 @@ export type LordCard = {
 
 	// Image keys (for ROM image extraction)
 	bustupKey: string;
+	miniBustupKey: string;
 	faceKey: string;
 };
 

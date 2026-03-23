@@ -50,7 +50,7 @@ type LordRowProps = {
 export function LordRow({lord}: LordRowProps) {
 	const cfg = getFactionConfig(lord.faction);
 	const {images} = useRom();
-	const faceUrl = images.get(lord.faceKey);
+	const miniBustupUrl = images.get(lord.miniBustupKey);
 
 	return (
 		<>
@@ -63,12 +63,12 @@ export function LordRow({lord}: LordRowProps) {
 				)}
 			>
 				<span className='text-center'>
-					{faceUrl ? (
+					{miniBustupUrl ? (
 						<img
 							alt={lord.name}
 							className='inline-block h-7 w-7 object-contain [image-rendering:pixelated]'
 							height={28}
-							src={faceUrl}
+							src={miniBustupUrl}
 							width={28}
 						/>
 					) : (
