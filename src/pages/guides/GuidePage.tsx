@@ -48,6 +48,7 @@ export function GuidePage() {
 							Loading guide…
 						</p>
 					}
+					key={slug}
 				>
 					<MDXProvider components={mdxComponents}>
 						<Content />
