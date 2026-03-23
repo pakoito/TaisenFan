@@ -2,9 +2,10 @@ import {LORD_GRID} from '@/components/lord-grid';
 import {RangeImage} from '@/components/RangeImage';
 import {AccordionContent, AccordionTrigger} from '@/components/ui/accordion';
 import {Badge} from '@/components/ui/badge';
+import {useRom} from '@/contexts/useRom';
 import {cn} from '@/lib/utils';
 import type {LordCard} from '@/types/gamedata';
-import {getFactionConfig} from '@/utils/faction';
+import {type FactionConfig, getFactionConfig} from '@/utils/faction';
 
 // ============================================================================
 // Color helpers
@@ -48,6 +49,8 @@ type LordRowProps = {
 
 export function LordRow({lord}: LordRowProps) {
 	const cfg = getFactionConfig(lord.faction);
+	const {images} = useRom();
+	const faceUrl = images.get(lord.faceKey);
 
 	return (
 		<>
@@ -60,15 +63,25 @@ export function LordRow({lord}: LordRowProps) {
 				)}
 			>
 				<span className='text-center'>
-					<span
-						className={cn(
-							'inline-flex h-7 w-7 items-center justify-center font-black font-serif text-[11px]',
-							cfg.cls,
-						)}
-						title={cfg.label}
-					>
-						{cfg.kanji}
-					</span>
+					{faceUrl ? (
+						<img
+							alt={lord.name}
+							className='inline-block h-7 w-7 object-contain [image-rendering:pixelated]'
+							height={28}
+							src={faceUrl}
+							width={28}
+						/>
+					) : (
+						<span
+							className={cn(
+								'inline-flex h-7 w-7 items-center justify-center font-black font-serif text-[11px]',
+								cfg.cls,
+							)}
+							title={cfg.label}
+						>
+							{cfg.kanji}
+						</span>
+					)}
 				</span>
 				<span>
 					<span className='font-medium text-text'>{lord.name}</span>
@@ -108,12 +121,11 @@ export function LordRow({lord}: LordRowProps) {
 				</span>
 			</AccordionTrigger>
 			<AccordionContent>
-				<div className={cn('px-4 py-5', cfg.rowBg)}>
-					<div className='grid grid-cols-1 gap-5 md:grid-cols-2'>
-						<SkillDetail lord={lord} />
-						<LoreDetail lord={lord} />
-					</div>
-				</div>
+				<ExpandedDetail
+					bustupUrl={images.get(lord.bustupKey)}
+					cfg={cfg}
+					lord={lord}
+				/>
 			</AccordionContent>
 		</>
 	);
@@ -122,6 +134,43 @@ export function LordRow({lord}: LordRowProps) {
 // ============================================================================
 // Expanded detail
 // ============================================================================
+
+function ExpandedDetail({
+	lord,
+	cfg,
+	bustupUrl,
+}: {
+	lord: LordCard;
+	cfg: FactionConfig;
+	bustupUrl: string | undefined;
+}) {
+	return (
+		<div className={cn('px-4 py-5', cfg.rowBg)}>
+			<div
+				className={cn(
+					'grid gap-5',
+					bustupUrl
+						? 'grid-cols-1 md:grid-cols-[auto_1fr_1fr]'
+						: 'grid-cols-1 md:grid-cols-2',
+				)}
+			>
+				{bustupUrl ? (
+					<div className='flex items-start justify-center'>
+						<img
+							alt={lord.name}
+							className='max-h-64 w-auto object-contain [image-rendering:pixelated]'
+							height={256}
+							src={bustupUrl}
+							width={192}
+						/>
+					</div>
+				) : null}
+				<SkillDetail lord={lord} />
+				<LoreDetail lord={lord} />
+			</div>
+		</div>
+	);
+}
 
 function SkillDetail({lord}: {lord: LordCard}) {
 	return (

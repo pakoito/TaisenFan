@@ -3,8 +3,13 @@
  *
  * Holds the ROM ArrayBuffer in memory between commands so the user
  * only transfers it once. Extraction and patching share the same ROM ref.
+ *
+ * Extraction is driven by the image catalog — it unpacks each unique NFP
+ * and decodes files based on their extension (KPC or ABP).
  */
 
+import {decodeAbp} from '@/utils/abp-decode';
+import {EXTRACTION_NFPS, IMAGE_CATALOG} from '@/utils/image-catalog';
 import {decodeKpc} from '@/utils/kpc-decode';
 import {parseNds, sliceFile} from '@/utils/nds-parser';
 import {unpackNfp} from '@/utils/nfp-unpack';
@@ -26,6 +31,42 @@ function post(msg: WorkerResponse, transfer?: Transferable[]): void {
 }
 
 // ============================================================================
+// Build a set of wanted files per NFP from the catalog
+// ============================================================================
+
+function buildExtractionPlan(): Map<string, Set<string>> {
+	const plan = new Map<string, Set<string>>();
+	for (const entry of Object.values(IMAGE_CATALOG)) {
+		const existing = plan.get(entry.nfp);
+		if (existing) {
+			existing.add(entry.file);
+		} else {
+			plan.set(entry.nfp, new Set([entry.file]));
+		}
+	}
+	return plan;
+}
+
+// ============================================================================
+// Decode a file based on its extension
+// ============================================================================
+
+function decodeFile(
+	data: Uint8Array,
+	filename: string,
+): {rgba: Uint8Array; width: number; height: number} | null {
+	const ext = filename.split('.').pop()?.toUpperCase();
+	switch (ext) {
+		case 'KPC':
+			return decodeKpc(data);
+		case 'ABP':
+			return decodeAbp(data);
+		default:
+			return null;
+	}
+}
+
+// ============================================================================
 // Extract
 // ============================================================================
 
@@ -37,50 +78,66 @@ function handleExtract(rom: ArrayBuffer): void {
 		post({type: 'progress', phase: 'parsing', current: 0, total: 1});
 		const nds = parseNds(romData);
 
-		// Phase 2: Find and unpack kpcbustup.NFP
-		const bustupEntry = nds.files.find(
-			f => f.name.toLowerCase() === 'kpcbustup.nfp',
-		);
-		if (!bustupEntry) {
-			post({type: 'extract-error', error: 'kpcbustup.NFP not found in ROM'});
-			return;
-		}
-
-		post({type: 'progress', phase: 'unpacking', current: 0, total: 1});
-		const nfpSlice = sliceFile(romData, bustupEntry);
-		const nfpFiles = unpackNfp(nfpSlice);
-
-		// Phase 3: Decode each KPC image
-		const kpcFiles = nfpFiles.filter(f =>
-			f.name.toUpperCase().endsWith('.KPC'),
-		);
+		// Phase 2: Unpack each NFP in the extraction plan
+		const plan = buildExtractionPlan();
 		const images: ExtractedImage[] = [];
 		const transferBuffers: ArrayBuffer[] = [];
+		let totalFiles = 0;
+		for (const wantedFiles of plan.values()) {
+			totalFiles += wantedFiles.size;
+		}
+		let decoded = 0;
 
-		for (let i = 0; i < kpcFiles.length; i += 1) {
-			const f = kpcFiles[i];
-			if (!f) continue;
+		for (const nfpName of EXTRACTION_NFPS) {
+			const wantedFiles = plan.get(nfpName);
+			if (!wantedFiles) continue;
+
+			const nfpEntry = nds.files.find(
+				f => f.name.toLowerCase() === `${nfpName}.nfp`,
+			);
+			if (!nfpEntry) {
+				console.warn(`[worker] NFP not found in ROM: ${nfpName}.NFP`);
+				continue;
+			}
 
 			post({
 				type: 'progress',
-				phase: 'decoding',
-				current: i,
-				total: kpcFiles.length,
+				phase: 'unpacking',
+				current: decoded,
+				total: totalFiles,
 			});
+			const nfpSlice = sliceFile(romData, nfpEntry);
+			const nfpFiles = unpackNfp(nfpSlice);
 
-			try {
-				const decoded = decodeKpc(f.data);
-				const buf = new ArrayBuffer(decoded.rgba.byteLength);
-				new Uint8Array(buf).set(decoded.rgba);
-				images.push({
-					name: f.name,
-					rgba: buf,
-					width: decoded.width,
-					height: decoded.height,
+			// Phase 3: Decode wanted files
+			for (const f of nfpFiles) {
+				if (!wantedFiles.has(f.name)) continue;
+
+				post({
+					type: 'progress',
+					phase: 'decoding',
+					current: decoded,
+					total: totalFiles,
 				});
-				transferBuffers.push(buf);
-			} catch {
-				// Skip individual decode failures
+
+				try {
+					const result = decodeFile(f.data, f.name);
+					if (result) {
+						const key = `${nfpName}:${f.name}`;
+						const buf = new ArrayBuffer(result.rgba.byteLength);
+						new Uint8Array(buf).set(result.rgba);
+						images.push({
+							name: key,
+							rgba: buf,
+							width: result.width,
+							height: result.height,
+						});
+						transferBuffers.push(buf);
+					}
+				} catch {
+					// Skip individual decode failures
+				}
+				decoded += 1;
 			}
 		}
 

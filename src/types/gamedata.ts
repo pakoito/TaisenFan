@@ -99,6 +99,10 @@ export type LordCard = {
 		duration: EffectDuration;
 		range: string;
 	};
+
+	// Image keys (for ROM image extraction)
+	bustupKey: string;
+	faceKey: string;
 };
 
 // Sage Ability

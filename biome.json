@@ -181,7 +181,7 @@
 			}
 		},
 		{
-			"includes": ["src/contexts/RomContext.tsx"],
+			"includes": ["src/contexts/RomContext.tsx", "src/workers/rom-worker.ts"],
 			"linter": {
 				"rules": {
 					"suspicious": {

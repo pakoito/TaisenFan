@@ -30,7 +30,9 @@
       "shortDescription": "POW increases and gain Stealth",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_1001.KPC",
+    "faceKey": "face:BF_1001.ABP"
   },
   {
     "cardId": 4098,
@@ -64,7 +66,9 @@
       "shortDescription": "Lowers enemy POW and SPD",
       "duration": "Scales with INT",
       "range": "medium_circle_ahead"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_1002.KPC",
+    "faceKey": "face:BF_1002.ABP"
   },
   {
     "cardId": 4099,
@@ -97,7 +101,9 @@
       "shortDescription": "Lowers POW and INT and SPD\neffect halved if only 1 target",
       "duration": "Scales with INT",
       "range": "medium_circle_ahead"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_1003.KPC",
+    "faceKey": "face:BF_1003.ABP"
   },
   {
     "cardId": 4100,
@@ -130,7 +136,9 @@
       "shortDescription": "Ally POW briefly increases and\nHorse units also gain SPD",
       "duration": "Brief",
       "range": "medium_circle_ahead"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_1004.KPC",
+    "faceKey": "face:BF_1004.ABP"
   },
   {
     "cardId": 4101,
@@ -163,7 +171,9 @@
       "shortDescription": "Lowers POW",
       "duration": "Scales with INT",
       "range": "medium_circle_ahead"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_1005.KPC",
+    "faceKey": "face:BF_1005.ABP"
   },
   {
     "cardId": 4102,
@@ -194,7 +204,9 @@
       "shortDescription": "POW increases",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_1006.KPC",
+    "faceKey": "face:BF_1006.ABP"
   },
   {
     "cardId": 4103,
@@ -228,7 +240,9 @@
       "shortDescription": "POW increases and\nbow attacks all enemies in range",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_1007.KPC",
+    "faceKey": "face:BF_1007.ABP"
   },
   {
     "cardId": 4104,
@@ -261,7 +275,9 @@
       "shortDescription": "POW and SPD increase",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_1008.KPC",
+    "faceKey": "face:BF_1008.ABP"
   },
   {
     "cardId": 4105,
@@ -295,7 +311,9 @@
       "shortDescription": "Stops enemies and POW increases\nSPD up past threshold",
       "duration": "Brief",
       "range": "aura_small"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_1009.KPC",
+    "faceKey": "face:BF_1009.ABP"
   },
   {
     "cardId": 4112,
@@ -329,7 +347,9 @@
       "shortDescription": "Removes Skill effects from enemies",
       "duration": "Scales with INT",
       "range": "aura_small"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_1010.KPC",
+    "faceKey": "face:BF_1010.ABP"
   },
   {
     "cardId": 4113,
@@ -362,7 +382,9 @@
       "shortDescription": "POW and SPD increase\nbut forced to move straight",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_1011.KPC",
+    "faceKey": "face:BF_1011.ABP"
   },
   {
     "cardId": 4114,
@@ -395,7 +417,9 @@
       "shortDescription": "Your POW increases",
       "duration": "Brief",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_1012.KPC",
+    "faceKey": "face:BF_1012.ABP"
   },
   {
     "cardId": 4115,
@@ -428,7 +452,9 @@
       "shortDescription": "[Dance] Ally SPD increases",
       "duration": "Until defeated",
       "range": "dance_board"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_1013.KPC",
+    "faceKey": "face:BF_1013.ABP"
   },
   {
     "cardId": 4116,
@@ -459,7 +485,9 @@
       "shortDescription": "POW increases",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_1014.KPC",
+    "faceKey": "face:BF_1014.ABP"
   },
   {
     "cardId": 4117,
@@ -493,7 +521,9 @@
       "shortDescription": "Hardcoded in source",
       "duration": "Scales with INT",
       "range": "medium_circle_ahead"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_1015.KPC",
+    "faceKey": "face:BF_1015.ABP"
   },
   {
     "cardId": 4118,
@@ -524,7 +554,9 @@
       "shortDescription": "Negates Skills and reflects damage",
       "duration": "Scales with INT",
       "range": "beam_medium"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_1016.KPC",
+    "faceKey": "face:BF_1016.ABP"
   },
   {
     "cardId": 4119,
@@ -558,7 +590,9 @@
       "shortDescription": "Deals water damage",
       "duration": "Scales with INT",
       "range": "row"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_1017.KPC",
+    "faceKey": "face:BF_1017.ABP"
   },
   {
     "cardId": 4120,
@@ -589,7 +623,9 @@
       "shortDescription": "Deals water damage",
       "duration": "Scales with INT",
       "range": "row"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_1018.KPC",
+    "faceKey": "face:BF_1018.ABP"
   },
   {
     "cardId": 4121,
@@ -620,7 +656,9 @@
       "shortDescription": "POW and SPD increase",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_1019.KPC",
+    "faceKey": "face:BF_1019.ABP"
   },
   {
     "cardId": 4128,
@@ -654,7 +692,9 @@
       "shortDescription": "[Dance] POW increases when\noutnumbered by enemies",
       "duration": "Until defeated",
       "range": "dance_board"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_1020.KPC",
+    "faceKey": "face:BF_1020.ABP"
   },
   {
     "cardId": 4129,
@@ -687,7 +727,9 @@
       "shortDescription": "POW and Siege up but\nforced to move forward",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_1021.KPC",
+    "faceKey": "face:BF_1021.ABP"
   },
   {
     "cardId": 4130,
@@ -718,7 +760,9 @@
       "shortDescription": "POW and SPD increase",
       "duration": "Scales with INT",
       "range": "circle_behind"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_1022.KPC",
+    "faceKey": "face:BF_1022.ABP"
   },
   {
     "cardId": 4131,
@@ -751,7 +795,9 @@
       "shortDescription": "Your POW increases",
       "duration": "Brief",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_1023.KPC",
+    "faceKey": "face:BF_1023.ABP"
   },
   {
     "cardId": 4132,
@@ -785,7 +831,9 @@
       "shortDescription": "Removes Skill effects from enemies",
       "duration": "Scales with INT",
       "range": "medium_circle_ahead"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_1024.KPC",
+    "faceKey": "face:BF_1024.ABP"
   },
   {
     "cardId": 4133,
@@ -816,7 +864,9 @@
       "shortDescription": "POW and SPD increase",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_1025.KPC",
+    "faceKey": "face:BF_1025.ABP"
   },
   {
     "cardId": 4134,
@@ -850,7 +900,9 @@
       "shortDescription": "Wei ally POW increases",
       "duration": "Scales with INT",
       "range": "large_rectangle_self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_1026.KPC",
+    "faceKey": "face:BF_1026.ABP"
   },
   {
     "cardId": 4135,
@@ -884,7 +936,9 @@
       "shortDescription": "Wei ally POW increases for long time",
       "duration": "Instant",
       "range": "large_rectangle_self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_1027.KPC",
+    "faceKey": "face:BF_1027.ABP"
   },
   {
     "cardId": 4136,
@@ -917,7 +971,9 @@
       "shortDescription": "POW increases",
       "duration": "Instant",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_1028.KPC",
+    "faceKey": "face:BF_1028.ABP"
   },
   {
     "cardId": 4137,
@@ -951,7 +1007,9 @@
       "shortDescription": "POW increases and gain Stealth",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_1029.KPC",
+    "faceKey": "face:BF_1029.ABP"
   },
   {
     "cardId": 4144,
@@ -984,7 +1042,9 @@
       "shortDescription": "Ally POW increases and\nHorse units also gain SPD",
       "duration": "Scales with INT",
       "range": "large_rectangle_self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_1030.KPC",
+    "faceKey": "face:BF_1030.ABP"
   },
   {
     "cardId": 4145,
@@ -1017,7 +1077,9 @@
       "shortDescription": "POW increases and gain Stealth",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_1031.KPC",
+    "faceKey": "face:BF_1031.ABP"
   },
   {
     "cardId": 4146,
@@ -1051,7 +1113,9 @@
       "shortDescription": "Your POW increases",
       "duration": "Brief",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_1032.KPC",
+    "faceKey": "face:BF_1032.ABP"
   },
   {
     "cardId": 4147,
@@ -1084,7 +1148,9 @@
       "shortDescription": "POW and SPD increase and\ngain Stealth",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_1033.KPC",
+    "faceKey": "face:BF_1033.ABP"
   },
   {
     "cardId": 4148,
@@ -1117,7 +1183,9 @@
       "shortDescription": "[Dance] Siege gauge fills faster\nbut Siege power decreases",
       "duration": "Until defeated",
       "range": "dance_board"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_1034.KPC",
+    "faceKey": "face:BF_1034.ABP"
   },
   {
     "cardId": 4149,
@@ -1148,7 +1216,9 @@
       "shortDescription": "POW and Siege up but\nforced to move forward",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_1035.KPC",
+    "faceKey": "face:BF_1035.ABP"
   },
   {
     "cardId": 4150,
@@ -1181,7 +1251,9 @@
       "shortDescription": "Lowers SPD",
       "duration": "Scales with INT",
       "range": "medium_circle_ahead"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_1036.KPC",
+    "faceKey": "face:BF_1036.ABP"
   },
   {
     "cardId": 4151,
@@ -1214,7 +1286,9 @@
       "shortDescription": "Increases ally POW",
       "duration": "Brief",
       "range": "aura_small"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_1037.KPC",
+    "faceKey": "face:BF_1037.ABP"
   },
   {
     "cardId": 4152,
@@ -1245,7 +1319,9 @@
       "shortDescription": "Negates Skills and reflects damage",
       "duration": "Scales with INT",
       "range": "aura_small"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_1038.KPC",
+    "faceKey": "face:BF_1038.ABP"
   },
   {
     "cardId": 4153,
@@ -1278,7 +1354,9 @@
       "shortDescription": "Negates enemy Skills",
       "duration": "Scales with INT",
       "range": "aura_small"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_1039.KPC",
+    "faceKey": "face:BF_1039.ABP"
   },
   {
     "cardId": 20481,
@@ -1309,7 +1387,9 @@
       "shortDescription": "Recovers ally HP",
       "duration": "Scales with INT",
       "range": "medium_circle_ahead"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_5001.KPC",
+    "faceKey": "face:BF_5001.ABP"
   },
   {
     "cardId": 20482,
@@ -1343,7 +1423,9 @@
       "shortDescription": "POW increases and\nattacks all directions with spear",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_5002.KPC",
+    "faceKey": "face:BF_5002.ABP"
   },
   {
     "cardId": 20483,
@@ -1376,7 +1458,9 @@
       "shortDescription": "Drops 3 lightning bolts for damage",
       "duration": "Scales with INT",
       "range": "medium_circle_ahead"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_5003.KPC",
+    "faceKey": "face:BF_5003.ABP"
   },
   {
     "cardId": 20484,
@@ -1411,7 +1495,9 @@
       "shortDescription": "Ally POW increases and\nHP recovers beyond max",
       "duration": "Scales with INT",
       "range": "aura_small"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_5004.KPC",
+    "faceKey": "face:BF_5004.ABP"
   },
   {
     "cardId": 20485,
@@ -1444,7 +1530,9 @@
       "shortDescription": "POW increases and spear lengthens",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_5005.KPC",
+    "faceKey": "face:BF_5005.ABP"
   },
   {
     "cardId": 20486,
@@ -1478,7 +1566,9 @@
       "shortDescription": "POW increases\ninvincible spear attack at threshold",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_5006.KPC",
+    "faceKey": "face:BF_5006.ABP"
   },
   {
     "cardId": 20487,
@@ -1511,7 +1601,9 @@
       "shortDescription": "[Dance] HP continuously recovers",
       "duration": "Until defeated",
       "range": "dance_board"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_5007.KPC",
+    "faceKey": "face:BF_5007.ABP"
   },
   {
     "cardId": 20488,
@@ -1544,7 +1636,9 @@
       "shortDescription": "POW increases and spear lengthens",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_5008.KPC",
+    "faceKey": "face:BF_5008.ABP"
   },
   {
     "cardId": 20489,
@@ -1577,7 +1671,9 @@
       "shortDescription": "Siege up and POW down\ngreater effect with less time left",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_5009.KPC",
+    "faceKey": "face:BF_5009.ABP"
   },
   {
     "cardId": 20496,
@@ -1608,7 +1704,9 @@
       "shortDescription": "Allies die and POW increases\nSPD up past threshold",
       "duration": "Scales with INT",
       "range": "aura_small"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_5010.KPC",
+    "faceKey": "face:BF_5010.ABP"
   },
   {
     "cardId": 20497,
@@ -1641,7 +1739,9 @@
       "shortDescription": "POW increases and\nattacks all directions with spear",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_5011.KPC",
+    "faceKey": "face:BF_5011.ABP"
   },
   {
     "cardId": 20498,
@@ -1674,7 +1774,9 @@
       "shortDescription": "Enemies move toward you",
       "duration": "Scales with INT",
       "range": "medium_circle_ahead"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_5012.KPC",
+    "faceKey": "face:BF_5012.ABP"
   },
   {
     "cardId": 20499,
@@ -1707,7 +1809,9 @@
       "shortDescription": "POW increases and HP recovers",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_5013.KPC",
+    "faceKey": "face:BF_5013.ABP"
   },
   {
     "cardId": 20500,
@@ -1738,7 +1842,9 @@
       "shortDescription": "Recovers ally HP",
       "duration": "Scales with INT",
       "range": "medium_circle_ahead"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_5014.KPC",
+    "faceKey": "face:BF_5014.ABP"
   },
   {
     "cardId": 20501,
@@ -1771,7 +1877,9 @@
       "shortDescription": "Speed increases",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_5015.KPC",
+    "faceKey": "face:BF_5015.ABP"
   },
   {
     "cardId": 20502,
@@ -1805,7 +1913,9 @@
       "shortDescription": "POW increases and range decreases",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_5016.KPC",
+    "faceKey": "face:BF_5016.ABP"
   },
   {
     "cardId": 20503,
@@ -1839,7 +1949,9 @@
       "shortDescription": "POW increases and\nHP recovers beyond max",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_5017.KPC",
+    "faceKey": "face:BF_5017.ABP"
   },
   {
     "cardId": 20504,
@@ -1872,7 +1984,9 @@
       "shortDescription": "POW increases",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_5018.KPC",
+    "faceKey": "face:BF_5018.ABP"
   },
   {
     "cardId": 20505,
@@ -1907,7 +2021,9 @@
       "shortDescription": "Hardcoded in source",
       "duration": "Scales with INT",
       "range": "medium_circle_ahead"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_5019.KPC",
+    "faceKey": "face:BF_5019.ABP"
   },
   {
     "cardId": 20512,
@@ -1940,7 +2056,9 @@
       "shortDescription": "Drops 3 lightning bolts for damage",
       "duration": "Scales with INT",
       "range": "medium_circle_ahead"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_5020.KPC",
+    "faceKey": "face:BF_5020.ABP"
   },
   {
     "cardId": 20513,
@@ -1974,7 +2092,9 @@
       "shortDescription": "POW and range increase and\narrows slow enemies",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_5021.KPC",
+    "faceKey": "face:BF_5021.ABP"
   },
   {
     "cardId": 20514,
@@ -2009,7 +2129,9 @@
       "shortDescription": "POW and SPD increase and\nnegates Spear Counter damage",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_5022.KPC",
+    "faceKey": "face:BF_5022.ABP"
   },
   {
     "cardId": 20515,
@@ -2042,7 +2164,9 @@
       "shortDescription": "POW and SPD increase",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_5023.KPC",
+    "faceKey": "face:BF_5023.ABP"
   },
   {
     "cardId": 20516,
@@ -2073,7 +2197,9 @@
       "shortDescription": "Enemies move toward you",
       "duration": "Scales with INT",
       "range": "medium_circle_ahead"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_5024.KPC",
+    "faceKey": "face:BF_5024.ABP"
   },
   {
     "cardId": 20517,
@@ -2106,7 +2232,9 @@
       "shortDescription": "Enemies move toward you",
       "duration": "Scales with INT",
       "range": "medium_circle_ahead"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_5025.KPC",
+    "faceKey": "face:BF_5025.ABP"
   },
   {
     "cardId": 20518,
@@ -2139,7 +2267,9 @@
       "shortDescription": "POW increases",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_5026.KPC",
+    "faceKey": "face:BF_5026.ABP"
   },
   {
     "cardId": 20519,
@@ -2172,7 +2302,9 @@
       "shortDescription": "Ally POW increases and\nSpear units attack all directions",
       "duration": "Scales with INT",
       "range": "circle_behind"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_5027.KPC",
+    "faceKey": "face:BF_5027.ABP"
   },
   {
     "cardId": 20520,
@@ -2205,7 +2337,9 @@
       "shortDescription": "Enemies move toward you",
       "duration": "Scales with INT",
       "range": "medium_circle_ahead"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_5028.KPC",
+    "faceKey": "face:BF_5028.ABP"
   },
   {
     "cardId": 20521,
@@ -2238,7 +2372,9 @@
       "shortDescription": "POW and SPD increase",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_5029.KPC",
+    "faceKey": "face:BF_5029.ABP"
   },
   {
     "cardId": 20528,
@@ -2271,7 +2407,9 @@
       "shortDescription": "POW and SPD and\nCharge damage increase",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_5030.KPC",
+    "faceKey": "face:BF_5030.ABP"
   },
   {
     "cardId": 20529,
@@ -2305,7 +2443,9 @@
       "shortDescription": "POW increases and\ncan't be targeted by enemy Skills",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_5031.KPC",
+    "faceKey": "face:BF_5031.ABP"
   },
   {
     "cardId": 20530,
@@ -2336,7 +2476,9 @@
       "shortDescription": "Revives 1 Unit where it died",
       "duration": "Scales with INT",
       "range": "circle_behind"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_5032.KPC",
+    "faceKey": "face:BF_5032.ABP"
   },
   {
     "cardId": 20531,
@@ -2369,7 +2511,9 @@
       "shortDescription": "[Dance] Killing Units\ndamages that side's Castle",
       "duration": "Until defeated",
       "range": "dance_castles"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_5033.KPC",
+    "faceKey": "face:BF_5033.ABP"
   },
   {
     "cardId": 20532,
@@ -2402,7 +2546,9 @@
       "shortDescription": "Ally POW increases and\nSpear units attack all directions",
       "duration": "Scales with INT",
       "range": "medium_circle_ahead"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_5034.KPC",
+    "faceKey": "face:BF_5034.ABP"
   },
   {
     "cardId": 20533,
@@ -2435,7 +2581,9 @@
       "shortDescription": "Lowers SPD",
       "duration": "Scales with INT",
       "range": "medium_circle_ahead"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_5035.KPC",
+    "faceKey": "face:BF_5035.ABP"
   },
   {
     "cardId": 20534,
@@ -2468,7 +2616,9 @@
       "shortDescription": "POW increases\n1 ally dies on activation",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_5036.KPC",
+    "faceKey": "face:BF_5036.ABP"
   },
   {
     "cardId": 20535,
@@ -2503,7 +2653,9 @@
       "shortDescription": "Shu ally POW increases",
       "duration": "Scales with INT",
       "range": "aura_medium"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_5037.KPC",
+    "faceKey": "face:BF_5037.ABP"
   },
   {
     "cardId": 20536,
@@ -2537,7 +2689,9 @@
       "shortDescription": "Ally POW increases but if 1 dies\nall affected allies die",
       "duration": "Scales with INT",
       "range": "aura_small"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_5038.KPC",
+    "faceKey": "face:BF_5038.ABP"
   },
   {
     "cardId": 20537,
@@ -2568,7 +2722,9 @@
       "shortDescription": "POW increases",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_5039.KPC",
+    "faceKey": "face:BF_5039.ABP"
   },
   {
     "cardId": 20544,
@@ -2599,7 +2755,9 @@
       "shortDescription": "POW increases and HP recovers",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_5040.KPC",
+    "faceKey": "face:BF_5040.ABP"
   },
   {
     "cardId": 12289,
@@ -2632,7 +2790,9 @@
       "shortDescription": "INT increases\nyou die after effect",
       "duration": "Scales with INT",
       "range": "circle_behind"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_3001.KPC",
+    "faceKey": "face:BF_3001.ABP"
   },
   {
     "cardId": 12290,
@@ -2665,7 +2825,9 @@
       "shortDescription": "POW increases",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_3002.KPC",
+    "faceKey": "face:BF_3002.ABP"
   },
   {
     "cardId": 12291,
@@ -2698,7 +2860,9 @@
       "shortDescription": "Reduces POW damage to allies",
       "duration": "Scales with INT",
       "range": "aura_small"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_3003.KPC",
+    "faceKey": "face:BF_3003.ABP"
   },
   {
     "cardId": 12292,
@@ -2729,7 +2893,9 @@
       "shortDescription": "[Focus] POW increases",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_3004.KPC",
+    "faceKey": "face:BF_3004.ABP"
   },
   {
     "cardId": 12293,
@@ -2762,7 +2928,9 @@
       "shortDescription": "[Focus] Deals fire damage",
       "duration": "Scales with INT",
       "range": "beam_medium"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_3005.KPC",
+    "faceKey": "face:BF_3005.ABP"
   },
   {
     "cardId": 12294,
@@ -2793,7 +2961,9 @@
       "shortDescription": "Deals damage to enemy Castle\nyou die after effect",
       "duration": "Scales with INT",
       "range": "enemy_castle"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_3006.KPC",
+    "faceKey": "face:BF_3006.ABP"
   },
   {
     "cardId": 12295,
@@ -2826,7 +2996,9 @@
       "shortDescription": "[Dance] MP gain rate increases",
       "duration": "Until defeated",
       "range": "dance_board"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_3007.KPC",
+    "faceKey": "face:BF_3007.ABP"
   },
   {
     "cardId": 12296,
@@ -2859,7 +3031,9 @@
       "shortDescription": "POW increases\nyou die after effect",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_3008.KPC",
+    "faceKey": "face:BF_3008.ABP"
   },
   {
     "cardId": 12297,
@@ -2893,7 +3067,9 @@
       "shortDescription": "Deals fire damage",
       "duration": "Scales with INT",
       "range": "beam_medium"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_3009.KPC",
+    "faceKey": "face:BF_3009.ABP"
   },
   {
     "cardId": 12304,
@@ -2924,7 +3100,9 @@
       "shortDescription": "Deals fire damage",
       "duration": "Scales with INT",
       "range": "beam_medium"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_3010.KPC",
+    "faceKey": "face:BF_3010.ABP"
   },
   {
     "cardId": 12305,
@@ -2955,7 +3133,9 @@
       "shortDescription": "[Focus] Recovers ally HP",
       "duration": "Scales with INT",
       "range": "medium_circle_ahead"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_3011.KPC",
+    "faceKey": "face:BF_3011.ABP"
   },
   {
     "cardId": 12306,
@@ -2989,7 +3169,9 @@
       "shortDescription": "[Focus] Deals damage to\nenemy Castle",
       "duration": "Scales with INT",
       "range": "enemy_castle"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_3012.KPC",
+    "faceKey": "face:BF_3012.ABP"
   },
   {
     "cardId": 12307,
@@ -3020,7 +3202,9 @@
       "shortDescription": "POW increases and\narrows lower enemy POW",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_3013.KPC",
+    "faceKey": "face:BF_3013.ABP"
   },
   {
     "cardId": 12308,
@@ -3053,7 +3237,9 @@
       "shortDescription": "Instantly return to Castle",
       "duration": "Scales with INT",
       "range": "aura_small"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_3014.KPC",
+    "faceKey": "face:BF_3014.ABP"
   },
   {
     "cardId": 12309,
@@ -3087,7 +3273,9 @@
       "shortDescription": "Summons 2 Support units",
       "duration": "Scales with INT",
       "range": "square_near"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_3015.KPC",
+    "faceKey": "face:BF_3015.ABP"
   },
   {
     "cardId": 12310,
@@ -3118,7 +3306,9 @@
       "shortDescription": "Summons a Decoy",
       "duration": "Scales with INT",
       "range": "square_near"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_3016.KPC",
+    "faceKey": "face:BF_3016.ABP"
   },
   {
     "cardId": 12311,
@@ -3149,7 +3339,9 @@
       "shortDescription": "Deals fire damage",
       "duration": "Scales with INT",
       "range": "beam_medium"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_3017.KPC",
+    "faceKey": "face:BF_3017.ABP"
   },
   {
     "cardId": 12312,
@@ -3182,7 +3374,9 @@
       "shortDescription": "Ally POW increases\nthey die after effect",
       "duration": "Scales with INT",
       "range": "large_rectangle_self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_3018.KPC",
+    "faceKey": "face:BF_3018.ABP"
   },
   {
     "cardId": 12313,
@@ -3216,7 +3410,9 @@
       "shortDescription": "Wu ally POW increases",
       "duration": "Scales with INT",
       "range": "large_rectangle_self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_3019.KPC",
+    "faceKey": "face:BF_3019.ABP"
   },
   {
     "cardId": 12320,
@@ -3249,7 +3445,9 @@
       "shortDescription": "POW and SPD increase\nyou die after effect",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_3020.KPC",
+    "faceKey": "face:BF_3020.ABP"
   },
   {
     "cardId": 12321,
@@ -3283,7 +3481,9 @@
       "shortDescription": "[Focus] POW and SPD increase",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_3021.KPC",
+    "faceKey": "face:BF_3021.ABP"
   },
   {
     "cardId": 12322,
@@ -3317,7 +3517,9 @@
       "shortDescription": "POW increases and HP recovers",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_3022.KPC",
+    "faceKey": "face:BF_3022.ABP"
   },
   {
     "cardId": 12323,
@@ -3350,7 +3552,9 @@
       "shortDescription": "[Focus] Deals damage to\nenemy Castle",
       "duration": "Scales with INT",
       "range": "enemy_castle"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_3023.KPC",
+    "faceKey": "face:BF_3023.ABP"
   },
   {
     "cardId": 12324,
@@ -3383,7 +3587,9 @@
       "shortDescription": "Summons a Support unit",
       "duration": "Scales with INT",
       "range": "square_near"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_3024.KPC",
+    "faceKey": "face:BF_3024.ABP"
   },
   {
     "cardId": 12325,
@@ -3416,7 +3622,9 @@
       "shortDescription": "POW and range increase and\narrows slow enemies",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_3025.KPC",
+    "faceKey": "face:BF_3025.ABP"
   },
   {
     "cardId": 12326,
@@ -3449,7 +3657,9 @@
       "shortDescription": "Removes enemy Skill effects",
       "duration": "Scales with INT",
       "range": "aura_small"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_3026.KPC",
+    "faceKey": "face:BF_3026.ABP"
   },
   {
     "cardId": 12327,
@@ -3482,7 +3692,9 @@
       "shortDescription": "Restores one fence",
       "duration": "Scales with INT",
       "range": "circle_behind"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_3027.KPC",
+    "faceKey": "face:BF_3027.ABP"
   },
   {
     "cardId": 12328,
@@ -3515,7 +3727,9 @@
       "shortDescription": "POW increases\nyou die after effect",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_3028.KPC",
+    "faceKey": "face:BF_3028.ABP"
   },
   {
     "cardId": 12329,
@@ -3548,7 +3762,9 @@
       "shortDescription": "POW and range increase",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_3029.KPC",
+    "faceKey": "face:BF_3029.ABP"
   },
   {
     "cardId": 12336,
@@ -3581,7 +3797,9 @@
       "shortDescription": "POW and range increase and\narrows slow enemies",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_3030.KPC",
+    "faceKey": "face:BF_3030.ABP"
   },
   {
     "cardId": 12337,
@@ -3614,7 +3832,9 @@
       "shortDescription": "Reduces POW damage",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_3031.KPC",
+    "faceKey": "face:BF_3031.ABP"
   },
   {
     "cardId": 12338,
@@ -3647,7 +3867,9 @@
       "shortDescription": "POW increases",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_3032.KPC",
+    "faceKey": "face:BF_3032.ABP"
   },
   {
     "cardId": 12339,
@@ -3678,7 +3900,9 @@
       "shortDescription": "Ally POW increases",
       "duration": "Scales with INT",
       "range": "medium_circle_ahead"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_3033.KPC",
+    "faceKey": "face:BF_3033.ABP"
   },
   {
     "cardId": 12340,
@@ -3709,7 +3933,9 @@
       "shortDescription": "[Focus]\nWu ally POW increases",
       "duration": "Scales with INT",
       "range": "large_rectangle_self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_3034.KPC",
+    "faceKey": "face:BF_3034.ABP"
   },
   {
     "cardId": 12341,
@@ -3740,7 +3966,9 @@
       "shortDescription": "POW increases",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_3035.KPC",
+    "faceKey": "face:BF_3035.ABP"
   },
   {
     "cardId": 12342,
@@ -3773,7 +4001,9 @@
       "shortDescription": "[Focus] POW increases",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_3036.KPC",
+    "faceKey": "face:BF_3036.ABP"
   },
   {
     "cardId": 12343,
@@ -3806,7 +4036,9 @@
       "shortDescription": "POW increases and\narrows lower enemy POW",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_3037.KPC",
+    "faceKey": "face:BF_3037.ABP"
   },
   {
     "cardId": 12344,
@@ -3839,7 +4071,9 @@
       "shortDescription": "Ally POW increases and\nBow units slow enemies hit",
       "duration": "Scales with INT",
       "range": "large_rectangle_self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_3038.KPC",
+    "faceKey": "face:BF_3038.ABP"
   },
   {
     "cardId": 12345,
@@ -3872,7 +4106,9 @@
       "shortDescription": "Summons a Charger",
       "duration": "Scales with INT",
       "range": "square_near"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_3039.KPC",
+    "faceKey": "face:BF_3039.ABP"
   },
   {
     "cardId": 28673,
@@ -3905,7 +4141,9 @@
       "shortDescription": "Deals water damage",
       "duration": "Scales with INT",
       "range": "row"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_7001.KPC",
+    "faceKey": "face:BF_7001.ABP"
   },
   {
     "cardId": 28674,
@@ -3938,7 +4176,9 @@
       "shortDescription": "Deals fire damage\nyou die after effect",
       "duration": "Scales with INT",
       "range": "aura_small"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_7002.KPC",
+    "faceKey": "face:BF_7002.ABP"
   },
   {
     "cardId": 28675,
@@ -3971,7 +4211,9 @@
       "shortDescription": "Lowers POW. Dying during\neffect delays Revive",
       "duration": "Scales with INT",
       "range": "medium_circle_ahead"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_7003.KPC",
+    "faceKey": "face:BF_7003.ABP"
   },
   {
     "cardId": 28676,
@@ -4004,7 +4246,9 @@
       "shortDescription": "POW increases\ndamages your Castle during effect",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_7004.KPC",
+    "faceKey": "face:BF_7004.ABP"
   },
   {
     "cardId": 28677,
@@ -4037,7 +4281,9 @@
       "shortDescription": "POW increases\ngreater effect with more allies",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_7005.KPC",
+    "faceKey": "face:BF_7005.ABP"
   },
   {
     "cardId": 28678,
@@ -4071,7 +4317,9 @@
       "shortDescription": "[Dance] Continuously damages\nboth Castles",
       "duration": "Until defeated",
       "range": "dance_castles"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_7006.KPC",
+    "faceKey": "face:BF_7006.ABP"
   },
   {
     "cardId": 28679,
@@ -4104,7 +4352,9 @@
       "shortDescription": "POW and Siege and\nfence damage increase",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_7007.KPC",
+    "faceKey": "face:BF_7007.ABP"
   },
   {
     "cardId": 28680,
@@ -4138,7 +4388,9 @@
       "shortDescription": "Ally SPD increases",
       "duration": "Scales with INT",
       "range": "large_rectangle_self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_7008.KPC",
+    "faceKey": "face:BF_7008.ABP"
   },
   {
     "cardId": 28681,
@@ -4169,7 +4421,9 @@
       "shortDescription": "POW increases\nkilled enemies take longer to Revive",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_7009.KPC",
+    "faceKey": "face:BF_7009.ABP"
   },
   {
     "cardId": 28688,
@@ -4203,7 +4457,9 @@
       "shortDescription": "POW equals the enemy\nwith highest POW",
       "duration": "Instant",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_7010.KPC",
+    "faceKey": "face:BF_7010.ABP"
   },
   {
     "cardId": 28689,
@@ -4236,7 +4492,9 @@
       "shortDescription": "[Dance] POW increases\neach time an ally dies",
       "duration": "Until defeated",
       "range": "dance_board"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_7011.KPC",
+    "faceKey": "face:BF_7011.ABP"
   },
   {
     "cardId": 28690,
@@ -4270,7 +4528,9 @@
       "shortDescription": "Revives all and increases POW\nyou die after activation",
       "duration": "Scales with INT",
       "range": "board"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_7012.KPC",
+    "faceKey": "face:BF_7012.ABP"
   },
   {
     "cardId": 28691,
@@ -4303,7 +4563,9 @@
       "shortDescription": "Revives all Rams and boosts SPD",
       "duration": "Scales with INT",
       "range": "board"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_7013.KPC",
+    "faceKey": "face:BF_7013.ABP"
   },
   {
     "cardId": 28692,
@@ -4336,7 +4598,9 @@
       "shortDescription": "POW increases\ndamages your Castle during effect",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_7014.KPC",
+    "faceKey": "face:BF_7014.ABP"
   },
   {
     "cardId": 28693,
@@ -4369,7 +4633,9 @@
       "shortDescription": "[Dance] Continuously deals\ndamage to enemy Castle",
       "duration": "Until defeated",
       "range": "dance_enemy_castle"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_7015.KPC",
+    "faceKey": "face:BF_7015.ABP"
   },
   {
     "cardId": 28694,
@@ -4402,7 +4668,9 @@
       "shortDescription": "POW and SPD increase\nPOW grows while charging",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_7016.KPC",
+    "faceKey": "face:BF_7016.ABP"
   },
   {
     "cardId": 28695,
@@ -4433,7 +4701,9 @@
       "shortDescription": "HP recovers",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_7017.KPC",
+    "faceKey": "face:BF_7017.ABP"
   },
   {
     "cardId": 28696,
@@ -4464,7 +4734,9 @@
       "shortDescription": "Revives 1 Unit",
       "duration": "Scales with INT",
       "range": "circle_behind"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_7018.KPC",
+    "faceKey": "face:BF_7018.ABP"
   },
   {
     "cardId": 28697,
@@ -4497,7 +4769,9 @@
       "shortDescription": "Ally POW increases\nbut damages your Castle",
       "duration": "Scales with INT",
       "range": "circle_behind"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_7019.KPC",
+    "faceKey": "face:BF_7019.ABP"
   },
   {
     "cardId": 28704,
@@ -4528,7 +4802,9 @@
       "shortDescription": "Speed increases but forced forward",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_7020.KPC",
+    "faceKey": "face:BF_7020.ABP"
   },
   {
     "cardId": 28705,
@@ -4561,7 +4837,9 @@
       "shortDescription": "POW increases",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_7021.KPC",
+    "faceKey": "face:BF_7021.ABP"
   },
   {
     "cardId": 28706,
@@ -4595,7 +4873,9 @@
       "shortDescription": "Ally POW and SPD increase\ndamages your Castle during effect",
       "duration": "Scales with INT",
       "range": "large_rectangle_self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_7022.KPC",
+    "faceKey": "face:BF_7022.ABP"
   },
   {
     "cardId": 28707,
@@ -4628,7 +4908,9 @@
       "shortDescription": "Prevents return to Castle",
       "duration": "Scales with INT",
       "range": "medium_circle_ahead"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_7023.KPC",
+    "faceKey": "face:BF_7023.ABP"
   },
   {
     "cardId": 28708,
@@ -4661,7 +4943,9 @@
       "shortDescription": "POW increases",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_7024.KPC",
+    "faceKey": "face:BF_7024.ABP"
   },
   {
     "cardId": 28709,
@@ -4694,7 +4978,9 @@
       "shortDescription": "POW increases and\narrows slow enemies",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_7025.KPC",
+    "faceKey": "face:BF_7025.ABP"
   },
   {
     "cardId": 28710,
@@ -4725,7 +5011,9 @@
       "shortDescription": "POW increases and gain Stealth",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_7026.KPC",
+    "faceKey": "face:BF_7026.ABP"
   },
   {
     "cardId": 28711,
@@ -4756,7 +5044,9 @@
       "shortDescription": "Drops 3 lightning bolts for damage",
       "duration": "Scales with INT",
       "range": "medium_circle_ahead"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_7027.KPC",
+    "faceKey": "face:BF_7027.ABP"
   },
   {
     "cardId": 28712,
@@ -4789,7 +5079,9 @@
       "shortDescription": "POW increases\ndamages your Castle during effect",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_7028.KPC",
+    "faceKey": "face:BF_7028.ABP"
   },
   {
     "cardId": 28713,
@@ -4822,7 +5114,9 @@
       "shortDescription": "Gradually lowers HP\nentering Castle cures poison",
       "duration": "Scales with INT",
       "range": "medium_circle_ahead"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_7029.KPC",
+    "faceKey": "face:BF_7029.ABP"
   },
   {
     "cardId": 28720,
@@ -4856,7 +5150,9 @@
       "shortDescription": "POW and SPD increase\nHP recovers",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_7030.KPC",
+    "faceKey": "face:BF_7030.ABP"
   },
   {
     "cardId": 28721,
@@ -4890,7 +5186,9 @@
       "shortDescription": "POW and SPD and INT increase\nHP recovers",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_7031.KPC",
+    "faceKey": "face:BF_7031.ABP"
   },
   {
     "cardId": 36870,
@@ -4923,7 +5221,9 @@
       "shortDescription": "Lowers POW and INT and SPD\neffect halved if only 1 target",
       "duration": "Scales with INT",
       "range": "medium_circle_ahead"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_9006.KPC",
+    "faceKey": "face:BF_9006.ABP"
   },
   {
     "cardId": 36869,
@@ -4956,7 +5256,9 @@
       "shortDescription": "Ally POW briefly increases and\nHorse units also gain SPD",
       "duration": "Brief",
       "range": "medium_circle_ahead"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_9005.KPC",
+    "faceKey": "face:BF_9005.ABP"
   },
   {
     "cardId": 36872,
@@ -4987,7 +5289,9 @@
       "shortDescription": "POW increases",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_9008.KPC",
+    "faceKey": "face:BF_9008.ABP"
   },
   {
     "cardId": 36867,
@@ -5021,7 +5325,9 @@
       "shortDescription": "POW increases and\nbow attacks all enemies in range",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_9003.KPC",
+    "faceKey": "face:BF_9003.ABP"
   },
   {
     "cardId": 36866,
@@ -5055,7 +5361,9 @@
       "shortDescription": "Stops enemies and POW increases\nSPD up past threshold",
       "duration": "Brief",
       "range": "aura_small"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_9002.KPC",
+    "faceKey": "face:BF_9002.ABP"
   },
   {
     "cardId": 36873,
@@ -5088,7 +5396,9 @@
       "shortDescription": "Your POW increases",
       "duration": "Brief",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_9009.KPC",
+    "faceKey": "face:BF_9009.ABP"
   },
   {
     "cardId": 36868,
@@ -5119,7 +5429,9 @@
       "shortDescription": "Negates Skills and reflects damage",
       "duration": "Scales with INT",
       "range": "beam_medium"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_9004.KPC",
+    "faceKey": "face:BF_9004.ABP"
   },
   {
     "cardId": 36881,
@@ -5153,7 +5465,9 @@
       "shortDescription": "Deals water damage",
       "duration": "Scales with INT",
       "range": "row"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_9011.KPC",
+    "faceKey": "face:BF_9011.ABP"
   },
   {
     "cardId": 36880,
@@ -5184,7 +5498,9 @@
       "shortDescription": "POW and SPD increase",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_9010.KPC",
+    "faceKey": "face:BF_9010.ABP"
   },
   {
     "cardId": 36882,
@@ -5215,7 +5531,9 @@
       "shortDescription": "POW and SPD increase",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_9012.KPC",
+    "faceKey": "face:BF_9012.ABP"
   },
   {
     "cardId": 36865,
@@ -5249,7 +5567,9 @@
       "shortDescription": "Wei ally POW increases",
       "duration": "Scales with INT",
       "range": "large_rectangle_self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_9001.KPC",
+    "faceKey": "face:BF_9001.ABP"
   },
   {
     "cardId": 36871,
@@ -5282,7 +5602,9 @@
       "shortDescription": "Ally POW increases and\nHorse units also gain SPD",
       "duration": "Scales with INT",
       "range": "large_rectangle_self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_9007.KPC",
+    "faceKey": "face:BF_9007.ABP"
   },
   {
     "cardId": 45062,
@@ -5313,7 +5635,9 @@
       "shortDescription": "POW increases\ngreater effect with more dead allies",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_B006.KPC",
+    "faceKey": "face:BF_B006.ABP"
   },
   {
     "cardId": 45063,
@@ -5346,7 +5670,9 @@
       "shortDescription": "POW increases and spear lengthens",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_B007.KPC",
+    "faceKey": "face:BF_B007.ABP"
   },
   {
     "cardId": 45064,
@@ -5377,7 +5703,9 @@
       "shortDescription": "POW increases",
       "duration": "Instant",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_B008.KPC",
+    "faceKey": "face:BF_B008.ABP"
   },
   {
     "cardId": 45075,
@@ -5411,7 +5739,9 @@
       "shortDescription": "Deals water damage",
       "duration": "Scales with INT",
       "range": "row"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_B013.KPC",
+    "faceKey": "face:BF_B013.ABP"
   },
   {
     "cardId": 45076,
@@ -5445,7 +5775,9 @@
       "shortDescription": "Your POW increases",
       "duration": "Brief",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_B014.KPC",
+    "faceKey": "face:BF_B014.ABP"
   },
   {
     "cardId": 45077,
@@ -5478,7 +5810,9 @@
       "shortDescription": "POW and SPD increase",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_B015.KPC",
+    "faceKey": "face:BF_B015.ABP"
   },
   {
     "cardId": 45078,
@@ -5511,7 +5845,9 @@
       "shortDescription": "Lowers POW",
       "duration": "Scales with INT",
       "range": "medium_circle_ahead"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_B016.KPC",
+    "faceKey": "face:BF_B016.ABP"
   },
   {
     "cardId": 45079,
@@ -5544,7 +5880,9 @@
       "shortDescription": "POW and SPD increase",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_B017.KPC",
+    "faceKey": "face:BF_B017.ABP"
   },
   {
     "cardId": 45080,
@@ -5577,7 +5915,9 @@
       "shortDescription": "Drops 4 lightning bolts for damage",
       "duration": "Scales with INT",
       "range": "aura_small"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_B018.KPC",
+    "faceKey": "face:BF_B018.ABP"
   },
   {
     "cardId": 45081,
@@ -5611,7 +5951,9 @@
       "shortDescription": "Lowers enemy POW and SPD",
       "duration": "Scales with INT",
       "range": "medium_circle_ahead"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_B019.KPC",
+    "faceKey": "face:BF_B019.ABP"
   },
   {
     "cardId": 45088,
@@ -5645,7 +5987,9 @@
       "shortDescription": "Recovers ally HP beyond max",
       "duration": "Scales with INT",
       "range": "medium_circle_ahead"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_B020.KPC",
+    "faceKey": "face:BF_B020.ABP"
   },
   {
     "cardId": 45089,
@@ -5678,7 +6022,9 @@
       "shortDescription": "POW increases\ngreater effect with more allies",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_B021.KPC",
+    "faceKey": "face:BF_B021.ABP"
   },
   {
     "cardId": 45090,
@@ -5711,7 +6057,9 @@
       "shortDescription": "Removes Skill effects from enemies",
       "duration": "Scales with INT",
       "range": "medium_circle_ahead"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_B022.KPC",
+    "faceKey": "face:BF_B022.ABP"
   },
   {
     "cardId": 45091,
@@ -5744,7 +6092,9 @@
       "shortDescription": "POW increases and HP recovers",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_B023.KPC",
+    "faceKey": "face:BF_B023.ABP"
   },
   {
     "cardId": 45092,
@@ -5777,7 +6127,9 @@
       "shortDescription": "Removes enemy Skill effects",
       "duration": "Scales with INT",
       "range": "aura_small"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_B024.KPC",
+    "faceKey": "face:BF_B024.ABP"
   },
   {
     "cardId": 45093,
@@ -5810,7 +6162,9 @@
       "shortDescription": "POW and Siege up but\nforced to move forward",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_B025.KPC",
+    "faceKey": "face:BF_B025.ABP"
   },
   {
     "cardId": 45073,
@@ -5844,7 +6198,9 @@
       "shortDescription": "Recovers Wei ally HP",
       "duration": "Scales with INT",
       "range": "medium_circle_ahead"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_B011.KPC",
+    "faceKey": "face:BF_B011.ABP"
   },
   {
     "cardId": 45094,
@@ -5878,7 +6234,9 @@
       "shortDescription": "POW and range increase and\narrows slow enemies",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_B026.KPC",
+    "faceKey": "face:BF_B026.ABP"
   },
   {
     "cardId": 45095,
@@ -5911,7 +6269,9 @@
       "shortDescription": "POW and INT and SPD increase",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_B027.KPC",
+    "faceKey": "face:BF_B027.ABP"
   },
   {
     "cardId": 45096,
@@ -5945,7 +6305,9 @@
       "shortDescription": "Stops enemies and POW increases\nSPD up past threshold",
       "duration": "Brief",
       "range": "aura_small"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_B028.KPC",
+    "faceKey": "face:BF_B028.ABP"
   },
   {
     "cardId": 45097,
@@ -5978,7 +6340,9 @@
       "shortDescription": "Drops 5 lightning bolts for damage",
       "duration": "Scales with INT",
       "range": "ally_board"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_B029.KPC",
+    "faceKey": "face:BF_B029.ABP"
   },
   {
     "cardId": 45104,
@@ -6011,7 +6375,9 @@
       "shortDescription": "Deals fire damage",
       "duration": "Scales with INT",
       "range": "beam_medium"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_B030.KPC",
+    "faceKey": "face:BF_B030.ABP"
   },
   {
     "cardId": 45057,
@@ -6042,7 +6408,9 @@
       "shortDescription": "[Dance] MP gain rate increases",
       "duration": "Until defeated",
       "range": "dance_board"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_B001.KPC",
+    "faceKey": "face:BF_B001.ABP"
   },
   {
     "cardId": 45058,
@@ -6075,7 +6443,9 @@
       "shortDescription": "Recovers ally HP beyond max",
       "duration": "Scales with INT",
       "range": "medium_circle_ahead"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_B002.KPC",
+    "faceKey": "face:BF_B002.ABP"
   },
   {
     "cardId": 45061,
@@ -6108,7 +6478,9 @@
       "shortDescription": "POW increases\n1 ally dies on activation",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_B005.KPC",
+    "faceKey": "face:BF_B005.ABP"
   },
   {
     "cardId": 45060,
@@ -6141,7 +6513,9 @@
       "shortDescription": "Enemies move toward you",
       "duration": "Scales with INT",
       "range": "medium_circle_ahead"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_B004.KPC",
+    "faceKey": "face:BF_B004.ABP"
   },
   {
     "cardId": 45059,
@@ -6174,7 +6548,9 @@
       "shortDescription": "Negates enemy Skills",
       "duration": "Scales with INT",
       "range": "aura_small"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_B003.KPC",
+    "faceKey": "face:BF_B003.ABP"
   },
   {
     "cardId": 45105,
@@ -6205,7 +6581,9 @@
       "shortDescription": "POW and SPD increase",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_B031.KPC",
+    "faceKey": "face:BF_B031.ABP"
   },
   {
     "cardId": 45106,
@@ -6238,7 +6616,9 @@
       "shortDescription": "Enemies move toward you",
       "duration": "Scales with INT",
       "range": "medium_circle_ahead"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_B032.KPC",
+    "faceKey": "face:BF_B032.ABP"
   },
   {
     "cardId": 45107,
@@ -6273,7 +6653,9 @@
       "shortDescription": "POW increases and HP recovers",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_B033.KPC",
+    "faceKey": "face:BF_B033.ABP"
   },
   {
     "cardId": 45108,
@@ -6307,6 +6689,8 @@
       "shortDescription": "POW and SPD increase\nHP recovers",
       "duration": "Scales with INT",
       "range": "self"
-    }
+    },
+    "bustupKey": "kpcbustup:BU_B034.KPC",
+    "faceKey": "face:BF_B034.ABP"
   }
 ]
