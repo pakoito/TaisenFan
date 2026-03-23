@@ -54,6 +54,14 @@
 			"includes": ["**/*"],
 			"linter": {
 				"rules": {
+					"complexity": {
+						"useMaxParams": {
+							"level": "error",
+							"options": {
+								"max": 16
+							}
+						}
+					},
 					"correctness": {
 						"useImportExtensions": "off",
 						"noUnresolvedImports": "off"
@@ -156,6 +164,7 @@
 				"src/utils/nds-parser.ts",
 				"src/utils/nfp-unpack.ts",
 				"src/utils/kpc-decode.ts",
+				"src/utils/abp-decode.ts",
 				"src/utils/image-cache.ts",
 				"src/workers/rom-worker.ts",
 				"src/workers/bps-patch.ts"
