@@ -28,15 +28,13 @@ import {
 import {
 	clearImageCache,
 	loadCachedImages,
-	saveImagesToCache,
+	savePngBlobsToCache,
 } from '@/utils/image-cache';
 import {RomWorkerClient} from '@/workers/rom-worker-client';
 
-/** Fire-and-forget cache save */
-function backgroundCacheSave(
-	cacheMap: Map<string, {rgba: Uint8Array; width: number; height: number}>,
-): void {
-	saveImagesToCache(cacheMap).catch((err: unknown) => {
+/** Fire-and-forget cache save (receives pre-encoded PNG blobs) */
+function backgroundCacheSavePngs(pngMap: Map<string, Blob>): void {
+	savePngBlobsToCache(pngMap).catch((err: unknown) => {
 		console.warn('[RomContext] Cache save failed:', err);
 	});
 }
@@ -62,36 +60,21 @@ function downloadArrayBuffer(data: ArrayBuffer, filename: string): void {
 	URL.revokeObjectURL(url);
 }
 
-function imagesToBlobs(
-	extractedImages: {
-		name: string;
-		rgba: Uint8Array;
-		width: number;
-		height: number;
-	}[],
-): {
+/** Create blob URLs from PNG ArrayBuffers (already encoded by the worker) */
+function pngsToBlobUrls(images: {name: string; png: ArrayBuffer}[]): {
 	blobMap: Map<string, string>;
-	cacheMap: Map<string, {rgba: Uint8Array; width: number; height: number}>;
+	pngMap: Map<string, Blob>;
 } {
 	const blobMap = new Map<string, string>();
-	const cacheMap = new Map<
-		string,
-		{rgba: Uint8Array; width: number; height: number}
-	>();
+	const pngMap = new Map<string, Blob>();
 
-	for (const img of extractedImages) {
-		const copy = new Uint8Array(img.rgba.length);
-		copy.set(img.rgba);
-		const blob = new Blob([copy], {type: 'application/octet-stream'});
+	for (const img of images) {
+		const blob = new Blob([img.png], {type: 'image/png'});
 		blobMap.set(img.name, URL.createObjectURL(blob));
-		cacheMap.set(img.name, {
-			rgba: img.rgba,
-			width: img.width,
-			height: img.height,
-		});
+		pngMap.set(img.name, blob);
 	}
 
-	return {blobMap, cacheMap};
+	return {blobMap, pngMap};
 }
 
 // ============================================================================
@@ -155,11 +138,11 @@ export function RomProvider({children}: PropsWithChildren) {
 							setProgress({phase, current, total});
 						},
 						onExtracted(extractedImages) {
-							const {blobMap, cacheMap} = imagesToBlobs(extractedImages);
+							const {blobMap, pngMap} = pngsToBlobUrls(extractedImages);
 							setImages(blobMap);
 							setStatus('loaded');
 							setProgress(null);
-							backgroundCacheSave(cacheMap);
+							backgroundCacheSavePngs(pngMap);
 						},
 						onExtractError(msg) {
 							setError(msg);

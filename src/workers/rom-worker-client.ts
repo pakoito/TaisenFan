@@ -13,9 +13,7 @@ export type RomWorkerCallbacks = {
 		current: number,
 		total: number,
 	) => void;
-	onExtracted?: (
-		images: {name: string; rgba: Uint8Array; width: number; height: number}[],
-	) => void;
+	onExtracted?: (images: {name: string; png: ArrayBuffer}[]) => void;
 	onExtractError?: (error: string) => void;
 	onPatchProgress?: (step: 'fetching' | 'verifying' | 'patching') => void;
 	onPatched?: (data: ArrayBuffer, filename: string) => void;
@@ -72,9 +70,7 @@ export class RomWorkerClient {
 				this.callbacks.onExtracted?.(
 					msg.images.map(img => ({
 						name: img.name,
-						rgba: new Uint8Array(img.rgba),
-						width: img.width,
-						height: img.height,
+						png: img.png,
 					})),
 				);
 				break;

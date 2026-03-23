@@ -119,23 +119,16 @@ export async function loadCachedImages(): Promise<CacheResult | null> {
 }
 
 /**
- * Save extracted images to IndexedDB with the current version.
+ * Save pre-encoded PNG blobs to IndexedDB with the current version.
  *
- * @param images - Map of filename → RGBA Uint8Array pairs with dimensions
+ * @param pngs - Map of image key → PNG Blob (already encoded by the worker)
  */
-export async function saveImagesToCache(
-	images: Map<string, {rgba: Uint8Array; width: number; height: number}>,
+export async function savePngBlobsToCache(
+	pngs: Map<string, Blob>,
 ): Promise<void> {
-	// Convert RGBA data to PNG Blobs via OffscreenCanvas
-	const entries = [...images.entries()];
-	const blobResults = await Promise.all(
-		entries.map(([, img]) => rgbaToBlob(img.rgba, img.width, img.height)),
-	);
 	const blobs: Record<string, Blob> = {};
-	for (let i = 0; i < entries.length; i += 1) {
-		const name = entries[i]?.[0];
-		const blob = blobResults[i];
-		if (name && blob) blobs[name] = blob;
+	for (const [name, blob] of pngs) {
+		blobs[name] = blob;
 	}
 
 	const record: CacheRecord = {
@@ -161,32 +154,4 @@ export async function clearImageCache(): Promise<void> {
 	} finally {
 		db.close();
 	}
-}
-
-// ============================================================================
-// RGBA → Blob conversion
-// ============================================================================
-
-function rgbaToBlob(
-	rgba: Uint8Array,
-	width: number,
-	height: number,
-): Promise<Blob> {
-	// OffscreenCanvas is available in modern browsers and workers
-	if (typeof OffscreenCanvas !== 'undefined') {
-		const canvas = new OffscreenCanvas(width, height);
-		const ctx = canvas.getContext('2d');
-		if (ctx) {
-			// Copy into a fresh ArrayBuffer to satisfy ImageData's type constraint
-			const copy = new Uint8ClampedArray(rgba.length);
-			copy.set(rgba);
-			const imageData = new ImageData(copy, width, height);
-			ctx.putImageData(imageData, 0, 0);
-			return canvas.convertToBlob({type: 'image/png'});
-		}
-	}
-	// Fallback: store raw RGBA (works but no PNG compression)
-	const copy = new Uint8Array(rgba.length);
-	copy.set(rgba);
-	return Promise.resolve(new Blob([copy], {type: 'application/octet-stream'}));
 }

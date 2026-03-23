@@ -6,6 +6,7 @@
  *
  * Extraction is driven by the image catalog — it unpacks each unique NFP
  * and decodes files based on their extension (KPC or ABP).
+ * Decoded RGBA is batch-converted to PNG via OffscreenCanvas before sending.
  */
 
 import {decodeAbp} from '@/utils/abp-decode';
@@ -30,10 +31,6 @@ function post(msg: WorkerResponse, transfer?: Transferable[]): void {
 	}
 }
 
-// ============================================================================
-// Build a set of wanted files per NFP from the catalog
-// ============================================================================
-
 function buildExtractionPlan(): Map<string, Set<string>> {
 	const plan = new Map<string, Set<string>>();
 	for (const entry of Object.values(IMAGE_CATALOG)) {
@@ -46,10 +43,6 @@ function buildExtractionPlan(): Map<string, Set<string>> {
 	}
 	return plan;
 }
-
-// ============================================================================
-// Decode a file based on its extension
-// ============================================================================
 
 function decodeFile(
 	data: Uint8Array,
@@ -66,78 +59,109 @@ function decodeFile(
 	}
 }
 
+function rgbaToPng(
+	rgba: Uint8Array,
+	width: number,
+	height: number,
+): Promise<ArrayBuffer> {
+	const canvas = new OffscreenCanvas(width, height);
+	const ctx = canvas.getContext('2d')!;
+	const clamped = new Uint8ClampedArray(rgba.length);
+	clamped.set(rgba);
+	ctx.putImageData(new ImageData(clamped, width, height), 0, 0);
+	return canvas
+		.convertToBlob({type: 'image/png'})
+		.then(blob => blob.arrayBuffer());
+}
+
 // ============================================================================
-// Extract
+// Extract: decode all images, then batch-convert to PNG
 // ============================================================================
 
-function handleExtract(rom: ArrayBuffer): void {
-	try {
-		romData = new Uint8Array(rom);
+type DecodedEntry = {
+	key: string;
+	rgba: Uint8Array;
+	width: number;
+	height: number;
+};
 
-		// Phase 1: Parse NDS filesystem
-		post({type: 'progress', phase: 'parsing', current: 0, total: 1});
-		const nds = parseNds(romData);
+function decodeAllImages(
+	nds: ReturnType<typeof parseNds>,
+	rom: Uint8Array,
+): DecodedEntry[] {
+	const plan = buildExtractionPlan();
+	let totalFiles = 0;
+	for (const wantedFiles of plan.values()) {
+		totalFiles += wantedFiles.size;
+	}
+	let decoded = 0;
+	const results: DecodedEntry[] = [];
 
-		// Phase 2: Unpack each NFP in the extraction plan
-		const plan = buildExtractionPlan();
-		const images: ExtractedImage[] = [];
-		const transferBuffers: ArrayBuffer[] = [];
-		let totalFiles = 0;
-		for (const wantedFiles of plan.values()) {
-			totalFiles += wantedFiles.size;
+	for (const nfpName of EXTRACTION_NFPS) {
+		const wantedFiles = plan.get(nfpName);
+		if (!wantedFiles) continue;
+
+		const nfpEntry = nds.files.find(
+			f => f.name.toLowerCase() === `${nfpName}.nfp`,
+		);
+		if (!nfpEntry) {
+			console.warn(`[worker] NFP not found in ROM: ${nfpName}.NFP`);
+			continue;
 		}
-		let decoded = 0;
 
-		for (const nfpName of EXTRACTION_NFPS) {
-			const wantedFiles = plan.get(nfpName);
-			if (!wantedFiles) continue;
+		post({
+			type: 'progress',
+			phase: 'unpacking',
+			current: decoded,
+			total: totalFiles,
+		});
+		const nfpSlice = sliceFile(rom, nfpEntry);
+		const nfpFiles = unpackNfp(nfpSlice);
 
-			const nfpEntry = nds.files.find(
-				f => f.name.toLowerCase() === `${nfpName}.nfp`,
-			);
-			if (!nfpEntry) {
-				console.warn(`[worker] NFP not found in ROM: ${nfpName}.NFP`);
-				continue;
-			}
-
+		for (const f of nfpFiles) {
+			if (!wantedFiles.has(f.name)) continue;
 			post({
 				type: 'progress',
-				phase: 'unpacking',
+				phase: 'decoding',
 				current: decoded,
 				total: totalFiles,
 			});
-			const nfpSlice = sliceFile(romData, nfpEntry);
-			const nfpFiles = unpackNfp(nfpSlice);
-
-			// Phase 3: Decode wanted files
-			for (const f of nfpFiles) {
-				if (!wantedFiles.has(f.name)) continue;
-
-				post({
-					type: 'progress',
-					phase: 'decoding',
-					current: decoded,
-					total: totalFiles,
-				});
-
-				try {
-					const result = decodeFile(f.data, f.name);
-					if (result) {
-						const key = `${nfpName}:${f.name}`;
-						const buf = new ArrayBuffer(result.rgba.byteLength);
-						new Uint8Array(buf).set(result.rgba);
-						images.push({
-							name: key,
-							rgba: buf,
-							width: result.width,
-							height: result.height,
-						});
-						transferBuffers.push(buf);
-					}
-				} catch {
-					// Skip individual decode failures
+			try {
+				const result = decodeFile(f.data, f.name);
+				if (result) {
+					results.push({key: `${nfpName}:${f.name}`, ...result});
 				}
-				decoded += 1;
+			} catch {
+				// Skip individual decode failures
+			}
+			decoded += 1;
+		}
+	}
+	return results;
+}
+
+async function handleExtract(rom: ArrayBuffer): Promise<void> {
+	try {
+		romData = new Uint8Array(rom);
+
+		post({type: 'progress', phase: 'parsing', current: 0, total: 1});
+		const nds = parseNds(romData);
+
+		// Decode all images (sync, with progress)
+		const decoded = decodeAllImages(nds, romData);
+
+		// Batch convert RGBA → PNG (parallel, single await)
+		const pngBuffers = await Promise.all(
+			decoded.map(d => rgbaToPng(d.rgba, d.width, d.height)),
+		);
+
+		const images: ExtractedImage[] = [];
+		const transferBuffers: ArrayBuffer[] = [];
+		for (let i = 0; i < decoded.length; i += 1) {
+			const buf = pngBuffers[i];
+			if (buf) {
+				images.push({name: decoded[i]!.key, png: buf});
+				transferBuffers.push(buf);
 			}
 		}
 
@@ -196,22 +220,20 @@ async function handlePatch(baseUrl: string): Promise<void> {
 }
 
 // ============================================================================
-// Eject
+// Message handler
 // ============================================================================
 
 function handleEject(): void {
 	romData = null;
 }
 
-// ============================================================================
-// Message handler
-// ============================================================================
-
 globalThis.onmessage = (e: MessageEvent<WorkerCommand>) => {
 	const cmd = e.data;
 	switch (cmd.type) {
 		case 'extract':
-			handleExtract(cmd.rom);
+			handleExtract(cmd.rom).catch(() => {
+				post({type: 'extract-error', error: 'Unexpected extraction error'});
+			});
 			break;
 		case 'patch':
 			handlePatch(cmd.baseUrl).catch(() => {

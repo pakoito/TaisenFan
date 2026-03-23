@@ -39,9 +39,8 @@ export type ProgressMessage = {
 
 export type ExtractedImage = {
 	name: string;
-	rgba: ArrayBuffer;
-	width: number;
-	height: number;
+	/** PNG blob as ArrayBuffer — ready for URL.createObjectURL */
+	png: ArrayBuffer;
 };
 
 export type ExtractDoneMessage = {
