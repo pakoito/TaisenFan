@@ -12,7 +12,7 @@
 		"test:ci": "vitest run",
 		"test:e2e:ci": "playwright test",
 		"lint:tsc": "tsc -b",
-		"lint:biome": "biome check --write --unsafe",
+		"lint:biome": "biome check --write",
 		"lint": "npm run lint:tsc && npm run lint:biome",
 		"format": "biome format --write",
 		"validate": "npm run lint && npm run test:ci && npm run test:e2e:ci",

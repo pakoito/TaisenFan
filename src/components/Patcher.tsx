@@ -96,7 +96,6 @@ export function Patcher() {
 }
 
 function zoneClass(step: PatchStep): string {
-	// biome-ignore lint/nursery/noUnnecessaryConditions: switch on union type is idiomatic
 	switch (step) {
 		case 'reading':
 		case 'patching':

@@ -1,10 +1,5 @@
-import {lazy, Suspense} from 'react';
 import {Link} from 'react-router';
 import {PageHead} from '@/components/PageHead';
-
-const Patcher = lazy(() =>
-	import('@/components/Patcher').then(m => ({default: m.Patcher})),
-);
 
 export function Home() {
 	return (
@@ -28,26 +23,20 @@ export function Home() {
 				</p>
 			</section>
 
-			{/* Patcher — Gold-stroked chronicle container */}
+			{/* ROM loader prompt */}
 			<section className='mx-auto mb-20 max-w-2xl'>
-				<div className='gold-stroke bg-surface-high p-8'>
-					<h2 className='mb-4 text-center font-black font-serif text-gold text-lg uppercase tracking-widest'>
-						Patch Your ROM
+				<div className='gold-stroke bg-surface-high p-8 text-center'>
+					<h2 className='mb-4 font-black font-serif text-gold text-lg uppercase tracking-widest'>
+						Load Your ROM
 					</h2>
-					<p className='mb-6 text-center text-sm text-text-faint'>
-						Select your original Japanese ROM and the patch will be applied in
-						your browser. Nothing is uploaded — everything runs locally.
+					<p className='mb-2 text-sm text-text-faint'>
+						Use the cartridge slot in the top-right corner to load your original
+						Japanese ROM. Portraits will appear across the site and you can
+						download the English translation patch.
 					</p>
-
-					<Suspense
-						fallback={
-							<div className='py-8 text-center text-sm text-text-dim'>
-								Loading patcher…
-							</div>
-						}
-					>
-						<Patcher />
-					</Suspense>
+					<p className='text-text-dim text-xs'>
+						Everything runs locally in your browser — nothing is uploaded.
+					</p>
 				</div>
 			</section>
 

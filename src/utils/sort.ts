@@ -19,7 +19,6 @@ export function compareLords(
 	dir: SortDir,
 ): number {
 	let cmp = 0;
-	// biome-ignore lint/nursery/noUnnecessaryConditions: switch on union type is idiomatic
 	switch (field) {
 		case 'sortNo':
 			cmp = a.sortNo - b.sortNo;

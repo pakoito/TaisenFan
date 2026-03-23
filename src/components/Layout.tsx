@@ -1,5 +1,6 @@
 import type {PropsWithChildren} from 'react';
 import {Link, NavLink, useLocation} from 'react-router';
+import {CartridgeSlot} from '@/components/CartridgeSlot';
 import {
 	NavigationMenu,
 	NavigationMenuContent,
@@ -119,6 +120,8 @@ export function Layout({children}: PropsWithChildren) {
 							</NavigationMenuItem>
 						</NavigationMenuList>
 					</NavigationMenu>
+
+					<CartridgeSlot />
 				</nav>
 			</header>
 
