@@ -7,8 +7,24 @@
  * portraits still display while prompting the user to re-extract.
  */
 
-/** Bump when extraction targets change (e.g. add game logo) */
-export const CACHE_VERSION = 1;
+import {IMAGE_CATALOG} from '@/utils/image-catalog';
+
+/**
+ * Auto-derived cache version — changes whenever the image catalog changes.
+ * FNV-1a hash of all sorted catalog keys, truncated to a positive 32-bit int.
+ * No manual bumping needed.
+ */
+function catalogHash(): number {
+	const keys = Object.keys(IMAGE_CATALOG).sort().join('\n');
+	let h = 0x81_1c_9d_c5; // FNV offset basis
+	for (let i = 0; i < keys.length; i += 1) {
+		h ^= keys.charCodeAt(i);
+		h = Math.imul(h, 0x01_00_01_93); // FNV prime
+	}
+	return h >>> 0; // ensure positive
+}
+
+export const CACHE_VERSION = catalogHash();
 
 const DB_NAME = 'taisen-fan-images';
 const DB_VERSION = 1;
