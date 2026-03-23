@@ -1,6 +1,6 @@
-import {Link} from 'react-router'
-import {PageHead} from '@/components/PageHead'
-import {GUIDES} from '@/pages/guides/guide-registry'
+import {Link} from 'react-router';
+import {PageHead} from '@/components/PageHead';
+import {GUIDES} from '@/pages/guides/guide-registry';
 
 export function GuideIndex() {
 	return (
@@ -35,5 +35,5 @@ export function GuideIndex() {
 				))}
 			</div>
 		</>
-	)
+	);
 }

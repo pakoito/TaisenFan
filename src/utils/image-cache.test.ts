@@ -1,4 +1,4 @@
-import {CACHE_VERSION} from '@/utils/image-cache'
+import {CACHE_VERSION} from '@/utils/image-cache';
 
 /**
  * image-cache.ts relies on IndexedDB and OffscreenCanvas which aren't
@@ -9,7 +9,7 @@ import {CACHE_VERSION} from '@/utils/image-cache'
 
 describe('image-cache constants', () => {
 	it('exports a positive CACHE_VERSION', () => {
-		expect(CACHE_VERSION).toBeGreaterThan(0)
-		expect(Number.isInteger(CACHE_VERSION)).toBe(true)
-	})
-})
+		expect(CACHE_VERSION).toBeGreaterThan(0);
+		expect(Number.isInteger(CACHE_VERSION)).toBe(true);
+	});
+});

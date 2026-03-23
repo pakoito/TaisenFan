@@ -1,6 +1,6 @@
-import type {FallbackProps} from 'react-error-boundary'
-import {Link} from 'react-router'
-import {Button} from '@/components/ui/button'
+import type {FallbackProps} from 'react-error-boundary';
+import {Link} from 'react-router';
+import {Button} from '@/components/ui/button';
 
 export function RouteErrorFallback({error, resetErrorBoundary}: FallbackProps) {
 	return (
@@ -38,5 +38,5 @@ export function RouteErrorFallback({error, resetErrorBoundary}: FallbackProps) {
 				</Button>
 			</div>
 		</section>
-	)
+	);
 }

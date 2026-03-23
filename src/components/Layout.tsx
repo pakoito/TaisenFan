@@ -1,66 +1,66 @@
-import type {PropsWithChildren} from 'react'
-import {Link, NavLink, useLocation} from 'react-router'
+import type {PropsWithChildren} from 'react';
+import {Link, NavLink, useLocation} from 'react-router';
 import {
 	NavigationMenu,
 	NavigationMenuContent,
 	NavigationMenuItem,
 	NavigationMenuLink,
 	NavigationMenuList,
-	NavigationMenuTrigger
-} from '@/components/ui/navigation-menu'
-import {navigationMenuTriggerStyle} from '@/components/ui/navigation-menu-styles'
-import {cn} from '@/lib/utils'
+	NavigationMenuTrigger,
+} from '@/components/ui/navigation-menu';
+import {navigationMenuTriggerStyle} from '@/components/ui/navigation-menu-styles';
+import {cn} from '@/lib/utils';
 
 /* ======================================================================== */
 /* Menu data                                                                */
 /* ======================================================================== */
 
 interface DropdownItem {
-	readonly to: string
-	readonly label: string
-	readonly disabled?: boolean
+	readonly to: string;
+	readonly label: string;
+	readonly disabled?: boolean;
 }
 
 const GUIDE_ITEMS: readonly DropdownItem[] = [
 	{to: '/guides/beginners', label: "Beginner's Guide"},
 	{
 		to: '/guides/campaign',
-		label: 'Campaign Walkthrough'
+		label: 'Campaign Walkthrough',
 	},
 	{
 		to: '/guides/campaign-merchants',
-		label: 'Campaign Merchants'
+		label: 'Campaign Merchants',
 	},
 	{to: '/guides/combat', label: 'Combat Mechanics'},
 	{
 		to: '/guides/deck-archetypes',
-		label: 'Deck Archetypes'
+		label: 'Deck Archetypes',
 	},
 	{
 		to: '/guides/deck-strategies',
-		label: 'Deck Strategies'
+		label: 'Deck Strategies',
 	},
 	{to: '/guides/duel', label: 'DUEL Guide'},
-	{to: '/guides/tactics', label: 'Tactics Guide'}
-]
+	{to: '/guides/tactics', label: 'Tactics Guide'},
+];
 
 const GAMEDATA_ITEMS: readonly DropdownItem[] = [
 	{to: '/gamedata/lords', label: 'Lord Cards'},
 	{to: '/gamedata/sages', label: 'Sage Cards'},
-	{to: '/gamedata/decks', label: 'Duel Decks'}
-]
+	{to: '/gamedata/decks', label: 'Duel Decks'},
+];
 
 /* ======================================================================== */
 /* Shared styles                                                            */
 /* ======================================================================== */
 
 const LINK_BASE =
-	'px-4 py-2 text-sm font-sans font-medium tracking-wide uppercase transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold motion-reduce:transition-none'
+	'px-4 py-2 text-sm font-sans font-medium tracking-wide uppercase transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold motion-reduce:transition-none';
 
 function navLinkClass({isActive}: {isActive: boolean}): string {
 	return isActive
 		? `${LINK_BASE} bg-cinnabar text-gold`
-		: `${LINK_BASE} text-text-muted hover:bg-surface-highest hover:text-gold`
+		: `${LINK_BASE} text-text-muted hover:bg-surface-highest hover:text-gold`;
 }
 
 /* ======================================================================== */
@@ -139,7 +139,7 @@ export function Layout({children}: PropsWithChildren) {
 				</p>
 			</footer>
 		</div>
-	)
+	);
 }
 
 /* ======================================================================== */
@@ -149,14 +149,14 @@ export function Layout({children}: PropsWithChildren) {
 function NavDropdown({
 	label,
 	items,
-	activePrefix
+	activePrefix,
 }: {
-	label: string
-	items: readonly DropdownItem[]
-	activePrefix: string
+	label: string;
+	items: readonly DropdownItem[];
+	activePrefix: string;
 }) {
-	const location = useLocation()
-	const isGroupActive = location.pathname.startsWith(activePrefix)
+	const location = useLocation();
+	const isGroupActive = location.pathname.startsWith(activePrefix);
 
 	return (
 		<NavigationMenuItem>
@@ -167,7 +167,7 @@ function NavDropdown({
 					'h-auto bg-transparent',
 					isGroupActive
 						? 'bg-cinnabar text-gold hover:bg-cinnabar'
-						: 'text-text-muted hover:bg-surface-highest hover:text-gold'
+						: 'text-text-muted hover:bg-surface-highest hover:text-gold',
 				)}
 			>
 				{label}
@@ -186,7 +186,7 @@ function NavDropdown({
 									<Link
 										className={cn(
 											'block px-4 py-2.5 font-sans text-sm text-text-muted transition-colors duration-100 hover:bg-surface-highest hover:text-gold motion-reduce:transition-none',
-											location.pathname === item.to && 'bg-cinnabar text-gold'
+											location.pathname === item.to && 'bg-cinnabar text-gold',
 										)}
 										to={item.to}
 									>
@@ -199,5 +199,5 @@ function NavDropdown({
 				</ul>
 			</NavigationMenuContent>
 		</NavigationMenuItem>
-	)
+	);
 }

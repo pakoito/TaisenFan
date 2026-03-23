@@ -1,55 +1,55 @@
-import {useMemo} from 'react'
-import {Link} from 'react-router'
-import {PageHead} from '@/components/PageHead'
+import {useMemo} from 'react';
+import {Link} from 'react-router';
+import {PageHead} from '@/components/PageHead';
 
 const EXCUSES = [
 	{
 		line: 'Kongming foresaw your arrival and set this page on fire.',
-		subline: 'The flames of the Empty Fort Strategy spare no scroll.'
+		subline: 'The flames of the Empty Fort Strategy spare no scroll.',
 	},
 	{
 		line: 'Cao Cao fled with this page on horseback.',
-		subline: 'He was last seen retreating through Huarong Trail.'
+		subline: 'He was last seen retreating through Huarong Trail.',
 	},
 	{
 		line: 'Lu Bu stood guard here. Nobody dared deliver the page.',
-		subline: 'Do not pursue Lu Bu.'
+		subline: 'Do not pursue Lu Bu.',
 	},
 	{
 		line: 'Zhou Yu devised a brilliant plan for this page — then coughed blood and died.',
-		subline: '"Why was I born if Zhuge Liang was also born?"'
+		subline: '"Why was I born if Zhuge Liang was also born?"',
 	},
 	{
 		line: 'Guan Yu let this page cross the five passes.',
-		subline: 'It slew six generals on its way out.'
+		subline: 'It slew six generals on its way out.',
 	},
 	{
 		line: 'Zhang Fei screamed at this page from Changban Bridge.',
-		subline: "The page retreated in terror. Cao Cao's army followed."
+		subline: "The page retreated in terror. Cao Cao's army followed.",
 	},
 	{
 		line: 'Sima Yi suspects this page is an ambush and refuses to approach.',
-		subline: 'He has ordered a full retreat, just to be safe.'
+		subline: 'He has ordered a full retreat, just to be safe.',
 	},
 	{
 		line: 'This page swore an oath in a peach garden and left to fight injustice.',
-		subline: 'It will return when the Han dynasty is restored.'
+		subline: 'It will return when the Han dynasty is restored.',
 	},
 	{
 		line: 'Huang Gai volunteered to suffer so this page could be sacrificed.',
-		subline: '"If not for the bitter, how would we know the sweet?"'
+		subline: '"If not for the bitter, how would we know the sweet?"',
 	},
 	{
 		line: 'Jiang Wei inherited this page, but lost it in his seventh northern expedition.',
-		subline: 'Some say an eighth attempt is planned.'
-	}
-] as const
+		subline: 'Some say an eighth attempt is planned.',
+	},
+] as const;
 
 export function NotFound() {
 	const excuse = useMemo(() => {
-		const idx = Math.floor(Math.random() * EXCUSES.length)
-		return EXCUSES[idx] ?? EXCUSES[0]
-	}, [])
+		const idx = Math.floor(Math.random() * EXCUSES.length);
+		return EXCUSES[idx] ?? EXCUSES[0];
+	}, []);
 
 	return (
 		<>
@@ -79,5 +79,5 @@ export function NotFound() {
 				</Link>
 			</section>
 		</>
-	)
+	);
 }

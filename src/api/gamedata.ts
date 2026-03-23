@@ -1,21 +1,21 @@
-import type {DuelDeck, LordCard, SageCard} from '@/types/gamedata'
+import type {DuelDeck, LordCard, SageCard} from '@/types/gamedata';
 
 async function fetchJson<T>(path: string): Promise<T> {
-	const response = await fetch(`${import.meta.env.BASE_URL}${path}`)
+	const response = await fetch(`${import.meta.env.BASE_URL}${path}`);
 	if (!response.ok) {
-		throw new Error(`Failed to load ${path}`)
+		throw new Error(`Failed to load ${path}`);
 	}
-	return response.json() as Promise<T>
+	return response.json() as Promise<T>;
 }
 
 export function getLords(): Promise<LordCard[]> {
-	return fetchJson('data/lords.json')
+	return fetchJson('data/lords.json');
 }
 
 export function getSages(): Promise<SageCard[]> {
-	return fetchJson('data/sages.json')
+	return fetchJson('data/sages.json');
 }
 
 export function getDecks(): Promise<DuelDeck[]> {
-	return fetchJson('data/decks.json')
+	return fetchJson('data/decks.json');
 }

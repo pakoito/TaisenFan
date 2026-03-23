@@ -1,10 +1,10 @@
-import {useCallback} from 'react'
-import {LordRow} from '@/components/LordRow'
-import {LORD_GRID} from '@/components/lord-grid'
-import {Accordion, AccordionItem} from '@/components/ui/accordion'
-import {cn} from '@/lib/utils'
-import type {LordCard} from '@/types/gamedata'
-import type {SortDir, SortField} from '@/utils/sort'
+import {useCallback} from 'react';
+import {LordRow} from '@/components/LordRow';
+import {LORD_GRID} from '@/components/lord-grid';
+import {Accordion, AccordionItem} from '@/components/ui/accordion';
+import {cn} from '@/lib/utils';
+import type {LordCard} from '@/types/gamedata';
+import type {SortDir, SortField} from '@/utils/sort';
 
 export function LordTable({
 	lords,
@@ -12,16 +12,16 @@ export function LordTable({
 	onToggleExpand,
 	sortField,
 	sortDir,
-	onToggleSort
+	onToggleSort,
 }: {
-	lords: LordCard[]
-	expanded: number | null
-	onToggleExpand: (value: string) => void
-	sortField: SortField
-	sortDir: SortDir
-	onToggleSort: (field: SortField) => void
+	lords: LordCard[];
+	expanded: number | null;
+	onToggleExpand: (value: string) => void;
+	sortField: SortField;
+	sortDir: SortDir;
+	onToggleSort: (field: SortField) => void;
 }) {
-	const accordionValue = expanded !== null ? String(expanded) : ''
+	const accordionValue = expanded !== null ? String(expanded) : '';
 
 	return (
 		<div className='overflow-x-auto font-sans text-sm'>
@@ -49,7 +49,7 @@ export function LordTable({
 				))}
 			</Accordion>
 		</div>
-	)
+	);
 }
 
 /* ======================================================================== */
@@ -59,17 +59,17 @@ export function LordTable({
 function LordGridHeader({
 	sortField,
 	sortDir,
-	onToggleSort
+	onToggleSort,
 }: {
-	sortField: SortField
-	sortDir: SortDir
-	onToggleSort: (field: SortField) => void
+	sortField: SortField;
+	sortDir: SortDir;
+	onToggleSort: (field: SortField) => void;
 }) {
 	return (
 		<div
 			className={cn(
 				LORD_GRID,
-				'bg-surface-highest py-2.5 text-[11px] text-text-faint uppercase tracking-wider'
+				'bg-surface-highest py-2.5 text-[11px] text-text-faint uppercase tracking-wider',
 			)}
 		>
 			<span />
@@ -122,7 +122,7 @@ function LordGridHeader({
 			/>
 			<span className='text-center font-medium'>Range</span>
 		</div>
-	)
+	);
 }
 
 /* ======================================================================== */
@@ -135,29 +135,29 @@ function SortCol({
 	active,
 	dir,
 	onClick,
-	left = false
+	left = false,
 }: {
-	label: string
-	field: SortField
-	active: boolean
-	dir: SortDir
-	onClick: (field: SortField) => void
-	left?: boolean
+	label: string;
+	field: SortField;
+	active: boolean;
+	dir: SortDir;
+	onClick: (field: SortField) => void;
+	left?: boolean;
 }) {
 	const handleClick = useCallback(() => {
-		onClick(field)
-	}, [onClick, field])
+		onClick(field);
+	}, [onClick, field]);
 
-	let arrow = ''
+	let arrow = '';
 	if (active) {
-		arrow = dir === 'asc' ? ' ▲' : ' ▼'
+		arrow = dir === 'asc' ? ' ▲' : ' ▼';
 	}
 	return (
 		<button
 			className={cn(
 				'cursor-pointer select-none bg-transparent p-0 font-medium transition-colors hover:text-gold',
 				left ? 'text-left' : 'text-center',
-				active && 'text-gold'
+				active && 'text-gold',
 			)}
 			onClick={handleClick}
 			type='button'
@@ -165,5 +165,5 @@ function SortCol({
 			{label}
 			{arrow}
 		</button>
-	)
+	);
 }

@@ -1,20 +1,20 @@
-import {useState} from 'react'
+import {useState} from 'react';
 import {
 	Collapsible,
 	CollapsibleContent,
-	CollapsibleTrigger
-} from '@/components/ui/collapsible'
-import type {SageAbility, SageCard as SageCardType} from '@/types/gamedata'
-import {factionBorder, factionHeaderBg} from '@/utils/faction'
-import {RangeImage} from './RangeImage'
-import {RarityBadge} from './RarityBadge'
+	CollapsibleTrigger,
+} from '@/components/ui/collapsible';
+import type {SageAbility, SageCard as SageCardType} from '@/types/gamedata';
+import {factionBorder, factionHeaderBg} from '@/utils/faction';
+import {RangeImage} from './RangeImage';
+import {RarityBadge} from './RarityBadge';
 
 interface Props {
-	sage: SageCardType
+	sage: SageCardType;
 }
 
 export function SageCard({sage}: Props) {
-	const [open, setOpen] = useState(false)
+	const [open, setOpen] = useState(false);
 
 	return (
 		<article
@@ -68,17 +68,17 @@ export function SageCard({sage}: Props) {
 				</div>
 			</div>
 		</article>
-	)
+	);
 }
 
 function AbilityBlock({
 	ability,
 	label,
-	sage = false
+	sage = false,
 }: {
-	ability: SageAbility
-	label: string
-	sage?: boolean
+	ability: SageAbility;
+	label: string;
+	sage?: boolean;
 }) {
 	return (
 		<div className='mb-4 bg-surface-mid p-3'>
@@ -105,5 +105,5 @@ function AbilityBlock({
 				{ability.description}
 			</p>
 		</div>
-	)
+	);
 }

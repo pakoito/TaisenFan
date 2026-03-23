@@ -1,10 +1,10 @@
-import {lazy, Suspense} from 'react'
-import {Link} from 'react-router'
-import {PageHead} from '@/components/PageHead'
+import {lazy, Suspense} from 'react';
+import {Link} from 'react-router';
+import {PageHead} from '@/components/PageHead';
 
 const Patcher = lazy(() =>
-	import('@/components/Patcher').then(m => ({default: m.Patcher}))
-)
+	import('@/components/Patcher').then(m => ({default: m.Patcher})),
+);
 
 export function Home() {
 	return (
@@ -151,7 +151,7 @@ export function Home() {
 				</div>
 			</section>
 		</>
-	)
+	);
 }
 
 /* ======================================================================== */
@@ -166,7 +166,7 @@ function InscriptionHeader({children}: {children: string}) {
 			</h2>
 			<div className='mx-auto mt-2 h-0.5 w-12 bg-cinnabar' />
 		</div>
-	)
+	);
 }
 
 /* ======================================================================== */
@@ -181,7 +181,7 @@ function StatBlock({label, value}: {label: string; value: string}) {
 				{label}
 			</div>
 		</div>
-	)
+	);
 }
 
 /* ======================================================================== */
@@ -191,11 +191,11 @@ function StatBlock({label, value}: {label: string; value: string}) {
 function DataLink({
 	to,
 	title,
-	description
+	description,
 }: {
-	to: string
-	title: string
-	description: string
+	to: string;
+	title: string;
+	description: string;
 }) {
 	return (
 		<Link
@@ -210,5 +210,5 @@ function DataLink({
 				View →
 			</div>
 		</Link>
-	)
+	);
 }

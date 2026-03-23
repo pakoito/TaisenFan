@@ -1,7 +1,7 @@
-import {CaretDownIcon, CaretUpIcon} from '@phosphor-icons/react'
-import {Accordion as AccordionPrimitive} from 'radix-ui'
-import type * as React from 'react'
-import {cn} from '@/lib/utils'
+import {CaretDownIcon, CaretUpIcon} from '@phosphor-icons/react';
+import {Accordion as AccordionPrimitive} from 'radix-ui';
+import type * as React from 'react';
+import {cn} from '@/lib/utils';
 
 function Accordion({
 	className,
@@ -13,7 +13,7 @@ function Accordion({
 			data-slot='accordion'
 			{...props}
 		/>
-	)
+	);
 }
 
 function AccordionItem({
@@ -26,7 +26,7 @@ function AccordionItem({
 			data-slot='accordion-item'
 			{...props}
 		/>
-	)
+	);
 }
 
 function AccordionTrigger({
@@ -39,7 +39,7 @@ function AccordionTrigger({
 			<AccordionPrimitive.Trigger
 				className={cn(
 					'group/accordion-trigger relative flex flex-1 items-start justify-between rounded-none border border-transparent py-2.5 text-left font-medium text-xs outline-none transition-all hover:underline focus-visible:border-ring focus-visible:ring-1 focus-visible:ring-ring/50 focus-visible:after:border-ring disabled:pointer-events-none disabled:opacity-50 **:data-[slot=accordion-trigger-icon]:ml-auto **:data-[slot=accordion-trigger-icon]:size-4 **:data-[slot=accordion-trigger-icon]:text-muted-foreground',
-					className
+					className,
 				)}
 				data-slot='accordion-trigger'
 				{...props}
@@ -55,7 +55,7 @@ function AccordionTrigger({
 				/>
 			</AccordionPrimitive.Trigger>
 		</AccordionPrimitive.Header>
-	)
+	);
 }
 
 function AccordionContent({
@@ -72,13 +72,13 @@ function AccordionContent({
 			<div
 				className={cn(
 					'h-(--radix-accordion-content-height) pt-0 pb-2.5 [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-foreground [&_p:not(:last-child)]:mb-4',
-					className
+					className,
 				)}
 			>
 				{children}
 			</div>
 		</AccordionPrimitive.Content>
-	)
+	);
 }
 
-export {Accordion, AccordionItem, AccordionTrigger, AccordionContent}
+export {Accordion, AccordionItem, AccordionTrigger, AccordionContent};

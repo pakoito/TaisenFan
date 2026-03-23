@@ -1,13 +1,13 @@
-import {useEffect} from 'react'
+import {useEffect} from 'react';
 
 interface Props {
-	title: string
+	title: string;
 }
 
 export function PageHead({title}: Props) {
 	useEffect(() => {
-		document.title = `${title} — TaisenFan`
-	}, [title])
+		document.title = `${title} — TaisenFan`;
+	}, [title]);
 
-	return null
+	return null;
 }

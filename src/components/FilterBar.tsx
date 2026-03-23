@@ -1,36 +1,36 @@
-import {useCallback} from 'react'
-import {Input} from '@/components/ui/input'
+import {useCallback} from 'react';
+import {Input} from '@/components/ui/input';
 import {
 	Select,
 	SelectContent,
 	SelectItem,
 	SelectTrigger,
-	SelectValue
-} from '@/components/ui/select'
+	SelectValue,
+} from '@/components/ui/select';
 
 /* ======================================================================== */
 /* SelectFilter                                                             */
 /* ======================================================================== */
 
 interface SelectFilterProps {
-	label: string
-	value: string
-	onChange: (value: string) => void
-	options: readonly {value: string; label: string}[]
+	label: string;
+	value: string;
+	onChange: (value: string) => void;
+	options: readonly {value: string; label: string}[];
 }
 
 export function SelectFilter({
 	label,
 	value,
 	onChange,
-	options
+	options,
 }: SelectFilterProps) {
 	const handleChange = useCallback(
 		(v: string) => {
-			onChange(v === '__all__' ? '' : v)
+			onChange(v === '__all__' ? '' : v);
 		},
-		[onChange]
-	)
+		[onChange],
+	);
 
 	return (
 		<div className='flex flex-col gap-0.5'>
@@ -51,7 +51,7 @@ export function SelectFilter({
 				</SelectContent>
 			</Select>
 		</div>
-	)
+	);
 }
 
 /* ======================================================================== */
@@ -59,22 +59,22 @@ export function SelectFilter({
 /* ======================================================================== */
 
 interface SearchFilterProps {
-	value: string
-	onChange: (value: string) => void
-	placeholder?: string
+	value: string;
+	onChange: (value: string) => void;
+	placeholder?: string;
 }
 
 export function SearchFilter({
 	value,
 	onChange,
-	placeholder = 'Search…'
+	placeholder = 'Search…',
 }: SearchFilterProps) {
 	const handleChange = useCallback(
 		(e: React.ChangeEvent<HTMLInputElement>) => {
-			onChange(e.target.value)
+			onChange(e.target.value);
 		},
-		[onChange]
-	)
+		[onChange],
+	);
 
 	return (
 		<div className='flex flex-col gap-0.5'>
@@ -92,5 +92,5 @@ export function SearchFilter({
 				value={value}
 			/>
 		</div>
-	)
+	);
 }

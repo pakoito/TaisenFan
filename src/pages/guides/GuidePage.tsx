@@ -1,19 +1,19 @@
-import {MDXProvider} from '@mdx-js/react'
-import {lazy, Suspense, useMemo} from 'react'
-import {Link, useParams} from 'react-router'
-import {mdxComponents} from '@/components/MdxComponents'
-import {PageHead} from '@/components/PageHead'
-import {GUIDES} from '@/pages/guides/guide-registry'
+import {MDXProvider} from '@mdx-js/react';
+import {lazy, Suspense, useMemo} from 'react';
+import {Link, useParams} from 'react-router';
+import {mdxComponents} from '@/components/MdxComponents';
+import {PageHead} from '@/components/PageHead';
+import {GUIDES} from '@/pages/guides/guide-registry';
 
 export function GuidePage() {
-	const {slug} = useParams<{slug: string}>()
-	const guide = GUIDES.find(g => g.slug === slug)
+	const {slug} = useParams<{slug: string}>();
+	const guide = GUIDES.find(g => g.slug === slug);
 
 	// useMemo must be called unconditionally — use a fallback loader
 	const Content = useMemo(
 		() => (guide ? lazy(guide.load) : () => null),
-		[guide]
-	)
+		[guide],
+	);
 
 	if (!guide) {
 		return (
@@ -26,7 +26,7 @@ export function GuidePage() {
 					Back to all guides
 				</Link>
 			</div>
-		)
+		);
 	}
 
 	return (
@@ -55,5 +55,5 @@ export function GuidePage() {
 				</Suspense>
 			</article>
 		</>
-	)
+	);
 }

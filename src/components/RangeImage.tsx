@@ -1,15 +1,15 @@
 interface Props {
-	range: string
-	sage?: boolean
-	className?: string
+	range: string;
+	sage?: boolean;
+	className?: string;
 }
 
 export function RangeImage({range, sage = false, className = ''}: Props) {
-	const base = import.meta.env.BASE_URL
+	const base = import.meta.env.BASE_URL;
 	const src = sage
 		? `${base}ranges/sage/${range}.png`
-		: `${base}ranges/${range}.png`
-	const label = range.replaceAll('_', ' ')
+		: `${base}ranges/${range}.png`;
+	const label = range.replaceAll('_', ' ');
 
 	return (
 		<img
@@ -21,5 +21,5 @@ export function RangeImage({range, sage = false, className = ''}: Props) {
 			title={label}
 			width={40}
 		/>
-	)
+	);
 }

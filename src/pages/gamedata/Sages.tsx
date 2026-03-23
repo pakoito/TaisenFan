@@ -1,40 +1,40 @@
-import {useSuspenseQuery} from '@tanstack/react-query'
-import {useMemo, useState} from 'react'
-import {getSages} from '@/api/gamedata'
-import {SearchFilter, SelectFilter} from '@/components/FilterBar'
-import {PageHead} from '@/components/PageHead'
-import {SageCard} from '@/components/SageCard'
-import {FACTIONS} from '@/types/gamedata'
-import {getFactionLabel} from '@/utils/faction'
+import {useSuspenseQuery} from '@tanstack/react-query';
+import {useMemo, useState} from 'react';
+import {getSages} from '@/api/gamedata';
+import {SearchFilter, SelectFilter} from '@/components/FilterBar';
+import {PageHead} from '@/components/PageHead';
+import {SageCard} from '@/components/SageCard';
+import {FACTIONS} from '@/types/gamedata';
+import {getFactionLabel} from '@/utils/faction';
 
 const FACTION_OPTIONS = FACTIONS.map(f => ({
 	value: f,
-	label: getFactionLabel(f)
-}))
+	label: getFactionLabel(f),
+}));
 
 export function Sages() {
 	const {data: sages} = useSuspenseQuery({
 		queryFn: getSages,
-		queryKey: ['sages']
-	})
+		queryKey: ['sages'],
+	});
 
-	const [faction, setFaction] = useState('')
-	const [search, setSearch] = useState('')
+	const [faction, setFaction] = useState('');
+	const [search, setSearch] = useState('');
 
 	const filtered = useMemo(() => {
-		const q = search.toLowerCase()
+		const q = search.toLowerCase();
 		return sages.filter(sage => {
-			if (faction && sage.faction !== faction) return false
+			if (faction && sage.faction !== faction) return false;
 			if (
 				q &&
 				!`${sage.name} ${sage.nameJapanese} ${sage.tactics.name} ${sage.formation.name}`
 					.toLowerCase()
 					.includes(q)
 			)
-				return false
-			return true
-		})
-	}, [sages, faction, search])
+				return false;
+			return true;
+		});
+	}, [sages, faction, search]);
 
 	return (
 		<>
@@ -70,5 +70,5 @@ export function Sages() {
 				</p>
 			) : null}
 		</>
-	)
+	);
 }

@@ -1,13 +1,13 @@
-import type {MDXComponents} from 'mdx/types'
-import {Link} from 'react-router'
+import type {MDXComponents} from 'mdx/types';
+import {Link} from 'react-router';
 import {
 	Table,
 	TableBody,
 	TableCell,
 	TableHead,
 	TableHeader,
-	TableRow
-} from '@/components/ui/table'
+	TableRow,
+} from '@/components/ui/table';
 
 /**
  * Maps standard HTML elements produced by MDX to our Digital Scribe
@@ -55,7 +55,7 @@ export const mdxComponents: MDXComponents = {
 					to={href}
 					{...props}
 				/>
-			)
+			);
 		}
 		return (
 			<a
@@ -65,7 +65,7 @@ export const mdxComponents: MDXComponents = {
 				target='_blank'
 				{...props}
 			/>
-		)
+		);
 	},
 
 	// Lists
@@ -126,5 +126,5 @@ export const mdxComponents: MDXComponents = {
 	th: props => (
 		<TableHead className='bg-surface-highest text-text-faint' {...props} />
 	),
-	td: props => <TableCell className='text-text-muted' {...props} />
-}
+	td: props => <TableCell className='text-text-muted' {...props} />,
+};

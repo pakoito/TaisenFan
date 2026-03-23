@@ -1,8 +1,8 @@
-import {useCallback, useRef, useState} from 'react'
-import {Button} from '@/components/ui/button'
-import {applyPatch, downloadBlob, type PatchResult} from '@/utils/patcher'
+import {useCallback, useRef, useState} from 'react';
+import {Button} from '@/components/ui/button';
+import {applyPatch, downloadBlob, type PatchResult} from '@/utils/patcher';
 
-type PatchStep = 'idle' | 'reading' | 'patching' | 'success' | 'error'
+type PatchStep = 'idle' | 'reading' | 'patching' | 'success' | 'error';
 
 function noop() {
 	/* intentionally empty */
@@ -10,61 +10,61 @@ function noop() {
 
 // biome-ignore lint/complexity/noExcessiveLinesPerFunction: patcher state machine requires unified handler
 export function Patcher() {
-	const [step, setStep] = useState<PatchStep>('idle')
-	const [result, setResult] = useState<PatchResult | null>(null)
-	const inputRef = useRef<HTMLInputElement>(null)
+	const [step, setStep] = useState<PatchStep>('idle');
+	const [result, setResult] = useState<PatchResult | null>(null);
+	const inputRef = useRef<HTMLInputElement>(null);
 
 	const handleFile = useCallback(async (file: File) => {
-		setStep('reading')
+		setStep('reading');
 		try {
-			const romBuffer = await file.arrayBuffer()
-			setStep('patching')
-			const patchResult = await applyPatch(romBuffer)
-			setResult(patchResult)
-			setStep(patchResult.success ? 'success' : 'error')
+			const romBuffer = await file.arrayBuffer();
+			setStep('patching');
+			const patchResult = await applyPatch(romBuffer);
+			setResult(patchResult);
+			setStep(patchResult.success ? 'success' : 'error');
 			if (patchResult.success && patchResult.data && patchResult.filename) {
-				downloadBlob(patchResult.data, patchResult.filename)
+				downloadBlob(patchResult.data, patchResult.filename);
 			}
 		} catch {
-			setResult({success: false, error: 'Failed to read ROM file.'})
-			setStep('error')
+			setResult({success: false, error: 'Failed to read ROM file.'});
+			setStep('error');
 		}
-	}, [])
+	}, []);
 
 	const onFileChange = useCallback(
 		(e: React.ChangeEvent<HTMLInputElement>) => {
-			const [file] = e.target.files ?? []
-			if (file) handleFile(file).catch(noop)
+			const [file] = e.target.files ?? [];
+			if (file) handleFile(file).catch(noop);
 		},
-		[handleFile]
-	)
+		[handleFile],
+	);
 
 	const onDrop = useCallback(
 		(e: React.DragEvent) => {
-			e.preventDefault()
-			const [file] = e.dataTransfer.files
-			if (file) handleFile(file).catch(noop)
+			e.preventDefault();
+			const [file] = e.dataTransfer.files;
+			if (file) handleFile(file).catch(noop);
 		},
-		[handleFile]
-	)
+		[handleFile],
+	);
 
 	const onDragOver = useCallback((e: React.DragEvent) => {
-		e.preventDefault()
-	}, [])
+		e.preventDefault();
+	}, []);
 
 	const reset = useCallback(() => {
-		setStep('idle')
-		setResult(null)
-		if (inputRef.current) inputRef.current.value = ''
-	}, [])
+		setStep('idle');
+		setResult(null);
+		if (inputRef.current) inputRef.current.value = '';
+	}, []);
 
 	const redownload = useCallback(() => {
 		if (result?.data && result.filename) {
-			downloadBlob(result.data, result.filename)
+			downloadBlob(result.data, result.filename);
 		}
-	}, [result])
+	}, [result]);
 
-	const isProcessing = step === 'reading' || step === 'patching'
+	const isProcessing = step === 'reading' || step === 'patching';
 
 	return (
 		// biome-ignore lint/a11y/noStaticElementInteractions: drop zone requires drag handlers
@@ -92,7 +92,7 @@ export function Patcher() {
 				<ErrorState error={result?.error ?? 'Unknown error'} onReset={reset} />
 			) : null}
 		</div>
-	)
+	);
 }
 
 function zoneClass(step: PatchStep): string {
@@ -100,22 +100,22 @@ function zoneClass(step: PatchStep): string {
 	switch (step) {
 		case 'reading':
 		case 'patching':
-			return 'cursor-wait border-gold-dim bg-gold/5'
+			return 'cursor-wait border-gold-dim bg-gold/5';
 		case 'success':
-			return 'border-shu bg-shu/5'
+			return 'border-shu bg-shu/5';
 		case 'error':
-			return 'border-cinnabar bg-cinnabar/5'
+			return 'border-cinnabar bg-cinnabar/5';
 		default:
-			return 'cursor-pointer border-border-dim bg-surface-mid hover:border-gold-muted hover:bg-surface-high'
+			return 'cursor-pointer border-border-dim bg-surface-mid hover:border-gold-muted hover:bg-surface-high';
 	}
 }
 
 function IdleState({
 	inputRef,
-	onFileChange
+	onFileChange,
 }: {
-	inputRef: React.RefObject<HTMLInputElement | null>
-	onFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+	inputRef: React.RefObject<HTMLInputElement | null>;
+	onFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) {
 	return (
 		<>
@@ -146,15 +146,15 @@ function IdleState({
 				/>
 			</label>
 		</>
-	)
+	);
 }
 
 function ProcessingState({
 	message,
-	subtitle
+	subtitle,
 }: {
-	message: string
-	subtitle?: string
+	message: string;
+	subtitle?: string;
 }) {
 	return (
 		<>
@@ -164,15 +164,15 @@ function ProcessingState({
 			<p className='font-bold font-serif text-gold text-sm'>{message}</p>
 			{subtitle ? <p className='text-text-dim text-xs'>{subtitle}</p> : null}
 		</>
-	)
+	);
 }
 
 function SuccessState({
 	onRedownload,
-	onReset
+	onReset,
 }: {
-	onRedownload: () => void
-	onReset: () => void
+	onRedownload: () => void;
+	onReset: () => void;
 }) {
 	return (
 		<>
@@ -197,7 +197,7 @@ function SuccessState({
 				</Button>
 			</div>
 		</>
-	)
+	);
 }
 
 function ErrorState({error, onReset}: {error: string; onReset: () => void}) {
@@ -214,5 +214,5 @@ function ErrorState({error, onReset}: {error: string; onReset: () => void}) {
 				Try Again
 			</Button>
 		</>
-	)
+	);
 }

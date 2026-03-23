@@ -1,13 +1,13 @@
 /// <reference types="vitest/config" />
 
-import fs from 'node:fs'
-import path from 'node:path'
-import mdx from '@mdx-js/rollup'
-import tailwindcss from '@tailwindcss/vite'
-import react from '@vitejs/plugin-react'
-import remarkFrontmatter from 'remark-frontmatter'
-import remarkGfm from 'remark-gfm'
-import {defineConfig, type Plugin} from 'vite'
+import fs from 'node:fs';
+import path from 'node:path';
+import mdx from '@mdx-js/rollup';
+import tailwindcss from '@tailwindcss/vite';
+import react from '@vitejs/plugin-react';
+import remarkFrontmatter from 'remark-frontmatter';
+import remarkGfm from 'remark-gfm';
+import {defineConfig, type Plugin} from 'vite';
 
 /**
  * GitHub Pages SPA routing workaround.
@@ -21,33 +21,33 @@ function ghPages404(): Plugin {
 	return {
 		name: 'gh-pages-404',
 		closeBundle() {
-			const outDir = path.resolve(import.meta.dirname, 'dist')
-			const src = path.join(outDir, 'index.html')
-			const dest = path.join(outDir, '404.html')
+			const outDir = path.resolve(import.meta.dirname, 'dist');
+			const src = path.join(outDir, 'index.html');
+			const dest = path.join(outDir, '404.html');
 			if (fs.existsSync(src)) {
-				fs.copyFileSync(src, dest)
+				fs.copyFileSync(src, dest);
 			}
-		}
-	}
+		},
+	};
 }
 
-const REACT_INCLUDE = /\.(?:jsx|tsx|md|mdx)$/u
+const REACT_INCLUDE = /\.(?:jsx|tsx|md|mdx)$/u;
 
 export default defineConfig(() => ({
 	base: '/TaisenFan/',
 	plugins: [
 		mdx({
 			providerImportSource: '@mdx-js/react',
-			remarkPlugins: [remarkGfm, remarkFrontmatter]
+			remarkPlugins: [remarkGfm, remarkFrontmatter],
 		}),
 		react({include: REACT_INCLUDE}),
 		tailwindcss(),
-		ghPages404()
+		ghPages404(),
 	],
 	resolve: {
 		alias: {
-			'@': path.resolve(import.meta.dirname, './src')
-		}
+			'@': path.resolve(import.meta.dirname, './src'),
+		},
 	},
 	test: {
 		bail: 1,
@@ -56,6 +56,6 @@ export default defineConfig(() => ({
 		environment: 'happy-dom',
 		globals: true,
 		include: ['src/**/*.test.ts?(x)'],
-		passWithNoTests: true
-	}
-}))
+		passWithNoTests: true,
+	},
+}));

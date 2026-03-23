@@ -1,37 +1,37 @@
-import {useSuspenseQuery} from '@tanstack/react-query'
-import {useMemo, useState} from 'react'
-import {getDecks} from '@/api/gamedata'
-import {SearchFilter, SelectFilter} from '@/components/FilterBar'
-import {PageHead} from '@/components/PageHead'
-import {DIFFICULTIES, type DuelDeck} from '@/types/gamedata'
-import {factionBorder, factionHeaderBg} from '@/utils/faction'
+import {useSuspenseQuery} from '@tanstack/react-query';
+import {useMemo, useState} from 'react';
+import {getDecks} from '@/api/gamedata';
+import {SearchFilter, SelectFilter} from '@/components/FilterBar';
+import {PageHead} from '@/components/PageHead';
+import {DIFFICULTIES, type DuelDeck} from '@/types/gamedata';
+import {factionBorder, factionHeaderBg} from '@/utils/faction';
 
-const DIFFICULTY_OPTIONS = DIFFICULTIES.map(d => ({value: d, label: d}))
+const DIFFICULTY_OPTIONS = DIFFICULTIES.map(d => ({value: d, label: d}));
 
 const DIFFICULTY_COLORS: Record<string, string> = {
 	Easy: 'bg-shu text-white',
 	Normal: 'bg-gold-dark text-gold',
-	Hard: 'bg-cinnabar text-gold'
-}
+	Hard: 'bg-cinnabar text-gold',
+};
 
 export function Decks() {
 	const {data: decks} = useSuspenseQuery({
 		queryFn: getDecks,
-		queryKey: ['decks']
-	})
+		queryKey: ['decks'],
+	});
 
-	const [difficulty, setDifficulty] = useState('')
-	const [search, setSearch] = useState('')
+	const [difficulty, setDifficulty] = useState('');
+	const [search, setSearch] = useState('');
 
 	const filtered = useMemo(() => {
-		const q = search.toLowerCase()
+		const q = search.toLowerCase();
 		return decks.filter(deck => {
-			if (difficulty && deck.difficulty !== difficulty) return false
+			if (difficulty && deck.difficulty !== difficulty) return false;
 			if (q && !`${deck.name} ${deck.description}`.toLowerCase().includes(q))
-				return false
-			return true
-		})
-	}, [decks, difficulty, search])
+				return false;
+			return true;
+		});
+	}, [decks, difficulty, search]);
 
 	return (
 		<>
@@ -67,11 +67,11 @@ export function Decks() {
 				</p>
 			) : null}
 		</>
-	)
+	);
 }
 
 function DeckCard({deck}: {deck: DuelDeck}) {
-	const sageFaction = deck.sage?.faction ?? 'Other'
+	const sageFaction = deck.sage?.faction ?? 'Other';
 
 	return (
 		<article
@@ -173,5 +173,5 @@ function DeckCard({deck}: {deck: DuelDeck}) {
 				) : null}
 			</div>
 		</article>
-	)
+	);
 }

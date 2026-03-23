@@ -1,10 +1,10 @@
-import {LORD_GRID} from '@/components/lord-grid'
-import {RangeImage} from '@/components/RangeImage'
-import {AccordionContent, AccordionTrigger} from '@/components/ui/accordion'
-import {Badge} from '@/components/ui/badge'
-import {cn} from '@/lib/utils'
-import type {LordCard} from '@/types/gamedata'
-import {getFactionConfig} from '@/utils/faction'
+import {LORD_GRID} from '@/components/lord-grid';
+import {RangeImage} from '@/components/RangeImage';
+import {AccordionContent, AccordionTrigger} from '@/components/ui/accordion';
+import {Badge} from '@/components/ui/badge';
+import {cn} from '@/lib/utils';
+import type {LordCard} from '@/types/gamedata';
+import {getFactionConfig} from '@/utils/faction';
 
 // ============================================================================
 // Color helpers
@@ -13,28 +13,28 @@ import {getFactionConfig} from '@/utils/faction'
 function rarityColor(rarity: string): string {
 	switch (rarity) {
 		case 'SR':
-			return 'text-han'
+			return 'text-han';
 		case 'R':
-			return 'text-wu'
+			return 'text-wu';
 		case 'UC':
-			return 'text-shu'
+			return 'text-shu';
 		case 'LE':
-			return 'text-gold'
+			return 'text-gold';
 		default:
-			return 'text-text-faint'
+			return 'text-text-faint';
 	}
 }
 
 function attrColor(attr: string): string {
 	switch (attr) {
 		case 'Heaven':
-			return 'text-wu'
+			return 'text-wu';
 		case 'Earth':
-			return 'text-gold-muted'
+			return 'text-gold-muted';
 		case 'Man':
-			return 'text-shu'
+			return 'text-shu';
 		default:
-			return ''
+			return '';
 	}
 }
 
@@ -43,11 +43,11 @@ function attrColor(attr: string): string {
 // ============================================================================
 
 interface LordRowProps {
-	lord: LordCard
+	lord: LordCard;
 }
 
 export function LordRow({lord}: LordRowProps) {
-	const cfg = getFactionConfig(lord.faction)
+	const cfg = getFactionConfig(lord.faction);
 
 	return (
 		<>
@@ -56,14 +56,14 @@ export function LordRow({lord}: LordRowProps) {
 					LORD_GRID,
 					'cursor-pointer py-2 transition-colors duration-75 hover:bg-surface-highest hover:no-underline focus-visible:outline-2 focus-visible:outline-gold focus-visible:outline-offset-[-2px] motion-reduce:transition-none',
 					'[&>*[data-slot=accordion-trigger-icon]]:hidden',
-					cfg.rowBg
+					cfg.rowBg,
 				)}
 			>
 				<span className='text-center'>
 					<span
 						className={cn(
 							'inline-flex h-7 w-7 items-center justify-center font-black font-serif text-[11px]',
-							cfg.cls
+							cfg.cls,
 						)}
 						title={cfg.label}
 					>
@@ -90,7 +90,7 @@ export function LordRow({lord}: LordRowProps) {
 				<span
 					className={cn(
 						'text-center font-medium text-xs',
-						attrColor(lord.attribute)
+						attrColor(lord.attribute),
 					)}
 				>
 					{lord.attribute}
@@ -116,7 +116,7 @@ export function LordRow({lord}: LordRowProps) {
 				</div>
 			</AccordionContent>
 		</>
-	)
+	);
 }
 
 // ============================================================================
@@ -147,7 +147,7 @@ function SkillDetail({lord}: {lord: LordCard}) {
 				{lord.skill.description}
 			</p>
 		</div>
-	)
+	);
 }
 
 function LoreDetail({lord}: {lord: LordCard}) {
@@ -167,7 +167,7 @@ function LoreDetail({lord}: {lord: LordCard}) {
 				</span>
 			</div>
 		</div>
-	)
+	);
 }
 
 // ============================================================================
@@ -176,7 +176,7 @@ function LoreDetail({lord}: {lord: LordCard}) {
 
 function TraitBadges({traits}: {traits: readonly string[]}) {
 	if (traits.length === 0) {
-		return <span className='text-text-dim text-xs'>—</span>
+		return <span className='text-text-dim text-xs'>—</span>;
 	}
 
 	return (
@@ -191,5 +191,5 @@ function TraitBadges({traits}: {traits: readonly string[]}) {
 				</Badge>
 			))}
 		</span>
-	)
+	);
 }
