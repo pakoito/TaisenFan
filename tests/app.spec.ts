@@ -15,7 +15,7 @@ test('renders the home page', async ({page}) => {
 	await expect(
 		page.getByRole('heading', {level: 1, name: HERO_HEADING}),
 	).toBeVisible();
-	await expect(page.getByText('Patch Your ROM')).toBeVisible();
+	await expect(page.getByText('Load Your ROM')).toBeVisible();
 });
 
 // ---------------------------------------------------------------------------
