@@ -28,7 +28,8 @@
 			"quoteStyle": "single",
 			"semicolons": "always",
 			"trailingCommas": "all"
-		}
+		},
+		"globals": ["__BUILD_TIMESTAMP__"]
 	},
 	"linter": {
 		"domains": {
@@ -130,10 +131,12 @@
 			"linter": {
 				"rules": {
 					"correctness": {
-						"noNodejsModules": "off"
+						"noNodejsModules": "off",
+						"useQwikValidLexicalScope": "off"
 					},
 					"style": {
-						"noDefaultExport": "off"
+						"noDefaultExport": "off",
+						"useNamingConvention": "off"
 					}
 				}
 			}

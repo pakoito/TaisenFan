@@ -137,9 +137,19 @@ export function Layout({children}: PropsWithChildren) {
 			{/* Footer — subtle, receding */}
 			<footer className='bg-surface-dim px-6 py-6'>
 				<div className='brushstroke-sep mx-auto mb-4 max-w-7xl' />
-				<p className='text-center font-sans text-text-dim text-xs uppercase tracking-wider'>
-					TaisenFan — Fan site for Sangokushi Taisen Ten (三国志大戦DS)
-				</p>
+				<div className='mx-auto max-w-7xl'>
+					<p className='text-center font-sans text-text-dim text-xs uppercase tracking-wider'>
+						TaisenFan — Fan site for Sangokushi Taisen Ten (三国志大戦DS)
+					</p>
+					<p className='mt-2 text-center font-sans text-text-dim text-[10px] leading-relaxed'>
+						Sangokushi Taisen DS (三国志大戦DS) © 2008 SEGA / ALPHA-UNIT. This
+						is an unofficial fan project with no affiliation to SEGA or
+						ALPHA-UNIT. All game assets belong to their respective owners.
+					</p>
+					<p className='mt-3 text-right font-mono text-text-dim text-[10px]'>
+						{__BUILD_TIMESTAMP__}
+					</p>
+				</div>
 			</footer>
 		</div>
 	);

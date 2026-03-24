@@ -33,8 +33,17 @@ function ghPages404(): Plugin {
 
 const REACT_INCLUDE = /\.(?:jsx|tsx|md|mdx)$/u;
 
+function buildTimestamp(): string {
+	const d = new Date();
+	const pad = (n: number) => String(n).padStart(2, '0');
+	return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
+
 export default defineConfig(() => ({
 	base: '/TaisenFan/',
+	define: {
+		__BUILD_TIMESTAMP__: JSON.stringify(buildTimestamp()),
+	},
 	plugins: [
 		mdx({
 			providerImportSource: '@mdx-js/react',
