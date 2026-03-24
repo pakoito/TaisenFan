@@ -146,7 +146,7 @@ export function Layout({children}: PropsWithChildren) {
 						is an unofficial fan project with no affiliation to SEGA or
 						ALPHA-UNIT. All game assets belong to their respective owners.
 					</p>
-					<p className='mt-3 text-right font-mono text-text-dim text-[10px]'>
+					<p className='mt-4 text-right font-mono text-[8px] text-text-dim opacity-30'>
 						{__BUILD_TIMESTAMP__}
 					</p>
 				</div>
