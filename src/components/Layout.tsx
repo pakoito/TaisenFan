@@ -135,7 +135,7 @@ export function Layout({children}: PropsWithChildren) {
 			</main>
 
 			{/* Footer — subtle, receding */}
-			<footer className='bg-surface-dim px-6 py-6'>
+			<footer className='relative bg-surface-dim px-6 py-6'>
 				<div className='brushstroke-sep mx-auto mb-4 max-w-7xl' />
 				<div className='mx-auto max-w-7xl'>
 					<p className='text-center font-sans text-text-dim text-xs uppercase tracking-wider'>
@@ -146,10 +146,10 @@ export function Layout({children}: PropsWithChildren) {
 						is an unofficial fan project with no affiliation to SEGA or
 						ALPHA-UNIT. All game assets belong to their respective owners.
 					</p>
-					<p className='mt-4 text-right font-mono text-[8px] text-text-dim opacity-30'>
-						{__BUILD_TIMESTAMP__}
-					</p>
 				</div>
+				<span className='absolute right-2 bottom-1 font-mono text-[8px] text-text-dim opacity-30'>
+					{__BUILD_TIMESTAMP__}
+				</span>
 			</footer>
 		</div>
 	);
