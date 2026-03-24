@@ -1,4 +1,4 @@
-import type {PropsWithChildren} from 'react';
+import {type PropsWithChildren, useCallback, useEffect, useState} from 'react';
 import {Link, NavLink, useLocation} from 'react-router';
 import {CartridgeSlot} from '@/components/CartridgeSlot';
 import {
@@ -10,6 +10,13 @@ import {
 	NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu';
 import {navigationMenuTriggerStyle} from '@/components/ui/navigation-menu-styles';
+import {
+	Sheet,
+	SheetContent,
+	SheetHeader,
+	SheetTitle,
+	SheetTrigger,
+} from '@/components/ui/sheet';
 import {cn} from '@/lib/utils';
 
 /* ======================================================================== */
@@ -24,23 +31,11 @@ type DropdownItem = {
 
 const GUIDE_ITEMS: readonly DropdownItem[] = [
 	{to: '/guides/beginners', label: "Beginner's Guide"},
-	{
-		to: '/guides/campaign',
-		label: 'Campaign Walkthrough',
-	},
-	{
-		to: '/guides/campaign-merchants',
-		label: 'Campaign Merchants',
-	},
+	{to: '/guides/campaign', label: 'Campaign Walkthrough'},
+	{to: '/guides/campaign-merchants', label: 'Campaign Merchants'},
 	{to: '/guides/combat', label: 'Combat Mechanics'},
-	{
-		to: '/guides/deck-archetypes',
-		label: 'Deck Archetypes',
-	},
-	{
-		to: '/guides/deck-strategies',
-		label: 'Deck Strategies',
-	},
+	{to: '/guides/deck-archetypes', label: 'Deck Archetypes'},
+	{to: '/guides/deck-strategies', label: 'Deck Strategies'},
 	{to: '/guides/duel', label: 'DUEL Guide'},
 	{to: '/guides/tactics', label: 'Tactics Guide'},
 ];
@@ -75,53 +70,30 @@ export function Layout({children}: PropsWithChildren) {
 			<header className='border-border-dim border-b bg-surface-dim'>
 				<nav
 					aria-label='Main navigation'
-					className='mx-auto flex max-w-7xl items-center gap-1 px-6 py-4'
+					className='mx-auto flex max-w-7xl items-center gap-1 px-4 py-3 md:px-6 md:py-4'
 				>
+					{/* Logo */}
 					<NavLink
-						className='mr-8 shrink-0 font-black font-serif text-gold text-xl tracking-widest focus-visible:outline-2 focus-visible:outline-gold focus-visible:outline-offset-2'
+						className='shrink-0 font-black font-serif text-gold text-xl tracking-widest focus-visible:outline-2 focus-visible:outline-gold focus-visible:outline-offset-2'
 						to='/'
 					>
 						<span className='text-cinnabar-light'>大戦</span>
 						<span className='text-gold-dim'>FAN</span>
 					</NavLink>
 
-					<NavigationMenu viewport={false}>
-						<NavigationMenuList>
-							{/* Home — direct link */}
-							<NavigationMenuItem>
-								<NavLink className={navLinkClass} end={true} to='/'>
-									Home
-								</NavLink>
-							</NavigationMenuItem>
+					{/* Desktop nav — hidden on mobile */}
+					<div className='ml-8 hidden md:block'>
+						<DesktopNav />
+					</div>
 
-							{/* Guides dropdown */}
-							<NavDropdown
-								activePrefix='/guides'
-								items={GUIDE_ITEMS}
-								label='Guides'
-							/>
+					{/* Spacer */}
+					<div className='flex-1' />
 
-							{/* Game Data dropdown */}
-							<NavDropdown
-								activePrefix='/gamedata'
-								items={GAMEDATA_ITEMS}
-								label='Game Data'
-							/>
-
-							{/* Save Editor — disabled placeholder */}
-							<NavigationMenuItem>
-								<span
-									aria-disabled='true'
-									className={cn(LINK_BASE, 'cursor-default text-text-dim')}
-									title='Coming soon'
-								>
-									Save Editor
-								</span>
-							</NavigationMenuItem>
-						</NavigationMenuList>
-					</NavigationMenu>
-
+					{/* Cartridge slot — always visible */}
 					<CartridgeSlot />
+
+					{/* Mobile hamburger — hidden on desktop */}
+					<MobileNav />
 				</nav>
 			</header>
 
@@ -156,7 +128,175 @@ export function Layout({children}: PropsWithChildren) {
 }
 
 /* ======================================================================== */
-/* NavDropdown — shadcn NavigationMenu item with our styling                */
+/* Desktop nav (hidden on mobile)                                           */
+/* ======================================================================== */
+
+function DesktopNav() {
+	return (
+		<NavigationMenu viewport={false}>
+			<NavigationMenuList>
+				<NavigationMenuItem>
+					<NavLink className={navLinkClass} end={true} to='/'>
+						Home
+					</NavLink>
+				</NavigationMenuItem>
+
+				<NavDropdown
+					activePrefix='/guides'
+					items={GUIDE_ITEMS}
+					label='Guides'
+				/>
+
+				<NavDropdown
+					activePrefix='/gamedata'
+					items={GAMEDATA_ITEMS}
+					label='Game Data'
+				/>
+
+				<NavigationMenuItem>
+					<span
+						aria-disabled='true'
+						className={cn(LINK_BASE, 'cursor-default text-text-dim')}
+						title='Coming soon'
+					>
+						Save Editor
+					</span>
+				</NavigationMenuItem>
+			</NavigationMenuList>
+		</NavigationMenu>
+	);
+}
+
+/* ======================================================================== */
+/* Mobile nav — sheet drawer (hidden on desktop)                            */
+/* ======================================================================== */
+
+function MobileNav() {
+	const [open, setOpen] = useState(false);
+	const location = useLocation();
+
+	// Close sheet on navigation
+	// biome-ignore lint/correctness/useExhaustiveDependencies: intentionally re-run on pathname change
+	useEffect(() => {
+		setOpen(false);
+	}, [location.pathname]);
+
+	const close = useCallback(() => {
+		setOpen(false);
+	}, []);
+
+	return (
+		<Sheet onOpenChange={setOpen} open={open}>
+			<SheetTrigger
+				aria-label='Open menu'
+				className='ml-2 flex h-9 w-9 items-center justify-center text-text-muted hover:text-gold md:hidden'
+			>
+				<HamburgerIcon />
+			</SheetTrigger>
+			<SheetContent className='w-72 bg-surface-dim p-0' side='right'>
+				<SheetHeader className='border-border-dim border-b px-4 py-4'>
+					<SheetTitle className='font-black font-serif text-gold tracking-widest'>
+						<span className='text-cinnabar-light'>大戦</span>
+						<span className='text-gold-dim'>FAN</span>
+					</SheetTitle>
+				</SheetHeader>
+
+				<div className='flex flex-col py-2'>
+					<MobileLink label='Home' onClick={close} to='/' />
+
+					<MobileSection label='Guides'>
+						{GUIDE_ITEMS.map(item => (
+							<MobileLink
+								key={item.to}
+								label={item.label}
+								onClick={close}
+								to={item.to}
+							/>
+						))}
+					</MobileSection>
+
+					<MobileSection label='Game Data'>
+						{GAMEDATA_ITEMS.map(item => (
+							<MobileLink
+								key={item.to}
+								label={item.label}
+								onClick={close}
+								to={item.to}
+							/>
+						))}
+					</MobileSection>
+
+					<span className='px-4 py-2 font-sans text-sm text-text-dim'>
+						Save Editor — Coming soon
+					</span>
+				</div>
+			</SheetContent>
+		</Sheet>
+	);
+}
+
+function MobileLink({
+	to,
+	label,
+	onClick,
+}: {
+	to: string;
+	label: string;
+	onClick: () => void;
+}) {
+	return (
+		<NavLink
+			className={({isActive}) =>
+				cn(
+					'block px-4 py-2.5 font-sans text-sm transition-colors',
+					isActive
+						? 'bg-cinnabar text-gold'
+						: 'text-text-muted hover:bg-surface-highest hover:text-gold',
+				)
+			}
+			onClick={onClick}
+			to={to}
+		>
+			{label}
+		</NavLink>
+	);
+}
+
+function MobileSection({
+	label,
+	children,
+}: {
+	label: string;
+	children: React.ReactNode;
+}) {
+	return (
+		<div>
+			<div className='mt-2 px-4 py-1 font-bold font-sans text-[10px] text-text-dim uppercase tracking-wider'>
+				{label}
+			</div>
+			{children}
+		</div>
+	);
+}
+
+function HamburgerIcon() {
+	return (
+		<svg
+			aria-hidden='true'
+			className='h-5 w-5'
+			fill='none'
+			stroke='currentColor'
+			strokeLinecap='square'
+			strokeWidth={2}
+			viewBox='0 0 24 24'
+		>
+			<path d='M4 6h16M4 12h16M4 18h16' />
+		</svg>
+	);
+}
+
+/* ======================================================================== */
+/* NavDropdown — shadcn NavigationMenu item (desktop only)                  */
 /* ======================================================================== */
 
 function NavDropdown({
