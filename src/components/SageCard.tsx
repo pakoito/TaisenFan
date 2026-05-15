@@ -64,17 +64,17 @@ export function SageCard({sage}: Props) {
 						{open ? '▼' : '▶'} Lore &amp; Dialogue
 					</CollapsibleTrigger>
 					<CollapsibleContent>
-						<div className={bustupUrl ? 'flex gap-4' : ''}>
+						<div className={bustupUrl ? 'flex items-start gap-4' : ''}>
 							{bustupUrl ? (
 								<img
 									alt={sage.name}
-									className='w-auto shrink-0 [image-rendering:pixelated]'
+									className='h-40 w-40 shrink-0 self-start [image-rendering:pixelated]'
 									height={256}
 									src={bustupUrl}
 									width={256}
 								/>
 							) : null}
-							<div>
+							<div className='min-w-0 flex-1'>
 								<p className='mb-3 whitespace-pre-line border-cinnabar/30 border-l-2 pl-3 text-sm text-text-faint italic'>
 									{sage.lore}
 								</p>
