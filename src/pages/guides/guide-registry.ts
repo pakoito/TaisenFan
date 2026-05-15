@@ -22,9 +22,9 @@ export const GUIDES: readonly GuideEntry[] = [
 		load: () => import('@/content/guides/tactics-guide.md'),
 	},
 	{
-		slug: 'deck-strategies',
-		title: 'DUEL Mode S Tier Deck Strategies',
-		load: () => import('@/content/guides/deck-strategies.md'),
+		slug: 'deck-archetypes',
+		title: 'Deck Archetypes',
+		load: () => import('@/content/guides/deck-archetypes.md'),
 	},
 	{
 		slug: 'duel',
@@ -32,9 +32,9 @@ export const GUIDES: readonly GuideEntry[] = [
 		load: () => import('@/content/guides/duel-guide.md'),
 	},
 	{
-		slug: 'deck-archetypes',
-		title: 'Deck Archetypes',
-		load: () => import('@/content/guides/deck-archetypes.md'),
+		slug: 'deck-strategies',
+		title: 'DUEL Mode S Tier Deck Strategies',
+		load: () => import('@/content/guides/deck-strategies.md'),
 	},
 	{
 		slug: 'conquest',
