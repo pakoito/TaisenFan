@@ -1,6 +1,6 @@
 # TaisenFan
 
-Community site for Sangokushi Taisen Ten (三国志大戦DS) — guides, game data, save editor, and English translation patches.
+Community site for Sangokushi Taisen Ten (三国志大戦DS): guides, game data, save editor, and English translation patches.
 
 **Live:** https://pakoito.github.io/TaisenFan/
 
@@ -16,10 +16,10 @@ Community site for Sangokushi Taisen Ten (三国志大戦DS) — guides, game da
 
 ## Features
 
-- **Game Data** — browsable Lord Cards (192), Sage Cards (20), Duel Decks (80)
-- **Guides** — 8 strategy guides rendered from markdown with inter-guide navigation
-- **ROM Loader** — load the original NDS ROM in-browser to extract character portraits (Web Worker, IndexedDB cache) and download the English translation patch (BPS)
-- **Save Editor** — (coming soon) edit save files in-browser
+- **Game Data**: browsable Lord Cards (192), Sage Cards (20), Duel Decks (80)
+- **Guides**: 8 strategy guides rendered from markdown with inter-guide navigation
+- **Cartridge Loader**: load the original NDS cartridge in-browser to extract character portraits (Web Worker, IndexedDB cache) and download the English translation patch (BPS)
+- **Save Editor**: (coming soon) edit save files in-browser
 
 ## Getting Started
 
