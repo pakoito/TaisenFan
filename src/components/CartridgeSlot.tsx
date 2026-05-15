@@ -109,7 +109,8 @@ function EmptyContent({
 	return (
 		<div className='flex flex-col items-center gap-3 py-2'>
 			<p className='text-center text-sm text-text-muted'>
-				Load your cartridge to unlock portraits and the English translation patch.
+				Load your cartridge to unlock portraits and the English translation
+				patch.
 			</p>
 			<FilePickerButton onFileChange={onFileChange} />
 		</div>

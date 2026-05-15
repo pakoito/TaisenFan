@@ -19,13 +19,7 @@ export type Faction = (typeof FACTIONS)[number];
 export const RARITIES = ['C', 'UC', 'R', 'SR', 'LE'] as const;
 export type Rarity = (typeof RARITIES)[number];
 
-export const UNIT_TYPES = [
-	'Spear',
-	'Horse',
-	'Bow',
-	'Sword',
-	'Ram',
-] as const;
+export const UNIT_TYPES = ['Spear', 'Horse', 'Bow', 'Sword', 'Ram'] as const;
 export type UnitType = (typeof UNIT_TYPES)[number];
 
 export const TRAITS = [
