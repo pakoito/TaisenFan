@@ -17,14 +17,14 @@ export const GUIDES: readonly GuideEntry[] = [
 		load: () => import('@/content/guides/beginners-guide.md'),
 	},
 	{
-		slug: 'conquest',
-		title: 'CONQUEST Walkthrough',
-		load: () => import('@/content/guides/conquest-guide.md'),
+		slug: 'tactics',
+		title: 'Tactics Guide',
+		load: () => import('@/content/guides/tactics-guide.md'),
 	},
 	{
-		slug: 'conquest-merchants',
-		title: 'CONQUEST Merchants',
-		load: () => import('@/content/guides/conquest-merchants.md'),
+		slug: 'deck-strategies',
+		title: 'DUEL Mode S Tier Deck Strategies',
+		load: () => import('@/content/guides/deck-strategies.md'),
 	},
 	{
 		slug: 'duel',
@@ -37,14 +37,14 @@ export const GUIDES: readonly GuideEntry[] = [
 		load: () => import('@/content/guides/deck-archetypes.md'),
 	},
 	{
-		slug: 'deck-strategies',
-		title: 'DUEL Mode S Tier Deck Strategies',
-		load: () => import('@/content/guides/deck-strategies.md'),
+		slug: 'conquest',
+		title: 'CONQUEST Walkthrough',
+		load: () => import('@/content/guides/conquest-guide.md'),
 	},
 	{
-		slug: 'tactics',
-		title: 'Tactics Guide',
-		load: () => import('@/content/guides/tactics-guide.md'),
+		slug: 'conquest-merchants',
+		title: 'CONQUEST Merchants',
+		load: () => import('@/content/guides/conquest-merchants.md'),
 	},
 	{
 		slug: 'combat',

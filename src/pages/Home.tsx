@@ -89,19 +89,19 @@ export function Home() {
 						to='/guides/beginners'
 					/>
 					<DataLink
+						description='How to think about and play matches.'
+						title='Tactics Guide'
+						to='/guides/tactics'
+					/>
+					<DataLink
+						description='DUEL mode stages, scoring, and rewards.'
+						title='DUEL Guide'
+						to='/guides/duel'
+					/>
+					<DataLink
 						description='All 6 chapters plus Warring States mode.'
 						title='CONQUEST Walkthrough'
 						to='/guides/conquest'
-					/>
-					<DataLink
-						description='Damage formulas, speed tables, and counters.'
-						title='Combat Mechanics'
-						to='/guides/combat'
-					/>
-					<DataLink
-						description='Proven decks for S-rank Duel clears.'
-						title='Deck Strategies'
-						to='/guides/deck-strategies'
 					/>
 				</div>
 				<div className='mt-4 text-center'>
