@@ -65,10 +65,10 @@ export function SageCard({sage}: Props) {
 					</CollapsibleTrigger>
 					<CollapsibleContent>
 						{bustupUrl ? (
-							// biome-ignore lint/correctness/useImageSize: aspect-square w-full handles sizing fluidly; explicit width/height would defeat that
+							// biome-ignore lint/correctness/useImageSize: aspect-square + object-contain pillarboxes/letterboxes the variably-cropped bustup into a fixed footprint
 							<img
 								alt={sage.name}
-								className='mb-4 block aspect-square w-full [image-rendering:pixelated]'
+								className='mb-4 block aspect-square w-full object-contain [image-rendering:pixelated]'
 								src={bustupUrl}
 							/>
 						) : null}

@@ -23,8 +23,8 @@ export const UNIT_TYPES = [
 	'Spear',
 	'Horse',
 	'Bow',
-	'Infantry',
-	'Siege',
+	'Sword',
+	'Ram',
 ] as const;
 export type UnitType = (typeof UNIT_TYPES)[number];
 

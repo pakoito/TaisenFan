@@ -1634,7 +1634,7 @@
     "cost": 1,
     "pow": 1,
     "int": 4,
-    "unitType": "Infantry",
+    "unitType": "Sword",
     "traits": [
       "Charm"
     ],
@@ -1918,7 +1918,7 @@
     "cost": 1,
     "pow": 1,
     "int": 8,
-    "unitType": "Siege",
+    "unitType": "Ram",
     "traits": [
       "Charm"
     ],
@@ -3246,7 +3246,7 @@
     "cost": 1.5,
     "pow": 2,
     "int": 5,
-    "unitType": "Infantry",
+    "unitType": "Sword",
     "traits": [
       "Barricade",
       "Charm"
@@ -3641,7 +3641,7 @@
     "cost": 1,
     "pow": 1,
     "int": 5,
-    "unitType": "Infantry",
+    "unitType": "Sword",
     "traits": [
       "Charm"
     ],
@@ -4247,7 +4247,7 @@
     "cost": 1,
     "pow": 1,
     "int": 7,
-    "unitType": "Infantry",
+    "unitType": "Sword",
     "traits": [
       "Ambush"
     ],
@@ -4283,7 +4283,7 @@
     "cost": 1,
     "pow": 2,
     "int": 6,
-    "unitType": "Siege",
+    "unitType": "Ram",
     "traits": [
       "Recruit"
     ],
@@ -4571,7 +4571,7 @@
     "cost": 1.5,
     "pow": 4,
     "int": 9,
-    "unitType": "Infantry",
+    "unitType": "Sword",
     "traits": [
       "Ambush",
       "Revival"
@@ -4825,7 +4825,7 @@
     "cost": 1,
     "pow": 5,
     "int": 1,
-    "unitType": "Infantry",
+    "unitType": "Sword",
     "traits": [],
     "attribute": "Man",
     "skill": {
@@ -4929,7 +4929,7 @@
     "cost": 1,
     "pow": 3,
     "int": 4,
-    "unitType": "Siege",
+    "unitType": "Ram",
     "traits": [],
     "attribute": "Man",
     "skill": {
@@ -5144,7 +5144,7 @@
     "cost": 1,
     "pow": 1,
     "int": 7,
-    "unitType": "Siege",
+    "unitType": "Ram",
     "traits": [],
     "attribute": "Man",
     "skill": {
@@ -5178,7 +5178,7 @@
     "cost": 1,
     "pow": 4,
     "int": 2,
-    "unitType": "Siege",
+    "unitType": "Ram",
     "traits": [],
     "attribute": "Earth",
     "skill": {
@@ -6145,7 +6145,7 @@
     "cost": 1.5,
     "pow": 4,
     "int": 8,
-    "unitType": "Siege",
+    "unitType": "Ram",
     "traits": [
       "Barricade",
       "Charm"
@@ -6615,7 +6615,7 @@
     "cost": 1,
     "pow": 1,
     "int": 8,
-    "unitType": "Infantry",
+    "unitType": "Sword",
     "traits": [
       "Charm"
     ],

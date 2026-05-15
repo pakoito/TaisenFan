@@ -148,10 +148,10 @@ function ExpandedDetail({
 		<div className={cn('px-4 py-5', cfg.rowBg)}>
 			<div className='grid grid-cols-1 gap-5 md:grid-cols-[3fr_2fr] md:items-start'>
 				{bustupUrl ? (
-					// biome-ignore lint/correctness/useImageSize: width is fluid via w-full; height follows the trimmed bustup's natural aspect
+					// biome-ignore lint/correctness/useImageSize: aspect-square + object-contain pillarboxes/letterboxes the variably-cropped bustup into a fixed footprint
 					<img
 						alt={lord.name}
-						className='block h-auto w-full [image-rendering:pixelated]'
+						className='block aspect-square w-full object-contain [image-rendering:pixelated]'
 						src={bustupUrl}
 					/>
 				) : null}
