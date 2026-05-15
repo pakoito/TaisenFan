@@ -83,7 +83,7 @@ Spear units are the anti-Horse specialists. They move slowly but can devastate f
 - Thrust zone remains active as long as you're not in melee
 
 **Weaknesses:**
-- Slowest movement speed in the game
+- Slow movement (only Ram is slower)
 - Thrust zone disappears during melee combat
 - Easy targets for Bow units due to slow speed
 
@@ -190,7 +190,7 @@ Every Lord has exactly one Skill. To use it:
 | Command | Buffs multiple allies in range |
 | Buff | Enhances the user's stats |
 | Debuff | Weakens enemies |
-| Damage | Deals direct HP damage to enemies |
+| Damage Tactic | Deals direct HP damage to enemies |
 | Dance | Immobilizes user but effect persists until death |
 | Focus | Hold to charge, cannot be Denied |
 | Summon | Creates ally units with set behavior |
@@ -224,7 +224,7 @@ Your Sage's Ability can be used once per match. It's a powerful effect that can 
 | Rally | All dead units revive faster |
 | Reinforce | All units recover HP |
 | Iron Chain | Enemies in zone move slower |
-| Wisdom Valor | Allies in zone gain POW and INT |
+| Inspire | Allies in zone gain POW and INT |
 
 ### Combat Basics
 
@@ -239,7 +239,7 @@ Your Sage's Ability can be used once per match. It's a powerful effect that can 
 - A rhythm-game style minigame decides the winner
 - Higher POW gives thicker bars (easier to hit)
 - Valor Trait guarantees some perfect hits
-- **DS Warning:** Losing a duel kills your unit outright. Only duel with POW advantage.
+- **DS Warning:** Losing a Duel kills your unit outright. Only Duel with POW advantage.
 
 **Death and Revival:**
 - Units at 0 HP die and must revive
@@ -399,7 +399,7 @@ A balanced deck typically includes:
 | Swarm | ワラ | Many cheap units deck |
 | Opening | 開幕 | Early game / match start |
 | Cheese | 厨 | Overpowered strategy (derogatory) |
-| Damage Skill | ダメ計 | Direct damage ability |
+| Damage Tactic | ダメ計 | Direct damage ability |
 | Wall | 壁 | Sacrificial unit to block for others |
 
 ---

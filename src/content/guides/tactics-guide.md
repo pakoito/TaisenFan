@@ -107,7 +107,7 @@ Every non-Horse deck needs at least one Spear. Without Spears, enemy Horse will 
 **Key Principles**
 - **Stay center** for best coverage against flanking Horse
 - **Once you advance, retreat is hard** - commit wisely
-- Recruitment or Revival traits are valuable on Spears
+- Regen or Undying traits are valuable on Spears
 - Stack Thrust zones - even low-POW Spears contribute this way
 
 ---
@@ -144,7 +144,7 @@ No special attack means you *must* melee to contribute. This is actually an adva
 
 ---
 
-### Ram (Siege Unit)
+### Ram
 
 **Role:** Castle damage specialist
 
@@ -172,7 +172,7 @@ MP is too low for most skills. This phase is determined by:
 
 **Play to your deck's concept:**
 - Aggressive decks: Push for early siege damage
-- Defensive decks: Survive, build MP, wait for your power spike
+- Defensive decks: Survive, build MP, wait for your POW spike
 - Ambush decks: Position carefully, deny enemy scouts
 
 The side with higher total POW or favorable unit matchups typically controls early tempo.
@@ -246,7 +246,7 @@ Use these for endgame planning. If you need siege in 10C, Ram won't make it from
 | Condition | Time |
 |-----------|------|
 | Normal | ~15.6C (35 sec) |
-| With Revival trait | ~12C (27 sec) |
+| With Undying trait | ~12C (27 sec) |
 | After Death Tactics | +23C added |
 
 ### Recovery Times
@@ -254,9 +254,9 @@ Use these for endgame planning. If you need siege in 10C, Ram won't make it from
 | Method | Time to Full HP |
 |--------|-----------------|
 | In castle | ~13C |
-| Recruitment trait | ~13C |
-| Recovery Formation Lv11 | ~10C |
-| Recruitment + Formation (stacked) | ~6C |
+| Regen trait | ~13C |
+| Heal Rally Lv11 | ~10C |
+| Regen + Heal Rally (stacked) | ~6C |
 | 8 Trigrams (4+ targets) | 9C duration, ~40% heal |
 
 **Optimization:** Units at ~80% HP can deploy and reach full HP during travel time. Don't wait for 100% in castle.
@@ -267,7 +267,7 @@ Use these for endgame planning. If you need siege in 10C, Ram won't make it from
 
 ### Don't Lose Units Unnecessarily
 
-Especially in Command decks, losing one unit massively reduces your team fight power.
+Especially in Command decks, losing one unit massively reduces your team fight POW.
 
 - Avoid dying at your own castle (worst timing)
 - Sometimes let enemy siege rather than lose a unit defending
@@ -286,7 +286,7 @@ Option 2 is often better. You control your revival timing.
 **Who to sacrifice as rearguard:**
 - Slow units (Spear) - they can't escape anyway
 - Low-cost units - less value lost
-- Revival trait holders - they come back faster
+- Undying trait holders - they come back faster
 - NOT your main carry (never sacrifice your key unit)
 
 ---
@@ -353,7 +353,7 @@ For teleport lag:
 | Bug | Effect | Notes |
 |-----|--------|-------|
 | Wild Shots double damage | Bow target takes 2x damage | Very powerful on single target |
-| Roar skills allow Spear rotation | Can rotate Spear during freeze | Partially counters the freeze |
+| Changban Roar / One Eye Roar allow Spear rotation | Can rotate Spear during freeze | Partially counters the freeze |
 | Multi-gate siege | Stack units on castle gate | Requires precise positioning |
 | Gate suction | Gate pulls cards deep automatically | Use link to position shallowly |
 

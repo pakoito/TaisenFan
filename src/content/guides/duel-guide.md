@@ -75,7 +75,7 @@ S-rank requires **30,000+ points** (threshold varies slightly by difficulty). Po
 
 **Early castle fall bonus:** A quick victory gives significant bonus points, but only if you do it fast. Late castle falls add little.
 
-**Watch for Rally (再起):** When the enemy is down to one unit and you have two or more units in their territory, they trigger Rally and fully heal. Control your positioning to avoid wasting time.
+**Watch for Rally (再起興軍):** When the enemy is down to one unit and you have two or more units in their territory, they trigger Rally and their dead allies revive. Control your positioning to avoid wasting time.
 
 ---
 
@@ -91,23 +91,23 @@ If you're new, don't worry about losses. There's no penalty, and you learn more 
 
 - Bring whatever deck you want. Even a basic "opening rush" deck clears most stages.
 - Use this difficulty to learn CPU behavior patterns and practice your timing.
-- If you lose to armies like Cao Hong or Lady Guo, think about what went wrong. Were your cavalry getting intercepted by spears? Did you bring the wrong unit composition against all-bow teams?
+- If you lose to armies like Cao Hong or Lady Guo, think about what went wrong. Were your Horse units getting intercepted by Spears? Did you bring the wrong unit composition against all-Bow teams?
 - The Advisor provides hints after defeats. Use them.
 
 ### Stage List
 
 | # | Army Name | Lords | S-Rank Title |
 |---|-----------|-------|--------------|
-| 1 | Cavalry Drill | Soldier (Bow) ×4 | Charger (突撃兵) |
+| 1 | Horse Drill | Soldier (Bow) ×4 | Charger (突撃兵) |
 | 2 | Spear Drill | Soldier (Horse) ×4 | Thrust Soldier (槍撃兵) |
 | 3 | Bow Drill | Soldier (Spear) ×4 | Run Shot Soldier (走射兵) |
 | 4 | Niu Jin Army | C Niu Jin, Soldier (Horse), Soldier (Spear), Soldier (Bow) | Reckless General |
 | 5 | Lu Fan Army | C Lu Fan, C Pan Zhang, Soldier (Horse), Soldier (Spear) | Assassin (暗殺者) |
-| 6 | Gongsun Zan Army | UC Gongsun Zan, C Pei Yuanshao, Soldier (Spear), Soldier (Bow) | White Horse General |
+| 6 | Gongsun Army | UC Gongsun Zan, C Pei Yuanshao, Soldier (Spear), Soldier (Bow) | White Horse General |
 | 7 | Wang Ping Army | C Wang Ping, UC Ma Dai, Soldier (Spear), Soldier (Horse) | Steady General |
 | 8 | Zuo Ci Army | SR Zuo Ci, C Cheng Yuanzhi, C Pei Yuanshao, C Ma Yuanyi | Undying Legion (不死軍団) |
-| 9 | Flowers of Shu | C Xiahou Yueji, UC Huang Yueying, C Lady Mi, R Guan Yinping, SR Sun Ren, UC Lady Gan | Princess of Shu (蜀の姫君) |
-| 10 | Cao Brothers Army | C Cao Ang, R Cao Pi, C Cao Zhi, C Cao Zhang | Heir to Hegemony (覇を継ぐ者) |
+| 9 | Shu Flowers | C Xiahou Yueji, UC Huang Yueying, C Lady Mi, R Guan Yinping, SR Sun Ren, UC Lady Gan | Princess of Shu (蜀の姫君) |
+| 10 | Cao Brothers | C Cao Ang, R Cao Pi, C Cao Zhi, C Cao Zhang | Heir to Hegemony (覇を継ぐ者) |
 | 11 | Yu Jin Army | UC Yu Jin, SR Deng Ai, SR Zhang Chunhua, UC Cheng Yu | Resolute Warrior (剛毅なる武人) |
 | 12 | Jiang Qin Army | UC Jiang Qin, R Xu Sheng, C Lu Fan, Soldier (Spear) | Seeker of Battle (戦の求道者) |
 | 13 | Guo Jia Army | R Guo Jia, UC Cao Ren, UC Xu Huang, C Cao Ang | Genius Cut Short |
@@ -115,7 +115,7 @@ If you're new, don't worry about losses. There's no penalty, and you learn more 
 | 15 | Ding Feng Army | R Ding Feng, UC Gan Ning, UC Jiang Qin, C Zhu Zhi | Hardened Veteran |
 | 16 | Cao Hong Army | C Cao Hong, C Zhang Song, R Ma Su, R Jiang Wei, C Li Dian | Vanguard Captain (特攻隊長) |
 | 17 | Ma Liang Army | UC Ma Liang, R Zhao Yun, UC Guan Ping, C Wu Yi, C Zhao Lei | White Brow (白眉) |
-| 18 | Ruinous Maidens | UC Yan, C Hu Cheer, C Li Guo, C Cheng Yuanzhi, C Ma Yuanyi | Peerless Beauty (稀代の美女) |
+| 18 | Doom Princess | UC Yan, C Hu Cheer, C Li Guo, C Cheng Yuanzhi, C Ma Yuanyi | Peerless Beauty (稀代の美女) |
 | 19 | Jian Yong Army | C Jian Yong, SR Zhuge Liang, UC Huang Yueying, C Zhang Song, R Ma Su, C Liu Feng | Carefree Envoy (無頓着な使者) |
 | 20 | Lady Guo Army | C Lady Guo, R Jia Xu, SR Wang Yi, R Xiahou Dun, C Man Chong | Queen of Wei (魏の女王) |
 
@@ -127,7 +127,7 @@ If you're new, don't worry about losses. There's no penalty, and you learn more 
 
 All 40 stages. Difficulty spikes dramatically between early and late stages. The final stages like "Heroes and Daughters" and "Fierce Warriors Alliance" rival Extreme difficulty.
 
-Enemy costs exceed 8, so you can't just brute-force with raw power. You need to build decks tailored to each enemy composition.
+Enemy costs exceed 8, so you can't just brute-force with raw POW. You need to build decks tailored to each enemy composition.
 
 ### Tips
 
@@ -143,43 +143,43 @@ Enemy costs exceed 8, so you can't just brute-force with raw power. You need to 
 | 1 | Ji Ling Army | UC Ji Ling, UC Gongsun Zan, C Zhang Liang, C Ma Yuanyi, C Cheng Yuanzhi, C Pei Yuanshao | Three-Pointed Blade Hero (三尖刀の豪傑) |
 | 2 | Kan Ze Army | C Kan Ze, R Zhou Tai, C Chen Wu, C Ling Cao, C Yu Fan | Strategist |
 | 3 | Xiahou Dun Army | UC Xiahou Dun, R Yang Hu, UC Cai Wenji, SR Wang Yi, C Lady Guo | Oath to Hegemony (覇道への誓い) |
-| 4 | Peach Garden Brothers | R Liu Bei, UC Guan Yu, R Zhang Fei | Sworn Brothers |
+| 4 | Garden Brothers | R Liu Bei, UC Guan Yu, R Zhang Fei | Sworn Brothers |
 | 5 | Li Ru Army | UC Li Ru, UC Dong Bai, R Hua Xiong, C Li Guo | Right Arm of the Devil King (魔王の右腕) |
-| 6 | Sun Family Army | R Sun Ce, SR Sun Jian, SR Lady Wu, R Sun Quan | Young Commander |
-| 7 | Zhuge Liang Army | SR Zhuge Liang, SR Wei Yan, SR Ma Chao, UC Yan Yan | Sleeping Dragon |
-| 8 | Yellow Turban Army | SR Zhang Jiao, C Zhang Liang, C Cheng Yuanzhi, C Pei Yuanshao, YT Rebel (Sword), YT Rebel (Spear) | Cult Leader (教祖) |
+| 6 | Sun Family | R Sun Ce, SR Sun Jian, SR Lady Wu, R Sun Quan | Young Commander |
+| 7 | Zhuge Liang | SR Zhuge Liang, SR Wei Yan, SR Ma Chao, UC Yan Yan | Sleeping Dragon |
+| 8 | Yellow Turban | SR Zhang Jiao, C Zhang Liang, C Cheng Yuanzhi, C Pei Yuanshao, YT Rebel (Sword), YT Rebel (Spear) | Cult Leader (教祖) |
 | 9 | Yi Ji Army | C Yi Ji, C Wu Yi, R Wei Yan, UC Zhang Fei, UC Zhou Cang | Shu Diplomat (蜀の外交官) |
-| 10 | Dazzling Beauties | R Lu Lingqi, C Lady Guo, SR Wang Yi, UC Dong Bai, R Sun Ren, C Xiahou Yueji, SR Lady Wu, R Guan Yinping | Pride of Heroines (女傑の誇り) |
+| 10 | Brave Ladies | R Lu Lingqi, C Lady Guo, SR Wang Yi, UC Dong Bai, R Sun Ren, C Xiahou Yueji, SR Lady Wu, R Guan Yinping | Pride of Heroines (女傑の誇り) |
 | 11 | Gan Ning Army | SR Gan Ning, C Lu Fan, C Sun Huan, UC Lu Su, C Ling Cao | Famous Wu General |
-| 12 | Healing Maidens | UC Lady Gan, UC Zhang Fei, R Huang Zhong, C Zhao Lei, R Pang Tong, UC Zhou Cang | Dancer |
-| 13 | Three Heroes | UC Taishi Ci, UC Guan Yu, UC Xiahou Yuan | Hero (豪傑) |
-| 14 | Divine Speed Cavalry | SR Zhang Liao, C Niu Jin, R Jia Xu, R Guo Jia, UC Yue Jin, C Lady Guo | Iron Cavalry (鉄騎馬隊) |
-| 15 | Wheel Spearmen | R Zhang Fei, R Jiang Wei, UC Fa Zheng, C Zhao Lei, UC Zhou Cang | Matchless (万夫不当) |
-| 16 | Paralyzing Archers | SR Lu Meng, R Xu Sheng, R Taishi Ci, UC Han Dang | Wise and Brave (知勇兼備) |
-| 17 | Flash Speed Army | R Guo Jia, UC Yan Yan, UC Ma Dai, UC Ji Ling, UC Yue Jin, C Pei Yuanshao | Flash Wisdom |
+| 12 | Heal Princess | UC Lady Gan, UC Zhang Fei, R Huang Zhong, C Zhao Lei, R Pang Tong, UC Zhou Cang | Dancer |
+| 13 | 3 Brave Lords | UC Taishi Ci, UC Guan Yu, UC Xiahou Yuan | Hero (豪傑) |
+| 14 | Speed Cavalry | SR Zhang Liao, C Niu Jin, R Jia Xu, R Guo Jia, UC Yue Jin, C Lady Guo | Iron Cavalry (鉄騎馬隊) |
+| 15 | Wheel Spears | R Zhang Fei, R Jiang Wei, UC Fa Zheng, C Zhao Lei, UC Zhou Cang | Matchless (万夫不当) |
+| 16 | Paralyze Bows | SR Lu Meng, R Xu Sheng, R Taishi Ci, UC Han Dang | Wise and Brave (知勇兼備) |
+| 17 | Flash Speed | R Guo Jia, UC Yan Yan, UC Ma Dai, UC Ji Ling, UC Yue Jin, C Pei Yuanshao | Flash Wisdom |
 | 18 | Lu Xun Army | SR Lu Xun, UC Gan Ning, UC Ling Tong, C Zhu Zhi, UC Han Dang | Young Strategist |
 | 19 | Jiang Wei Army | R Jiang Wei, UC Guan Ping, R Xiahou Yuan, UC Xun You, C Cao Hong | Young Prodigy (麒麟児) |
-| 20 | Flying Heaven Maidens | UC Cai Wenji, SR Wang Yi, R Pang De, UC Yue Jin, UC Cao Ren | Proud Genius (誇り高き才媛) |
-| 21 | Xiahou Dun Army 2 | R Xiahou Dun, R Xiahou Yuan, R Zhang He, R Xun Yu | Battle-Hardened Hero |
-| 22 | Fire Thunder Army | R Zhou Yu, R Xu Shu, C Yu Fan, C Xiahou Yueji, C Zhu Huan, C Sun Huan | Tragic Strategist (悲劇の軍師) |
+| 20 | Heaven Princess | UC Cai Wenji, SR Wang Yi, R Pang De, UC Yue Jin, UC Cao Ren | Proud Genius (誇り高き才媛) |
+| 21 | Xiahou Dun Army | R Xiahou Dun, R Xiahou Yuan, R Zhang He, R Xun Yu | Battle-Hardened Hero |
+| 22 | Fire Thunder | R Zhou Yu, R Xu Shu, C Yu Fan, C Xiahou Yueji, C Zhu Huan, C Sun Huan | Tragic Strategist (悲劇の軍師) |
 | 23 | Chen Gong Army | UC Chen Gong, SR Lu Bu, R Hua Xiong, C Zhang Liang | Rebellious Advisor (反逆の謀士) |
-| 24 | Bitter Sweet Maidens | R Lady Zou, C Hu Cheer, SR Zuo Ci, C Zhang Liang, C Pei Yuanshao, C Cheng Yuanzhi, UC Li Ru | Bewitching Charm (幻惑の色香) |
+| 24 | Bitter Lady | R Lady Zou, C Hu Cheer, SR Zuo Ci, C Zhang Liang, C Pei Yuanshao, C Cheng Yuanzhi, UC Li Ru | Bewitching Charm (幻惑の色香) |
 | 25 | Wei Yan Army | SR Wei Yan, R Huang Zhong, UC Yan Yan, C Meng Da, C Wang Ping | Lone Wolf General |
 | 26 | Xun Yu Army | R Xun Yu, C Liu Ye, C Li Dian, R Zhang He, UC Xu Huang, UC Yue Jin | Royal Advisor (王佐の才) |
 | 27 | Sun Ce Army | SR Sun Ce, R Zhou Yu, UC Huang Gai, UC Cheng Pu | Bond of Metal (断金の交) |
-| 28 | Outnumbered Maidens | SR Lady Zhen, R Xiahou Dun, R Dian Wei, UC Cao Ren | Tragic Empress (悲哀の皇后) |
+| 28 | Outnumber Lady | SR Lady Zhen, R Xiahou Dun, R Dian Wei, UC Cao Ren | Tragic Empress (悲哀の皇后) |
 | 29 | Sima Yi Army | SR Sima Yi, R Pang De, R Zhang He, UC Zhong Hui, C Cai Mao | Wolf Gaze (狼顧の相) |
-| 30 | Huang Zhong Army | UC Huang Zhong, UC Yan Yan, C Yi Ji, R Wei Yan, SR Sun Ren | Valiant Veteran |
+| 30 | Huang Zhong | UC Huang Zhong, UC Yan Yan, C Yi Ji, R Wei Yan, SR Sun Ren | Valiant Veteran |
 | 31 | Zhang Lu Army | C Zhang Lu, SR Lu Bu, SR Zhao Yun, C Wang Ping | Rice Lover (米大好き) |
-| 32 | Field Battle Maidens | C Lady Mi, R Xu Shu, R Huang Zhong, SR Ma Chao, C Liao Hua | Ephemeral Empress (儚き皇后) |
+| 32 | Field Princess | C Lady Mi, R Xu Shu, R Huang Zhong, SR Ma Chao, C Liao Hua | Ephemeral Empress (儚き皇后) |
 | 33 | Wei-Wu Alliance | R Lu Kang, R Yang Hu, C Chen Wu, UC Yu Jin, C Zhu Huan, C Cao Hong | Next Generation Heroes |
 | 34 | Pang Tong Army | R Pang Tong, UC Huang Yueying, SR Sun Ren, R Zhang Fei, R Jiang Wei | Young Phoenix |
-| 35 | Meteor Maidens | R Xiao Qiao, R Zhou Tai, R Xu Sheng, R Ding Feng, UC Han Dang | Victory Maiden (勝利の乙女) |
+| 35 | Meteor Princess | R Xiao Qiao, R Zhou Tai, R Xu Sheng, R Ding Feng, UC Han Dang | Victory Maiden (勝利の乙女) |
 | 36 | Jia Xu Army | R Jia Xu (Rogue), C Hu Cheer, R Gao Shun, UC Chen Gong, C Li Guo, C Cheng Yuanzhi | Cold Strategist (冷酷なる謀士) |
-| 37 | Guan Yu Army 2 | SR Guan Yu, R Zhang Fei, R Guan Yinping, UC Guan Ping, UC Zhou Cang, C Yi Ji | Lord Guan (美髭公) |
-| 38 | Elder Alliance | UC Cheng Yu, UC Yan Yan, UC Huang Zhong, SR Zhang Jiao, SR Zuo Ci, UC Yu Ji, UC Zhang Hong, UC Zhang Zhao | Ten-Sided Ambush (十面埋伏の計) |
-| 39 | Heroes and Daughters | SR Dong Zhuo, SR Lu Bu, UC Guan Yu, UC Dong Bai, R Lu Lingqi, R Guan Yinping | Devil King (魔王) |
-| 40 | Fierce Warriors Alliance | R Xu Chu, R Dian Wei, C Cao Zhang, R Pang De, C Chen Wu, UC Gan Ning | Elite Guard (親衛隊) |
+| 37 | Guan Yu Army | SR Guan Yu, R Zhang Fei, R Guan Yinping, UC Guan Ping, UC Zhou Cang, C Yi Ji | Lord Guan (美髭公) |
+| 38 | Old Veterans | UC Cheng Yu, UC Yan Yan, UC Huang Zhong, SR Zhang Jiao, SR Zuo Ci, UC Yu Ji, UC Zhang Hong, UC Zhang Zhao | Ten-Sided Ambush (十面埋伏の計) |
+| 39 | Family Trouble | SR Dong Zhuo, SR Lu Bu, UC Guan Yu, UC Dong Bai, R Lu Lingqi, R Guan Yinping | Devil King (魔王) |
+| 40 | Fierce Lords | R Xu Chu, R Dian Wei, C Cao Zhang, R Pang De, C Chen Wu, UC Gan Ning | Elite Guard (親衛隊) |
 
 ---
 
@@ -191,7 +191,7 @@ All 20 stages. Even experienced players will struggle to clear everything with o
 
 Enemy costs are absurd. "Tiger Fool Evil" has 16 total cost. "Shu Emperor" has 18. Even if you use a powerful Command skill, the enemy might still have higher total POW than your entire team.
 
-But don't despair. With the right deck, correct tactics, and proper unit control, you can score over 40,000 points even against the Shu Emperor. It's about exploiting AI patterns, not raw power.
+But don't despair. With the right deck, correct tactics, and proper unit control, you can score over 40,000 points even against the Shu Emperor. It's about exploiting AI patterns, not raw POW.
 
 See the [Deck Strategies Guide](/guides/deck-strategies) for detailed builds and tactics on each archetype.
 
@@ -207,7 +207,7 @@ See the [Deck Strategies Guide](/guides/deck-strategies) for detailed builds and
 
 SR Ma Chao and R Zhang Liao survive single Ambush hits due to their INT, so consider opening with Deception immediately. Include at least 1 cost of Earth affinity or the formation expires instantly.
 
-With only 4 enemy units, you can run 2 siege units. After defeating enemies, push aggressively even if Rally triggers.
+With only 4 enemy units, you can run 2 Rams. After defeating enemies, push aggressively even if Rally triggers.
 
 ---
 
@@ -227,7 +227,7 @@ During your advance, try to match Zhang Fei's Charge against Deng Ai's Charge fo
 
 ---
 
-### Stage 3: Sleeping Dragon and Phoenix
+### Stage 3: Dragon-Phoenix
 
 **Enemy Units:** SR Zhuge Liang, R Pang Tong, R Xu Shu, R Jiang Wei, R Ma Su, R Ma Chao, SR Wei Yan  
 **Formation:** Multiple deadly Ambush units (Zhuge Liang, Pang Tong, Xu Shu)  
@@ -239,19 +239,19 @@ Three high-INT Ambush units make direct engagement suicidal. Use Huang Yueying's
 
 ---
 
-### Stage 4: Jing Province Assault
+### Stage 4: Jing Rush Army
 
 **Enemy Units:** SR Lu Meng, SR Lu Xun, SR Gan Ning, C Pan Zhang, R Ding Feng  
 **Formation:** 2 fences on right side, 1 Ambush unit on left  
 **Title:** Grand Admiral
 
-**Strategy:** [Horse Fool Ambush](deck-strategies.md#strategy-6-horse-fool-ambush) (2 siege units recommended)
+**Strategy:** [Horse Fool Ambush](deck-strategies.md#strategy-6-horse-fool-ambush) (2 Rams recommended)
 
-Attack from the left side to avoid fences. Line up Ambush units from the left in front row, with 2 siege units in back left.
+Attack from the left side to avoid fences. Line up Ambush units from the left in front row, with 2 Rams in back left.
 
-Position Deception left of center, in front of the fences. Use a cavalry Ambush unit to hit first for maximum mobility.
+Position Deception left of center, in front of the fences. Use a Horse Ambush unit to hit first for maximum mobility.
 
-Ding Feng survives due to higher INT - use cavalry Charges to finish him. The left tower can be destroyed by pushing your second siege unit deep enough that cards don't overlap.
+Ding Feng survives due to higher INT - use Horse Charges to finish him. The left tower can be destroyed by pushing your second Ram deep enough that cards don't overlap.
 
 Even if Rally triggers early, you can force the win by spreading revealed Ambush units to castle gate and right wall while sieging aggressively.
 
@@ -269,7 +269,7 @@ Even if Rally triggers early, you can force the win by spreading revealed Ambush
 
 Attack from the right (away from fences). Form front line with 4 units linked and advance. Activate Rally Elite just before contact.
 
-Guan Ping will step on the Ambush - ignore it and keep sieging. Spend morale on Zhang Liang's healing.
+Guan Ping will step on the Ambush - ignore it and keep sieging. Spend MP on Zhang Liang's healing.
 
 **Alternative:** Swap Guan Ping for Yan Yan if you prefer Charge-focused play. In that case, make sure Yan Yan triggers the Ambush.
 
@@ -279,7 +279,7 @@ If Gao Shun breaks off to siege your castle mid-fight, it actually helps by prev
 
 ---
 
-### Stage 6: Wu Emperor Army
+### Stage 6: Wu Emperor
 
 **Enemy Units:** R Sun Quan, R Zhou Yu, UC Ling Tong, R Zhou Tai, SR Gan Ning  
 **Formation:** 4 units in front of castle gate, Ambush on right edge  
@@ -289,19 +289,19 @@ If Gao Shun breaks off to siege your castle mid-fight, it actually helps by prev
 
 Position Deception so the upper-right corner of the aura circle touches the right tower.
 
-Line up Ambush units horizontally from the right edge, with 2 siege units behind them on the right.
+Line up Ambush units horizontally from the right edge, with 2 Rams behind them on the right.
 
 **Key Trick:** Zhou Yu (INT 7) won't die to Ambush even under Deception. When he steps on an Ambush, he retreats to heal instead of dying. Position Kuai Yue or Lu Fan on the right edge to trigger this - then don't shoot him with bows so he stays in the castle recovering.
 
 Leave Sun Quan alive on the left side and Rally won't trigger. Siege with everyone else.
 
-If Sun Quan does die and Rally triggers, use cavalry Charges and debuff bows to force through.
+If Sun Quan does die and Rally triggers, use Horse Charges and debuff Bow units to force through.
 
-The left-most Ambush unit won't get triggered, but that's fine - it forces Zhou Yu to path toward your siege units instead.
+The left-most Ambush unit won't get triggered, but that's fine - it forces Zhou Yu to path toward your Rams instead.
 
 ---
 
-### Stage 7: Cao Family Army
+### Stage 7: Cao Clan Army
 
 **Enemy Units:** SR Cao Cao, R Cao Pi, UC Cao Ren, C Cao Hong, C Cao Zhang, C Cao Zhi, C Cao Ang  
 **Formation:** 1 unit on each edge, 4 units in center + 1 Ambush in front of fences  
@@ -313,23 +313,23 @@ Attack from the right side where Cao Ren is positioned. Position Inferno anywher
 
 Open with Inferno, then land Charges sequentially. High chance of triggering a duel - Extreme difficulty enemies hit hard, so don't miss your timing.
 
-Enemy archers retreat to castle when low HP. Let them escape to prevent Rally.
+Enemy Bow units retreat to castle when low HP. Let them escape to prevent Rally.
 
-**Alternative:** If Cao Cao's Ambush stays hidden, he won't attack much. Field Dance Long Spear also works - position the formation forward to prioritize killing archers first, since they'll accurately target Lady Mi.
+**Alternative:** If Cao Cao's Ambush stays hidden, he won't attack much. Field Dance Long Spear also works - position the formation forward to prioritize killing Bow units first, since they'll accurately target Lady Mi.
 
 ---
 
 ### Stage 8: Grand General
 
 **Enemy Units:** UC Zhang Xun, R Zhang Liao, UC Gongsun Zan, C Ji Ling, UC Yuan Shu, C Chen Lan, UC Yang Hong, C Lei Bo  
-**Formation:** Siege units on both edges, remaining units in center  
+**Formation:** Rams on both edges, remaining units in center  
 **Title:** Grand General
 
 **Strategy:** [Field Dance Long Spear](deck-strategies.md#strategy-3-field-dance-long-spear)
 
 The template deck works, but consider replacing one 2-cost unit with two 1-cost units since the enemy has many units.
 
-Opening is chaotic with many enemies swarming. Focus on intercepting cavalry while holding position. Place 1-cost units on edges to prevent wall sieges.
+Opening is chaotic with many enemies swarming. Focus on intercepting Horse while holding position. Place 1-cost units on edges to prevent wall sieges.
 
 After Field Dance activates, divide your spears into two roles: some stay stationary for Thrust aura damage, others actively Thrust enemies. This role separation makes the fight more manageable.
 
@@ -341,7 +341,7 @@ After Field Dance activates, divide your spears into two roles: some stay statio
 **Formation:** All units at castle gate, fences on right side  
 **Title:** Incarnation of War
 
-**Strategy:** [Horse Fool Ambush](deck-strategies.md#strategy-6-horse-fool-ambush) (1 siege unit only, 5 Ambush units with ~2 cost of Charm + Earth affinity)
+**Strategy:** [Horse Fool Ambush](deck-strategies.md#strategy-6-horse-fool-ambush) (1 Ram only, 5 Ambush units with ~2 cost of Charm + Earth affinity)
 
 Position Deception slightly right of center. Surround Chen Lan with Ambush units in the back row.
 
@@ -351,7 +351,7 @@ After all enemies die to Ambush, return revealed units to your castle. Send Chen
 
 ---
 
-### Stage 10: Nation-Toppling Maidens
+### Stage 10: Ruinous Lady
 
 **Enemy Units:** SR Diao Chan, R Hua Xiong, R Lu Lingqi, R Jia Xu (Rogue), UC Li Ru, UC Gongsun Zan, C Pei Yuanshao  
 **Formation:** 3-2-1 formation from castle gate outward, Ambush in front center of fences  
@@ -369,7 +369,7 @@ Trigger the Ambush with Guan Ping.
 
 ---
 
-### Stage 11: Three Generations of Wu
+### Stage 11: Sun Wu 3 Gens
 
 **Enemy Units:** SR Sun Jian, R Sun Ce, R Sun Quan, UC Cheng Pu, UC Huang Gai, UC Han Dang  
 **Formation:** 3 fences at castle gate, 5 units behind fences, 1 unit in front left  
@@ -377,17 +377,17 @@ Trigger the Ambush with Guan Ping.
 
 **Strategy:** [Elite Opening](deck-strategies.md#strategy-7-elite-opening)
 
-Many bow units, so Yan Yan (1.5 cost) is recommended. Attack from the right where Sun Ce is.
+Many Bow units, so Yan Yan (1.5 cost) is recommended. Attack from the right where Sun Ce is.
 
 The fence layout means you must destroy at least 1 fence to get 3 units sieging simultaneously.
 
-Winning a duel against Sun Ce makes this much easier. Wound bow units and let them retreat to castle to prevent Rally.
+Winning a duel against Sun Ce makes this much easier. Wound Bow units and let them retreat to castle to prevent Rally.
 
 **Alternative:** Opening Long Spear also works. With fences present, position 2 units for edge sieges. Zhang Fei can use Provoke to pull defenders away from the siege.
 
 ---
 
-### Stage 12: Four Fierce Warriors
+### Stage 12: 4 Fierce Lords
 
 **Enemy Units:** SR Lu Bu, R Xiahou Dun, SR Guan Yu, R Sun Ce  
 **Formation:** 3 units at castle gate, Lu Bu starts inside castle  
@@ -403,7 +403,7 @@ Carefully time your siege hits - if you mistime the second hit, Xiahou Dun reviv
 
 ---
 
-### Stage 13: Extreme Healing Maidens
+### Stage 13: Heal Princess+
 
 **Enemy Units:** UC Lady Gan, R Zhang Fei, SR Ma Chao, R Xu Sheng, R Zhou Tai, UC Taishi Ci  
 **Formation:** Fences on upper left  
@@ -413,23 +413,23 @@ Carefully time your siege hits - if you mistime the second hit, Xiahou Dun reviv
 
 The opening is the hardest part. Position a fence unit (C Dong Xi) in front of your castle for protection.
 
-4 units (everyone except the 2 bow units) advance immediately. Focus on intercepting cavalry while building morale. Use Long Spear and other Skills to push them back once morale builds.
+4 units (everyone except the 2 Bow units) advance immediately. Focus on intercepting Horse while building MP. Use Long Spear and other Skills to push them back once MP builds.
 
 After Spear Flash fills, activate and start Field Dance in the lower-right area.
 
-Taishi Ci and Xu Sheng stay in their territory and only use Far Bow Paralyze Arrow (which won't reach) while Lady Gan is alive.
+Taishi Ci and Xu Sheng stay in their territory and only use Paralyze Arrow (which won't reach) while Lady Gan is alive.
 
 ---
 
-### Stage 14: Five Tiger Generals
+### Stage 14: Five Tigers
 
 **Enemy Units:** SR Ma Chao, SR Zhao Yun, UC Guan Yu, R Zhang Fei, R Huang Zhong  
 **Formation:** Fences in center, all 5 units around fences  
 **Title:** Divine General
 
-**Strategy:** [Horse Fool Ambush](deck-strategies.md#strategy-6-horse-fool-ambush) (2 siege units recommended)
+**Strategy:** [Horse Fool Ambush](deck-strategies.md#strategy-6-horse-fool-ambush) (2 Rams recommended)
 
-Fences force you to attack from the sides. With only 5 enemies, 2 siege units work well.
+Fences force you to attack from the sides. With only 5 enemies, 2 Rams work well.
 
 After Ambush reveals, send units to opposite edge and castle gate for sieging.
 
@@ -437,7 +437,7 @@ Defeating enemies is easy, but Rally is dangerous. Consider staggering Deception
 
 ---
 
-### Stage 15: Famous Wu Generals
+### Stage 15: Wu Generals
 
 **Enemy Units:** SR Lu Xun, R Taishi Ci, R Zhou Tai, SR Sun Ce, UC Ling Tong, UC Gan Ning  
 **Formation:** Fences in center, all 5 units around fences  
@@ -447,11 +447,11 @@ Defeating enemies is easy, but Rally is dangerous. Consider staggering Deception
 
 Attack from the left to avoid the tower. Position UC Gan Ning alone in front to draw enemy bow fire.
 
-Chase off flanking bow units with Charges to prevent Rally.
+Chase off flanking Bow units with Charges to prevent Rally.
 
 ---
 
-### Stage 16: Wei Emperor Army
+### Stage 16: Wei Emperor
 
 **Enemy Units:** R Cao Pi, R Yang Hu, R Dian Wei, R Pang De, R Xiahou Yuan, R Jia Xu (Wei), C Liu Ye, UC Cheng Yu  
 **Formation:** Fences in center, Ambush units on both sides and at castle gate  
@@ -483,13 +483,13 @@ Enemy also has Sunset Dance (Lady Bian) which activates when you're at their cas
 
 **Approach:** Bring fire attacks (Inferno works) to burn Lady Mi along with Cao Cao. Alternatively, use Wild Shots with Xiahou Yuan or Taishi Ci to snipe the dancers.
 
-With 4 cavalry units, bring spears to handle them. Keep your Thrust active at all times - Lu Bu is the biggest threat.
+With 4 Horse units, bring Spears to handle them. Keep your Thrust active at all times - Lu Bu is the biggest threat.
 
 **Warning:** Don't accidentally kill Lady Mi early - she's your win condition.
 
 ---
 
-### Stage 18: Tiger Fool Evil
+### Stage 18: Tiger-Demon
 
 **Enemy Units:** R Xu Chu, R Dian Wei, SR Lu Bu, C Hu Cheer, C Zhang Liang, R Pang De, R Xiahou Yuan, C Cao Zhang  
 **Formation:** Lu Bu, Xiahou Yuan, Cao Zhang on left; Pang De, Hu Cheer, Zhang Liang on right; Dian Wei behind them; Xu Chu at castle gate  
@@ -512,12 +512,12 @@ This is the hardest Extreme stage. The center damage terrain makes it even worse
 4. After defeating the right 3 with front row, fall back slightly - don't advance or you'll get crushed
 5. Wait for Dian Wei to advance, then hit him with Lu Fan
 
-**Critical:** Killing Dian Wei is essential. If he lives, your cavalry can't move.
+**Critical:** Killing Dian Wei is essential. If he lives, your Horse can't move.
 
 6. After triggering Ambush on Lu Bu and Cao Zhang with back units, send bow units to left edge and castle gate (ignore damage terrain)
 7. After Dian Wei dies, send Chen Lan to right edge with Lance Tactics
-8. Use Deng Ai for main cavalry work - chain Charges against Xu Chu and Xiahou Yuan to force them back to castle (DO NOT KILL - prevents Rally)
-9. Spare cavalry can spread to siege or melee bow units to protect Chen Lan from flanking shots
+8. Use Deng Ai for main Horse work - chain Charges against Xu Chu and Xiahou Yuan to force them back to castle (DO NOT KILL - prevents Rally)
+9. Spare Horse can spread to siege or melee Bow units to protect Chen Lan from flanking shots
 
 Use Reinforce on critical units (Chen Lan, Deng Ai). Link Force is backup if the final push stalls.
 
@@ -525,7 +525,7 @@ Use Reinforce on critical units (Chen Lan, Deng Ai). Link Force is backup if the
 
 ---
 
-### Stage 19: Grand Meteor Maidens
+### Stage 19: Grand Princess+
 
 **Enemy Units:** R Da Qiao, R Sun Quan, R Zhou Yu, SR Lu Meng, R Zhou Tai, R Ding Feng, UC Cheng Pu, UC Zhang Zhao  
 **Formation:** Multiple units, R Zhou Yu is Ambush and advances after you dance  
@@ -535,13 +535,13 @@ Use Reinforce on critical units (Chen Lan, Deng Ai). Link Force is backup if the
 
 Standard Grand Meteor execution. The enemy's R Zhou Yu is Ambush and advances after you start dancing - you can trigger and kill him early without problems.
 
-If Wild Shots successfully wipes the field, sneak in a cavalry wall hit for bonus damage.
+If Wild Shots successfully wipes the field, sneak in a Horse wall hit for bonus damage.
 
 **Alternative:** Use Sage SR Zhou Yu with Inferno. This can eliminate all units except Zhou Tai and Zhang Zhao. Then defeat Zhou Tai when he approaches, and send a single unit to the castle gate for one hit to win.
 
 ---
 
-### Stage 20: Shu Emperor Army
+### Stage 20: Shu Emperor
 
 **Enemy Units:** R Liu Bei, SR Guan Yu, R Zhang Fei, SR Ma Chao, SR Zhao Yun, UC Huang Zhong, SR Zhuge Liang, R Xu Shu  
 **Formation:** 3+3 at castle gate, Ambush: Zhuge Liang in front, Xu Shu on left edge  

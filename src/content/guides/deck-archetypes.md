@@ -1,6 +1,6 @@
 # Deck Archetypes
 
-> **Terminology Note:** This guide uses official English translations. Key terms: POW (combat power), INT (intelligence), MP (morale points for Skills), HP (unit health), Skill (special abilities), Sage (non-combat advisor cards), Command (team buff Skills), Trait (passive abilities like Ambush, Valor, Charm).
+> **Terminology Note:** This guide uses official English translations. Key terms: POW (combat power), INT (intelligence), MP (resource for Skills), HP (unit health), Skill (special abilities), Sage (non-combat advisor cards), Command (team buff Skills), Trait (passive abilities like Ambush, Valor, Charm).
 
 ## Overview
 
@@ -26,7 +26,7 @@ Every deck must total exactly 8 cost. Common distributions:
 Matching Lord factions to your Sage also affects Ability gauge speed.
 
 ### Gameplay Considerations
-- **Touch controls limit cavalry management.** Stick to 1-2 Horse units maximum.
+- **Touch controls limit Horse management.** Stick to 1-2 Horse units maximum.
 - **HP recovery is slow.** Regen trait and recovery Skills are nearly mandatory.
 - **Ram units revive at full HP**, making them exceptionally durable.
 - **Thrust attacks are forgiving.** Easy to execute consistently.
@@ -113,7 +113,7 @@ Rogue represents the independent warlords, bandits, and heroes who didn't align 
 
 **Tactical Style:**
 - Swarm tactics. Many 1-Cost Lords with the Undying Trait enable large armies.
-- Unorthodox Command Skills that damage your own castle for power boosts.
+- Unorthodox Command Skills that damage your own castle for POW boosts.
 - Access to all three damage types: fire, water, and lightning.
 - Debuffs include Death Ploy and Block Retreat.
 - Unique Skills like Assassin Toxin blend damage and debuff.
@@ -146,7 +146,7 @@ Wei excels at Horse units and low-MP utility Skills. Build around Horse-heavy co
 
 **Deck Patterns:**
 - **Pure Command:** Maximize POW with Horse units, crush opponents with raw stats
-- **Combo Type:** Pair with Deny/Dispel for control, or Separation for disruption
+- **Combo Type:** Pair with Deny/Dispel for control, or Divide Ploy for disruption
 - **Dual Threat:** Include damage Skills like Water Bane as alternate win conditions
 
 **Sample Deck:**
@@ -174,7 +174,7 @@ Wei excels at Horse units and low-MP utility Skills. Build around Horse-heavy co
 
 ---
 
-### Great Virtue
+### Liu Bei Virtue
 
 **Faction:** Shu
 
@@ -206,7 +206,7 @@ The wide range lets you buff spread-out Spear formations. Liu Bei's low POW mean
 
 **Weaknesses:**
 - Liu Bei's low POW makes him a liability in combat
-- Vulnerable to Paralysis Arrow and area damage
+- Vulnerable to Paralyze Arrow and area damage
 - Requires good Thrust technique
 
 **Sage Recommendations:** Zhuge Liang (Seven Stars/Elite Formation), Pang Tong (HP Recovery/Chain), Mi Zhu (Revive/Valor Formation)
@@ -386,7 +386,7 @@ Build with high-POW units and at least one Fence. Position the dancer safely beh
 
 ---
 
-### Flying Heaven Dance
+### Heaven Dance
 
 **Faction:** Wei or mixed
 
@@ -537,7 +537,7 @@ Zhao Yun with Horse Unity active can charge through Spear lines without taking C
 
 **Faction:** Shu or mixed
 
-SR Ma Chao's White Lion is a devastating super-buff. Build cheap support around him.
+SR Ma Chao's Silver Lion is a devastating super-buff. Build cheap support around him.
 
 **Key Card:**
 | Card | Cost | Type | Affinity | Traits | POW/INT | Skill |
@@ -659,7 +659,7 @@ The highest total POW deck possible: 36. Rush the enemy before they can respond.
 Rush immediately. Your raw POW advantage crushes early game. Use Zhou Yu Sage with Inferno to reveal Ambushes if needed. Must win before enemy MP accumulates.
 
 **Strengths:**
-- Overwhelming early game power
+- Overwhelming early game POW
 - Simple execution
 - Catches unprepared opponents
 
@@ -821,7 +821,7 @@ R Pang Tong's Chain Ploy+ immobilizes enemies, then R Xu Shu's Lightning or R Ji
 | R Jiang Wei | 2 | Spear | Man | Regen | 7/7 | Provoke |
 
 **Core Strategy:**
-Chain Ploy+ slows enemies to a crawl. Follow up with Lightning to eliminate grouped enemies, or Provoke to drag enemies into Counter range. Pang Tong Sage with Iron Chain Formation stacks for near-total immobilization.
+Chain Ploy+ slows enemies to a crawl. Follow up with Lightning to eliminate grouped enemies, or Provoke to drag enemies into Counter range. Pang Tong Sage with Iron Chain stacks for near-total immobilization.
 
 **Sage Recommendations:** Pang Tong (Iron Chain), Mi Zhu
 
@@ -842,7 +842,7 @@ Immobilize enemies with Chain, then let Bows freely shoot them down without reta
 
 ## Low-Card Decks (4-5 cards)
 
-High-cost elite units with fewer cards but higher individual power.
+High-cost elite units with fewer cards but higher individual POW.
 
 ---
 
@@ -954,7 +954,7 @@ UC Gongsun Zan's White Horse Formation boosts ally Horse speed without making th
 | UC Gongsun Zan | 1.5 | Horse | Heaven | Charm/Regen | 5/5 | White Horse |
 
 **Core Strategy:**
-Unlike Flying Heaven Dance, White Horse doesn't increase speed enough to trigger Double Counter. Safer speed boost for Horse-heavy builds.
+Unlike Heaven Dance, White Horse doesn't increase speed enough to trigger Double Counter. Safer speed boost for Horse-heavy builds.
 
 **Sage Recommendations:** Chen Gong, Jia Xu
 
@@ -1001,7 +1001,7 @@ R Lady Zou's Bitter Dance has unique effects.
 | Loyal Order | Command | Shu | SR Guan Yu | 6 |
 | Wei Martial | Command | Wei | R Cao Pi | 6 |
 | Healing Dance | Dance | Shu | UC Lady Gan | 7 |
-| Flying Heaven | Dance | Wei | UC Cai Wenji | 5 |
+| Heaven Dance | Dance | Wei | UC Cai Wenji | 5 |
 | Outnumber Dance | Dance | Wei | SR Lady Zhen | 5 |
 | Lu Bu Swarm | Superweapon | Rogue | SR Lu Bu | 6 |
 | 8 Trigrams | Control | Shu | SR Zhuge Liang | 6 |

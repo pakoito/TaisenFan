@@ -15,7 +15,7 @@ Understanding how the AI works is essential for exploiting it:
 - **CPU waits for 100% HP after dying** before attacking again
 - **CPU prioritizes dancers above all else** - they'll charge through spears and poison to kill a dancing unit
 - **CPU favors single-target Buffs** over Command skills
-- **CPU siege units just march forward** - easy to predict
+- **CPU Rams just march forward** - easy to predict
 - **CPU positions are fixed** - learn where Ambushes hide
 - **CPU triggers Rally** when down to 1 unit and you have 2+ in their territory
 
@@ -34,11 +34,11 @@ Understanding how the AI works is essential for exploiting it:
 
 **Concept:** Protect R Da Qiao while she casts Grand Meteor. Minimize unit deaths while dealing massive castle damage.
 
-**Works best against:** Grand Meteor Maidens (Extreme Stage 19)
+**Works best against:** Grand Princess+ (Extreme Stage 19)
 
 **Core Cards:**
 - R Da Qiao (dancer with Grand Meteor ritual)
-- SR Lu Meng or R Xiahou Yuan (Wild Shots for defense)
+- SR Lu Meng (Paralyze Order); swap to R Xiahou Yuan (Wild Shots) when overwhelmed
 - Paralyze Arrow users for crowd control
 - High-POW Horse for intercepting threats
 - R Xun Yu if facing R Zhou Yu (counter his Inferno with Deny)
@@ -48,14 +48,14 @@ Understanding how the AI works is essential for exploiting it:
 **Strategy:**
 1. Position your units at bottom-left, fences protecting Da Qiao
 2. Wait for MP 7, then start Grand Meteor
-3. Enemy rushes Da Qiao. Use Horse to intercept and melee their archers
+3. Enemy rushes Da Qiao. Use Horse to intercept and melee their Bow units
 4. Watch for enemy R Zhou Yu's Inferno. Position R Xun Yu to Deny it
 5. Burn enemy Da Qiao with Inferno
 6. Wild Shots + Horse charges to clean up
 
 **Adaptations:**
 - Against many bows: Add 2-cost high-POW Horse to charge and melee them
-- Against many cavalry: Use Long Spear tactics to protect Da Qiao
+- Against many Horse units: Use Long Spear tactics to protect Da Qiao
 - The AI always prioritizes killing dancers, so position defenses accordingly
 
 ---
@@ -76,7 +76,7 @@ Understanding how the AI works is essential for exploiting it:
 2. Send C Chen Lan behind them toward the enemy castle
 3. Enemy charges through your Ambush line, taking massive INT-based damage
 4. Most enemies die instantly to Ambush reveals
-5. Use Horse to mop up any surviving archers
+5. Use Horse to mop up any surviving Bow units
 6. Chen Lan's siege + your revealed Ambush units all siege together
 7. Often achieves castle fall even if Rally triggers
 
@@ -106,7 +106,7 @@ Understanding how the AI works is essential for exploiting it:
 4. Enemy abandons all tactics and charges straight at Lady Mi
 5. Four spear units with extended Thrust range massacre anyone approaching
 6. Use Long Spear skill (MP 3) for ridiculous range extensions
-7. Jiang Wei's Provoke pulls archers into Thrust range
+7. Jiang Wei's Provoke pulls Bow units into Thrust range
 
 **Weakness:** Struggles against high-bow compositions. Use a different strategy.
 
@@ -122,7 +122,7 @@ Understanding how the AI works is essential for exploiting it:
 - Multiple high-POW Spear units (all same affinity)
 - Formation fills fast with matching affinities
 
-**Sage:** Fa Zheng or Lu Meng (Spear Flash)
+**Sage:** Fa Zheng (Spear Flash)
 
 **Strategy:**
 1. Position spears to avoid enemy Ambush locations (CPU positions are fixed)
@@ -148,7 +148,7 @@ Understanding how the AI works is essential for exploiting it:
 **Core Cards:**
 - UC Huang Yueying (Charm, 1-cost Yellow Accel skill)
 - 2× 1.5-cost Charm units (same affinity)
-- 2× 2-cost Recruit units (Spear or Horse, same affinity)
+- 2× 2-cost Regen units (Spear or Horse, same affinity)
 
 **Sage:** Li Ru (Link Force - wider range than Iron Chain)
 
@@ -167,7 +167,7 @@ Understanding how the AI works is essential for exploiting it:
 
 ## Strategy 6: Horse Fool Ambush
 
-**Concept:** Mi Heng's Deception reduces all enemies' INT by 7. Combined with your Ambush units, enemies die instantly when they step on you.
+**Concept:** Mi Heng's Deception reduces enemy INT by 7 inside its Formation zone. Combined with your Ambush units, enemies die instantly when they step on you.
 
 **Works best against:** Western Heroes (Extreme Stage 1), Jing Province Assault (Extreme Stage 4), Wu Emperor (Extreme Stage 6), Unrivaled (Extreme Stage 9), Four Fierce (Extreme Stage 12), Five Tiger Generals (Extreme Stage 14)
 
@@ -220,7 +220,7 @@ Understanding how the AI works is essential for exploiting it:
 2. Activate Rally Elite at battle start
 3. With 43 total POW, just march forward
 4. Kill everything, siege castle
-5. Less complex than Long Spear but handles archers better
+5. Less complex than Long Spear but handles Bow units better
 
 **Use this when:** Opening Long Spear fails because Rally triggers before you can finish sieging, or when facing bow-heavy compositions.
 

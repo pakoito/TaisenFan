@@ -23,8 +23,8 @@
 
 | Threshold | Effect |
 |-----------|--------|
-| 1.0+ | Cavalry can build charge flash |
-| 1.3+ | Triggers Counter (or charging cavalry) |
+| 1.0+ | Horse can build charge flash |
+| 1.3+ | Triggers Counter (or charging Horse) |
 | 2.0+ | Triggers Double Counter |
 
 ### Unit Base Speeds
@@ -50,11 +50,11 @@
 
 ## Overview
 
-Combat in Sangokushi Taisen Ten is based on **power difference** rather than absolute power values. This is a crucial insight that contradicts the common belief that combat scales with squared values.
+Combat in Sangokushi Taisen Ten is based on **POW difference** rather than absolute POW values. This is a crucial insight that contradicts the common belief that combat scales with squared values.
 
-**Key Principle:** A POW 1 vs POW 5 fight produces the same result as POW 11 vs POW 15. Both have a power difference of 4, so the higher-powered unit wins with approximately 75% HP remaining.
+**Key Principle:** A POW 1 vs POW 5 fight produces the same result as POW 11 vs POW 15. Both have a POW difference of 4, so the higher-POW unit wins with approximately 75% HP remaining.
 
-This applies to all melee combat. The exceptions are **Charge** and **Counter** attacks, which include a damage bonus that scales with the attacker's own power.
+This applies to all melee combat. The exceptions are **Charge** and **Counter** attacks, which include a damage bonus that scales with the attacker's own POW.
 
 ---
 
@@ -80,7 +80,7 @@ All units start battle with **100 HP** (displayed as a full HP bar). When HP rea
 
 ## Melee Combat
 
-### Power Difference System
+### POW Difference System
 
 In standard melee combat, damage dealt depends entirely on the difference between your POW and the enemy's POW:
 
@@ -117,17 +117,17 @@ Unlike traditional rock-paper-scissors systems, Sangokushi Taisen doesn't use fl
 
 | Matchup | Advantage | Why |
 |---------|-----------|-----|
-| **Spear vs Horse** | Spear wins | Counter deals massive damage to charging/fast cavalry |
-| **Horse vs Bow** | Horse wins | Charging cavalry are nearly immune to bow damage |
+| **Spear vs Horse** | Spear wins | Counter deals massive damage to charging/fast Horse |
+| **Horse vs Bow** | Horse wins | Charging Horse are nearly immune to bow damage |
 | **Bow vs Spear** | Bow wins | Range advantage; bows can kite slow spears |
 
 ### Key Interactions
 
-- **Spear Counter**: The primary anti-cavalry mechanic. A single Counter can deal 40-80+ damage.
-- **Charge Immunity**: Charging cavalry have a defensive aura that drastically reduces bow damage.
-- **Speed vs Range**: Spears are the slowest unit (0.7 base), making them easy targets for bows at range.
-- **Sword (Infantry)**: No special advantages or disadvantages. Balanced stats, no special attacks.
-- **Ram (Siege)**: Extremely slow (0.5), but deals ~3x the siege damage of other units.
+- **Spear Counter**: The primary anti-Horse mechanic. A single Counter can deal 40-80+ damage.
+- **Charge Immunity**: Charging Horse have a defensive flash that drastically reduces bow damage.
+- **Speed vs Range**: Spears are slow (0.7 base, slower than every unit except Ram), making them easy targets for bows at range.
+- **Sword**: No special advantages or disadvantages. Balanced stats, no special attacks.
+- **Ram**: Extremely slow (0.5), but deals ~3x the siege damage of other units.
 
 These interactions mean positioning and timing matter more than simple type matchups.
 
@@ -135,22 +135,22 @@ These interactions mean positioning and timing matter more than simple type matc
 
 ## Charge Attacks
 
-Cavalry can build a charge flash by running at speed 1.0 or higher. When the flash-charged cavalry contacts an enemy, a Charge attack triggers, dealing heavy damage.
+Horse can build a charge flash by running at speed 1.0 or higher. When the flash-charged Horse contacts an enemy, a Charge attack triggers, dealing heavy damage.
 
 ### Charge Formula
 
 ```
-Charge Damage = 19 + (Cavalry POW × 2) - Enemy POW
+Charge Damage = 19 + (Horse POW × 2) - Enemy POW
 ```
 
 This can also be expressed as:
 ```
-Charge Damage = 20 + ((Cavalry POW - 1) × 2) - (Enemy POW - 1)
+Charge Damage = 20 + ((Horse POW - 1) × 2) - (Enemy POW - 1)
 ```
 
 ### Charge Damage Examples
 
-| Cavalry POW | Enemy POW | Damage |
+| Horse POW | Enemy POW | Damage |
 |-------------|-----------|--------|
 | 1 | 1 | 20 |
 | 5 | 1 | 28 |
@@ -158,14 +158,14 @@ Charge Damage = 20 + ((Cavalry POW - 1) × 2) - (Enemy POW - 1)
 | 11 | 11 | 30 |
 | 1 | 11 | 10 |
 
-**Key Insight:** Unlike melee combat, Charge damage includes a `Cavalry POW × 2` bonus. This means higher-power cavalry deal proportionally more charge damage, not just difference-based damage.
+**Key Insight:** Unlike melee combat, Charge damage includes a `Horse POW × 2` bonus. This means higher-POW Horse deal proportionally more charge damage, not just difference-based damage.
 
 ### Charge Defensive Bonus
 
 While a unit has its charge flash active:
 - It takes **reduced contact damage** from enemies
 - The exact defensive multiplier is not fully documented
-- Charging into another charging cavalry deals reduced damage due to their defensive bonus
+- Charging into another charging Horse deals reduced damage due to their defensive bonus
 
 ### Flash Mechanics
 
@@ -178,12 +178,12 @@ While a unit has its charge flash active:
 
 ## Counter Attacks
 
-Spear units have a passive frontal spear aura (Thrust). When fast-moving enemies contact this aura, they trigger a Counter for massive damage.
+Spear units have a passive frontal Thrust zone. When fast-moving enemies contact this Thrust zone, they trigger a Counter for massive damage.
 
 ### Counter Conditions
 
 A Counter triggers when the target:
-1. Is a **charging cavalry** (has flash), OR
+1. Is a **charging Horse** (has flash), OR
 2. Has **movement speed ≥ 1.3**
 
 The Counter must hit from the target's **front 180°**. Hitting from behind or the sides does NOT trigger a Counter; the unit just takes normal Thrust damage.
@@ -214,7 +214,7 @@ When the target's speed is **2.0 or higher**, a Double Counter triggers instead,
 
 ## Bow Damage
 
-Bow attacks use the same power-difference system as melee combat. Despite the common perception that bows are "strong" in this game, bow damage is NOT enhanced; it's identical to melee damage per hit.
+Bow attacks use the same POW-difference system as melee combat. Despite the common perception that bows are "strong" in this game, bow damage is NOT enhanced; it's identical to melee damage per hit.
 
 The perceived strength comes from:
 - Automatic targeting (no manual aiming needed)
@@ -223,7 +223,7 @@ The perceived strength comes from:
 
 ### Time to Kill Table
 
-How long it takes for a bow unit to kill an enemy of various power differences:
+How long it takes for a bow unit to kill an enemy of various POW differences:
 
 | Enemy POW Diff | Time to Kill |
 |----------------|--------------|
@@ -241,8 +241,8 @@ How long it takes for a bow unit to kill an enemy of various power differences:
 
 - **-8 cap applies here too.** See [The +8 Disadvantage Cap](#the-8-disadvantage-cap). When 8+ POW weaker, time-to-kill maxes out at 65C.
 - **High-POW bows matter.** Low-POW bows become nearly useless against buffed enemies due to the cap.
-- **Charging cavalry resist bows.** The charge flash grants defensive bonuses, reducing bow effectiveness further.
-- **No offensive scaling.** Unlike Charge/Counter, bows don't get a power-based damage bonus.
+- **Charging Horse resist bows.** The charge flash grants defensive bonuses, reducing bow effectiveness further.
+- **No offensive scaling.** Unlike Charge/Counter, bows don't get a POW-based damage bonus.
 - **Wild Shots (SR Xiahou Yuan).** Doubles bow damage, but still hits the cap against +8 enemies. Against POW 19+ targets, 6C of doubled shots only deals ~20% HP.
 
 ---
@@ -278,8 +278,8 @@ Speed-boosting skills come in fixed multiplier tiers:
 
 | Threshold | Effect |
 |-----------|--------|
-| 1.0+ | Cavalry can build charge flash |
-| 1.3+ | Triggers Counter (or charging cavalry) |
+| 1.0+ | Horse can build charge flash |
+| 1.3+ | Triggers Counter (or charging Horse) |
 | 2.0+ | Triggers Double Counter |
 
 ### Speed Stacking

@@ -207,7 +207,7 @@ Each chapter has merchants selling Lords at three price tiers. This is a complet
 **500 Gold:**
 - Wei (魏): UC Yu Jin, R Guo Jia, C Lady Guo, UC Yue Jin, UC Cai Wenji, R Xun Yu, C Cao Hong, UC Cheng Yu, R Yang Hu, C Li Dian, C Liu Ye
 - Wu (呉): UC Zhang Hong, UC Zhang Zhao, C Dong Xi, C Lu Fan, UC Lu Su
-- Shu (蜀): C Jian Yong, UC Guan Ping, C Zhou Cang, R Ma Su, UC Fa Zheng, C Liao Hua
+- Shu (蜀): C Jian Yong, UC Guan Ping, UC Zhou Cang, R Ma Su, UC Fa Zheng, C Liao Hua
 - Rogue (群): UC Yu Ji, R Jia Xu, UC Ji Ling, UC Zhang Xun, C Zhang Liang, C Cheng Yuanzhi, C Pei Yuanshao
 
 **1000 Gold:**
@@ -251,7 +251,7 @@ Each chapter has merchants selling Lords at three price tiers. This is a complet
 - Wei (魏): UC Yu Jin, R Xiahou Yuan, UC Xiahou Dun, C Cao Hong, R Zhang He
 - Wu (呉): UC Gan Ning, UC Huang Gai, R Zhou Tai, UC Jiang Qin, C Zu Mao, C Chen Wu, UC Cheng Pu
 - Shu (蜀): UC Guan Ping, SR Wei Yan, UC Yan Yan, UC Ma Liang
-- Rogue (群): UC Ji Ling, UC Hu Cheer
+- Rogue (群): UC Ji Ling, C Hu Cheer
 
 **2000 Gold:**
 - Wei (魏): R Xu Chu

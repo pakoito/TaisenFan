@@ -20,15 +20,15 @@ A unit at half HP can take nearly the entire battle to naturally recover. Every 
 
 ### Castle Revival System
 
-Units don't revive on a timer wherever they fell. They must physically return to your castle to revive. If a unit dies deep in enemy territory, it takes ages to return and get back into the fight.
+When a unit dies, a revive timer counts down before it reappears at your castle. If a unit dies deep in enemy territory, the long trip back to the action means it's out of the fight for ages.
 
 > **Tip:** Don't overextend. Dying far from home is a big punishment.
 
-### Siege Units Revive at Full HP
+### Rams Revive at Full HP
 
-Siege units (攻城兵) come back at 100% HP when they revive. This makes them incredibly sustainable attackers.
+Rams (攻城兵) come back at 100% HP when they revive. This makes them incredibly sustainable attackers.
 
-> **Tip:** Use siege units as your primary damage dealers. They're slow but steady and come back fresh every time.
+> **Tip:** Use Rams as your primary damage dealers. They're slow but steady and come back fresh every time.
 
 ### Dueling Means Instant Death
 
@@ -38,9 +38,9 @@ Losing a duel kills your unit outright. The duel is a rhythm-game style minigame
 
 ### Touch Controls Limit Your Options
 
-Managing multiple cavalry units with the stylus is difficult. Even skilled players fumble when trying to control two or three at once.
+Managing multiple Horse units with the stylus is difficult. Even skilled players fumble when trying to control two or three at once.
 
-> **Tip:** Stick to one or two cavalry maximum. Siege units and archers are much easier to control.
+> **Tip:** Stick to one or two Horse maximum. Rams and Bow units are much easier to control.
 
 ---
 
@@ -48,22 +48,22 @@ Managing multiple cavalry units with the stylus is difficult. Even skilled playe
 
 > **Note:** For detailed mechanics (Charge, Thrust, Counter, Run Shot), see the [Beginner's Guide](beginners-guide.md#unit-types). This section covers campaign-specific tips.
 
-### Cavalry (騎兵)
+### Horse (騎兵)
 Must be moving to charge. Arrows cancel your charge if they hit you. Very difficult to control multiples.
 
-**Best use:** Single cavalry with infantry support. Don't try to micro multiple horses with the stylus.
+**Best use:** Single Horse with Sword support. Don't try to micro multiple Horse units with the stylus.
 
-### Archers (弓兵)
+### Bow (弓兵)
 Set them up and let them shoot. After stopping briefly, they can use Run Shot to fire while moving. The easiest unit type to manage.
 
 **Best use:** Defense, support fire, and as your "set and forget" damage dealers.
 
-### Spearmen (槍兵)
-Essential for stopping enemy cavalry charges. Can thrust when stationary. Spear attacks are relatively easy to perform.
+### Spear (槍兵)
+Essential for stopping enemy Horse charges. Can Thrust when stationary. Spear attacks are relatively easy to perform.
 
-**Best use:** Defensive walls, anti-cavalry duty. Long spear tactics are especially effective against the AI.
+**Best use:** Defensive walls, anti-Horse duty. Long Spear tactics are especially effective against the AI.
 
-### Siege Units (攻城兵)
+### Ram (攻城兵)
 Slow movement but high castle damage. The full HP revival makes them broken good.
 
 **Best use:** Primary attackers for most of the campaign. Slow speed actually makes them easier to control.
@@ -80,7 +80,7 @@ Your deck has an 8-cost limit. Units cost between 1.0 and 3.0. Here are some exa
 |-------|---------------|
 | 5 units | 3.0 + 2.0 + 1.5 + 1.0 + 0.5 = 8.0 |
 | 6 units | 2.5 + 2.0 + 1.5 + 1.0 + 0.5 + 0.5 = 8.0 |
-| 4 power units | 2.5 + 2.5 + 2.0 + 1.0 = 8.0 |
+| 4 high-POW units | 2.5 + 2.5 + 2.0 + 1.0 = 8.0 |
 
 ### Faction Synergy is Critical
 
@@ -138,7 +138,7 @@ The rhythm is: Defend, then counter, then defend, then counter.
 
 **DO:** Capture weak or neutral territories first. This builds your unit roster from card rewards. A stronger army makes the harder territories easier.
 
-**DON'T:** Attack strong enemy territories early. Always check enemy composition before committing. Look for ambush count, cavalry count, and boss units.
+**DON'T:** Attack strong enemy territories early. Always check enemy composition before committing. Look for Ambush count, Horse count, and boss units.
 
 ---
 
@@ -164,7 +164,7 @@ POW 15 - the highest in the game. His "Unrivaled" skill is devastating.
 **How to beat him:**
 1. Gang up with 3+ units simultaneously
 2. Use attack buffs before engaging
-3. Pin him with spearmen while others flank
+3. Pin him with Spears while others flank
 4. Never, ever fight him one-on-one
 
 ### Xu Chu (許褚)
@@ -182,21 +182,21 @@ Uses "Paralyze Order" with an overpowered Wu army.
 **Counter:** Speed-boosting skills to escape the paralysis zone. Don't clump your units.
 
 ### Huang Zu (黄祖)
-3/8 archer with ambush, revival, and Paralysis Arrow skill. Often paired with Gan Ning.
+3/8 Bow with Ambush, Undying, and Paralyze Arrow skill. Often paired with Gan Ning.
 
-**Why he's dangerous:** High intelligence means long skill duration. The AI uses Paralysis Arrow constantly.
+**Why he's dangerous:** High INT means long skill duration. The AI uses Paralyze Arrow constantly.
 
 **Counter:** Speed Tactics units to close the gap. Accept some Castle damage and reset if needed.
 
 ### Xiahou Dun (夏侯惇)
-Uses "One Eye Roar" - a lightning attack that hits multiple targets.
+Uses "One Eye Roar" - stuns nearby enemies while boosting his POW.
 
 **Counter:** Don't group up near him. Spread your units.
 
 ### Li Ru (李儒)
-Uses "Assassin Toxin" which forces poisoned units to retreat to their Castle.
+Uses "Assassin Toxin" which gradually drains HP from units in range until they enter their Castle.
 
-**Counter:** Don't bunch up. Bring purification or HP recovery skills.
+**Counter:** Don't bunch up. Bring Purify Ploy or HP recovery skills.
 
 ---
 
@@ -208,13 +208,13 @@ Understanding how the AI works helps you exploit it:
 
 2. **The AI prioritizes destroying dancers (舞姫) above all else.** They'll charge through spears and poison just to kill a dancing unit. You can use this as bait.
 
-3. **CPU prefers single-target Buffs over formation Skills.** They spam Fury Tactics (憤激戦法) and Power Tactics (強化戦法), rarely use the expensive Command Skills.
+3. **CPU prefers single-target Buffs over Command Skills.** They spam Fury Tactics (奮激戦法) and Power Tactics (強化戦法), rarely use the expensive Command Skills.
 
-4. **CPU siege units just march forward.** Easy to predict.
+4. **CPU Rams just march forward.** Easy to predict.
 
-5. **CPU cavalry charges at you but is easy to intercept.** They rarely dodge spear counters.
+5. **CPU Horse charges at you but is easy to intercept.** They rarely dodge Spear Counters.
 
-6. **Enemy initial positions are fixed.** Learn where the ambushes are and send expendable units to trigger them.
+6. **Enemy initial positions are fixed.** Learn where the Ambushes are and send expendable units to trigger them.
 
 ---
 
@@ -242,7 +242,7 @@ This is your tutorial. The difficulty is low, and you won't get stuck here.
 - Use this chapter to practice the touch controls
 - Experiment with different unit types
 - Make your mistakes here, not later
-- Watch out for Zhang Jiao's "Yellow Turban Rebellion" skill - bring a counter or just rush him down
+- Watch out for Zhang Jiao's "YT Rebellion" skill - bring a counter or just rush him down
 
 **Events:**
 | Event | Condition | Reward |
@@ -349,7 +349,7 @@ You start allied with the Coalition, Shu, and Wu.
 | **Starting Gold** | 1200 |
 | **Time Limit** | 18 months |
 | **Objective** | Capture Changan |
-| **Reward Card** | Ma Liang (馬良) - 1 cost Spear, 2/7, Guardian Thunder |
+| **Reward Card** | Ma Liang (馬良) - 1 cost Spear, 2/7, Guard Thunder |
 
 This stage has lots of Wu SR and R cards available from merchants. A great opportunity to build your collection.
 
@@ -361,7 +361,7 @@ This stage has lots of Wu SR and R cards available from merchants. A great oppor
 | Opening | Start with SR Sun Jian | 300 |
 | Imperial Seal | Place SR Sun Jian and UC Cheng Pu in Luoyang before Dec 190 | 1000 |
 | Zu Mao's Struggle | Dec 189 - Jun 190, defend against Hua Xiong using Zu Mao (time-out victory) | 500 |
-| Tiger of Jiangdong | Attack Hua Xiong's city with SR Sun Jian | 500 |
+| Jiangdong Tiger | Attack Hua Xiong's city with SR Sun Jian | 500 |
 | Sun Ce's First Battle | Use SR Sun Jian and R Sun Ce in battle before Oct 189 | 500 |
 
 > **Note:** For "Zu Mao's Struggle," you need a time-out victory, not a castle victory. If you win by destroying Hua Xiong's castle, he retreats and the event doesn't trigger.
@@ -386,8 +386,8 @@ Unlike Stages I and II, you have no allies here. Everyone is your enemy.
 - Xiahou Dun's "One Eye Roar" is dangerous - don't cluster
 
 **Cao Cao Fight Tips:**
-- R Xiahou Dun starts on the right - place spears there for interception
-- SR Cao Cao hides near UC Xiahou Yuan - flush him out with high-INT cavalry
+- R Xiahou Dun starts on the right - place Spears there for Counter
+- SR Cao Cao hides near UC Xiahou Yuan - flush him out with high-INT Horse
 - Once you have MP, Speed Tactics them down
 
 ---
@@ -406,7 +406,7 @@ Unlike Stages I and II, you have no allies here. Everyone is your enemy.
 | **Starting Gold** | 1200 |
 | **Time Limit** | 15 months |
 | **Objective** | Control 6 territories |
-| **Reward Card** | Kuai Yue (蒯越) - 1 cost Bow, 2/7, Weakening Scheme (has Ambush) |
+| **Reward Card** | Kuai Yue (蒯越) - 1 cost Bow, 2/7, Weaken Ploy (has Ambush) |
 
 You only need to control 6 territories total, including your home base. So you're really only capturing 5.
 
@@ -436,7 +436,7 @@ You only need to control 6 territories total, including your home base. So you'r
 **Strategy:**
 - Going west or south means fighting Wei or Wu, which is tough
 - The northern route is recommended - easier enemies
-- Xiapi is defensible with damage skill users and spear-focused units
+- Xiapi is defensible with damage skill users and Spear-focused units
 
 **Events:**
 | Event | Condition | Reward |
@@ -584,7 +584,7 @@ The Wei army around Pengcheng is terrifying. Don't rush them.
 | Event | Condition | Reward |
 |-------|-----------|--------|
 | Opening | Start with R Liu Bei | 300 |
-| Three Visits to the Cottage | May-Oct 207, place R Liu Bei and Zhuge Liang in same city | 1000 |
+| Three Visits | May-Oct 207, place R Liu Bei and Zhuge Liang in same city | 1000 |
 | Dragon and Phoenix | May 207 - Feb 208, fight Cao Cao using Zhuge Liang and Pang Tong | 500 |
 | Xu Shu's Loyalty | After Feb 208, attack Xu Shu's city with Pang Tong and win | 500 |
 | Archer Princess | After May 208, place R Sun Ren and R Liu Bei in same city | 500 |
@@ -635,7 +635,7 @@ The objective is to defeat Cao Cao personally, not eliminate all Wei forces. Tra
 - Start by conquering the Rogue territories to build strength
 - Divide the land into three before taking on the major powers
 - Isolate Pengcheng using the same Chaisang bait tactic
-- Bring a deck designed for overpowered enemies - consider the "Wild Battle Long Spear" composition from Training mode
+- Bring a deck designed for overpowered enemies - consider the "Wild Battle Long Spear" composition from DUEL mode
 - Gao Shun is incredible here - his "Siege Camp" counter is perfect for defense
 
 > **Note:** This stage has unique Soldier sprites in Jianning - they're 3/6 Spear units with Ambush. Don't underestimate them.
@@ -665,7 +665,7 @@ The turn limit is tight. Don't fight Wei or Wu directly - expand into Rogue terr
 **Strategy:**
 - Leave Jiangling alone until the last moment
 - Keep main forces in Jiangxia for defense while other units expand west
-- Against Lu Meng's Paralysis Arrow: don't let him use it with his full army at your gates. Force him to waste it early.
+- Against Lu Meng's Paralyze Order: don't let him use it with his full army at your gates. Force him to waste it early.
 - Huang Zhong + Taishi Ci's summons + Zhou Tai can hold the line
 
 **Speed Run Route:**
@@ -738,9 +738,9 @@ Xiapi connects to three territories and you have 20 months. Essentially the same
 
 **Unlocked:** After completing all 6 chapters
 
-**Reward Card:** Guan Yu (関羽) - 3 cost Spear, 10/10, Divine Thunder of Judgment
+**Reward Card:** Guan Yu (関羽) - 3 cost Spear, 10/10, Judgment Bolt
 
-This is the ultimate test. Everything is randomized: your starting deck, home base, surrounding enemies, merchant stock, and imperial orders.
+This is the ultimate test. Everything is randomized: your starting deck, home base, surrounding enemies, merchant stock, and edicts.
 
 | Detail | Info |
 |---|---|
@@ -755,14 +755,14 @@ This is the ultimate test. Everything is randomized: your starting deck, home ba
 - Starting cost ranges from 6 to 14 - lower is harder but scores better
 - Acceptable: 1-2 adjacent territories and at least one useful character
 
-**Imperial Orders:** Starting turn 2, you'll receive orders. Completing them gives gold, virtue, and cards. Worth doing, but don't sacrifice your defense.
+**Edicts:** Starting turn 2, you'll receive edicts. Completing them gives gold, virtue, and cards. Worth doing, but don't sacrifice your defense.
 
 **Pacing:** 24 territories in 24 turns means 1 per turn average. Since you can attack multiple territories per turn, you actually have breathing room. Don't panic.
 
 ### Scoring
 
 - **Turn Score:** Based on completion speed. Edge positions score higher than central ones.
-- **Order Bonus:** Up to 30,000 - remaining turns when completing each order add 1,000 each
+- **Edict Bonus:** Up to 30,000 - remaining turns when completing each edict add 1,000 each
 - **Difficulty Bonus:** Up to 10,000 - formula is 10,000 minus (starting cost - 6.0) times 500
 
 ---
@@ -773,26 +773,26 @@ This is the ultimate test. Everything is randomized: your starting deck, home ba
 
 | Unit | Role |
 |------|------|
-| 2x Siege Units | Main damage dealers |
-| 1x Spearman | Defense |
-| 1x Archer | Support |
+| 2x Rams | Main damage dealers |
+| 1x Spear | Defense |
+| 1x Bow | Support |
 | 1x Recovery Unit | Sustain |
 
-**Commander Skill:** Rally (Recovery)
+**Sage Ability:** Rally (Recovery)
 
-**Why it works:** Siege units are the easiest to control. Recovery compensates for slow natural HP regeneration.
+**Why it works:** Rams are the easiest to control. Recovery compensates for slow natural HP regeneration.
 
 ### Balanced Deck
 
 | Cost | Unit | Role |
 |------|------|------|
 | 2.5-3.0 | Main attacker | Damage and threat |
-| 2.0 | Siege unit | Reliable castle damage |
-| 1.5-2.0 | Cavalry | Mobility |
+| 2.0 | Ram | Reliable castle damage |
+| 1.5-2.0 | Horse | Mobility |
 | 1.0-1.5 | Support/Recovery | Sustain |
 | 0.5-1.0 | Flex | Situational |
 
-**Commander Skill:** Rally or Link
+**Sage Ability:** Rally or Link Force
 
 **Why it works:** Covers all situations without being hard to manage.
 
@@ -805,7 +805,7 @@ Based on the "Wild Battle Long Spear" (野戦長槍) composition:
 - UC Guan Ping
 - C Dong Xi
 - C Lady Mi (dancer)
-- **Commander:** Fa Zheng (Long Spear formation)
+- **Sage:** Fa Zheng (Spear Flash)
 
 This deck uses Lady Mi as bait while long spear formations devastate approaching enemies. Extremely effective against the AI.
 
@@ -814,9 +814,9 @@ This deck uses Lady Mi as bait while long spear formations devastate approaching
 Based on successful clears:
 
 - **Sun Ce** - Main attacker
-- **Siege Unit** - Territory capture
+- **Ram** - Territory capture
 - **Recovery Unit** - Sustain
-- **Spearman** - Defense/anti-cavalry
+- **Spear** - Defense/anti-Horse
 - **Low-cost support** - Flex
 
 **Faction:** Wu-focused for strong Sage Abilities
@@ -825,13 +825,13 @@ Based on successful clears:
 
 ## Common Mistakes to Avoid
 
-1. **Using 3+ cavalry** - Too difficult to control with touch screen. Stick to 1-2 maximum.
+1. **Using 3+ Horse** - Too difficult to control with touch screen. Stick to 1-2 maximum.
 
 2. **Ignoring recovery skills** - Natural HP recovery is glacially slow. Always bring healing.
 
 3. **Triggering ambushes with your best units** - Send expendables first to scout.
 
-4. **Fighting Lu Bu alone** - He has 15 attack. Gang up with multiple units.
+4. **Fighting Lu Bu alone** - He has POW 15. Gang up with multiple units.
 
 5. **Mixing 3+ factions** - Severely weakens Sage Abilities. Stick to 1-2.
 
@@ -888,15 +888,15 @@ Scoring 5,000+ points unlocks the exclusive DS card for each stage.
 ### Priority Skills to Look For
 
 1. Any Recovery skill
-2. Taishi Ji (area buff)
-3. Commander Rally (増援)
+2. Taishi Ci (area buff)
+3. Rally (再起興軍)
 4. Speed Tactics variants
 5. Long Spear variants
 
 ### Priority Units to Acquire
 
 1. Sun Ce (孫策) - Charge ability, mobility
-2. Lu Bu (呂布) - Raw power (but high cost)
+2. Lu Bu (呂布) - Raw POW (but high cost)
 3. Any Ram - Broken revival mechanic
 4. Gao Shun (高順) - Siege Camp counter
 5. Huang Zhong (黄忠) - Aged Valor heal
@@ -922,7 +922,7 @@ Scoring 5,000+ points unlocks the exclusive DS card for each stage.
 | Ma Chao | 馬超 | Ba Chou | Splendid Ma Chao |
 | Huang Zhong | 黄忠 | Kou Chuu | Old general |
 | Zhao Yun | 趙雲 | Chou Un | Dragon of Changshan |
-| Pang Tong | 龐統 | Hou Tou | Young Phoenix |
+| Pang Tong | 龐統 | Hou Tou | Fledgling Phoenix |
 | Xu Shu | 徐庶 | Jo Sho | Shu/Wei advisor |
 | Lu Bu | 呂布 | Ryo Fu | Flying General |
 | Dong Zhuo | 董卓 | Tou Taku | Tyrant |
@@ -930,7 +930,7 @@ Scoring 5,000+ points unlocks the exclusive DS card for each stage.
 | Xu Chu | 許褚 | Kyo Cho | Wei bodyguard |
 | Jia Xu | 賈詡 | Ka Ku | Strategist |
 | Xiahou Dun | 夏侯惇 | Kakou Ton | One-eyed general |
-| Xiahou Yuan | 夏侯淵 | Kakou En | Wei cavalry |
+| Xiahou Yuan | 夏侯淵 | Kakou En | Wei Horse general |
 | Wang Yi | 王異 | Ou I | Female warrior |
 | Taishi Ci | 太史慈 | Taishi Ji | Wu general |
 | Gan Ning | 甘寧 | Kan Nei | Wu pirate |
