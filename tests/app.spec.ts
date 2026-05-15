@@ -62,5 +62,5 @@ test('404 page still shows nav bar and footer', async ({page}) => {
 	).toBeVisible();
 
 	// Footer
-	await expect(page.getByText('TaisenFan — Fan site')).toBeVisible();
+	await expect(page.getByText('TaisenFan · Fan site')).toBeVisible();
 });
