@@ -11,6 +11,12 @@ import type {ImageKey} from '@/utils/image-catalog';
 import {IMAGE_CATALOG} from '@/utils/image-catalog';
 
 /**
+ * Bump when the extraction algorithm changes shape (e.g. KPC autoCrop on/off).
+ * Folded into the catalog hash so existing caches re-extract on next load.
+ */
+const EXTRACTION_REVISION = 2;
+
+/**
  * Auto-derived cache version — changes whenever the image catalog changes.
  * FNV-1a hash of all sorted catalog keys, truncated to a positive 32-bit int.
  * No manual bumping needed.
@@ -22,6 +28,8 @@ function catalogHash(): number {
 		h ^= keys.charCodeAt(i);
 		h = Math.imul(h, 0x01_00_01_93); // FNV prime
 	}
+	h ^= EXTRACTION_REVISION;
+	h = Math.imul(h, 0x01_00_01_93);
 	return h >>> 0; // ensure positive
 }
 

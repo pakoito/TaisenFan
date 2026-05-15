@@ -64,25 +64,20 @@ export function SageCard({sage}: Props) {
 						{open ? '▼' : '▶'} Lore &amp; Dialogue
 					</CollapsibleTrigger>
 					<CollapsibleContent>
-						<div className={bustupUrl ? 'flex items-start gap-4' : ''}>
-							{bustupUrl ? (
-								<img
-									alt={sage.name}
-									className='h-40 w-40 shrink-0 self-start [image-rendering:pixelated]'
-									height={256}
-									src={bustupUrl}
-									width={256}
-								/>
-							) : null}
-							<div className='min-w-0 flex-1'>
-								<p className='mb-3 whitespace-pre-line border-cinnabar/30 border-l-2 pl-3 text-sm text-text-faint italic'>
-									{sage.lore}
-								</p>
-								<p className='text-sm text-text-muted'>
-									&ldquo;{sage.battleCry}&rdquo;
-								</p>
-							</div>
-						</div>
+						{bustupUrl ? (
+							// biome-ignore lint/correctness/useImageSize: aspect-square w-full handles sizing fluidly; explicit width/height would defeat that
+							<img
+								alt={sage.name}
+								className='mb-4 block aspect-square w-full [image-rendering:pixelated]'
+								src={bustupUrl}
+							/>
+						) : null}
+						<p className='mb-3 whitespace-pre-line border-cinnabar/30 border-l-2 pl-3 text-sm text-text-faint italic'>
+							{sage.lore}
+						</p>
+						<p className='text-sm text-text-muted'>
+							&ldquo;{sage.battleCry}&rdquo;
+						</p>
 					</CollapsibleContent>
 				</Collapsible>
 

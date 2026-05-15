@@ -146,27 +146,19 @@ function ExpandedDetail({
 }) {
 	return (
 		<div className={cn('px-4 py-5', cfg.rowBg)}>
-			<div
-				className={cn(
-					'grid gap-5',
-					bustupUrl
-						? 'grid-cols-1 md:grid-cols-[auto_1fr_1fr]'
-						: 'grid-cols-1 md:grid-cols-2',
-				)}
-			>
+			<div className='grid grid-cols-1 gap-5 md:grid-cols-[3fr_2fr] md:items-start'>
 				{bustupUrl ? (
-					<div className='flex items-start justify-center'>
-						<img
-							alt={lord.name}
-							className='w-auto [image-rendering:pixelated]'
-							height={256}
-							src={bustupUrl}
-							width={256}
-						/>
-					</div>
+					// biome-ignore lint/correctness/useImageSize: width is fluid via w-full; height follows the trimmed bustup's natural aspect
+					<img
+						alt={lord.name}
+						className='block h-auto w-full [image-rendering:pixelated]'
+						src={bustupUrl}
+					/>
 				) : null}
-				<SkillDetail lord={lord} />
-				<LoreDetail lord={lord} />
+				<div className='flex flex-col gap-5'>
+					<SkillDetail lord={lord} />
+					<LoreDetail lord={lord} />
+				</div>
 			</div>
 		</div>
 	);

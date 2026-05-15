@@ -51,7 +51,7 @@ function decodeFile(
 	const ext = filename.split('.').pop()?.toUpperCase();
 	switch (ext) {
 		case 'KPC':
-			return decodeKpc(data);
+			return decodeKpc(data, true);
 		case 'ABP':
 			return decodeAbp(data);
 		default:
