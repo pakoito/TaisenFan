@@ -146,7 +146,7 @@ function ExpandedDetail({
 }) {
 	return (
 		<div className={cn('px-4 py-5', cfg.rowBg)}>
-			<div className='grid grid-cols-1 gap-5 md:grid-cols-[3fr_2fr] md:items-start'>
+			<div className='grid grid-cols-1 gap-5 md:grid-cols-[2fr_3fr] md:items-start'>
 				{bustupUrl ? (
 					// biome-ignore lint/correctness/useImageSize: aspect-square + object-contain pillarboxes/letterboxes the variably-cropped bustup into a fixed footprint
 					<img

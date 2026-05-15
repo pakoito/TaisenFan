@@ -93,7 +93,7 @@ function statusLabel(status: RomStatus): string {
 		case 'loaded':
 			return 'Loaded';
 		default:
-			return 'Load ROM';
+			return 'Load Cartridge';
 	}
 }
 
@@ -109,7 +109,7 @@ function EmptyContent({
 	return (
 		<div className='flex flex-col items-center gap-3 py-2'>
 			<p className='text-center text-sm text-text-muted'>
-				Load your ROM to unlock portraits and the English translation patch.
+				Load your cartridge to unlock portraits and the English translation patch.
 			</p>
 			<FilePickerButton onFileChange={onFileChange} />
 		</div>
@@ -141,7 +141,7 @@ function StaleContent({
 				{images.size} portraits loaded from cache.
 			</p>
 			<p className='text-text-faint text-xs'>
-				New image types available. Load ROM to update.
+				New image types available. Reload cartridge to update.
 			</p>
 			<FilePickerButton onFileChange={onFileChange} />
 			<button
@@ -167,7 +167,7 @@ function CachedContent({
 				{images.size} portraits loaded from cache.
 			</p>
 			<p className='text-text-faint text-xs'>
-				Load ROM to enable the English translation patch.
+				Load cartridge to enable the English translation patch.
 			</p>
 			<FilePickerButton onFileChange={onFileChange} />
 			<button
@@ -195,7 +195,7 @@ function LoadedContent() {
 	return (
 		<div className='flex flex-col gap-3'>
 			<p className='text-sm text-text-muted'>
-				ROM verified. {images.size} portraits extracted ✓
+				Cartridge verified. {images.size} portraits extracted ✓
 			</p>
 
 			{error ? <p className='text-cinnabar-light text-xs'>{error}</p> : null}
@@ -222,7 +222,7 @@ function LoadedContent() {
 					onClick={eject}
 					type='button'
 				>
-					Eject ROM
+					Eject Cartridge
 				</button>
 				<button
 					className='text-text-dim text-xs hover:text-gold'
@@ -251,7 +251,7 @@ function FilePickerButton({
 				asChild={true}
 				className='bg-cinnabar font-bold text-gold uppercase tracking-wider hover:bg-cinnabar-light'
 			>
-				<span>Select ROM File</span>
+				<span>Select Cartridge File</span>
 			</Button>
 			<input
 				accept='.nds'

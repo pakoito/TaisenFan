@@ -106,8 +106,8 @@ export function applyBps(source: Uint8Array, patch: BpsPatch): Uint8Array {
 	const srcCrc = crc32(source);
 	if (srcCrc !== patch.sourceChecksum) {
 		throw new Error(
-			`ROM checksum mismatch (got 0x${srcCrc.toString(16)}, expected 0x${patch.sourceChecksum.toString(16)}). ` +
-				'Make sure you are using the correct original Japanese ROM.',
+			`Cartridge checksum mismatch (got 0x${srcCrc.toString(16)}, expected 0x${patch.sourceChecksum.toString(16)}). ` +
+				'Make sure you are using the correct original Japanese game cartridge.',
 		);
 	}
 
@@ -154,7 +154,7 @@ export function applyBps(source: Uint8Array, patch: BpsPatch): Uint8Array {
 
 	const tgtCrc = crc32(target);
 	if (tgtCrc !== patch.targetChecksum) {
-		throw new Error('Patched ROM checksum mismatch. Patch may be corrupted.');
+		throw new Error('Patched cartridge checksum mismatch. Patch may be corrupted.');
 	}
 
 	return target;

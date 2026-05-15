@@ -23,16 +23,16 @@ export function Home() {
 				</p>
 			</section>
 
-			{/* ROM loader prompt */}
+			{/* Cartridge loader prompt */}
 			<section className='mx-auto mb-20 max-w-2xl'>
 				<div className='gold-stroke bg-surface-high p-8 text-center'>
 					<h2 className='mb-4 font-black font-serif text-gold text-lg uppercase tracking-widest'>
-						Load Your ROM
+						Load Your Cartridge
 					</h2>
 					<p className='mb-2 text-sm text-text-faint'>
 						Use the cartridge slot in the top-right corner to load your original
-						Japanese ROM. Portraits will appear across the site and you can
-						download the English translation patch.
+						Japanese game cartridge. Portraits will appear across the site and
+						you can download the English translation patch.
 					</p>
 					<p className='text-text-dim text-xs'>
 						Everything runs locally in your browser. Nothing is uploaded.

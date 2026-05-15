@@ -181,7 +181,7 @@ async function handleExtract(rom: ArrayBuffer): Promise<void> {
 async function handlePatch(baseUrl: string): Promise<void> {
 	try {
 		if (!romData) {
-			post({type: 'patch-error', error: 'No ROM loaded. Load a ROM first.'});
+			post({type: 'patch-error', error: 'No cartridge loaded. Load a cartridge first.'});
 			return;
 		}
 
