@@ -90,8 +90,8 @@ export function Home() {
 					/>
 					<DataLink
 						description='All 6 chapters plus Warring States mode.'
-						title='Campaign Walkthrough'
-						to='/guides/campaign'
+						title='CONQUEST Walkthrough'
+						to='/guides/conquest'
 					/>
 					<DataLink
 						description='Damage formulas, speed tables, and counters.'

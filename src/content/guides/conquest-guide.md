@@ -1,4 +1,4 @@
-# Campaign Guide
+# CONQUEST Guide
 
 Welcome to the Strategy Chapter (戦略ノ章), the campaign mode of Sangokushi Taisen Ten. This guide will take you through all six chapters plus the Warring States mode, helping you overcome each challenge.
 
@@ -960,7 +960,7 @@ Scoring 5,000+ points unlocks the exclusive DS card for each stage.
 
 ## Additional References
 
-- [Campaign Merchants](/guides/campaign-merchants) - Complete listing of Lords available for purchase by chapter
+- [CONQUEST Merchants](/guides/conquest-merchants) - Complete listing of Lords available for purchase by chapter
 
 ---
 

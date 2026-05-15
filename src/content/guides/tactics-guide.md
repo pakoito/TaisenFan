@@ -3,7 +3,7 @@
 > **Strategy Guide:** This covers how to think about and play matches.
 > For game basics, see [Beginner's Guide](/guides/beginners).
 > For DUEL deck strategies, see [Deck Strategies](/guides/deck-strategies).
-> For CONQUEST mode, see [Campaign Guide](/guides/campaign).
+> For CONQUEST mode, see [CONQUEST Guide](/guides/conquest).
 
 ## Quick Reference of Unit Roles
 
@@ -364,4 +364,4 @@ For teleport lag:
 - [Beginner's Guide](/guides/beginners) - Game fundamentals
 - [Deck Strategies](/guides/deck-strategies) - DUEL-specific deck tactics
 - [DUEL Guide](/guides/duel) - Complete DUEL mode walkthrough
-- [Campaign Guide](/guides/campaign) - CONQUEST mode strategy
+- [CONQUEST Guide](/guides/conquest) - CONQUEST mode strategy

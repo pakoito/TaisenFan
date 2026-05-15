@@ -437,7 +437,7 @@ The AI is reasonably smart:
 
 - **Tutorials unlock cards.** Complete all tutorials in DUEL mode to receive 6 free cards.
 - **Wi-Fi improves drops.** Higher rarity cards appear more often in online battles.
-- **Sages only level in DUEL.** Campaign and Wi-Fi battles don't train your Sages.
+- **Sages only level in DUEL.** CONQUEST and Wi-Fi battles don't train your Sages.
 
 ---
 
@@ -450,7 +450,7 @@ Now that you understand the basics, follow this progression based on how you wan
 | Stage | Guide | What You'll Learn |
 |-------|-------|-------------------|
 | 1. Basics | **You are here** | Fundamentals, terminology |
-| 2. Pick a Mode | [Campaign Guide](/guides/campaign) | CONQUEST story mode |
+| 2. Pick a Mode | [CONQUEST Guide](/guides/conquest) | CONQUEST story mode |
 | | [DUEL Guide](/guides/duel) | Training mode, unlock rewards |
 | 3. Build Decks | [Deck Archetypes](/guides/deck-archetypes) | Meta decks by faction and strategy |
 | 4. Win Consistently | [Deck Strategies](/guides/deck-strategies) | S-rank tactics for DUEL mode |
@@ -461,7 +461,7 @@ Now that you understand the basics, follow this progression based on how you wan
 
 This is a lookup table, not a tutorial:
 
-- [Campaign Merchants](/guides/campaign-merchants) - Lords available for purchase by chapter
+- [CONQUEST Merchants](/guides/conquest-merchants) - Lords available for purchase by chapter
 
 ### Recommended First Steps
 

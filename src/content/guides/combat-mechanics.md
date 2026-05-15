@@ -580,4 +580,4 @@ Lords with the **Valor** trait convert some of their standard bars into guarante
 - [Beginner's Guide](/guides/beginners): basic concepts and controls
 - [Deck Strategies](/guides/deck-strategies): deck building and tactics
 - [DUEL Mode Guide](/guides/duel): DUEL mode progression
-- [CONQUEST Guide](/guides/campaign): campaign mode walkthrough
+- [CONQUEST Guide](/guides/conquest): campaign mode walkthrough

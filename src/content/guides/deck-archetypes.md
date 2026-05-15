@@ -6,7 +6,7 @@
 
 This guide covers the standard deck archetypes for general play, WiFi matches, and VS mode. These are the "meta" deck types that form the backbone of competitive play.
 
-For DUEL mode-specific strategies against CPU opponents, see [Deck Strategies](/guides/deck-strategies). For campaign progression, see [Campaign Guide](/guides/campaign).
+For DUEL mode-specific strategies against CPU opponents, see [Deck Strategies](/guides/deck-strategies). For CONQUEST progression, see [CONQUEST Guide](/guides/conquest).
 
 ---
 
@@ -1017,5 +1017,5 @@ R Lady Zou's Bitter Dance has unique effects.
 
 - [DUEL Guide](/guides/duel) - Stage listings and difficulty
 - [Deck Strategies](/guides/deck-strategies) - DUEL-specific S-rank tactics
-- [Campaign Guide](/guides/campaign) - Story mode progression
+- [CONQUEST Guide](/guides/conquest) - Story mode progression
 - [Beginners Guide](/guides/beginners) - Basic mechanics

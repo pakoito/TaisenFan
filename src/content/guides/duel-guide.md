@@ -570,8 +570,8 @@ Around Chen Lan's second siege attempt, SR Zhao Yun (Undying) emerges. Bait him 
 ## Additional References
 
 - [Deck Strategies Guide](/guides/deck-strategies) - Detailed deck builds for S-rank clears
-- [Campaign Guide](/guides/campaign) - Story mode walkthrough and event conditions
-- [Campaign Merchants](/guides/campaign-merchants) - Card acquisition by chapter
+- [CONQUEST Guide](/guides/conquest) - Story mode walkthrough and event conditions
+- [CONQUEST Merchants](/guides/conquest-merchants) - Card acquisition by chapter
 
 ---
 

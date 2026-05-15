@@ -17,19 +17,19 @@ export const GUIDES: readonly GuideEntry[] = [
 		load: () => import('@/content/guides/beginners-guide.md'),
 	},
 	{
-		slug: 'campaign',
-		title: 'Campaign Walkthrough',
-		load: () => import('@/content/guides/campaign-guide.md'),
+		slug: 'conquest',
+		title: 'CONQUEST Walkthrough',
+		load: () => import('@/content/guides/conquest-guide.md'),
 	},
 	{
-		slug: 'campaign-merchants',
-		title: 'Campaign Merchants',
-		load: () => import('@/content/guides/campaign-merchants.md'),
+		slug: 'conquest-merchants',
+		title: 'CONQUEST Merchants',
+		load: () => import('@/content/guides/conquest-merchants.md'),
 	},
 	{
-		slug: 'combat',
-		title: 'Combat Mechanics',
-		load: () => import('@/content/guides/combat-mechanics.md'),
+		slug: 'duel',
+		title: 'DUEL Guide',
+		load: () => import('@/content/guides/duel-guide.md'),
 	},
 	{
 		slug: 'deck-archetypes',
@@ -42,13 +42,13 @@ export const GUIDES: readonly GuideEntry[] = [
 		load: () => import('@/content/guides/deck-strategies.md'),
 	},
 	{
-		slug: 'duel',
-		title: 'DUEL Guide',
-		load: () => import('@/content/guides/duel-guide.md'),
-	},
-	{
 		slug: 'tactics',
 		title: 'Tactics Guide',
 		load: () => import('@/content/guides/tactics-guide.md'),
+	},
+	{
+		slug: 'combat',
+		title: 'Combat Mechanics',
+		load: () => import('@/content/guides/combat-mechanics.md'),
 	},
 ];

@@ -19,8 +19,8 @@ const GUIDES_DEST = path.resolve(import.meta.dirname, '../src/content/guides');
 /** Map filename (without .md) → SPA route slug */
 const SLUG_MAP: Record<string, string> = {
 	'beginners-guide': 'beginners',
-	'campaign-guide': 'campaign',
-	'campaign-merchants': 'campaign-merchants',
+	'conquest-guide': 'conquest',
+	'conquest-merchants': 'conquest-merchants',
 	'combat-mechanics': 'combat',
 	'deck-archetypes': 'deck-archetypes',
 	'deck-strategies': 'deck-strategies',

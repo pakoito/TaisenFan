@@ -261,7 +261,7 @@ When aiming for S-rank (30,000+ points):
 ## Additional References
 
 - [DUEL Guide](/guides/duel) - Stage listings and mode overview
-- [Campaign Guide](/guides/campaign) - Story mode walkthrough
+- [CONQUEST Guide](/guides/conquest) - Story mode walkthrough
 
 ---
 

@@ -1,4 +1,4 @@
-# Campaign Merchant Reference
+# CONQUEST Merchant Reference
 
 Each chapter has merchants selling Lords at three price tiers. This is a complete listing of available Lords by chapter and stage.
 
@@ -425,4 +425,4 @@ Merchant availability varies each playthrough, but the pool includes:
 
 ---
 
-*For event conditions and strategies, see the [Campaign Guide](/guides/campaign).*
+*For event conditions and strategies, see the [CONQUEST Guide](/guides/conquest).*

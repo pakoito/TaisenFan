@@ -31,13 +31,13 @@ type DropdownItem = {
 
 const GUIDE_ITEMS: readonly DropdownItem[] = [
 	{to: '/guides/beginners', label: "Beginner's Guide"},
-	{to: '/guides/campaign', label: 'Campaign Walkthrough'},
-	{to: '/guides/campaign-merchants', label: 'Campaign Merchants'},
-	{to: '/guides/combat', label: 'Combat Mechanics'},
+	{to: '/guides/conquest', label: 'CONQUEST Walkthrough'},
+	{to: '/guides/conquest-merchants', label: 'CONQUEST Merchants'},
+	{to: '/guides/duel', label: 'DUEL Guide'},
 	{to: '/guides/deck-archetypes', label: 'Deck Archetypes'},
 	{to: '/guides/deck-strategies', label: 'DUEL Mode S Tier Deck Strategies'},
-	{to: '/guides/duel', label: 'DUEL Guide'},
 	{to: '/guides/tactics', label: 'Tactics Guide'},
+	{to: '/guides/combat', label: 'Combat Mechanics'},
 ];
 
 const GAMEDATA_ITEMS: readonly DropdownItem[] = [
