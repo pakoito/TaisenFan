@@ -1,4 +1,4 @@
-# Sangokushi Taisen Ten - Deck Archetypes
+# Deck Archetypes
 
 > **Terminology Note:** This guide uses official English translations. Key terms: POW (combat power), INT (intelligence), MP (morale points for Skills), HP (unit health), Skill (special abilities), Sage (non-combat advisor cards), Command (team buff Skills), Trait (passive abilities like Ambush, Valor, Charm).
 

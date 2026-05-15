@@ -1,4 +1,4 @@
-# Sangokushi Taisen Ten - Deck Strategies
+# DUEL Mode S Tier Deck Strategies
 
 This guide covers proven deck archetypes for achieving S-rank in DUEL mode, particularly on Extreme difficulty. These strategies were documented by the Japanese wiki community and exploit AI behavior patterns rather than trying to match the enemy's overwhelming stats.
 

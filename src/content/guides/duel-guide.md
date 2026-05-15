@@ -1,4 +1,4 @@
-# Sangokushi Taisen Ten - DUEL Guide
+# DUEL Guide
 
 Welcome to the DUEL mode (鍛錬ノ章), a training chapter where you battle predetermined CPU armies to hone your skills, earn rewards, and push for S-rank clears on increasingly brutal difficulties.
 

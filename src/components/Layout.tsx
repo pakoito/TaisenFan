@@ -35,7 +35,7 @@ const GUIDE_ITEMS: readonly DropdownItem[] = [
 	{to: '/guides/campaign-merchants', label: 'Campaign Merchants'},
 	{to: '/guides/combat', label: 'Combat Mechanics'},
 	{to: '/guides/deck-archetypes', label: 'Deck Archetypes'},
-	{to: '/guides/deck-strategies', label: 'Deck Strategies'},
+	{to: '/guides/deck-strategies', label: 'DUEL Mode S Tier Deck Strategies'},
 	{to: '/guides/duel', label: 'DUEL Guide'},
 	{to: '/guides/tactics', label: 'Tactics Guide'},
 ];
@@ -43,7 +43,7 @@ const GUIDE_ITEMS: readonly DropdownItem[] = [
 const GAMEDATA_ITEMS: readonly DropdownItem[] = [
 	{to: '/gamedata/lords', label: 'Lord Cards'},
 	{to: '/gamedata/sages', label: 'Sage Cards'},
-	{to: '/gamedata/decks', label: 'Duel Decks'},
+	{to: '/gamedata/decks', label: 'DUEL Decks'},
 ];
 
 /* ======================================================================== */

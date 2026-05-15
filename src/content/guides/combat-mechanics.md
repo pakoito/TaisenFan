@@ -1,4 +1,4 @@
-# Sangokushi Taisen Ten - Combat Mechanics
+# Combat Mechanics
 
 > **Reference Guide:** This document contains formulas and tables for advanced play.
 > For basic concepts, see [Beginner's Guide](/guides/beginners).

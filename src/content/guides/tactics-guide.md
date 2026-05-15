@@ -1,4 +1,4 @@
-# Sangokushi Taisen Ten - Tactics Guide
+# Tactics Guide
 
 > **Strategy Guide:** This covers how to think about and play matches.
 > For game basics, see [Beginner's Guide](/guides/beginners).

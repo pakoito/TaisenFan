@@ -38,7 +38,7 @@ export const GUIDES: readonly GuideEntry[] = [
 	},
 	{
 		slug: 'deck-strategies',
-		title: 'Deck Strategies',
+		title: 'DUEL Mode S Tier Deck Strategies',
 		load: () => import('@/content/guides/deck-strategies.md'),
 	},
 	{

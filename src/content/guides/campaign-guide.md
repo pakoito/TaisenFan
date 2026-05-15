@@ -1,4 +1,4 @@
-# Sangokushi Taisen Ten - Campaign Guide
+# Campaign Guide
 
 Welcome to the Strategy Chapter (戦略ノ章), the campaign mode of Sangokushi Taisen Ten. This guide will take you through all six chapters plus the Warring States mode, helping you overcome each challenge.
 
