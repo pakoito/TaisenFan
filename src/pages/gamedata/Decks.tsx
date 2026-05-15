@@ -136,7 +136,7 @@ function DeckCard({deck}: {deck: DuelDeck}) {
 					<div className='mb-4 text-sm'>
 						<span className='font-bold font-serif text-gold'>Sage:</span>{' '}
 						<span className='text-text-muted'>
-							{deck.sage.name} ({deck.sage.nameJapanese}) —{' '}
+							{deck.sage.name} ({deck.sage.nameJapanese}), using{' '}
 							{deck.sage.selectedAbility === 'Tactics'
 								? deck.sage.tacticsName
 								: deck.sage.formationName}

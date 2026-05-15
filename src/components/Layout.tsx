@@ -111,7 +111,7 @@ export function Layout({children}: PropsWithChildren) {
 				<div className='brushstroke-sep mx-auto mb-4 max-w-7xl' />
 				<div className='mx-auto max-w-7xl'>
 					<p className='text-center font-sans text-text-dim text-xs uppercase tracking-wider'>
-						TaisenFan — Fan site for Sangokushi Taisen Ten (三国志大戦DS)
+						TaisenFan · Fan site for Sangokushi Taisen Ten (三国志大戦DS)
 					</p>
 					<p className='mt-2 text-center font-sans text-text-dim text-[10px] leading-relaxed'>
 						Sangokushi Taisen DS (三国志大戦DS) © 2008 SEGA / ALPHA-UNIT. This
@@ -227,7 +227,7 @@ function MobileNav() {
 					</MobileSection>
 
 					<span className='px-4 py-2 font-sans text-sm text-text-dim'>
-						Save Editor — Coming soon
+						Save Editor (coming soon)
 					</span>
 				</div>
 			</SheetContent>

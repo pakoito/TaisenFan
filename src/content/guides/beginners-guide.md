@@ -465,7 +465,7 @@ This is a lookup table, not a tutorial:
 
 ### Recommended First Steps
 
-1. **Complete all Tutorials** in DUEL mode first — you get 6 free DS-original cards
+1. **Complete all Tutorials** in DUEL mode first to earn 6 free DS-original cards
 2. **Play Normal difficulty DUEL stages** to practice controls and learn CPU patterns
 3. **Start CONQUEST Chapter 1** once you're comfortable with touch controls
 4. **Return here** to reference terminology whenever you encounter unfamiliar terms

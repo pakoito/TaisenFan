@@ -16,7 +16,7 @@ const EXCUSES = [
 		subline: 'Do not pursue Lu Bu.',
 	},
 	{
-		line: 'Zhou Yu devised a brilliant plan for this page — then coughed blood and died.',
+		line: 'Zhou Yu devised a brilliant plan for this page, then coughed blood and died.',
 		subline: '"Why was I born if Zhuge Liang was also born?"',
 	},
 	{

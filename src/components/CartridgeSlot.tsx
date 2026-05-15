@@ -141,7 +141,7 @@ function StaleContent({
 				{images.size} portraits loaded from cache.
 			</p>
 			<p className='text-text-faint text-xs'>
-				New image types available — load ROM to update.
+				New image types available. Load ROM to update.
 			</p>
 			<FilePickerButton onFileChange={onFileChange} />
 			<button
@@ -195,7 +195,7 @@ function LoadedContent() {
 	return (
 		<div className='flex flex-col gap-3'>
 			<p className='text-sm text-text-muted'>
-				ROM verified ✓ — {images.size} portraits extracted.
+				ROM verified. {images.size} portraits extracted ✓
 			</p>
 
 			{error ? <p className='text-cinnabar-light text-xs'>{error}</p> : null}

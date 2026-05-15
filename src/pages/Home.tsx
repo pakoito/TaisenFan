@@ -18,8 +18,8 @@ export function Home() {
 				<div className='brushstroke-sep mx-auto my-6 max-w-xs' />
 				<p className='mx-auto max-w-lg text-text-faint leading-relaxed'>
 					A fan translation patch for the Nintendo DS real-time strategy card
-					game set in the Three Kingdoms era of China. All menus, cards, skills,
-					cutscenes, and guides — in English.
+					game set in the Three Kingdoms era of China. Menus, cards, skills,
+					cutscenes, and guides, all in English.
 				</p>
 			</section>
 
@@ -35,7 +35,7 @@ export function Home() {
 						download the English translation patch.
 					</p>
 					<p className='text-text-dim text-xs'>
-						Everything runs locally in your browser — nothing is uploaded.
+						Everything runs locally in your browser. Nothing is uploaded.
 					</p>
 				</div>
 			</section>
@@ -62,7 +62,7 @@ export function Home() {
 				<InscriptionHeader>Game Data</InscriptionHeader>
 				<div className='mt-8 grid grid-cols-1 gap-6 md:grid-cols-3'>
 					<DataLink
-						description='All 192 warriors — stats, skills, traits, and lore.'
+						description='Stats, skills, traits, and lore for all 192 warriors.'
 						title='Lord Cards'
 						to='/gamedata/lords'
 					/>
@@ -122,7 +122,7 @@ export function Home() {
 						<strong className='text-gold-dim'>Sangokushi Taisen Ten</strong>{' '}
 						(三国志大戦・天) is the Nintendo DS adaptation of SEGA's popular
 						arcade card game. Command legendary Three Kingdoms heroes in
-						real-time tactical battles — place cards on the touch screen,
+						real-time tactical battles. Place cards on the touch screen,
 						maneuver units, and activate devastating skills to breach the enemy
 						castle.
 					</p>

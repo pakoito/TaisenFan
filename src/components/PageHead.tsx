@@ -6,7 +6,7 @@ type Props = {
 
 export function PageHead({title}: Props) {
 	useEffect(() => {
-		document.title = `${title} — TaisenFan`;
+		document.title = `${title} · TaisenFan`;
 	}, [title]);
 
 	return null;

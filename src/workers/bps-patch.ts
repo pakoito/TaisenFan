@@ -154,7 +154,7 @@ export function applyBps(source: Uint8Array, patch: BpsPatch): Uint8Array {
 
 	const tgtCrc = crc32(target);
 	if (tgtCrc !== patch.targetChecksum) {
-		throw new Error('Patched ROM checksum mismatch — patch may be corrupted.');
+		throw new Error('Patched ROM checksum mismatch. Patch may be corrupted.');
 	}
 
 	return target;

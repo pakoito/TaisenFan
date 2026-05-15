@@ -52,7 +52,7 @@
 
 Combat in Sangokushi Taisen Ten is based on **power difference** rather than absolute power values. This is a crucial insight that contradicts the common belief that combat scales with squared values.
 
-**Key Principle:** A POW 1 vs POW 5 fight produces the same result as POW 11 vs POW 15 — both have a power difference of 4, so the higher-powered unit wins with approximately 75% HP remaining.
+**Key Principle:** A POW 1 vs POW 5 fight produces the same result as POW 11 vs POW 15. Both have a power difference of 4, so the higher-powered unit wins with approximately 75% HP remaining.
 
 This applies to all melee combat. The exceptions are **Charge** and **Counter** attacks, which include a damage bonus that scales with the attacker's own power.
 
@@ -99,9 +99,9 @@ When you're **weaker** than your target, damage scaling stops at **8 POW below**
 | 0 to -7 POW | Damage scales normally |
 | -8 or worse | Damage locked at minimum (won't decrease further) |
 
-**Example:** A POW 1 unit deals the same (tiny) damage to a POW 9 enemy as to a POW 30 enemy — both are beyond the -8 cap.
+**Example:** A POW 1 unit deals the same (tiny) damage to a POW 9 enemy as to a POW 30 enemy, since both are beyond the -8 cap.
 
-**This is NOT symmetric.** When you're stronger, there's no mentioned cap — a POW 30 unit hitting a POW 1 enemy deals full difference-based damage.
+**This is NOT symmetric.** When you're stronger, there's no mentioned cap. A POW 30 unit hitting a POW 1 enemy deals full difference-based damage.
 
 This cap applies to all standard combat (melee and bow). Charge and Counter attacks have their own formulas.
 
@@ -126,7 +126,7 @@ Unlike traditional rock-paper-scissors systems, Sangokushi Taisen doesn't use fl
 - **Spear Counter**: The primary anti-cavalry mechanic. A single Counter can deal 40-80+ damage.
 - **Charge Immunity**: Charging cavalry have a defensive aura that drastically reduces bow damage.
 - **Speed vs Range**: Spears are the slowest unit (0.7 base), making them easy targets for bows at range.
-- **Sword (Infantry)**: No special advantages or disadvantages — balanced stats, no special attacks.
+- **Sword (Infantry)**: No special advantages or disadvantages. Balanced stats, no special attacks.
 - **Ram (Siege)**: Extremely slow (0.5), but deals ~3x the siege damage of other units.
 
 These interactions mean positioning and timing matter more than simple type matchups.
@@ -186,7 +186,7 @@ A Counter triggers when the target:
 1. Is a **charging cavalry** (has flash), OR
 2. Has **movement speed ≥ 1.3**
 
-The Counter must hit from the target's **front 180°**. Hitting from behind or the sides does NOT trigger a Counter — the unit just takes normal Thrust damage.
+The Counter must hit from the target's **front 180°**. Hitting from behind or the sides does NOT trigger a Counter; the unit just takes normal Thrust damage.
 
 ### Counter Formula
 
@@ -208,13 +208,13 @@ When the target's speed is **2.0 or higher**, a Double Counter triggers instead,
 | 20 | 1 | 79 | 119 |
 | 10 | 10 | 50 | 90 |
 
-**Takeaway:** Even low-POW spears can devastate high-speed enemies. A POW 1 spear Counter deals 41 damage to a POW 1 target — nearly half their HP.
+**Takeaway:** Even low-POW spears can devastate high-speed enemies. A POW 1 spear Counter deals 41 damage to a POW 1 target, nearly half their HP.
 
 ---
 
 ## Bow Damage
 
-Bow attacks use the same power-difference system as melee combat. Despite the common perception that bows are "strong" in this game, bow damage is NOT enhanced — it's identical to melee damage per hit.
+Bow attacks use the same power-difference system as melee combat. Despite the common perception that bows are "strong" in this game, bow damage is NOT enhanced; it's identical to melee damage per hit.
 
 The perceived strength comes from:
 - Automatic targeting (no manual aiming needed)
@@ -239,11 +239,11 @@ How long it takes for a bow unit to kill an enemy of various power differences:
 
 ### Notes
 
-- **-8 cap applies here too** — See [The +8 Disadvantage Cap](#the-8-disadvantage-cap). When 8+ POW weaker, time-to-kill maxes out at 65C.
-- **High-POW bows matter** — Low-POW bows become nearly useless against buffed enemies due to the cap.
-- **Charging cavalry resist bows** — The charge flash grants defensive bonuses, reducing bow effectiveness further.
-- **No offensive scaling** — Unlike Charge/Counter, bows don't get a power-based damage bonus.
-- **Wild Shots (SR Xiahou Yuan)** — Doubles bow damage, but still hits the cap against +8 enemies. Against POW 19+ targets, 6C of doubled shots only deals ~20% HP.
+- **-8 cap applies here too.** See [The +8 Disadvantage Cap](#the-8-disadvantage-cap). When 8+ POW weaker, time-to-kill maxes out at 65C.
+- **High-POW bows matter.** Low-POW bows become nearly useless against buffed enemies due to the cap.
+- **Charging cavalry resist bows.** The charge flash grants defensive bonuses, reducing bow effectiveness further.
+- **No offensive scaling.** Unlike Charge/Counter, bows don't get a power-based damage bonus.
+- **Wild Shots (SR Xiahou Yuan).** Doubles bow damage, but still hits the cap against +8 enemies. Against POW 19+ targets, 6C of doubled shots only deals ~20% HP.
 
 ---
 
@@ -547,8 +547,8 @@ When two unit centers touch, a Duel may trigger. Duels are button-mashing miniga
 ### Musou Bar Distribution
 
 Based on POW difference, each side receives a mix of:
-- **Musou-possible bars** — Can become Musou with correct timing
-- **Standard bars** — Cannot become Musou
+- **Musou-possible bars.** Can become Musou with correct timing.
+- **Standard bars.** Cannot become Musou.
 
 | Your POW | vs 0 | vs 1 | vs 2 | vs 3 | vs 4 | vs 5 | vs 6 | vs 7 | vs 8 | vs 9 | vs 10 |
 |----------|------|------|------|------|------|------|------|------|------|------|-------|
@@ -577,7 +577,7 @@ Lords with the **Valor** trait convert some of their standard bars into guarante
 
 ## Additional References
 
-- [Beginner's Guide](/guides/beginners) — Basic concepts and controls
-- [Deck Strategies](/guides/deck-strategies) — Deck building and tactics
-- [DUEL Mode Guide](/guides/duel) — DUEL mode progression
-- [CONQUEST Guide](/guides/campaign) — Campaign mode walkthrough
+- [Beginner's Guide](/guides/beginners): basic concepts and controls
+- [Deck Strategies](/guides/deck-strategies): deck building and tactics
+- [DUEL Mode Guide](/guides/duel): DUEL mode progression
+- [CONQUEST Guide](/guides/campaign): campaign mode walkthrough
