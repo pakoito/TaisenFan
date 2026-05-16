@@ -820,7 +820,9 @@ export function applyPreset(profile: SaveProfile, preset: string): SaveProfile {
 					},
 				},
 				cards: {unlockAll: true, cards: {}},
-				sages: {unlockAll: true, sages: maxedSages},
+				// Explicit per-sage entries (no unlockAll shortcut) so writeSages
+				// honors the level=20 from maxedSages instead of falling back to 1.
+				sages: {sages: maxedSages},
 				achievements: {
 					titlesUnlocked: 'all',
 					campaignEventsUnlocked: 'all',
