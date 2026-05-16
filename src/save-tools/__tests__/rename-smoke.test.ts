@@ -1,7 +1,7 @@
 /**
  * End-to-end smoke test for the rename feature.
  *
- * Take vanilla.sav (player name ａａ), change name to Ｓｉｒ via the
+ * Take vanilla.sav (player name Ｓｉｒ), change name to くくくくく♪ via the
  * codec, and assert:
  *   - The output's name region is the new shift-jis bytes.
  *   - The output's header MD5+CRC at 0x50..0x63 matches a fresh
@@ -22,15 +22,15 @@ const VANILLA_PATH = join(
 );
 
 describe('rename smoke', () => {
-	it('renames vanilla → Ｓｉｒ and refreshes header MD5+CRC', async () => {
+	it('renames vanilla → くくくくく♪ and refreshes header MD5+CRC', async () => {
 		const template = new Uint8Array(readFileSync(VANILLA_PATH));
 		const profile = await extractProfile(template);
-		profile.playerName = 'Ｓｉｒ';
+		profile.playerName = 'くくくくく♪';
 		const rebuilt = await replaceSave(template, profile);
 
-		// Name region: 82 72 82 89 82 92 00 00 00 00 00 00
+		// Name region: shift-jis bytes for くくくくく♪
 		const expectedName = Uint8Array.from([
-			0x82, 0x72, 0x82, 0x89, 0x82, 0x92, 0, 0, 0, 0, 0, 0,
+			0x82, 0xad, 0x82, 0xad, 0x82, 0xad, 0x82, 0xad, 0x82, 0xad, 0x81, 0xf4,
 		]);
 		for (let i = 0; i < 12; i++) {
 			expect(rebuilt[0x0c + i], `name byte ${i}`).toBe(expectedName[i]);

@@ -90,10 +90,12 @@ describe('Vanilla preset (fresh)', () => {
 	});
 
 	it('reads the player name from the unencrypted header', async () => {
-		// vanilla.sav was created on a DS where the player named themselves ａａ.
+		// vanilla.sav ships with player name Ｓｉｒ. The DS save was created with
+		// ａａ; we re-headered it via the codec (refreshing MD5+CRC) so editor
+		// new-saves start as 'Sir'.
 		const template = new Uint8Array(VANILLA);
 		const profile = await extractProfile(template);
-		expect(profile.playerName).toBe('ａａ');
+		expect(profile.playerName).toBe('Ｓｉｒ');
 	});
 
 	it('round-trips a Shift_JIS player name through replaceSave', async () => {
