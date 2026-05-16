@@ -63,7 +63,7 @@ describe('Vanilla preset (fresh)', () => {
 		for (const name of [
 			'profile',
 			'deck_slots',
-			'decks',
+			'account',
 			'history',
 			'footer',
 		] as const) {
@@ -231,7 +231,12 @@ describe('Starter preset', () => {
 		const out = await buildPreset('starter');
 		const a = await parseSav(VANILLA);
 		const b = await parseSav(out);
-		for (const name of ['deck_slots', 'decks', 'history', 'footer'] as const) {
+		for (const name of [
+			'deck_slots',
+			'account',
+			'history',
+			'footer',
+		] as const) {
 			expect(
 				blockDiffs(a.blocks.get(name)!, b.blocks.get(name)!).count,
 				`Block "${name}"`,
@@ -341,7 +346,7 @@ describe('Upload round-trip', () => {
 		for (const name of [
 			'profile',
 			'deck_slots',
-			'decks',
+			'account',
 			'history',
 			'footer',
 		] as const) {
@@ -369,7 +374,7 @@ describe('Upload round-trip', () => {
 			for (const name of [
 				'profile',
 				'deck_slots',
-				'decks',
+				'account',
 				'history',
 				'footer',
 			] as const) {

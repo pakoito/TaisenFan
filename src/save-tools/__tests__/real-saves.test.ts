@@ -46,7 +46,7 @@ function blockDiffs(a: Uint8Array, b: Uint8Array): number {
 const BLOCK_NAMES = [
 	'profile',
 	'deck_slots',
-	'decks',
+	'account',
 	'history',
 	'footer',
 ] as const;

@@ -41,7 +41,7 @@ describe('vanilla template round-trip', () => {
 		for (const name of [
 			'profile',
 			'deck_slots',
-			'decks',
+			'account',
 			'history',
 			'footer',
 		] as const) {

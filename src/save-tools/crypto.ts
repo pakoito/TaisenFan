@@ -4,8 +4,9 @@
  * Uses Web Crypto API for HMAC-SHA1 (works in both Node and browsers).
  * Uses pure JS for MD5 and CRC32 (not available in Web Crypto).
  *
- * Algorithm: Xorshift128 PRNG + HMAC-SHA1 stream cipher.
- * See SAVE_FORMAT.md for full details.
+ * Algorithm: Xorshift128 PRNG + HMAC-SHA1 stream cipher. Per-block keys
+ * + xorshift seeds are precomputed below — these are byte-for-byte
+ * verified against captured saves and live in version control.
  */
 
 import {crc32} from './crc32';
@@ -23,7 +24,12 @@ export type BlockInfo = {
 export const BLOCKS: BlockInfo[] = [
 	{name: 'profile', size: 0x4_5c, offset: 0x80, allocSize: 0x4_80},
 	{name: 'deck_slots', size: 0x3_58, offset: 0x5_00, allocSize: 0x3_80},
-	{name: 'decks', size: 0x8_74, offset: 0x8_80, allocSize: 0x9_00},
+	// 2164 bytes once called the "decks" block. Most of it is an
+	// account-level header (constants + JTNC magic + two 4-byte per-save
+	// hashes that include the prefecture choice). 12-byte entries appear
+	// at +0x40 but their purpose is unclear and none of our sample saves
+	// populate them. Renamed to "account" to stop pretending it's decks.
+	{name: 'account', size: 0x8_74, offset: 0x8_80, allocSize: 0x9_00},
 	{name: 'history', size: 0x59_1c, offset: 0x11_80, allocSize: 0x59_80},
 	{name: 'footer', size: 0x8, offset: 0x6b_00, allocSize: 0x80},
 ];
@@ -34,12 +40,12 @@ export function getBlock(name: string): BlockInfo {
 	return block;
 }
 
-// === Precomputed keys and xorshift states (verified, from SAVE_FORMAT.md) ===
+// === Precomputed keys and xorshift states (verified against real saves) ===
 
 const PRECOMPUTED_KEYS: Record<string, Uint8Array> = {
 	profile: hex('79F139A7A6AF433BF3F5E6007FC3026226395A6B'),
 	deck_slots: hex('64C324956FFDEC09D6C13C47D1450DB60023B7C0'),
-	decks: hex('B0CEF09849FEC1040334DD86FE71BF907ED52404'),
+	account: hex('B0CEF09849FEC1040334DD86FE71BF907ED52404'),
 	history: hex('F394B3C26E773B5E5A0DF308514AD37C7115655E'),
 	footer: hex('8AE9CABFD1EF7A2385848C4B136B10573BB5D7AB'),
 };
@@ -64,7 +70,7 @@ const PRECOMPUTED_STATES: Record<string, XorshiftState> = {
 		s2: 0x6c_a7_49_7b,
 		s3: 0xa2_0e_45_58,
 	},
-	decks: {
+	account: {
 		s0: 0x29_b9_50_70,
 		s1: 0x87_ef_81_50,
 		s2: 0xcb_27_42_a1,
