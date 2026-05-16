@@ -17,8 +17,6 @@ import {decodeShiftJis, encodeShiftJis} from './shift-jis';
 export const SAV_SIZE = 65_536;
 const MAGIC = '3GOKUTEN';
 const MAGIC_OFFSET = 4;
-const VERSION = 0x00_00_81_82;
-const VERSION_OFFSET = 0x0c;
 const SAVE_COUNT_OFFSET = 0x44;
 const HEADER_SIZE = 0x80;
 
@@ -246,13 +244,10 @@ export function freshHeader(): Uint8Array {
 	const magic = new TextEncoder().encode(MAGIC);
 	header.set(magic, MAGIC_OFFSET);
 
-	// Version (little-endian)
-	header[VERSION_OFFSET] = VERSION & 0xff;
-	header[VERSION_OFFSET + 1] = (VERSION >>> 8) & 0xff;
-	header[VERSION_OFFSET + 2] = (VERSION >>> 16) & 0xff;
-	header[VERSION_OFFSET + 3] = (VERSION >>> 24) & 0xff;
-
-	// Save count = 1
+	// Save count = 1. The player name (0x0C) and the 20-byte value at
+	// 0x50 stay zero — callers that go through createSave can fill the
+	// name via writePlayerName; the 0x50 value is left empty since the
+	// game accepts saves with it unset.
 	header[SAVE_COUNT_OFFSET] = 1;
 
 	return header;
