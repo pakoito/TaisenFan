@@ -5,7 +5,7 @@
  * user-friendly SaveProfile JSON structure.
  */
 
-import {CARD_ID_TO_NO, CARD_TABLE, CARD_TOTAL_SLOTS} from './card-table';
+import {CARD_TABLE, CARD_TOTAL_SLOTS} from './card-table';
 import {
 	ALL_SAGE_NAMES,
 	SAGE_CARD_OFFSET,
@@ -447,13 +447,13 @@ function writeTraining(buf: Uint8Array, training: TrainingProgress): void {
 	if (training.hardUnlocked) modeFlags |= 0x80;
 	buf[OFF.MODE_UNLOCK] = modeFlags;
 
-	// Tutorials
-	let tutByte = 0;
-	if (training.tutorials.tutorial1) tutByte |= 0x01;
-	if (training.tutorials.tutorial2) tutByte |= 0x02;
-	if (training.tutorials.tutorial3) tutByte |= 0x04;
-	if (training.tutorials.tutorial4) tutByte |= 0x08;
-	buf[OFF.TUTORIAL] = tutByte;
+	// Tutorials: bits 0-3 of 0x42C. Bits 4-7 are unknown — preserve them.
+	let tutBits = 0;
+	if (training.tutorials.tutorial1) tutBits |= 0x01;
+	if (training.tutorials.tutorial2) tutBits |= 0x02;
+	if (training.tutorials.tutorial3) tutBits |= 0x04;
+	if (training.tutorials.tutorial4) tutBits |= 0x08;
+	buf[OFF.TUTORIAL] = (buf[OFF.TUTORIAL]! & 0xf0) | tutBits;
 
 	// Duel completion and scores
 	const completionDwords = [0, 0, 0];
@@ -474,9 +474,15 @@ function writeTraining(buf: Uint8Array, training: TrainingProgress): void {
 		w16(buf, OFF.DUEL_SCORE_BASE + (deckNo - 2) * 2, result.highScore);
 	}
 
-	for (let d = 0; d < 3; d++) {
-		w32(buf, OFF.DUEL_COMPLETION_BASE + d * 4, completionDwords[d]! >>> 0);
-	}
+	// DUEL completion: 80 bits (deck 2-81) across 3 dwords. The third dword
+	// only uses its low 16 bits (deck 66-81); bits 80-95 are unknown so we
+	// preserve whatever the buf already has.
+	w32(buf, OFF.DUEL_COMPLETION_BASE, completionDwords[0]! >>> 0);
+	w32(buf, OFF.DUEL_COMPLETION_BASE + 4, completionDwords[1]! >>> 0);
+	const tail = u32(buf, OFF.DUEL_COMPLETION_BASE + 8);
+	const merged =
+		((completionDwords[2]! & 0x00_00_ff_ff) | (tail & 0xff_ff_00_00)) >>> 0;
+	w32(buf, OFF.DUEL_COMPLETION_BASE + 8, merged);
 }
 
 function writeCampaign(buf: Uint8Array, campaign: CampaignProgress): void {
@@ -499,7 +505,8 @@ function writeCampaign(buf: Uint8Array, campaign: CampaignProgress): void {
 	}
 	buf[OFF.MODE_UNLOCK] = modeFlags;
 
-	// Write chapter completion flags to 0x456
+	// Write chapter-completion flags into bits 0-5 of 0x456. Bits 6-7 are
+	// unknown — preserve them.
 	let ch3Flags = 0;
 	for (let i = 0; i < 6; i++) {
 		const ch = chapters[i]!;
@@ -508,28 +515,27 @@ function writeCampaign(buf: Uint8Array, campaign: CampaignProgress): void {
 			ch3Flags |= 1 << i;
 		}
 	}
-	buf[OFF.CHAPTER3_UNLOCK] = ch3Flags;
+	buf[OFF.CHAPTER3_UNLOCK] =
+		(buf[OFF.CHAPTER3_UNLOCK]! & 0xc0) | (ch3Flags & 0x3f);
 }
 
 function writeCards(buf: Uint8Array, cards: CardCollection): void {
 	if (cards.unlockAll) {
-		// Set all 232 slots to 0x31 ('1' = 1 copy)
+		// Flood every slot to 0x31, matching the in-game "all owned" state
+		// (some `no` positions don't correspond to a real card but the game's
+		// own fully-unlocked saves still write 0x31 there).
 		for (let no = 0; no < CARD_TOTAL_SLOTS; no++) {
 			buf[OFF.CARD_BASE + no] = 0x31;
 		}
-	} else {
-		// Zero all card slots
-		for (let no = 0; no < CARD_TOTAL_SLOTS; no++) {
-			buf[OFF.CARD_BASE + no] = 0x00;
-		}
+		return;
+	}
 
-		// Set owned cards
-		for (const [cardId, entry] of Object.entries(cards.cards)) {
-			const no = CARD_ID_TO_NO[cardId];
-			if (no !== undefined) {
-				buf[OFF.CARD_BASE + no] = qtyToByte(entry.quantity);
-			}
-		}
+	// Touch only the 192 slots backed by CARD_TABLE. Unknown `no` positions
+	// (unused slots in the 232-byte region) are left as-is so any bytes the
+	// game put there in an uploaded save survive the round-trip.
+	for (const entry of CARD_TABLE) {
+		const live = cards.cards[entry.cardId];
+		buf[OFF.CARD_BASE + entry.no] = live ? qtyToByte(live.quantity) : 0x00;
 	}
 }
 
@@ -568,13 +574,14 @@ function writeSages(buf: Uint8Array, sages: SageCollection): void {
 	}
 
 	// XP / level / flag entries. Index 0 is the Advisor placeholder.
+	// We only own the level (+0) and flag (+4) bytes — XP (+2) and the
+	// trailing pair (+6) are preserved from the base buf so uploaded saves
+	// keep any in-game progress we don't model.
 	for (let i = 0; i <= SAGE_COUNT; i++) {
 		const base = OFF.SAGE_DATA_BASE + i * OFF.SAGE_ENTRY_SIZE;
 		if (i === 0) {
 			w16(buf, base, 1);
-			w16(buf, base + 2, 0);
 			w16(buf, base + 4, 0);
-			w16(buf, base + 6, 0);
 			continue;
 		}
 		const name = SAGE_INDEX_TO_NAME[i];
@@ -582,7 +589,6 @@ function writeSages(buf: Uint8Array, sages: SageCollection): void {
 		if (!entry) continue; // No explicit state — preserve buf bytes.
 
 		w16(buf, base, entry.level);
-		w16(buf, base + 2, 0); // XP = 0
 
 		// Flag (+4): vanilla saves have card_byte set yet flag=0 for the
 		// starter sage. We must not invent a flag=1 just because the user
@@ -601,7 +607,6 @@ function writeSages(buf: Uint8Array, sages: SageCollection): void {
 			nextFlag = flagAlready;
 		}
 		w16(buf, base + 4, nextFlag);
-		w16(buf, base + 6, 0);
 	}
 }
 
