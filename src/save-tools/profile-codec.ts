@@ -507,15 +507,22 @@ function writeCards(buf: Uint8Array, cards: CardCollection): void {
 
 function writeSages(buf: Uint8Array, sages: SageCollection): void {
 	const isAll = sages.unlockAll === true;
+	const explicitUnlock = Object.values(sages.sages).some(s => s.unlocked);
 
-	// Determine if any sage should be unlocked
-	const anyUnlocked = isAll || Object.values(sages.sages).some(s => s.unlocked);
-
-	// Sage card bytes: set all if any sage is unlocked
-	// (We don't know which specific card maps to which sage, so bulk unlock)
-	for (let i = 0; i < OFF.SAGE_CARD_COUNT; i++) {
-		buf[OFF.SAGE_CARD_BASE + i] = anyUnlocked ? 0x31 : 0x00;
+	// Sage card bytes: only rewrite when the user has explicitly chosen a
+	// state. The vanilla template ships with a starter sage byte already set,
+	// and we'd otherwise zero it out and corrupt the save.
+	if (isAll) {
+		for (let i = 0; i < OFF.SAGE_CARD_COUNT; i++) {
+			buf[OFF.SAGE_CARD_BASE + i] = 0x31;
+		}
+	} else if (explicitUnlock) {
+		// At least one sage explicitly unlocked — bulk-flag the whole region.
+		for (let i = 0; i < OFF.SAGE_CARD_COUNT; i++) {
+			buf[OFF.SAGE_CARD_BASE + i] = 0x31;
+		}
 	}
+	// Otherwise: leave 0x189-0x1A3 untouched (preserve template state).
 
 	// Sage XP/level entries
 	// We set both the flag at +4 AND the sage card bytes as belt-and-suspenders
@@ -585,8 +592,16 @@ function writeAchievements(buf: Uint8Array, achievements: Achievements): void {
 		}
 	}
 
-	// Selected title: store as index + 19
-	w16(buf, OFF.SELECTED_TITLE, achievements.selectedTitle + 19);
+	// Selected title: when titles are locked the game uses the 0xFFFF sentinel
+	// ("none"); otherwise it stores the displayed index + 19.
+	if (
+		achievements.titlesUnlocked === 'none' &&
+		achievements.selectedTitle === 0
+	) {
+		w16(buf, OFF.SELECTED_TITLE, 0xff_ff);
+	} else {
+		w16(buf, OFF.SELECTED_TITLE, achievements.selectedTitle + 19);
+	}
 }
 
 // =============================================================================
@@ -614,9 +629,6 @@ export function defaultProfile(): SaveProfile {
 		stage3Completed: false,
 		rewardCardObtained: false,
 	};
-
-	// Chapters 1-2 are always unlocked in a new game
-	const unlockedChapter: ChapterProgress = {...defaultChapter, unlocked: true};
 
 	return {
 		stats: {
@@ -648,7 +660,7 @@ export function defaultProfile(): SaveProfile {
 		},
 		campaign: {
 			chapters: {
-				chapter1: {...unlockedChapter}, // Ch.1 I & II always unlocked
+				chapter1: {...defaultChapter}, // Game unlocks Ch.1 via tutorial — start locked
 				chapter2: {...defaultChapter}, // Ch.2+ start locked
 				chapter3: {...defaultChapter},
 				chapter4: {...defaultChapter},

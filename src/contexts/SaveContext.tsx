@@ -22,9 +22,9 @@ import {
 import {
 	applyPreset,
 	createSave,
-	defaultProfile,
 	extractProfile,
 	PATCHED_ROM_BASENAME,
+	type PresetName,
 	replaceSave,
 	type SaveProfile,
 	wrapDsv,
@@ -37,6 +37,7 @@ import {
 	type PersistedSave,
 	persistSave,
 } from '@/utils/save-cache';
+import {loadVanillaTemplate} from '@/utils/vanilla-template';
 
 const PERSIST_DEBOUNCE_MS = 200;
 const SAVE_EXT_RE = /\.(sav|dsv)$/iu;
@@ -146,25 +147,50 @@ async function buildAndDownload(
 	downloadBinary(bytes, `${base}.${format}`);
 }
 
-/** Compose the action callbacks the editor exposes through context. */
-function useActions(
-	state: SnapshotState,
+/**
+ * Build a fresh save record from the bundled vanilla template. The template
+ * is what a brand-new MelonDS save looks like — it contains the 25 preset
+ * deck slots, starter Lord/Sage card unlocks, and 0xFF-padded history that
+ * an all-zero `createSave` would miss. We extract the canonical fresh
+ * profile, apply the preset overrides, and write the result back.
+ */
+async function buildRecordFromTemplate(
+	preset: PresetName,
+): Promise<PersistedSave> {
+	const template = await loadVanillaTemplate();
+	const base = await extractProfile(template);
+	const profile = preset === 'fresh' ? base : applyPreset(base, preset);
+	const rawSav = await replaceSave(template, profile);
+	return {status: 'new', filename: null, rawSav, profile};
+}
+
+function reportError(setState: SetState, err: unknown): void {
+	const message = err instanceof Error ? err.message : String(err);
+	setState(s => ({...s, error: message}));
+}
+
+/** Actions that replace the whole record (presets + file upload). */
+function useReplaceActions(
 	setState: SetState,
-	last: LastRef,
 	schedule: (record: PersistedSave) => void,
-	cancel: () => void,
 ) {
-	const newStarter = useCallback(() => {
-		const fresh = applyPreset(defaultProfile(), 'starter');
-		const record: PersistedSave = {
-			status: 'new',
-			filename: null,
-			rawSav: null,
-			profile: fresh,
-		};
-		setState({...record, isDirty: true, error: null});
-		schedule(record);
-	}, [schedule, setState]);
+	const applyPresetReset = useCallback(
+		async (preset: PresetName) => {
+			try {
+				const record = await buildRecordFromTemplate(preset);
+				setState({...record, isDirty: true, error: null});
+				schedule(record);
+			} catch (err) {
+				reportError(setState, err);
+			}
+		},
+		[schedule, setState],
+	);
+
+	const newStarter = useCallback(
+		() => applyPresetReset('starter'),
+		[applyPresetReset],
+	);
 
 	const loadFile = useCallback(
 		async (file: File) => {
@@ -179,13 +205,23 @@ function useActions(
 				setState({...record, isDirty: false, error: null});
 				schedule(record);
 			} catch (err) {
-				const message = err instanceof Error ? err.message : String(err);
-				setState(s => ({...s, error: message}));
+				reportError(setState, err);
 			}
 		},
 		[schedule, setState],
 	);
 
+	return {newStarter, applyPresetReset, loadFile};
+}
+
+/** Actions that operate on the live record (edits + download + clear). */
+function useLiveActions(
+	state: SnapshotState,
+	setState: SetState,
+	last: LastRef,
+	schedule: (record: PersistedSave) => void,
+	cancel: () => void,
+) {
 	const mutate = useCallback(
 		(recipe: (draft: SaveProfile) => void) => {
 			setState(prev => {
@@ -213,14 +249,15 @@ function useActions(
 		await clearPersistedSave();
 	}, [cancel, setState]);
 
-	return {newStarter, loadFile, mutate, download, clear};
+	return {mutate, download, clear};
 }
 
 export function SaveProvider({children}: PropsWithChildren) {
 	const [state, setState] = useState<SnapshotState>(EMPTY_STATE);
 	const {schedule, last, cancel} = usePersistence();
 	useHydrate(setState, last);
-	const actions = useActions(state, setState, last, schedule, cancel);
+	const replaceActions = useReplaceActions(setState, schedule);
+	const liveActions = useLiveActions(state, setState, last, schedule, cancel);
 
 	const value: SaveContextValue = {
 		status: state.status,
@@ -228,7 +265,8 @@ export function SaveProvider({children}: PropsWithChildren) {
 		profile: state.profile,
 		isDirty: state.isDirty,
 		error: state.error,
-		...actions,
+		...replaceActions,
+		...liveActions,
 	};
 
 	return <SaveContext value={value}>{children}</SaveContext>;

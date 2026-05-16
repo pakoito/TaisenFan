@@ -19,7 +19,9 @@ describe('save round-trip', () => {
 		expect(round.training.normalUnlocked).toBe(
 			original.training.normalUnlocked,
 		);
-		expect(round.campaign.chapters.chapter1.unlocked).toBe(true);
+		// A vanilla profile starts with every chapter locked — the game's own
+		// tutorial flips Chapter 1's bit during first launch.
+		expect(round.campaign.chapters.chapter1.unlocked).toBe(false);
 		expect(round.cards.unlockAll ?? false).toBe(false);
 	});
 

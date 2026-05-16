@@ -1,5 +1,5 @@
 import {createContext} from 'react';
-import type {SaveProfile} from '@/save-tools';
+import type {PresetName, SaveProfile} from '@/save-tools';
 
 export type SaveStatus = 'empty' | 'new' | 'uploaded';
 export type SaveFormat = 'sav' | 'dsv';
@@ -10,8 +10,10 @@ export type SaveContextValue = {
 	profile: SaveProfile | null;
 	isDirty: boolean;
 	error: string | null;
-	/** Replace the profile with a starter preset (no file backing) */
-	newStarter: () => void;
+	/** Build a fresh save from the bundled vanilla template + starter preset */
+	newStarter: () => Promise<void>;
+	/** Reset the entire save to the chosen preset, rebuilt from the template */
+	applyPresetReset: (preset: PresetName) => Promise<void>;
 	/** Load a .sav or .dsv file from disk */
 	loadFile: (file: File) => Promise<void>;
 	/** Mutate the current profile via a recipe function */

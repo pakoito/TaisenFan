@@ -291,6 +291,9 @@ export function SaveSlot() {
 	const [format, setFormat] = useState<SaveFormat>(() => inferFormat(filename));
 	const {inputRef, handleFileChange, handleDownload, handleClear} =
 		useSaveSlotHandlers(format, setFormat);
+	const handleNew = useCallback(() => {
+		newStarter().catch(noop);
+	}, [newStarter]);
 
 	return (
 		<section
@@ -307,7 +310,7 @@ export function SaveSlot() {
 				{status === 'empty' ? (
 					<EmptyActions
 						inputRef={inputRef}
-						onNew={newStarter}
+						onNew={handleNew}
 						onUpload={handleFileChange}
 					/>
 				) : (

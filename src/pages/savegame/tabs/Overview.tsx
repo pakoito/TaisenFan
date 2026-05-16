@@ -1,7 +1,6 @@
 import {Button} from '@/components/ui/button';
 import {useSave} from '@/contexts/useSave';
 import {
-	applyPreset,
 	CARD_TOTAL_SLOTS,
 	type PresetName,
 	SAGE_COUNT,
@@ -56,7 +55,7 @@ function countChaptersUnlocked(profile: SaveProfile): number {
 }
 
 export function Overview() {
-	const {profile, mutate} = useSave();
+	const {profile, applyPresetReset} = useSave();
 	if (!profile) return null;
 
 	const stats = [
@@ -120,10 +119,7 @@ export function Overview() {
 							<Button
 								className='w-full sm:w-40'
 								onClick={() => {
-									mutate(draft => {
-										const next = applyPreset(draft, p.preset);
-										Object.assign(draft, next);
-									});
+									applyPresetReset(p.preset).catch(() => undefined);
 								}}
 								size='sm'
 								variant='outline'
