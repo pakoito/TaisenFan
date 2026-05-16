@@ -2,7 +2,7 @@
 
 Welcome to Sangokushi Taisen Ten, a real-time strategy card game set in the Three Kingdoms era of China. This guide covers everything you need to know to start playing: factions, unit types, core mechanics, and essential terminology.
 
-> **Terminology Note:** This guide uses official English translations. Japanese equivalents are listed in the glossary at the end.
+> **Terminology Note:** This guide uses TaisenFan's English translations. Japanese equivalents are listed in the glossary at the end.
 
 ---
 
