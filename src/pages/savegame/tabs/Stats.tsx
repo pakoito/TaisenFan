@@ -187,19 +187,32 @@ function MasterySection() {
 function TitlesSection() {
 	const {profile, mutate} = useSave();
 	if (!profile) return null;
+	const hasPartial = profile.achievements.titlesRaw !== undefined;
+	const isAll = profile.achievements.titlesUnlocked === 'all';
+	const offLabel = hasPartial ? 'Preserve in-game progress' : 'No titles';
 	return (
 		<SectionShell title='Titles'>
 			<div className='flex items-center justify-between gap-3 text-xs'>
 				<span className='flex flex-col'>
-					<span className='font-medium text-text'>All titles unlocked</span>
+					<span className='font-medium text-text'>
+						{isAll ? 'All titles unlocked' : offLabel}
+					</span>
 					<span className='text-text-faint'>{EXPLAINERS.titlesUnlocked}</span>
 				</span>
 				<Switch
-					aria-label='All titles unlocked'
-					checked={profile.achievements.titlesUnlocked === 'all'}
+					aria-label='Unlock all titles'
+					checked={isAll}
 					onCheckedChange={checked => {
 						mutate(d => {
-							d.achievements.titlesUnlocked = checked ? 'all' : 'none';
+							if (checked) {
+								d.achievements.titlesUnlocked = 'all';
+							} else {
+								// Off restores whatever the source had — partial (if we
+								// captured raw bytes from an uploaded save) or none.
+								d.achievements.titlesUnlocked = d.achievements.titlesRaw
+									? 'partial'
+									: 'none';
+							}
 						});
 					}}
 				/>

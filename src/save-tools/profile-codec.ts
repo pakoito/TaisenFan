@@ -18,6 +18,7 @@ import {
 	STAGE_TABLE,
 } from './stage-table';
 import type {
+	AchievementBitfield,
 	Achievements,
 	CampaignProgress,
 	CardCollection,
@@ -332,37 +333,66 @@ function readSages(buf: Uint8Array): SageCollection {
 	return {sages};
 }
 
+type BitfieldState = {
+	state: 'none' | 'all' | 'partial';
+	raw?: Uint8Array;
+};
+
+/**
+ * Classify a contiguous byte region as all-clear, all-set, or partial.
+ * The last byte may need a mask (e.g. titles use 0x3F because only bits 0-5
+ * are meaningful in the trailing byte for 110 titles).
+ */
+function classifyBitfield(
+	buf: Uint8Array,
+	start: number,
+	endInclusive: number,
+	lastByteMask = 0xff,
+): BitfieldState {
+	let allSet = true;
+	let allClear = true;
+	for (let i = start; i <= endInclusive; i++) {
+		const expectedAll = i === endInclusive ? lastByteMask : 0xff;
+		if (buf[i] !== expectedAll) allSet = false;
+		if (buf[i] !== 0x00) allClear = false;
+		if (!(allSet || allClear)) break;
+	}
+	if (allSet) return {state: 'all'};
+	if (allClear) return {state: 'none'};
+	return {
+		state: 'partial',
+		raw: buf.slice(start, endInclusive + 1),
+	};
+}
+
 function readAchievements(buf: Uint8Array): Achievements {
-	// Check if all titles are unlocked
-	let allTitles = true;
-	for (let i = OFF.TITLE_BASE; i < OFF.TITLE_END; i++) {
-		if (buf[i] !== 0xff) {
-			allTitles = false;
-			break;
-		}
-	}
-	if (buf[OFF.TITLE_END] !== 0x3f) allTitles = false;
+	const titles = classifyBitfield(buf, OFF.TITLE_BASE, OFF.TITLE_END, 0x3f);
+	const events = classifyBitfield(
+		buf,
+		OFF.CAMPAIGN_EVENTS,
+		OFF.CAMPAIGN_EVENTS_END,
+		0x07,
+	);
+	const episodes = classifyBitfield(
+		buf,
+		OFF.EPISODE_COMPLETION,
+		OFF.EPISODE_COMPLETION_END,
+	);
 
-	// Check if all campaign events are unlocked
-	let allEvents = true;
-	for (let i = OFF.CAMPAIGN_EVENTS; i < OFF.CAMPAIGN_EVENTS_END; i++) {
-		if (buf[i] !== 0xff) {
-			allEvents = false;
-			break;
-		}
-	}
-	if (buf[OFF.CAMPAIGN_EVENTS_END] !== 0x07) allEvents = false;
-
-	// Selected title: stored as index + 19
-	// Value of 0 or less than 19 means no title selected (default to 0)
+	// Selected title: stored as index + 19; 0xFFFF (or anything <19) is "none"
 	const rawTitle = u16(buf, OFF.SELECTED_TITLE);
 	const selectedTitle = rawTitle >= 19 && rawTitle < 129 ? rawTitle - 19 : 0;
 
-	return {
-		titlesUnlocked: allTitles ? 'all' : 'none',
-		campaignEventsUnlocked: allEvents ? 'all' : 'none',
+	const result: Achievements = {
+		titlesUnlocked: titles.state,
+		campaignEventsUnlocked: events.state,
+		episodeCompletion: episodes.state,
 		selectedTitle,
 	};
+	if (titles.raw) result.titlesRaw = titles.raw;
+	if (events.raw) result.campaignEventsRaw = events.raw;
+	if (episodes.raw) result.episodeCompletionRaw = episodes.raw;
+	return result;
 }
 
 // =============================================================================
@@ -559,38 +589,54 @@ function writeSages(buf: Uint8Array, sages: SageCollection): void {
 	}
 }
 
+/**
+ * Write a bitfield region. `all` floods 0xFF (with an optional mask on the
+ * trailing byte), `none` floods 0x00, and `partial` writes the verbatim raw
+ * bytes captured at read-time so mid-game progress survives a round-trip.
+ */
+function writeBitfield(
+	buf: Uint8Array,
+	start: number,
+	endInclusive: number,
+	state: AchievementBitfield,
+	raw: Uint8Array | undefined,
+	lastByteMask = 0xff,
+): void {
+	const length = endInclusive - start + 1;
+	if (state === 'all') {
+		for (let i = start; i <= endInclusive; i++) buf[i] = 0xff;
+		buf[endInclusive] = lastByteMask;
+	} else if (state === 'partial' && raw && raw.length === length) {
+		for (let i = 0; i < length; i++) buf[start + i] = raw[i]!;
+	} else {
+		for (let i = start; i <= endInclusive; i++) buf[i] = 0x00;
+	}
+}
+
 function writeAchievements(buf: Uint8Array, achievements: Achievements): void {
-	// Titles
-	if (achievements.titlesUnlocked === 'all') {
-		for (let i = OFF.TITLE_BASE; i <= OFF.TITLE_END; i++) {
-			buf[i] = 0xff;
-		}
-		buf[OFF.TITLE_END] = 0x3f; // Last byte: bits 0-5 only
-	} else {
-		for (let i = OFF.TITLE_BASE; i <= OFF.TITLE_END; i++) {
-			buf[i] = 0x00;
-		}
-	}
-
-	// Campaign events
-	if (achievements.campaignEventsUnlocked === 'all') {
-		for (let i = OFF.CAMPAIGN_EVENTS; i <= OFF.CAMPAIGN_EVENTS_END; i++) {
-			buf[i] = 0xff;
-		}
-		buf[OFF.CAMPAIGN_EVENTS_END] = 0x07; // Last byte: bits 0-2 only
-
-		// Also set episode completion flags (0x3C-0x43) so Episode 3 can be played.
-		for (let i = OFF.EPISODE_COMPLETION; i <= OFF.EPISODE_COMPLETION_END; i++) {
-			buf[i] = 0xff;
-		}
-	} else {
-		for (let i = OFF.CAMPAIGN_EVENTS; i <= OFF.CAMPAIGN_EVENTS_END; i++) {
-			buf[i] = 0x00;
-		}
-		for (let i = OFF.EPISODE_COMPLETION; i <= OFF.EPISODE_COMPLETION_END; i++) {
-			buf[i] = 0x00;
-		}
-	}
+	writeBitfield(
+		buf,
+		OFF.TITLE_BASE,
+		OFF.TITLE_END,
+		achievements.titlesUnlocked,
+		achievements.titlesRaw,
+		0x3f,
+	);
+	writeBitfield(
+		buf,
+		OFF.CAMPAIGN_EVENTS,
+		OFF.CAMPAIGN_EVENTS_END,
+		achievements.campaignEventsUnlocked,
+		achievements.campaignEventsRaw,
+		0x07,
+	);
+	writeBitfield(
+		buf,
+		OFF.EPISODE_COMPLETION,
+		OFF.EPISODE_COMPLETION_END,
+		achievements.episodeCompletion,
+		achievements.episodeCompletionRaw,
+	);
 
 	// Selected title: when titles are locked the game uses the 0xFFFF sentinel
 	// ("none"); otherwise it stores the displayed index + 19.
@@ -686,6 +732,7 @@ export function defaultProfile(): SaveProfile {
 		achievements: {
 			titlesUnlocked: 'none',
 			campaignEventsUnlocked: 'none',
+			episodeCompletion: 'none',
 			selectedTitle: 0,
 		},
 		decks: [],
@@ -777,6 +824,7 @@ export function applyPreset(profile: SaveProfile, preset: string): SaveProfile {
 				achievements: {
 					titlesUnlocked: 'all',
 					campaignEventsUnlocked: 'all',
+					episodeCompletion: 'all',
 					selectedTitle: 0,
 				},
 			};
@@ -833,6 +881,7 @@ export function applyPreset(profile: SaveProfile, preset: string): SaveProfile {
 				achievements: {
 					titlesUnlocked: 'none',
 					campaignEventsUnlocked: 'none',
+					episodeCompletion: 'none',
 					selectedTitle: 0,
 				},
 			};

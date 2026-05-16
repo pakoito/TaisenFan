@@ -178,10 +178,28 @@ export type SageCollection = {
 // ACHIEVEMENTS
 // =============================================================================
 
+/**
+ * State of a bitfield-backed achievement region.
+ *
+ * - `'none'`: every bit cleared (write a fresh zero region)
+ * - `'all'`:  every bit set (write a flood of 0xFF)
+ * - `'partial'`: in-progress state read from an uploaded save; the codec
+ *   preserves the original bytes verbatim on the next write so the player
+ *   doesn't lose mid-game progress
+ */
+export type AchievementBitfield = 'none' | 'all' | 'partial';
+
 export type Achievements = {
-	titlesUnlocked: 'none' | 'all'; // 110 titles
-	campaignEventsUnlocked: 'none' | 'all'; // 251 campaign events
+	titlesUnlocked: AchievementBitfield; // 110 titles, bitmask at 0x445-0x452
+	campaignEventsUnlocked: AchievementBitfield; // 251 events, bitmask at 0x1C-0x3B
+	episodeCompletion: AchievementBitfield; // 6 chapters × 3 episodes, 0x3C-0x43
 	selectedTitle: number; // 0-109, displayed title
+	/** Raw 14-byte title bitmask preserved when state is 'partial' */
+	titlesRaw?: Uint8Array;
+	/** Raw 32-byte event-gallery bitmask preserved when state is 'partial' */
+	campaignEventsRaw?: Uint8Array;
+	/** Raw 8-byte episode-completion bitmask preserved when state is 'partial' */
+	episodeCompletionRaw?: Uint8Array;
 };
 
 // =============================================================================

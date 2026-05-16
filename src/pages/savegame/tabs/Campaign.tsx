@@ -6,6 +6,9 @@ import {EXPLAINERS} from '../explainers';
 function EventGallerySection() {
 	const {profile, mutate} = useSave();
 	if (!profile) return null;
+	const hasPartial = profile.achievements.campaignEventsRaw !== undefined;
+	const isAll = profile.achievements.campaignEventsUnlocked === 'all';
+	const offLabel = hasPartial ? 'Preserve in-game progress' : 'No events';
 	return (
 		<section className='gold-stroke flex items-center justify-between gap-3 bg-surface-low p-4 text-xs'>
 			<span className='flex flex-col'>
@@ -15,15 +18,23 @@ function EventGallerySection() {
 				<span className='text-text-faint'>
 					{EXPLAINERS.campaignEventsUnlocked}
 				</span>
+				<span className='mt-1 text-text-faint'>
+					{isAll ? 'All unlocked.' : `${offLabel}.`}
+				</span>
 			</span>
 			<Switch
-				aria-label='Campaign event gallery unlocked'
-				checked={profile.achievements.campaignEventsUnlocked === 'all'}
+				aria-label='Unlock all campaign events'
+				checked={isAll}
 				onCheckedChange={checked => {
 					mutate(draft => {
-						draft.achievements.campaignEventsUnlocked = checked
-							? 'all'
-							: 'none';
+						if (checked) {
+							draft.achievements.campaignEventsUnlocked = 'all';
+						} else {
+							draft.achievements.campaignEventsUnlocked = draft.achievements
+								.campaignEventsRaw
+								? 'partial'
+								: 'none';
+						}
 					});
 				}}
 			/>
