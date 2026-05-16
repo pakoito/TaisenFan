@@ -6,7 +6,7 @@
  * count"). Touching either of those caused the game to reject the save
  * as corrupted; this test pins the codec to never regress on that.
  */
-import {readFileSync} from 'node:fs';
+import {existsSync, readFileSync} from 'node:fs';
 import {join} from 'node:path';
 import {describe, expect, it} from 'vitest';
 import {buildSav, parseSav} from '../save-io';
@@ -17,12 +17,14 @@ const VANILLA_PATH = join(
 	'../../../public/data/vanilla.sav',
 );
 
+// vanilla.sav ships in public/data; the others are git-ignored real
+// player saves only present on dev machines. CI runs the vanilla case
+// and skips the rest, matching real-saves.test.ts's pattern.
 const fixtures = [
 	{path: VANILLA_PATH, name: 'vanilla.sav (bundled template)'},
-	...['pacc_osaka.sav', 'miau_somewhereNEARtokyo.sav'].map(name => ({
-		path: join(FIXTURE_DIR, name),
-		name,
-	})),
+	...['pacc_osaka.sav', 'miau_somewhereNEARtokyo.sav']
+		.map(name => ({path: join(FIXTURE_DIR, name), name}))
+		.filter(f => existsSync(f.path)),
 ];
 
 describe('byte-perfect passthrough', () => {
