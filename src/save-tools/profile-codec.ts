@@ -6,7 +6,12 @@
  */
 
 import {CARD_ID_TO_NO, CARD_TABLE, CARD_TOTAL_SLOTS} from './card-table';
-import {ALL_SAGE_NAMES, SAGE_COUNT, SAGE_INDEX_TO_NAME} from './sage-table';
+import {
+	ALL_SAGE_NAMES,
+	SAGE_COUNT,
+	SAGE_INDEX_TO_NAME,
+	SAGE_TABLE,
+} from './sage-table';
 import {
 	DECKNO_TO_STAGE_ID,
 	STAGE_ID_TO_DECKNO,
@@ -681,6 +686,90 @@ export function defaultProfile(): SaveProfile {
 
 export function applyPreset(profile: SaveProfile, preset: string): SaveProfile {
 	switch (preset) {
+		case 'full': {
+			// "Have everything, beat everything." Every chapter complete, every
+			// duel stage S-ranked (40k), max food and ranks, all sages at level
+			// 20, all titles, all event galleries, all tutorials done.
+			const completeChapter: ChapterProgress = {
+				unlocked: true,
+				stage1Completed: true,
+				stage2Completed: true,
+				stage3Completed: true,
+				rewardCardObtained: true,
+			};
+			const maxedSages: Record<SageName, SageEntry> = {} as Record<
+				SageName,
+				SageEntry
+			>;
+			for (const sage of SAGE_TABLE) {
+				maxedSages[sage.name as SageName] = {unlocked: true, level: 20};
+			}
+			const sRankedStages: Record<string, StageResult> = {};
+			for (const stage of STAGE_TABLE) {
+				sRankedStages[stage.stageId] = {completed: true, highScore: 40_000};
+			}
+			return {
+				...profile,
+				stats: {
+					offline: {wins: 9999, losses: 0, draws: 0},
+					online: {wins: 9999, losses: 0, draws: 0},
+					offlineRank: 99_999,
+					onlineRank: 12_000,
+					food: 9999,
+					mastery: {
+						cavalry: 999,
+						spear: 999,
+						bow: 999,
+						defeat: 999,
+						siege: 999,
+						defense: 999,
+						duel: 999,
+					},
+				},
+				training: {
+					normalUnlocked: true,
+					hardUnlocked: true,
+					tutorials: {
+						tutorial1: true,
+						tutorial2: true,
+						tutorial3: true,
+						tutorial4: true,
+					},
+					stages: sRankedStages,
+				},
+				campaign: {
+					chapters: {
+						chapter1: {...completeChapter},
+						chapter2: {...completeChapter},
+						chapter3: {...completeChapter},
+						chapter4: {...completeChapter},
+						chapter5: {...completeChapter},
+						chapter6: {...completeChapter},
+					},
+					chapter3Variants: {
+						yellowTurbanRebellion: true,
+						tyrantDemonKing: true,
+						rivalWarlords: true,
+						redCliffs: true,
+						threeKingdomsDivision: true,
+						mightiestWarrior: true,
+					},
+					warringStates: {
+						unlocked: true,
+						completed: true,
+						highScore: 40_000,
+					},
+				},
+				cards: {unlockAll: true, cards: {}},
+				sages: {unlockAll: true, sages: maxedSages},
+				achievements: {
+					titlesUnlocked: 'all',
+					campaignEventsUnlocked: 'all',
+					selectedTitle: 0,
+				},
+			};
+		}
+
 		case 'starter': {
 			// "All content, no outcomes": every menu the player can tap is open,
 			// but every "you beat this" flag is zero. The game still must be played.
@@ -736,86 +825,6 @@ export function applyPreset(profile: SaveProfile, preset: string): SaveProfile {
 				},
 			};
 		}
-
-		case 'all-unlocked': {
-			const completeChapter: ChapterProgress = {
-				unlocked: true,
-				stage1Completed: true,
-				stage2Completed: true,
-				stage3Completed: true,
-				rewardCardObtained: true,
-			};
-			return {
-				...profile,
-				training: {
-					...profile.training,
-					normalUnlocked: true,
-					hardUnlocked: true,
-					tutorials: {
-						tutorial1: true,
-						tutorial2: true,
-						tutorial3: true,
-						tutorial4: true,
-					},
-				},
-				campaign: {
-					chapters: {
-						chapter1: {...completeChapter},
-						chapter2: {...completeChapter},
-						chapter3: {...completeChapter},
-						chapter4: {...completeChapter},
-						chapter5: {...completeChapter},
-						chapter6: {...completeChapter},
-					},
-					chapter3Variants: {
-						yellowTurbanRebellion: true,
-						tyrantDemonKing: true,
-						rivalWarlords: true,
-						redCliffs: true,
-						threeKingdomsDivision: true,
-						mightiestWarrior: true,
-					},
-					warringStates: {
-						unlocked: true,
-						completed: true,
-						highScore: 0,
-					},
-				},
-				cards: {unlockAll: true, cards: {}},
-				sages: {unlockAll: true, sages: {} as Record<SageName, SageEntry>},
-				achievements: {
-					titlesUnlocked: 'all',
-					campaignEventsUnlocked: 'all',
-					selectedTitle: 0,
-				},
-			};
-		}
-
-		case 'full-collection':
-			return {
-				...profile,
-				cards: {unlockAll: true, cards: {}},
-				sages: {unlockAll: true, sages: {} as Record<SageName, SageEntry>},
-			};
-
-		case 'max-stats':
-			return {
-				...profile,
-				stats: {
-					...profile.stats,
-					food: 9999,
-					offlineRank: 9999,
-					mastery: {
-						cavalry: 999,
-						spear: 999,
-						bow: 999,
-						defeat: 999,
-						siege: 999,
-						defense: 999,
-						duel: 999,
-					},
-				},
-			};
 
 		default:
 			return profile;

@@ -22,6 +22,7 @@ import {
 } from './profile-codec';
 import {buildSav, freshHeader, parseSav} from './save-io';
 
+export {PATCHED_ROM_BASENAME} from './constants';
 export {wrapDsv} from './save-io';
 
 import type {DeepPartial, PresetName, SaveProfile} from './types';
@@ -118,9 +119,12 @@ export function defaultProfile(): SaveProfile {
  * Apply a preset to a profile.
  *
  * Presets:
- *   - 'all-unlocked': Everything unlocked (cards, sages, modes, achievements)
- *   - 'full-collection': All cards and sages unlocked
- *   - 'max-stats': Max skills, food, rank
+ *   - 'fresh':   Vanilla — same shape as a brand-new save
+ *   - 'starter': All content unlocked (difficulties, chapters, cards,
+ *                sages) with no completion or outcome flags set
+ *   - 'full':    Maxed save — every chapter cleared, every duel stage at
+ *                40k, every sage at level 20, all titles + events, full
+ *                food and mastery
  */
 export function applyPreset(
 	profile: SaveProfile,
@@ -189,12 +193,4 @@ export async function patchSave(
 /**
  * Available presets.
  */
-export const AVAILABLE_PRESETS: PresetName[] = [
-	'fresh',
-	'starter',
-	'all-unlocked',
-	'campaign-complete',
-	'training-complete',
-	'full-collection',
-	'max-stats',
-];
+export const AVAILABLE_PRESETS: PresetName[] = ['fresh', 'starter', 'full'];

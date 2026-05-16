@@ -210,21 +210,21 @@ function TitlesSection() {
 						Selected title #
 					</span>
 					<span className='font-bold text-gold text-xs tabular-nums'>
-						{profile.achievements.selectedTitle}
+						{profile.achievements.selectedTitle + 1}
 					</span>
 				</div>
 				<Slider
-					max={109}
-					min={0}
+					max={110}
+					min={1}
 					onValueChange={values => {
 						const v = values[0];
 						if (typeof v !== 'number') return;
 						mutate(d => {
-							d.achievements.selectedTitle = v;
+							d.achievements.selectedTitle = v - 1;
 						});
 					}}
 					step={1}
-					value={[profile.achievements.selectedTitle]}
+					value={[profile.achievements.selectedTitle + 1]}
 				/>
 				<span className='text-text-faint text-[10px]'>
 					{EXPLAINERS.selectedTitle}

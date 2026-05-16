@@ -207,10 +207,6 @@ export type DeepPartial<T> = T extends (infer _U)[]
 
 // Preset types for common operations
 export type PresetName =
-	| 'fresh' // New game state
+	| 'fresh' // Vanilla — same as a brand-new save
 	| 'starter' // All content unlocked, no outcomes recorded
-	| 'all-unlocked' // Everything unlocked (including completion)
-	| 'campaign-complete' // All chapters done
-	| 'training-complete' // All DUEL stages completed
-	| 'full-collection' // All cards and sages
-	| 'max-stats'; // Max skills, food, rank
+	| 'full'; // Maxed out — everything cleared, every counter at cap

@@ -16,29 +16,19 @@ type PresetButton = {
 
 const PRESET_BUTTONS: PresetButton[] = [
 	{
+		preset: 'fresh',
+		label: 'Vanilla',
+		hint: 'Reset to a brand-new save — nothing unlocked, food 100, no completion records.',
+	},
+	{
 		preset: 'starter',
 		label: 'Starter',
-		hint: 'All difficulties, all chapters, all cards and sages unlocked. No completion records.',
+		hint: 'Every DUEL difficulty, CONQUEST chapter, episode, Lord, and Sage unlocked — no completion or outcomes recorded.',
 	},
 	{
-		preset: 'all-unlocked',
-		label: 'All Unlocked',
-		hint: 'Everything starter does, plus every chapter/Episode 3 marked cleared and all titles earned.',
-	},
-	{
-		preset: 'full-collection',
-		label: 'Full Collection',
-		hint: 'Unlock every Lord and Sage card. Other progress untouched.',
-	},
-	{
-		preset: 'max-stats',
-		label: 'Max Stats',
-		hint: 'Food 9999, Offline Rank 9999, every mastery skill at 999.',
-	},
-	{
-		preset: 'fresh',
-		label: 'Reset to Fresh',
-		hint: 'Wipe the current profile back to a brand-new save (nothing unlocked).',
+		preset: 'full',
+		label: 'Full',
+		hint: 'Maxed save: every duel S-ranked at 40k, every chapter cleared, every sage at level 20, all titles, full food, every flag on.',
 	},
 ];
 
@@ -71,7 +61,7 @@ export function Overview() {
 
 	const stats = [
 		{
-			label: 'Cards unlocked',
+			label: 'Lords unlocked',
 			value: `${countUnlockedCards(profile)} / ${CARD_TOTAL_SLOTS}`,
 		},
 		{

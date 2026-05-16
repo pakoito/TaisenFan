@@ -24,6 +24,7 @@ import {
 	createSave,
 	defaultProfile,
 	extractProfile,
+	PATCHED_ROM_BASENAME,
 	replaceSave,
 	type SaveProfile,
 	wrapDsv,
@@ -136,7 +137,12 @@ async function buildAndDownload(
 	if (!state.profile) return;
 	const raw = await buildBytes(state.rawSav, state.profile);
 	const bytes = format === 'dsv' ? wrapDsv(raw) : raw;
-	const base = (state.filename ?? `taisen_${stamp()}`).replace(SAVE_EXT_RE, '');
+	// New-save downloads share the patched ROM's basename so emulators
+	// auto-pair the .sav/.dsv with the .nds. Uploaded saves keep their name.
+	const base = (state.filename ?? `${PATCHED_ROM_BASENAME}.sav`).replace(
+		SAVE_EXT_RE,
+		'',
+	);
 	downloadBinary(bytes, `${base}.${format}`);
 }
 
@@ -226,13 +232,4 @@ export function SaveProvider({children}: PropsWithChildren) {
 	};
 
 	return <SaveContext value={value}>{children}</SaveContext>;
-}
-
-function pad2(n: number): string {
-	return String(n).padStart(2, '0');
-}
-
-function stamp(): string {
-	const d = new Date();
-	return `${d.getFullYear()}${pad2(d.getMonth() + 1)}${pad2(d.getDate())}_${pad2(d.getHours())}${pad2(d.getMinutes())}`;
 }

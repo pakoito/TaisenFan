@@ -1,4 +1,9 @@
-import {applyPreset, defaultProfile} from '@/save-tools';
+import {
+	applyPreset,
+	defaultProfile,
+	SAGE_TABLE,
+	STAGE_TABLE,
+} from '@/save-tools';
 
 describe('starter preset', () => {
 	const profile = applyPreset(defaultProfile(), 'starter');
@@ -54,5 +59,71 @@ describe('starter preset', () => {
 		expect(profile.stats.mastery.cavalry).toBe(0);
 		expect(profile.stats.mastery.duel).toBe(0);
 		expect(profile.stats.offline.wins).toBe(0);
+	});
+});
+
+describe('full preset', () => {
+	const profile = applyPreset(defaultProfile(), 'full');
+
+	it('caps food, ranks, and mastery skills', () => {
+		expect(profile.stats.food).toBe(9999);
+		expect(profile.stats.offlineRank).toBe(99_999);
+		expect(profile.stats.onlineRank).toBe(12_000);
+		expect(profile.stats.mastery.cavalry).toBe(999);
+		expect(profile.stats.mastery.duel).toBe(999);
+	});
+
+	it('completes every chapter and Chapter-3 variant', () => {
+		for (const chapter of Object.values(profile.campaign.chapters)) {
+			expect(chapter.unlocked).toBe(true);
+			expect(chapter.stage1Completed).toBe(true);
+			expect(chapter.stage2Completed).toBe(true);
+			expect(chapter.stage3Completed).toBe(true);
+			expect(chapter.rewardCardObtained).toBe(true);
+		}
+		for (const variant of Object.values(profile.campaign.chapter3Variants)) {
+			expect(variant).toBe(true);
+		}
+		expect(profile.campaign.warringStates.unlocked).toBe(true);
+		expect(profile.campaign.warringStates.completed).toBe(true);
+	});
+
+	it('S-ranks every DUEL stage at 40k', () => {
+		for (const stage of STAGE_TABLE) {
+			const result = profile.training.stages[stage.stageId];
+			expect(result?.completed).toBe(true);
+			expect(result?.highScore).toBe(40_000);
+		}
+	});
+
+	it('maxes every sage at level 20', () => {
+		for (const sage of SAGE_TABLE) {
+			const entry = profile.sages.sages[sage.name];
+			expect(entry?.unlocked).toBe(true);
+			expect(entry?.level).toBe(20);
+		}
+	});
+
+	it('grants all titles and the entire event gallery', () => {
+		expect(profile.achievements.titlesUnlocked).toBe('all');
+		expect(profile.achievements.campaignEventsUnlocked).toBe('all');
+	});
+
+	it('marks every tutorial as cleared', () => {
+		for (const done of Object.values(profile.training.tutorials)) {
+			expect(done).toBe(true);
+		}
+	});
+});
+
+describe('fresh preset (vanilla)', () => {
+	const profile = applyPreset(defaultProfile(), 'fresh');
+
+	it('matches the bare default profile', () => {
+		const def = defaultProfile();
+		expect(profile.stats.food).toBe(def.stats.food);
+		expect(profile.training.normalUnlocked).toBe(def.training.normalUnlocked);
+		expect(profile.training.hardUnlocked).toBe(def.training.hardUnlocked);
+		expect(profile.cards.unlockAll ?? false).toBe(false);
 	});
 });
