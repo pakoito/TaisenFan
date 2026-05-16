@@ -89,6 +89,32 @@ describe('Vanilla preset (fresh)', () => {
 		expect(profile[0x4_59]).toBe(0xff);
 	});
 
+	it('reads the player name from the unencrypted header', async () => {
+		// vanilla.sav was created on a DS where the player named themselves ａａ.
+		const template = new Uint8Array(VANILLA);
+		const profile = await extractProfile(template);
+		expect(profile.playerName).toBe('ａａ');
+	});
+
+	it('round-trips a Shift_JIS player name through replaceSave', async () => {
+		const template = new Uint8Array(VANILLA);
+		const profile = await extractProfile(template);
+		profile.playerName = 'くくくくく♪';
+		const rebuilt = await replaceSave(template, profile);
+		const round = await extractProfile(rebuilt);
+		expect(round.playerName).toBe('くくくくく♪');
+	});
+
+	it('clamps player names longer than 12 Shift_JIS bytes', async () => {
+		const template = new Uint8Array(VANILLA);
+		const profile = await extractProfile(template);
+		// 7 full-width hiragana × 2 bytes = 14 bytes → last char dropped.
+		profile.playerName = 'あいうえおかき';
+		const rebuilt = await replaceSave(template, profile);
+		const round = await extractProfile(rebuilt);
+		expect(round.playerName).toBe('あいうえおか');
+	});
+
 	it('exposes Chen Qun as the only owned sage in the SaveProfile', async () => {
 		const template = new Uint8Array(VANILLA);
 		const profile = await extractProfile(template);

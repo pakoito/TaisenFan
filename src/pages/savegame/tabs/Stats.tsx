@@ -79,6 +79,34 @@ function SectionShell({
 	);
 }
 
+function PlayerNameSection() {
+	const {profile, mutate} = useSave();
+	if (!profile) return null;
+	return (
+		<SectionShell
+			hint='The nickname the game shows you (and your opponent in Wi-Fi).
+				Stored in the save header as Shift_JIS. Limit: 6 full-width
+				characters (12 bytes).'
+			title='Player name'
+		>
+			<Input
+				autoComplete='off'
+				className='w-64 border-0 border-border-dim border-b bg-transparent font-sans text-base text-text'
+				maxLength={12}
+				onChange={e => {
+					const v = e.target.value;
+					mutate(d => {
+						d.playerName = v;
+					});
+				}}
+				placeholder='ニックネーム'
+				spellCheck={false}
+				value={profile.playerName}
+			/>
+		</SectionShell>
+	);
+}
+
 function WinLossSection() {
 	const {profile, mutate} = useSave();
 	if (!profile) return null;
@@ -250,6 +278,7 @@ function TitlesSection() {
 export function Stats() {
 	return (
 		<div className='flex flex-col gap-5'>
+			<PlayerNameSection />
 			<WinLossSection />
 			<MasterySection />
 			<TitlesSection />

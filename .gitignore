@@ -9,6 +9,7 @@ coverage
 /playwright-report/
 /blob-report/
 /playwright/.cache/
-# Test fixtures (extracted from ROM, not committed)
+# Test fixtures (extracted from ROM or game saves; not committed)
 src/utils/__fixtures__/*.bin
 src/utils/__fixtures__/*.nfp
+src/save-tools/__tests__/__fixtures__/sav_name/*.sav

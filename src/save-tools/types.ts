@@ -15,6 +15,12 @@
 // =============================================================================
 
 export type SaveProfile = {
+	/**
+	 * Player-entered nickname. Lives in the unencrypted header at 0x0C
+	 * (Shift_JIS, max 12 bytes ≈ 6 full-width chars). Surfaced here so
+	 * the editor sees the whole save through one type.
+	 */
+	playerName: string;
 	stats: PlayerStats;
 	training: TrainingProgress;
 	campaign: CampaignProgress;

@@ -20,10 +20,20 @@ import {
 	readProfile,
 	writeProfile,
 } from './profile-codec';
-import {buildSav, freshHeader, parseSav} from './save-io';
+import {
+	buildSav,
+	freshHeader,
+	parseSav,
+	readPlayerName,
+	writePlayerName,
+} from './save-io';
 
 export {PATCHED_ROM_BASENAME} from './constants';
-export {wrapDsv} from './save-io';
+export {
+	readPlayerName,
+	wrapDsv,
+	writePlayerName,
+} from './save-io';
 
 import type {DeepPartial, PresetName, SaveProfile} from './types';
 
@@ -141,7 +151,9 @@ export async function extractProfile(sav: Uint8Array): Promise<SaveProfile> {
 	const parsed = await parseSav(sav);
 	const profileBin = parsed.blocks.get('profile');
 	if (!profileBin) throw new Error('Profile block not found in save');
-	return readProfile(profileBin);
+	const profile = readProfile(profileBin);
+	profile.playerName = readPlayerName(parsed.header);
+	return profile;
 }
 
 /**
@@ -151,6 +163,7 @@ export async function extractProfile(sav: Uint8Array): Promise<SaveProfile> {
 export async function createSave(profile: SaveProfile): Promise<Uint8Array> {
 	const profileBin = writeProfile(profile);
 	const header = freshHeader();
+	writePlayerName(header, profile.playerName);
 	const blocks = new Map<string, Uint8Array>();
 	blocks.set('profile', profileBin);
 	return buildSav(header, blocks);
@@ -169,6 +182,7 @@ export async function replaceSave(
 	if (!profileBin) throw new Error('Profile block not found in save');
 	const newProfileBin = writeProfile(profile, profileBin);
 	parsed.blocks.set('profile', newProfileBin);
+	writePlayerName(parsed.header, profile.playerName);
 	return buildSav(parsed.header, parsed.blocks, parsed.rawSav);
 }
 

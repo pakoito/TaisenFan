@@ -10,6 +10,7 @@
 
 import {crc32} from './crc32';
 import {BLOCKS, encryptBlock, verifyBlock} from './crypto';
+import {decodeShiftJis, encodeShiftJis} from './shift-jis';
 
 // === Constants ===
 
@@ -23,6 +24,15 @@ const HEADER_SIZE = 0x80;
 
 const DSV_FOOTER = '|-DESMUME SAVE-|';
 const DSV_SNIP = '|<--Snip above here to create a raw sav';
+
+/**
+ * The player name lives in the unencrypted header at offset 0x0C, encoded
+ * in Shift_JIS. The game allocates 12 bytes for it (6 full-width characters
+ * or 12 half-width), trailed by 0x00 padding. The DS firmware nickname is
+ * NOT what's stored — the game prompts for a name on first launch.
+ */
+const NAME_OFFSET = 0x0c;
+const NAME_LENGTH = 12;
 
 // Default footer block content (observed in all saves)
 const DEFAULT_FOOTER = new Uint8Array([
@@ -168,6 +178,30 @@ export async function buildSav(
 	sav[3] = (fileCrc >>> 24) & 0xff;
 
 	return sav;
+}
+
+/**
+ * Decode the player name from a raw 64KB .sav header (or any buffer
+ * whose first ≥0x18 bytes mirror the header). Trailing 0x00 padding
+ * is stripped.
+ */
+export function readPlayerName(savOrHeader: Uint8Array): string {
+	return decodeShiftJis(
+		savOrHeader.slice(NAME_OFFSET, NAME_OFFSET + NAME_LENGTH),
+	);
+}
+
+/**
+ * Write the player name into a header buffer in place. The string is
+ * encoded via Shift_JIS (the encoding the game uses) and clamped to
+ * NAME_LENGTH bytes. Any unused trailing bytes are zeroed. The 20-byte
+ * value at 0x50 is NOT recomputed — its derivation is unknown, and
+ * the game accepts edited saves so it appears to not be a strict
+ * integrity check.
+ */
+export function writePlayerName(header: Uint8Array, name: string): void {
+	const encoded = encodeShiftJis(name, NAME_LENGTH);
+	header.set(encoded, NAME_OFFSET);
 }
 
 /**

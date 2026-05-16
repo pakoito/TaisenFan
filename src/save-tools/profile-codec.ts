@@ -154,6 +154,10 @@ export function readProfile(buf: Uint8Array): SaveProfile {
 	}
 
 	return {
+		// playerName lives in the unencrypted header. Callers that route
+		// through `extractProfile` get the real name; calling readProfile
+		// directly on a profile-only buffer leaves it blank by default.
+		playerName: '',
 		stats: readStats(buf),
 		training: readTraining(buf),
 		campaign: readCampaign(buf),
@@ -698,6 +702,7 @@ export function defaultProfile(): SaveProfile {
 	};
 
 	return {
+		playerName: '',
 		stats: {
 			offline: {wins: 0, losses: 0, draws: 0},
 			online: {wins: 0, losses: 0, draws: 0},
