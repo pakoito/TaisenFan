@@ -88,6 +88,29 @@ describe('Vanilla preset (fresh)', () => {
 		expect(profile[0x4_58]).toBe(0xff);
 		expect(profile[0x4_59]).toBe(0xff);
 	});
+
+	it('exposes Chen Qun as the only owned sage in the SaveProfile', async () => {
+		const template = new Uint8Array(VANILLA);
+		const profile = await extractProfile(template);
+		// JSON-level — readSages should honor the sage-card region byte.
+		expect(profile.sages.unlockAll ?? false).toBe(false);
+		expect(profile.sages.sages['Chen Qun']?.unlocked).toBe(true);
+		for (const otherName of [
+			'Guo Jia',
+			'Sima Yi',
+			'Xun Yu',
+			'Xun You',
+			'Mi Zhu',
+			'Zhuge Liang',
+			'Zhou Yu',
+			'Jia Xu',
+		] as const) {
+			expect(
+				profile.sages.sages[otherName]?.unlocked,
+				`${otherName} should NOT be unlocked in vanilla`,
+			).toBe(false);
+		}
+	});
 });
 
 /* ------------------------------------------------------------------------ */

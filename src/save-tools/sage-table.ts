@@ -81,3 +81,36 @@ export const SAGE_COUNT = 20;
 
 /** Total sage entries in save file (including Advisor placeholder) */
 export const SAGE_TOTAL_ENTRIES = 21;
+
+/**
+ * Byte position (0-23) within the 24-byte sage-card region at 0x189
+ * for each sage. Layout is 4 factions × 6 byte slots; within each
+ * faction the slot index is `(cardId & 0xF) - 1` (so Wei 0x2001 ⇒
+ * faction-slot 0, Wei 0x2005 ⇒ faction-slot 4). The trailing byte
+ * in each faction's run is reserved (no 0x_006 card exists).
+ *
+ * Faction order is Wei → Shu → Wu → Han, matching the sage_table
+ * indexing convention.
+ *
+ * Wei is empirically verified: a clean MelonDS save has byte 4 set
+ * to 0x31 and exposes Chen Qun (0x2005) as the only owned sage
+ * card. Shu / Wu / Han ordering is our best guess by convention.
+ */
+const FACTION_BYTE_BASE: Record<string, number> = {
+	Wei: 0,
+	Shu: 6,
+	Wu: 12,
+	Han: 18,
+};
+
+export const SAGE_CARD_OFFSET: Record<SageName, number> = {} as Record<
+	SageName,
+	number
+>;
+
+for (const entry of SAGE_TABLE) {
+	const base = FACTION_BYTE_BASE[entry.faction];
+	if (base === undefined) continue;
+	const slot = (entry.cardId & 0x00_0f) - 1;
+	SAGE_CARD_OFFSET[entry.name] = base + slot;
+}

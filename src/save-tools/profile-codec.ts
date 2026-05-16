@@ -8,6 +8,7 @@
 import {CARD_ID_TO_NO, CARD_TABLE, CARD_TOTAL_SLOTS} from './card-table';
 import {
 	ALL_SAGE_NAMES,
+	SAGE_CARD_OFFSET,
 	SAGE_COUNT,
 	SAGE_INDEX_TO_NAME,
 	SAGE_TABLE,
@@ -305,31 +306,28 @@ function readSages(buf: Uint8Array): SageCollection {
 		const base = OFF.SAGE_DATA_BASE + i * OFF.SAGE_ENTRY_SIZE;
 		const level = Math.max(1, u16(buf, base));
 		const xp = u16(buf, base + 2);
-		const flag = u16(buf, base + 4); // Unknown purpose
+		const flag = u16(buf, base + 4);
 
-		// Heuristic: sage is unlocked if any of:
-		// - The flag at +4 is set
-		// - Level > 1 (has been leveled up)
-		// - XP > 0 (has gained experience)
-		// We don't use sage card ownership because we don't fully understand
-		// the relationship between sage cards and sage unlocks
-		const unlocked = flag !== 0 || level > 1 || xp > 0;
+		// Sage-card ownership byte at SAGE_CARD_BASE + offset[name]. This is
+		// the primary signal: a real fresh save has Chen Qun's byte set at
+		// 0x18d even though no XP-entry flag is on.
+		const cardOff = SAGE_CARD_OFFSET[name];
+		const cardOwned =
+			cardOff !== undefined && buf[OFF.SAGE_CARD_BASE + cardOff] === 0x31;
+
+		// Unlocked if any of: card byte set, XP flag set, has leveled up, has XP.
+		const unlocked = cardOwned || flag !== 0 || level > 1 || xp > 0;
 
 		sages[name] = {unlocked, level};
 
-		if (unlocked) {
-			anyUnlocked = true;
-		}
-		if (!unlocked || level !== 1) {
-			allUnlockedL1 = false;
-		}
+		if (unlocked) anyUnlocked = true;
+		if (!unlocked || level !== 1) allUnlockedL1 = false;
 	}
 
-	// If all sages unlocked at level 1, use unlockAll shorthand
+	// All sages unlocked at level 1 → use the shorthand.
 	if (allUnlockedL1 && anyUnlocked) {
 		return {unlockAll: true, sages: {} as Record<SageName, SageEntry>};
 	}
-
 	return {sages};
 }
 
@@ -537,55 +535,73 @@ function writeCards(buf: Uint8Array, cards: CardCollection): void {
 
 function writeSages(buf: Uint8Array, sages: SageCollection): void {
 	const isAll = sages.unlockAll === true;
-	const explicitUnlock = Object.values(sages.sages).some(s => s.unlocked);
 
-	// Sage card bytes: only rewrite when the user has explicitly chosen a
-	// state. The vanilla template ships with a starter sage byte already set,
-	// and we'd otherwise zero it out and corrupt the save.
+	// Resolve per-sage state. Explicit `sages.sages[name]` wins; `unlockAll`
+	// fills in any sage not covered. Sages with no signal stay "unknown" —
+	// their bytes get preserved as-is from the base buffer.
+	const known: Record<SageName, {unlocked: boolean; level: number}> =
+		{} as Record<SageName, {unlocked: boolean; level: number}>;
+	for (const sage of SAGE_TABLE) {
+		const explicit = sages.sages[sage.name];
+		if (explicit) {
+			known[sage.name] = {unlocked: explicit.unlocked, level: explicit.level};
+		} else if (isAll) {
+			known[sage.name] = {unlocked: true, level: 1};
+		}
+	}
+
+	// Card-byte region. `isAll` floods all 24 bytes (matching the CLI cooker
+	// and the game's own "fully unlocked" state — the layout has 1 reserved
+	// byte per faction we'd otherwise leave at 0). Otherwise we write each
+	// real sage's slot per its known state and preserve reserved bytes.
 	if (isAll) {
 		for (let i = 0; i < OFF.SAGE_CARD_COUNT; i++) {
 			buf[OFF.SAGE_CARD_BASE + i] = 0x31;
 		}
-	} else if (explicitUnlock) {
-		// At least one sage explicitly unlocked — bulk-flag the whole region.
-		for (let i = 0; i < OFF.SAGE_CARD_COUNT; i++) {
-			buf[OFF.SAGE_CARD_BASE + i] = 0x31;
-		}
 	}
-	// Otherwise: leave 0x189-0x1A3 untouched (preserve template state).
+	for (const sage of SAGE_TABLE) {
+		const off = SAGE_CARD_OFFSET[sage.name];
+		if (off === undefined) continue;
+		const k = known[sage.name];
+		if (!k) continue;
+		buf[OFF.SAGE_CARD_BASE + off] = k.unlocked ? 0x31 : 0x00;
+	}
 
-	// Sage XP/level entries
-	// We set both the flag at +4 AND the sage card bytes as belt-and-suspenders
-	// since we don't know exactly which triggers the in-game unlock
+	// XP / level / flag entries. Index 0 is the Advisor placeholder.
 	for (let i = 0; i <= SAGE_COUNT; i++) {
 		const base = OFF.SAGE_DATA_BASE + i * OFF.SAGE_ENTRY_SIZE;
-		const name = SAGE_INDEX_TO_NAME[i];
-
 		if (i === 0) {
-			// Advisor placeholder (index 0) - always inactive
 			w16(buf, base, 1);
 			w16(buf, base + 2, 0);
 			w16(buf, base + 4, 0);
 			w16(buf, base + 6, 0);
-		} else if (isAll) {
-			// All sages unlocked at level 1
-			w16(buf, base, 1);
-			w16(buf, base + 2, 0);
-			w16(buf, base + 4, 1); // Set flag (unknown purpose, but set it anyway)
-			w16(buf, base + 6, 0);
-		} else if (name && sages.sages[name]) {
-			const sage = sages.sages[name];
-			w16(buf, base, sage.level);
-			w16(buf, base + 2, 0); // XP = 0
-			w16(buf, base + 4, sage.unlocked ? 1 : 0);
-			w16(buf, base + 6, 0);
-		} else {
-			// Default: locked at level 1
-			w16(buf, base, 1);
-			w16(buf, base + 2, 0);
-			w16(buf, base + 4, 0);
-			w16(buf, base + 6, 0);
+			continue;
 		}
+		const name = SAGE_INDEX_TO_NAME[i];
+		const entry = name ? known[name] : undefined;
+		if (!entry) continue; // No explicit state — preserve buf bytes.
+
+		w16(buf, base, entry.level);
+		w16(buf, base + 2, 0); // XP = 0
+
+		// Flag (+4): vanilla saves have card_byte set yet flag=0 for the
+		// starter sage. We must not invent a flag=1 just because the user
+		// uploaded that save and re-downloaded it. Two cases set the flag:
+		//   1. Preset-driven unlocks (isAll: caller is asking for "fully
+		//      active" sages, matching how Starter/Full should look).
+		//   2. The user has leveled this sage above 1 — flag goes with level.
+		// In all other cases, preserve whatever the base buffer had.
+		const flagAlready = u16(buf, base + 4);
+		let nextFlag: number;
+		if (!entry.unlocked) {
+			nextFlag = 0;
+		} else if (isAll || entry.level > 1 || flagAlready !== 0) {
+			nextFlag = 1;
+		} else {
+			nextFlag = flagAlready;
+		}
+		w16(buf, base + 4, nextFlag);
+		w16(buf, base + 6, 0);
 	}
 }
 
