@@ -10,6 +10,7 @@
 
 import {crc32} from './crc32';
 import {BLOCKS, encryptBlock, verifyBlock} from './crypto';
+import {md5} from './md5';
 import {decodeShiftJis, encodeShiftJis} from './shift-jis';
 
 // === Constants ===
@@ -17,8 +18,18 @@ import {decodeShiftJis, encodeShiftJis} from './shift-jis';
 export const SAV_SIZE = 65_536;
 const MAGIC = '3GOKUTEN';
 const MAGIC_OFFSET = 4;
-const SAVE_COUNT_OFFSET = 0x44;
 const HEADER_SIZE = 0x80;
+
+// The first 0x80 bytes of the save look like a header, but are really
+// a 6th unencrypted "block" with the same MD5+CRC footer pattern as
+// the encrypted blocks: 0x50 bytes of payload, then MD5(payload) at
+// 0x50..0x5F and CRC32(padded block 0..0x7F with CRC field zeroed)
+// at 0x60..0x63, then zero pad to 0x80. The game's runtime check
+// validates these two hashes; if you mutate any header byte without
+// recomputing both, the save is rejected as corrupted.
+const HEADER_DATA_SIZE = 0x50;
+const HEADER_MD5_OFFSET = 0x50;
+const HEADER_CRC_OFFSET = 0x60;
 
 const DSV_FOOTER = '|-DESMUME SAVE-|';
 const DSV_SNIP = '|<--Snip above here to create a raw sav';
@@ -115,10 +126,32 @@ export async function parseSav(data: Uint8Array): Promise<ParsedSave> {
 }
 
 /**
+ * Recompute the header's MD5+CRC footer. The header is laid out like
+ * the other blocks: payload at 0..0x4F, MD5 at 0x50..0x5F, CRC32 at
+ * 0x60..0x63, zero pad to 0x80. Mutating any header byte requires
+ * recomputing both; otherwise the game treats the save as corrupted.
+ */
+function refreshHeaderFooter(sav: Uint8Array): void {
+	const md5Bytes = md5(sav.slice(0, HEADER_DATA_SIZE));
+	sav.set(md5Bytes, HEADER_MD5_OFFSET);
+	sav[HEADER_CRC_OFFSET] = 0;
+	sav[HEADER_CRC_OFFSET + 1] = 0;
+	sav[HEADER_CRC_OFFSET + 2] = 0;
+	sav[HEADER_CRC_OFFSET + 3] = 0;
+	const c = crc32(sav.slice(0, HEADER_SIZE)) >>> 0;
+	sav[HEADER_CRC_OFFSET] = c & 0xff;
+	sav[HEADER_CRC_OFFSET + 1] = (c >>> 8) & 0xff;
+	sav[HEADER_CRC_OFFSET + 2] = (c >>> 16) & 0xff;
+	sav[HEADER_CRC_OFFSET + 3] = (c >>> 24) & 0xff;
+}
+
+/**
  * Build a .sav buffer from header + decrypted blocks.
  *
- * Blocks not in the map are taken from `baseSav` if provided,
- * otherwise zeroed blocks are used.
+ * Payload bytes 0..0x4F of the header are copied verbatim from `header`;
+ * the MD5+CRC footer at 0x50..0x63 is recomputed against them. Blocks
+ * not in the map are taken from `baseSav` if provided, otherwise zeroed
+ * (or DEFAULT_FOOTER for the footer block).
  */
 export async function buildSav(
 	header: Uint8Array,
@@ -127,35 +160,20 @@ export async function buildSav(
 ): Promise<Uint8Array> {
 	const sav = new Uint8Array(SAV_SIZE).fill(0xff);
 
-	// Write header
+	// Copy header verbatim. Footer (MD5+CRC at 0x50..0x63) gets
+	// overwritten by refreshHeaderFooter below to match the payload.
 	sav.set(header.slice(0, HEADER_SIZE));
 
-	// Increment save count
-	const count =
-		(sav[SAVE_COUNT_OFFSET]! |
-			(sav[SAVE_COUNT_OFFSET + 1]! << 8) |
-			(sav[SAVE_COUNT_OFFSET + 2]! << 16) |
-			(sav[SAVE_COUNT_OFFSET + 3]! << 24)) >>>
-		0;
-	const newCount = count + 1;
-	sav[SAVE_COUNT_OFFSET] = newCount & 0xff;
-	sav[SAVE_COUNT_OFFSET + 1] = (newCount >>> 8) & 0xff;
-	sav[SAVE_COUNT_OFFSET + 2] = (newCount >>> 16) & 0xff;
-	sav[SAVE_COUNT_OFFSET + 3] = (newCount >>> 24) & 0xff;
-
-	// Encrypt and write each block
 	for (const block of BLOCKS) {
 		let plaintext = blocks.get(block.name);
 
 		if (!plaintext) {
 			if (baseSav) {
-				// Decrypt from base save
 				const {decrypted} = await verifyBlock(block, baseSav);
 				plaintext = decrypted;
 			} else if (block.name === 'footer') {
 				plaintext = new Uint8Array(DEFAULT_FOOTER);
 			} else {
-				// Zeroed block
 				plaintext = new Uint8Array(block.size);
 			}
 		}
@@ -164,17 +182,7 @@ export async function buildSav(
 		sav.set(fullBlock, block.offset);
 	}
 
-	// Recompute file-level CRC32 (offset 0x00, computed with field zeroed)
-	sav[0] = 0;
-	sav[1] = 0;
-	sav[2] = 0;
-	sav[3] = 0;
-	const fileCrc = crc32(sav);
-	sav[0] = fileCrc & 0xff;
-	sav[1] = (fileCrc >>> 8) & 0xff;
-	sav[2] = (fileCrc >>> 16) & 0xff;
-	sav[3] = (fileCrc >>> 24) & 0xff;
-
+	refreshHeaderFooter(sav);
 	return sav;
 }
 
@@ -192,10 +200,9 @@ export function readPlayerName(savOrHeader: Uint8Array): string {
 /**
  * Write the player name into a header buffer in place. The string is
  * encoded via Shift_JIS (the encoding the game uses) and clamped to
- * NAME_LENGTH bytes. Any unused trailing bytes are zeroed. The 20-byte
- * value at 0x50 is NOT recomputed — its derivation is unknown, and
- * the game accepts edited saves so it appears to not be a strict
- * integrity check.
+ * NAME_LENGTH bytes; unused trailing bytes are zeroed. The header
+ * MD5+CRC footer at 0x50..0x63 will be refreshed by `buildSav` once
+ * the full save is rebuilt, so callers don't need to do that here.
  */
 export function writePlayerName(header: Uint8Array, name: string): void {
 	const encoded = encodeShiftJis(name, NAME_LENGTH);
@@ -235,20 +242,17 @@ export function wrapDsv(rawSav: Uint8Array): Uint8Array {
 }
 
 /**
- * Build a fresh header (for createSave without a base).
+ * Build a fresh header for createSave without a base. In practice every
+ * UI flow uses the bundled vanilla template (see SaveContext), so this
+ * is only the fallback for someone calling the API directly. The header
+ * is left zero apart from the magic; bytes 0..3 and 0x44..0x47 (unknown
+ * fields the game's integrity check is sensitive to) are also zero, so
+ * such a save will likely not load — callers should prefer
+ * `replaceSave` against the vanilla template.
  */
 export function freshHeader(): Uint8Array {
 	const header = new Uint8Array(HEADER_SIZE);
-
-	// Magic
 	const magic = new TextEncoder().encode(MAGIC);
 	header.set(magic, MAGIC_OFFSET);
-
-	// Save count = 1. The player name (0x0C) and the 20-byte value at
-	// 0x50 stay zero — callers that go through createSave can fill the
-	// name via writePlayerName; the 0x50 value is left empty since the
-	// game accepts saves with it unset.
-	header[SAVE_COUNT_OFFSET] = 1;
-
 	return header;
 }

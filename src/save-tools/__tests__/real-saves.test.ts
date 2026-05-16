@@ -142,12 +142,12 @@ describe.skipIf(!haveFixtures)('Real-save codec invariants', () => {
 					expect(blockDiffs(x, y), `block "${name}" must not drift`).toBe(0);
 				}
 
-				// Header diffs limited to: name region (0x0C-0x17), save
-				// count (0x44-0x47), file CRC (0x00-0x03).
+				// Header diffs limited to: the name region itself (0x0C-0x17)
+				// and the header's own MD5+CRC footer (0x50-0x63), which gets
+				// refreshed against the new payload.
 				for (let i = 0; i < 0x80; i++) {
-					if (i < 0x04) continue; // CRC
-					if (i >= 0x0c && i < 0x18) continue; // name
-					if (i >= 0x44 && i < 0x48) continue; // save count
+					if (i >= 0x0c && i < 0x18) continue; // name region
+					if (i >= 0x50 && i < 0x64) continue; // header MD5+CRC footer
 					expect(rebuilt[i], `header 0x${i.toString(16)}`).toBe(buf[i]);
 				}
 			});
