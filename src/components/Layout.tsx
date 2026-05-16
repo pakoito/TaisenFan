@@ -154,13 +154,9 @@ function DesktopNav() {
 				/>
 
 				<NavigationMenuItem>
-					<span
-						aria-disabled='true'
-						className={cn(LINK_BASE, 'cursor-default text-text-dim')}
-						title='Coming soon'
-					>
+					<NavLink className={navLinkClass} to='/savegame-editor'>
 						Save Editor
-					</span>
+					</NavLink>
 				</NavigationMenuItem>
 			</NavigationMenuList>
 		</NavigationMenu>
@@ -226,9 +222,11 @@ function MobileNav() {
 						))}
 					</MobileSection>
 
-					<span className='px-4 py-2 font-sans text-sm text-text-dim'>
-						Save Editor (coming soon)
-					</span>
+					<MobileLink
+						label='Save Editor'
+						onClick={close}
+						to='/savegame-editor'
+					/>
 				</div>
 			</SheetContent>
 		</Sheet>

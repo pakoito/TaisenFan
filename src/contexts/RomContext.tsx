@@ -25,6 +25,7 @@ import {
 	type RomProgress,
 	type RomStatus,
 } from '@/contexts/rom-types';
+import {downloadBinary} from '@/utils/download';
 import {
 	clearImageCache,
 	loadCachedImages,
@@ -50,16 +51,6 @@ function backgroundCacheClear(): void {
 // ============================================================================
 // Helpers
 // ============================================================================
-
-function downloadArrayBuffer(data: ArrayBuffer, filename: string): void {
-	const blob = new Blob([data], {type: 'application/octet-stream'});
-	const url = URL.createObjectURL(blob);
-	const a = document.createElement('a');
-	a.href = url;
-	a.download = filename;
-	a.click();
-	URL.revokeObjectURL(url);
-}
 
 /** Create blob URLs from PNG ArrayBuffers (already encoded by the worker) */
 function pngsToBlobUrls(images: {name: string; png: ArrayBuffer}[]): {
@@ -177,7 +168,7 @@ export function RomProvider({children}: PropsWithChildren) {
 			onPatched(data, filename) {
 				setIsPatching(false);
 				setPatchProgress(null);
-				downloadArrayBuffer(data, filename);
+				downloadBinary(data, filename);
 			},
 			onPatchError(msg) {
 				setError(msg);

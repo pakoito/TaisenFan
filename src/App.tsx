@@ -21,6 +21,9 @@ const GuideIndex = lazy(() =>
 const GuidePage = lazy(() =>
 	import('@/pages/guides/GuidePage').then(m => ({default: m.GuidePage})),
 );
+const SavegameEditor = lazy(() =>
+	import('@/pages/SavegameEditor').then(m => ({default: m.SavegameEditor})),
+);
 
 function Loading() {
 	return (
@@ -42,6 +45,7 @@ export function App() {
 						<Route element={<Lords />} path='gamedata/lords' />
 						<Route element={<Sages />} path='gamedata/sages' />
 						<Route element={<Decks />} path='gamedata/decks' />
+						<Route element={<SavegameEditor />} path='savegame-editor' />
 						<Route element={<NotFound />} path='*' />
 					</Routes>
 				</Suspense>

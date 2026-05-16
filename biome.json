@@ -126,13 +126,17 @@
 				"playwright.config.ts",
 				"scripts/**",
 				"src/**/*.test.ts",
-				"src/**/*.test.tsx"
+				"src/**/*.test.tsx",
+				"tests/**"
 			],
 			"linter": {
 				"rules": {
 					"correctness": {
 						"noNodejsModules": "off",
 						"useQwikValidLexicalScope": "off"
+					},
+					"performance": {
+						"useTopLevelRegex": "off"
 					},
 					"style": {
 						"noDefaultExport": "off",
@@ -169,13 +173,26 @@
 				"src/utils/kpc-decode.ts",
 				"src/utils/abp-decode.ts",
 				"src/utils/image-cache.ts",
+				"src/utils/save-cache.ts",
 				"src/workers/rom-worker.ts",
-				"src/workers/bps-patch.ts"
+				"src/workers/bps-patch.ts",
+				"src/save-tools/**"
 			],
 			"linter": {
 				"rules": {
-					"suspicious": { "noBitwiseOperators": "off" },
-					"style": { "useForOf": "off", "noNonNullAssertion": "off" },
+					"suspicious": {
+						"noBitwiseOperators": "off",
+						"useAwait": "off"
+					},
+					"style": {
+						"useForOf": "off",
+						"noNonNullAssertion": "off",
+						"useNamingConvention": "off"
+					},
+					"performance": {
+						"noBarrelFile": "off",
+						"noAwaitInLoops": "off"
+					},
 					"complexity": {
 						"noExcessiveCognitiveComplexity": "off",
 						"noExcessiveLinesPerFunction": "off"
@@ -184,7 +201,12 @@
 			}
 		},
 		{
-			"includes": ["src/contexts/RomContext.tsx", "src/workers/rom-worker.ts"],
+			"includes": [
+				"src/contexts/RomContext.tsx",
+				"src/contexts/SaveContext.tsx",
+				"src/utils/save-cache.ts",
+				"src/workers/rom-worker.ts"
+			],
 			"linter": {
 				"rules": {
 					"suspicious": {

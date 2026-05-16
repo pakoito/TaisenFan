@@ -5,6 +5,7 @@ import {createRoot} from 'react-dom/client';
 import {BrowserRouter} from 'react-router';
 import {App} from './App';
 import {RomProvider} from './contexts/RomContext';
+import {SaveProvider} from './contexts/SaveContext';
 
 const queryClient = new QueryClient();
 
@@ -16,7 +17,9 @@ if (container) {
 			<QueryClientProvider client={queryClient}>
 				<BrowserRouter basename={import.meta.env.BASE_URL}>
 					<RomProvider>
-						<App />
+						<SaveProvider>
+							<App />
+						</SaveProvider>
 					</RomProvider>
 				</BrowserRouter>
 			</QueryClientProvider>
