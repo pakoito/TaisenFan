@@ -1,7 +1,11 @@
 name: Deploy to GitHub Pages
 
+# Only deploy after the Test workflow finishes on main — and only if it
+# passed. This gate prevents a red build from shipping to GitHub Pages.
 on:
-  push:
+  workflow_run:
+    workflows: ['Test']
+    types: [completed]
     branches: [main]
   workflow_dispatch:
 
@@ -16,6 +20,11 @@ concurrency:
 
 jobs:
   build:
+    # workflow_run fires on both success and failure; the manual dispatch
+    # path has no workflow_run context, so allow it through unconditionally.
+    if: >-
+      ${{ github.event_name == 'workflow_dispatch' ||
+          github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -32,7 +41,7 @@ jobs:
         run: npm run build
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: dist
 
@@ -45,4 +54,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
