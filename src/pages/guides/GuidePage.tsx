@@ -89,12 +89,25 @@ function GuideReady({onReady}: {onReady: () => void}) {
 /** Scroll to the heading named by the current URL hash, if present. */
 function scrollToHash(): void {
 	const id = decodeURIComponent(window.location.hash.replace(HASH_PREFIX, ''));
-	const el = id ? document.getElementById(id) : null;
-	if (!el) {
+	if (!id) {
 		return;
 	}
-	const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-	el.scrollIntoView({behavior: reduce ? 'auto' : 'smooth'});
+
+	function jump() {
+		// Instant: a deep link should land on the section, not animate the reader
+		// through the whole (long) guide.
+		document.getElementById(id)?.scrollIntoView();
+	}
+
+	// The guide body renders in a network-loaded web font (Noto Serif,
+	// display=swap). Scrolling before it arrives measures the fallback-font
+	// layout; when the real font swaps in, accumulated line-height drift over a
+	// long guide pushes the target a section or two off. Wait for fonts first.
+	if (document.fonts && document.fonts.status !== 'loaded') {
+		document.fonts.ready.then(jump);
+	} else {
+		jump();
+	}
 }
 
 function GuideLoading() {
