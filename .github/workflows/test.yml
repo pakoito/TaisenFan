@@ -14,16 +14,24 @@ jobs:
   Test:
     runs-on: ubuntu-latest
 
+    # Prebuilt Playwright image ships the browsers + their OS deps, so we skip
+    # `playwright install --with-deps` entirely — that apt step was the thing
+    # stalling CI. Keep the tag in lockstep with @playwright/test in package.json.
+    container:
+      image: mcr.microsoft.com/playwright:v1.58.2-noble
+
     steps:
       - uses: actions/checkout@v5
 
+      # The image bundles Node 22, but `npm run dev` (the e2e web server) runs
+      # `node scripts/sync-guides.ts`, which needs Node 24's type stripping.
       - uses: actions/setup-node@v5
         with:
           node-version: '24'
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci && npx playwright install --with-deps
+        run: npm ci
 
       - name: Validate
         run: npx biome ci && npm run test:ci && npm run test:e2e:ci
