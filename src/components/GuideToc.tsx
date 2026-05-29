@@ -22,15 +22,22 @@ const DEPTH_CLASS: Record<1 | 2 | 3, string> = {
  * Smooth-scroll to a heading and reflect it in the URL hash without a full
  * navigation, so deep links like `…/guides/conquest#place-names` keep working
  * but in-page clicks stay snappy.
+ *
+ * Clicking an entry also collapses the TOC, which removes its expanded list
+ * from the layout and pulls every heading upward. We reflect the hash now but
+ * defer the scroll across two frames — after React commits the collapse and
+ * the browser relays out — otherwise we aim at the pre-collapse position and
+ * overshoot the target. The scroll is instant: a TOC entry can be thousands of
+ * pixels away, and animating that far is both slow and lands imprecisely.
  */
 function scrollToHeading(id: string): void {
-	const el = document.getElementById(id);
-	if (!el) {
-		return;
-	}
-	const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-	el.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block: 'start'});
 	window.history.pushState(null, '', `#${id}`);
+
+	function jump() {
+		document.getElementById(id)?.scrollIntoView({block: 'start'});
+	}
+
+	requestAnimationFrame(() => requestAnimationFrame(jump));
 }
 
 /**
@@ -90,8 +97,10 @@ export function GuideToc({entries}: GuideTocProps) {
 									href={`#${entry.id}`}
 									onClick={e => {
 										e.preventDefault();
-										scrollToHeading(entry.id);
+										// Collapse first; scrollToHeading defers the scroll until the
+										// resulting layout change has committed.
 										setOpen(false);
+										scrollToHeading(entry.id);
 									}}
 								>
 									{entry.text}
