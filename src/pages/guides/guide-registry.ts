@@ -8,7 +8,7 @@ export type GuideEntry = {
 
 /**
  * All guides, lazily loaded. The MDX plugin compiles each .md to a React
- * component at build time — the import returns { default: MDXContent }.
+ * component at build time — the `load` import returns { default: MDXContent }.
  */
 export const GUIDES: readonly GuideEntry[] = [
 	{

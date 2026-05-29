@@ -5,6 +5,7 @@ import path from 'node:path';
 import mdx from '@mdx-js/rollup';
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
+import rehypeSlug from 'rehype-slug';
 import remarkFrontmatter from 'remark-frontmatter';
 import remarkGfm from 'remark-gfm';
 import {defineConfig, type Plugin} from 'vite';
@@ -48,6 +49,10 @@ export default defineConfig(() => ({
 		mdx({
 			providerImportSource: '@mdx-js/react',
 			remarkPlugins: [remarkGfm, remarkFrontmatter],
+			// rehype-slug adds GitHub-compatible `id`s to every heading. The TOC
+			// (src/lib/guide-toc.ts) reproduces the same slugs via github-slugger,
+			// so anchor links and TOC targets line up exactly.
+			rehypePlugins: [rehypeSlug],
 		}),
 		react({include: REACT_INCLUDE}),
 		tailwindcss(),
