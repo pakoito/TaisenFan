@@ -83,10 +83,41 @@ function txDelete(db: IDBDatabase, key: string): Promise<void> {
 	});
 }
 
+/**
+ * Whether a persisted profile matches the SaveProfile shape the current code
+ * expects. The codec field map changes between releases (e.g. the old `food`
+ * field became `currencyGold`, and `troopColors` / `regionCode` were added).
+ * A cached profile written by an older deploy is missing those fields, which
+ * makes the editor throw at render time (`Object.values(profile.troopColors)`
+ * etc.). We do NOT migrate stale state — we detect it and drop it.
+ */
+function isProfileShapeCurrent(profile: unknown): profile is SaveProfile {
+	if (typeof profile !== 'object' || profile === null) return false;
+	const p = profile as {
+		troopColors?: unknown;
+		regionCode?: unknown;
+		stats?: {currencyGold?: unknown};
+	};
+	if (typeof p.troopColors !== 'object' || p.troopColors === null) return false;
+	if (typeof p.regionCode !== 'number') return false;
+	if (typeof p.stats?.currencyGold !== 'number') return false;
+	return true;
+}
+
 export async function loadPersistedSave(): Promise<PersistedSave | null> {
 	try {
 		const db = await openDb();
 		const record = await txGet<PersistedSave>(db, RECORD_KEY);
+		// Drop incompatible state written by an older deploy rather than
+		// rehydrating a stale-shaped profile that crashes the editor on render.
+		if (record && !isProfileShapeCurrent(record.profile)) {
+			await txDelete(db, RECORD_KEY);
+			db.close();
+			console.warn(
+				'[save-cache] Discarded incompatible cached save (old format).',
+			);
+			return null;
+		}
 		db.close();
 		return record ?? null;
 	} catch (err) {

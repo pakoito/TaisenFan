@@ -79,3 +79,92 @@ test('Discard wipes the save and shows the empty state', async ({page}) => {
 	await expect(slot.getByText('No save loaded')).toBeVisible();
 	await expect(page.getByRole('button', {name: 'New Save'})).toBeVisible();
 });
+
+// A pre-field-map profile: it has `stats.food` but is missing the fields the
+// current codec requires (`troopColors`, `currencyGold`, `regionCode`). Kept
+// intentionally minimal — only enough to mimic what an older deploy persisted.
+const OLD_FORMAT_PROFILE = {
+	playerName: 'OldUser',
+	stats: {
+		offline: {wins: 1, losses: 0, draws: 0},
+		online: {wins: 0, losses: 0, draws: 0},
+		offlineRank: 0,
+		onlineRank: 0,
+		food: 100,
+		mastery: {cavalry: 0, spear: 0, bow: 0, defeat: 0, siege: 0, defense: 0},
+	},
+	training: {
+		normalUnlocked: true,
+		hardUnlocked: false,
+		tutorials: {
+			tutorial1: true,
+			tutorial2: false,
+			tutorial3: false,
+			tutorial4: false,
+		},
+		stages: {'Easy-01': {completed: true, highScore: 12_345}},
+	},
+	campaign: {chapters: {}, chapter3Variants: {}},
+	cards: {cards: {}},
+	sages: {sages: {}},
+	achievements: {titlesUnlocked: 'none', campaignEventsUnlocked: 'none'},
+	decks: [],
+};
+
+/** Seed the editor's IndexedDB cache with an arbitrary profile record. */
+async function seedCachedProfile(
+	page: import('@playwright/test').Page,
+	profile: unknown,
+): Promise<void> {
+	await page.evaluate(async profileArg => {
+		const record = {
+			status: 'uploaded',
+			filename: 'old.sav',
+			rawSav: null,
+			profile: profileArg,
+		};
+		await new Promise<void>((resolve, reject) => {
+			const req = indexedDB.open('taisen-fan-save', 1);
+			req.onupgradeneeded = () => {
+				const db = req.result;
+				if (!db.objectStoreNames.contains('state')) {
+					db.createObjectStore('state');
+				}
+			};
+			req.onsuccess = () => {
+				const db = req.result;
+				const tx = db.transaction('state', 'readwrite');
+				tx.objectStore('state').put(record, 'current');
+				tx.oncomplete = () => {
+					db.close();
+					resolve();
+				};
+				tx.onerror = () => reject(tx.error);
+			};
+			req.onerror = () => reject(req.error);
+		});
+	}, profile);
+}
+
+// Regression: a returning user whose IndexedDB holds a profile written by an
+// OLDER deploy must NOT crash the editor. The old code rehydrated the stale
+// profile verbatim and `Object.values(profile.troopColors)` threw
+// "Cannot convert undefined or null to object", tripping the error boundary
+// ("Something went wrong"). We now drop incompatible cached state on load and
+// fall back to the empty state instead of migrating it.
+test('discards an incompatible old-format cached save without crashing', async ({
+	page,
+}) => {
+	// Visit once so the page's origin owns the IndexedDB we seed.
+	await page.goto('./savegame-editor');
+	await seedCachedProfile(page, OLD_FORMAT_PROFILE);
+
+	// Reload: hydration must discard the stale record and recover gracefully.
+	await page.reload();
+
+	const slot = page.getByRole('region', {name: 'Save slot'});
+	await expect(slot.getByText('No save loaded')).toBeVisible();
+	await expect(page.getByRole('button', {name: 'New Save'})).toBeVisible();
+	// The error boundary must NOT have fired.
+	await expect(page.getByText('Something went wrong')).toHaveCount(0);
+});
