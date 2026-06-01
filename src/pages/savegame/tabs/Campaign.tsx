@@ -164,7 +164,7 @@ export function Campaign() {
 			<section className='gold-stroke flex flex-col gap-3 bg-surface-low p-4'>
 				<header>
 					<p className='font-medium font-serif text-gold text-sm uppercase tracking-wider'>
-						Chapter 3 — branch unlocks
+						Chapter 3: branch unlocks
 					</p>
 					<p className='text-text-faint text-xs'>
 						{EXPLAINERS.chapter3Variants}

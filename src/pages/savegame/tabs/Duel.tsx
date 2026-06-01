@@ -61,7 +61,7 @@ function DifficultyUnlocks() {
 					Difficulty unlocks (playable)
 				</p>
 				<p className='text-text-faint text-xs'>
-					Whether each list is PLAYABLE — separate from clearing or scoring its
+					Whether each list is PLAYABLE, separate from clearing or scoring its
 					stages below.
 				</p>
 			</header>
@@ -190,7 +190,7 @@ function DifficultyStages({difficulty}: {difficulty: Difficulty}) {
 		<section className='gold-stroke flex flex-col gap-2 bg-surface-low p-4'>
 			<header className='flex items-baseline justify-between'>
 				<p className='font-medium font-serif text-gold text-sm uppercase tracking-wider'>
-					{difficulty} — {stages.length} stages
+					{difficulty}: {stages.length} stages
 				</p>
 				<span className='text-text-faint text-xs tabular-nums'>
 					{locked ? 'Tier locked · ' : ''}

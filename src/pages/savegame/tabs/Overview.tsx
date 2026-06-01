@@ -18,12 +18,12 @@ const PRESET_BUTTONS: PresetButton[] = [
 	{
 		preset: 'fresh',
 		label: 'Vanilla',
-		hint: 'Reset to a brand-new save — nothing unlocked, food 100, no completion records.',
+		hint: 'Reset to a brand-new save: nothing unlocked, food 100, no completion records.',
 	},
 	{
 		preset: 'starter',
 		label: 'Starter',
-		hint: 'Every DUEL difficulty, CONQUEST chapter, episode, Lord, and Sage unlocked — no completion or outcomes recorded.',
+		hint: 'Every DUEL difficulty, CONQUEST chapter, episode, Lord, and Sage unlocked; no completion or outcomes recorded.',
 	},
 	{
 		preset: 'full',
@@ -81,7 +81,7 @@ export function Overview() {
 		{
 			label: 'Chapters open',
 			value: `${countChaptersUnlocked(profile)} / 6`,
-			hint: 'CONQUEST chapters that are OPEN (tappable on the map) — separate from clearing their episodes. Edit on the CONQUEST tab.',
+			hint: 'CONQUEST chapters that are OPEN (tappable on the map), separate from clearing their episodes. Edit on the CONQUEST tab.',
 		},
 		{
 			label: 'Food (兵糧)',

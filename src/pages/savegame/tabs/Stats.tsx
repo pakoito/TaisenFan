@@ -286,7 +286,7 @@ function MasteryRow({field}: {field: (typeof MASTERY_FIELDS)[number]}) {
 
 function MasterySection() {
 	return (
-		<SectionShell hint='0–999 per skill.' title='Mastery skills'>
+		<SectionShell hint='0-999 per skill.' title='Mastery skills'>
 			<div className='grid grid-cols-1 gap-3 md:grid-cols-2'>
 				{MASTERY_FIELDS.map(field => (
 					<MasteryRow field={field} key={field.key} />

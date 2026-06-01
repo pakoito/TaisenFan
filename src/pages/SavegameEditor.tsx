@@ -28,7 +28,7 @@ function EmptyState() {
 				Use the Save Slot above to generate a fresh starter save, or upload your
 				own <code className='text-gold-dim'>.sav</code> /{' '}
 				<code className='text-gold-dim'>.dsv</code> exported from a flash cart
-				or emulator. The editor remembers your work across page changes — the
+				or emulator. The editor remembers your work across page changes; the
 				cartridge popup is unaffected.
 			</p>
 		</div>

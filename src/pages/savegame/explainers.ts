@@ -14,9 +14,9 @@ export const EXPLAINERS = {
 
 	// === DUEL per-stage facets (kept DISTINCT) ===
 	stageCleared:
-		'The stage’s CLEARED flag — explicitly recorded by the game. A stage can be cleared with a best score of 0; this is never inferred from the score.',
+		'The stage’s CLEARED flag, explicitly recorded by the game. A stage can be cleared with a best score of 0; this is never inferred from the score.',
 	stageScore:
-		'Your BEST SCORE on this stage (S-rank is 30000+). Separate from the cleared flag — a high score does not by itself mark the stage cleared.',
+		'Your BEST SCORE on this stage (S-rank is 30000+). Separate from the cleared flag: a high score does not by itself mark the stage cleared.',
 	duelStages:
 		'Per-stage DUEL records. UNLOCKED (playable) is the difficulty tier above; CLEARED and BEST SCORE are tracked independently per stage.',
 
@@ -34,9 +34,9 @@ export const EXPLAINERS = {
 	chapterReward:
 		'Records the reward Lord card as obtained for this chapter. Does not add the card on its own.',
 	chapter3Variants:
-		'Branch-specific Chapter 3 stages (Yellow Turban, Red Cliffs, etc.) — unlocked through Chapter 3 play.',
+		'Branch-specific Chapter 3 stages (Yellow Turban, Red Cliffs, etc.), unlocked through Chapter 3 play.',
 	warringStates:
-		'Endgame Warring States mode — accessible after clearing the main campaign.',
+		'Endgame Warring States mode, accessible after clearing the main campaign.',
 
 	// === Cards / sages ===
 	cardsUnlockAll:
@@ -46,30 +46,30 @@ export const EXPLAINERS = {
 	sagesUnlockAll:
 		'Treats every Sage card as owned. They appear in the Sage selection screen.',
 	sageLevel:
-		'Sage level (1–20). Higher levels widen Tactics gauge and Formation range. Raise by spending food at the Strategy Counter.',
+		'Sage level (1-20). Higher levels widen Tactics gauge and Formation range. Raise by spending food at the Strategy Counter.',
 
 	// === Stats ===
-	food: 'Food (兵糧) — training currency. Earned per drill, spent in DUEL → Strategy Counter to level Sages and draw cards. Starts at 100.',
+	food: 'Food (兵糧): training currency. Earned per drill, spent in DUEL → Strategy Counter to level Sages and draw cards. Starts at 100.',
 	region:
-		'Prefecture you chose at first launch (read-only). Stored in the save header — changing it would invalidate the header checksum.',
-	offlineRank: 'Lifetime points from DUEL — visible on the title screen.',
-	onlineRank: 'Online rating (max 12,000) — dormant without Wi-Fi.',
+		'Prefecture you chose at first launch (read-only). Stored in the save header; changing it would invalidate the header checksum.',
+	offlineRank: 'Lifetime points from DUEL, visible on the title screen.',
+	onlineRank: 'Online rating (max 12,000), dormant without Wi-Fi.',
 	winsLosses: 'Win / loss / draw totals shown on the player profile screen.',
 	masteryCavalry:
-		'Skill XP for cavalry charge attacks (0–999). Affects the cavalry chevron on the player profile.',
-	masterySpear: 'Skill XP for spear-unit thrust kills (0–999).',
-	masteryBow: 'Skill XP for bow-unit run-shot kills (0–999).',
+		'Skill XP for cavalry charge attacks (0-999). Affects the cavalry chevron on the player profile.',
+	masterySpear: 'Skill XP for spear-unit thrust kills (0-999).',
+	masteryBow: 'Skill XP for bow-unit run-shot kills (0-999).',
 	masteryDefeat:
-		'Generic enemy-defeat XP (0–999). Counts every kill regardless of unit type.',
-	masterySiege: 'Castle-damage XP (0–999).',
-	masteryDefense: 'Castle-defense XP (0–999).',
-	masteryDuel: 'One-on-one duel-win XP (0–999).',
+		'Generic enemy-defeat XP (0-999). Counts every kill regardless of unit type.',
+	masterySiege: 'Castle-damage XP (0-999).',
+	masteryDefense: 'Castle-defense XP (0-999).',
+	masteryDuel: 'One-on-one duel-win XP (0-999).',
 
 	// === Tutorials ===
-	tutorial1: 'Tutorial 1 — basic controls.',
-	tutorial2: 'Tutorial 2 — advanced movement.',
-	tutorial3: 'Tutorial 3 — skills and morale gauge.',
-	tutorial4: 'Tutorial 4 — sage abilities.',
+	tutorial1: 'Tutorial 1: basic controls.',
+	tutorial2: 'Tutorial 2: advanced movement.',
+	tutorial3: 'Tutorial 3: skills and morale gauge.',
+	tutorial4: 'Tutorial 4: sage abilities.',
 
 	// === Achievements ===
 	titlesUnlocked:
