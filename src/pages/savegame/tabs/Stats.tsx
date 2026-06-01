@@ -1,8 +1,9 @@
+import {useCallback} from 'react';
 import {Input} from '@/components/ui/input';
 import {Slider} from '@/components/ui/slider';
 import {Switch} from '@/components/ui/switch';
 import {useSave} from '@/contexts/useSave';
-import type {SaveProfile} from '@/save-tools';
+import type {SaveProfile, TroopColor} from '@/save-tools';
 import {EXPLAINERS} from '../explainers';
 
 type MasteryKey = keyof SaveProfile['stats']['mastery'];
@@ -103,6 +104,89 @@ function PlayerNameSection() {
 				spellCheck={false}
 				value={profile.playerName}
 			/>
+			<p className='text-text-faint text-xs' title={EXPLAINERS.region}>
+				Region (prefecture) code:{' '}
+				<span className='font-mono text-text-muted'>{profile.regionCode}</span>{' '}
+				· read-only
+			</p>
+		</SectionShell>
+	);
+}
+
+const TROOP_COLOR_SWATCHES: {
+	key: TroopColor;
+	label: string;
+	swatch: string;
+	base?: boolean;
+	how: string;
+}[] = [
+	{key: 'red', label: 'Red', swatch: '#c0392b', base: true, how: 'Base'},
+	{key: 'blue', label: 'Blue', swatch: '#2c5fa8', base: true, how: 'Base'},
+	{key: 'green', label: 'Green', swatch: '#2e8b57', base: true, how: 'Base'},
+	{
+		key: 'purple',
+		label: 'Purple',
+		swatch: '#7d3c98',
+		how: 'DUEL Normal all-clear',
+	},
+	{key: 'black', label: 'Black', swatch: '#222222', how: '20 online wins'},
+	{
+		key: 'yellow',
+		label: 'Yellow',
+		swatch: '#d4ac0d',
+		how: 'DUEL Easy all-clear',
+	},
+	{key: 'pink', label: 'Pink', swatch: '#e87ea1', how: '100 online wins'},
+	{key: 'cyan', label: 'Cyan', swatch: '#1ab6c8', how: 'DUEL Hard all-clear'},
+	{key: 'white', label: 'White', swatch: '#f2f2f2', how: '50 online wins'},
+];
+
+function TroopColorRow({
+	entry,
+}: {
+	entry: (typeof TROOP_COLOR_SWATCHES)[number];
+}) {
+	const {profile, mutate} = useSave();
+	const onChange = useCallback(
+		(checked: boolean) => {
+			mutate(d => {
+				d.troopColors[entry.key] = checked;
+			});
+		},
+		[mutate, entry.key],
+	);
+	if (!profile) return null;
+	return (
+		<div className='flex items-center gap-2 text-xs' title={entry.how}>
+			<span
+				aria-hidden={true}
+				className='inline-block h-4 w-4 shrink-0 rounded-sm border border-border-dim'
+				style={{backgroundColor: entry.swatch}}
+			/>
+			<span className='flex min-w-0 flex-1 flex-col'>
+				<span className='truncate text-text-muted'>{entry.label}</span>
+				<span className='truncate text-[10px] text-text-faint'>
+					{entry.how}
+				</span>
+			</span>
+			<Switch
+				aria-label={`${entry.label} troop colour`}
+				checked={profile.troopColors[entry.key]}
+				disabled={entry.base}
+				onCheckedChange={onChange}
+			/>
+		</div>
+	);
+}
+
+function TroopColorsSection() {
+	return (
+		<SectionShell hint={EXPLAINERS.troopColors} title='Troop colours (部隊色)'>
+			<div className='grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3'>
+				{TROOP_COLOR_SWATCHES.map(entry => (
+					<TroopColorRow entry={entry} key={entry.key} />
+				))}
+			</div>
 		</SectionShell>
 	);
 }
@@ -281,6 +365,7 @@ export function Stats() {
 			<PlayerNameSection />
 			<WinLossSection />
 			<MasterySection />
+			<TroopColorsSection />
 			<TitlesSection />
 		</div>
 	);

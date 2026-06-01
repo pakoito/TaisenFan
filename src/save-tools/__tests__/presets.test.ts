@@ -54,8 +54,14 @@ describe('starter preset', () => {
 		expect(profile.achievements.selectedTitle).toBe(0);
 	});
 
-	it('preserves default stats (food=100, all mastery=0)', () => {
-		expect(profile.stats.food).toBe(100);
+	it('unlocks every troop colour (selectable menu content)', () => {
+		for (const on of Object.values(profile.troopColors)) {
+			expect(on).toBe(true);
+		}
+	});
+
+	it('preserves default stats (gold=100, all mastery=0)', () => {
+		expect(profile.stats.currencyGold).toBe(100);
 		expect(profile.stats.mastery.cavalry).toBe(0);
 		expect(profile.stats.mastery.duel).toBe(0);
 		expect(profile.stats.offline.wins).toBe(0);
@@ -65,12 +71,18 @@ describe('starter preset', () => {
 describe('full preset', () => {
 	const profile = applyPreset(defaultProfile(), 'full');
 
-	it('caps food, ranks, and mastery skills', () => {
-		expect(profile.stats.food).toBe(9999);
+	it('caps gold, ranks, and mastery skills', () => {
+		expect(profile.stats.currencyGold).toBe(9999);
 		expect(profile.stats.offlineRank).toBe(99_999);
 		expect(profile.stats.onlineRank).toBe(12_000);
 		expect(profile.stats.mastery.cavalry).toBe(999);
 		expect(profile.stats.mastery.duel).toBe(999);
+	});
+
+	it('unlocks every troop colour', () => {
+		for (const on of Object.values(profile.troopColors)) {
+			expect(on).toBe(true);
+		}
 	});
 
 	it('completes every chapter and Chapter-3 variant', () => {
@@ -121,7 +133,7 @@ describe('fresh preset (vanilla)', () => {
 
 	it('matches the bare default profile', () => {
 		const def = defaultProfile();
-		expect(profile.stats.food).toBe(def.stats.food);
+		expect(profile.stats.currencyGold).toBe(def.stats.currencyGold);
 		expect(profile.training.normalUnlocked).toBe(def.training.normalUnlocked);
 		expect(profile.training.hardUnlocked).toBe(def.training.hardUnlocked);
 		expect(profile.cards.unlockAll ?? false).toBe(false);

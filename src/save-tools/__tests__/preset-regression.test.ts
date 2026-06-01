@@ -220,13 +220,23 @@ describe('Starter preset', () => {
 		}
 	});
 
-	it('food remains at the 100 starter currency', () => {
-		const food =
-			profile[0x18]! |
-			(profile[0x19]! << 8) |
-			(profile[0x1a]! << 16) |
-			(profile[0x1b]! << 24);
-		expect(food).toBe(100);
+	it('gold remains at the 100 starter currency (0x14)', () => {
+		const gold =
+			profile[0x14]! |
+			(profile[0x15]! << 8) |
+			(profile[0x16]! << 16) |
+			(profile[0x17]! << 24);
+		expect(gold).toBe(100);
+	});
+
+	it('records no DUEL Normal/Hard cleared bits (0x2EC + 0x38C masks zero)', () => {
+		for (let i = 0; i < 5; i++) expect(profile[0x2_ec + i]).toBe(0);
+		for (let i = 0; i < 3; i++) expect(profile[0x3_8c + i]).toBe(0);
+	});
+
+	it('unlocks every troop colour for the starter menu (0x42D = 0xFF)', () => {
+		expect(profile[0x4_2d]).toBe(0xff);
+		expect(profile[0x4_2e]! & 0x01).toBe(0x01);
 	});
 
 	it('non-profile blocks match the vanilla template', async () => {
@@ -282,20 +292,54 @@ describe('Full preset', () => {
 		}
 	});
 
-	it('marks all 80 DUEL stages completed (0x24C-0x254)', () => {
-		// 80 bits across 3 DWORDs; first 2 fully set, third has 16 bits set.
+	it('marks all 20 Easy DUEL stages cleared (0x24C bits 0-19) + copy at 0x254', () => {
+		// Easy cleared bitmask: 20 bits at 0x24C, mirrored at +0x08 (0x254).
 		expect(profile[0x2_4c]).toBe(0xff);
-		expect(profile[0x2_50]).toBe(0xff);
-		// Bits 64-79 → second WORD of the third DWORD
+		expect(profile[0x2_4d]).toBe(0xff);
+		expect(profile[0x2_4e]! & 0x0f).toBe(0x0f);
 		expect(profile[0x2_54]).toBe(0xff);
 		expect(profile[0x2_55]).toBe(0xff);
+		expect(profile[0x2_56]! & 0x0f).toBe(0x0f);
 	});
 
-	it('writes 40_000 to every DUEL high score slot', () => {
-		for (let deckNo = 2; deckNo <= 81; deckNo++) {
-			const off = 0x2_5c + (deckNo - 2) * 2;
+	it('marks all 40 Normal DUEL stages cleared (0x2EC bits 0-39) + copy at 0x2F4', () => {
+		// Normal cleared bitmask: 40 bits (5 bytes) at 0x2EC, mirrored at 0x2F4.
+		for (let i = 0; i < 5; i++) {
+			expect(profile[0x2_ec + i], `Normal cleared byte ${i}`).toBe(0xff);
+			expect(profile[0x2_f4 + i], `Normal cleared copy byte ${i}`).toBe(0xff);
+		}
+	});
+
+	it('marks all 20 Hard DUEL stages cleared (0x38C bits 0-19) + copy at 0x394', () => {
+		expect(profile[0x3_8c]).toBe(0xff);
+		expect(profile[0x3_8d]).toBe(0xff);
+		expect(profile[0x3_8e]! & 0x0f).toBe(0x0f);
+		expect(profile[0x3_94]).toBe(0xff);
+		expect(profile[0x3_95]).toBe(0xff);
+		expect(profile[0x3_96]! & 0x0f).toBe(0x0f);
+	});
+
+	it('writes 40_000 to every Easy DUEL high score slot (0x25C-0x283)', () => {
+		for (let i = 0; i < 20; i++) {
+			const off = 0x2_5c + i * 2;
 			const score = profile[off]! | (profile[off + 1]! << 8);
-			expect(score, `DUEL deck ${deckNo} high score`).toBe(40_000);
+			expect(score, `Easy stage ${i + 1} high score`).toBe(40_000);
+		}
+	});
+
+	it('writes 40_000 to every Normal DUEL high score slot (0x2FC-0x34B)', () => {
+		for (let i = 0; i < 40; i++) {
+			const off = 0x2_fc + i * 2;
+			const score = profile[off]! | (profile[off + 1]! << 8);
+			expect(score, `Normal stage ${i + 1} high score`).toBe(40_000);
+		}
+	});
+
+	it('writes 40_000 to every Hard DUEL high score slot (0x39C-0x3C3)', () => {
+		for (let i = 0; i < 20; i++) {
+			const off = 0x3_9c + i * 2;
+			const score = profile[off]! | (profile[off + 1]! << 8);
+			expect(score, `Hard stage ${i + 1} high score`).toBe(40_000);
 		}
 	});
 
@@ -317,13 +361,18 @@ describe('Full preset', () => {
 		for (let i = 0x3c; i <= 0x43; i++) expect(profile[i]).toBe(0xff);
 	});
 
-	it('caps food at 9999 (0x18-0x1B = little-endian 9999)', () => {
-		const food =
-			profile[0x18]! |
-			(profile[0x19]! << 8) |
-			(profile[0x1a]! << 16) |
-			(profile[0x1b]! << 24);
-		expect(food).toBe(9999);
+	it('caps gold currency at 9999 (0x14-0x17 = little-endian 9999)', () => {
+		const gold =
+			profile[0x14]! |
+			(profile[0x15]! << 8) |
+			(profile[0x16]! << 16) |
+			(profile[0x17]! << 24);
+		expect(gold).toBe(9999);
+	});
+
+	it('unlocks every troop colour (0x42D = 0xFF, 0x42E bit0 = white)', () => {
+		expect(profile[0x4_2d]).toBe(0xff);
+		expect(profile[0x4_2e]! & 0x01).toBe(0x01);
 	});
 
 	it('caps every mastery skill at 999 (0x44-0x52)', () => {
@@ -364,7 +413,7 @@ describe('Upload round-trip', () => {
 			const generated = await buildPreset(preset);
 			const reExtracted = await extractProfile(generated);
 			// At least the easily-comparable scalars must round-trip
-			expect(typeof reExtracted.stats.food).toBe('number');
+			expect(typeof reExtracted.stats.currencyGold).toBe('number');
 			expect(typeof reExtracted.campaign.chapters.chapter1.unlocked).toBe(
 				'boolean',
 			);

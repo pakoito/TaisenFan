@@ -52,10 +52,10 @@ describe('vanilla template round-trip', () => {
 		}
 	});
 
-	it('extracts vanilla state correctly (no chapters open, no titles, food=100)', async () => {
+	it('extracts vanilla state correctly (no chapters open, no titles, gold=100)', async () => {
 		const original = new Uint8Array(fs.readFileSync(VANILLA_TEMPLATE));
 		const profile = await extractProfile(original);
-		expect(profile.stats.food).toBe(100);
+		expect(profile.stats.currencyGold).toBe(100);
 		expect(profile.campaign.chapters.chapter1.unlocked).toBe(false);
 		expect(profile.training.normalUnlocked).toBe(false);
 		expect(profile.achievements.titlesUnlocked).toBe('none');

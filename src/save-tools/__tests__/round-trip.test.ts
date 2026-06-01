@@ -15,7 +15,7 @@ describe('save round-trip', () => {
 		expect(magic).toBe('3GOKUTEN');
 
 		const round = await extractProfile(sav);
-		expect(round.stats.food).toBe(original.stats.food);
+		expect(round.stats.currencyGold).toBe(original.stats.currencyGold);
 		expect(round.training.normalUnlocked).toBe(
 			original.training.normalUnlocked,
 		);

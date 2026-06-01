@@ -202,11 +202,49 @@ describe.skipIf(!haveFixtures)('Per-field codec round-trip', () => {
 		expect(round.stats.onlineRank).toBe(9876);
 	});
 
-	it('stats: food (u32) persists', async () => {
+	it('stats: gold currency (u32) persists', async () => {
 		const round = await withMutation(p => {
-			p.stats.food = 5432;
+			p.stats.currencyGold = 5432;
 		});
-		expect(round.stats.food).toBe(5432);
+		expect(round.stats.currencyGold).toBe(5432);
+	});
+
+	it('stats: troop-colour unlock bits persist independently', async () => {
+		const round = await withMutation(p => {
+			p.troopColors = {
+				red: true,
+				blue: true,
+				green: true,
+				purple: true,
+				black: false,
+				yellow: true,
+				pink: false,
+				cyan: true,
+				white: true,
+			};
+		});
+		expect(round.troopColors.purple).toBe(true);
+		expect(round.troopColors.cyan).toBe(true);
+		expect(round.troopColors.white).toBe(true);
+		expect(round.troopColors.black).toBe(false);
+		expect(round.troopColors.pink).toBe(false);
+	});
+
+	it('training: DUEL Normal/Hard completion uses the explicit cleared flag (score 0 can still be cleared)', async () => {
+		const round = await withMutation(p => {
+			// Cleared but zero score — must NOT be lost / inferred from score.
+			p.training.stages['Normal-01'] = {completed: true, highScore: 0};
+			// Scored but not cleared — completion must stay false.
+			p.training.stages['Hard-05'] = {completed: false, highScore: 12_345};
+		});
+		expect(round.training.stages['Normal-01']).toEqual({
+			completed: true,
+			highScore: 0,
+		});
+		expect(round.training.stages['Hard-05']).toEqual({
+			completed: false,
+			highScore: 12_345,
+		});
 	});
 
 	it('stats: every mastery skill (0–999) persists', async () => {

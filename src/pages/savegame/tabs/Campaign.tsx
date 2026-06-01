@@ -145,6 +145,16 @@ export function Campaign() {
 
 	return (
 		<div className='flex flex-col gap-5'>
+			<section className='border-border-dim border-l-2 bg-surface-low/40 p-3 text-text-faint text-xs'>
+				CONQUEST tracks three distinct things: chapters being{' '}
+				<span className='text-text-muted'>OPEN</span> (playable), events being{' '}
+				<span className='text-text-muted'>VIEWED</span> in the gallery, and
+				missions being <span className='text-text-muted'>CLEARED</span> with a
+				score. The toggles below edit the chapter open/completion flags and the
+				event gallery. The raw per-mission clear/score records inside the
+				campaign block are experimental and left read-only, so they are not
+				editable here.
+			</section>
 			<div className='flex flex-col gap-3'>
 				{CHAPTERS.map(c => (
 					<ChapterRow chapter={c} key={c.key} />

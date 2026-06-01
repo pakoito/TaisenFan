@@ -24,10 +24,11 @@ const VANILLA = new Uint8Array(
 );
 
 const WHOLE_BYTE_WATCH: {off: number; note: string}[] = [
-	// Padding between online rank and food
-	{off: 0x12, note: 'pad between onlineRank and food'},
-	{off: 0x15, note: 'pad between onlineRank and food'},
-	{off: 0x17, note: 'pad before food'},
+	// onlineRank (0x10 u32) high word + currency_gold (0x14 u32) high bytes —
+	// modeled as full u32s now, so they read-then-write verbatim.
+	{off: 0x12, note: 'high word of onlineRank u32 (0x10)'},
+	{off: 0x15, note: 'byte of currency_gold u32 (0x14)'},
+	{off: 0x17, note: 'high byte of currency_gold u32 (0x14)'},
 	// Sage card region: per-faction trailing slot has no card mapped
 	{off: 0x1_8e, note: 'Wei reserved slot in sage card region'},
 	{off: 0x1_94, note: 'Shu reserved slot in sage card region'},
@@ -36,15 +37,20 @@ const WHOLE_BYTE_WATCH: {off: number; note: string}[] = [
 	// Padding between sage card region and sage XP entries
 	{off: 0x1_a1, note: 'pad after sage card region'},
 	{off: 0x1_a3, note: 'pad before sage XP base'},
-	// DUEL completion bitmask: 80 bits used, upper 16 bits of dword[2] unused
-	{off: 0x2_56, note: 'unused high word of DUEL completion dword 2'},
-	{off: 0x2_57, note: 'unused high word of DUEL completion dword 2'},
-	// Large padding region between DUEL scores and the tutorial byte
-	{off: 0x2_fc, note: 'pad block start (post DUEL scores)'},
+	// DUEL Easy struct reserved gaps the codec never touches: 0x250-0x253
+	// (between cleared mask and its copy) and 0x258-0x25B (after the copy,
+	// before the 0x25C score array).
+	{off: 0x2_50, note: 'Easy DUEL reserved gap (between mask and copy)'},
+	{off: 0x2_53, note: 'Easy DUEL reserved gap (between mask and copy)'},
+	{off: 0x2_58, note: 'Easy DUEL reserved gap (after copy, before scores)'},
+	{off: 0x2_5b, note: 'Easy DUEL reserved gap (after copy, before scores)'},
+	// Normal DUEL score region start (modeled as a u16; reads-then-writes
+	// verbatim) and the padding region before the tutorial byte.
+	{off: 0x2_fc, note: 'Normal DUEL score slot 0 (read/write verbatim)'},
 	{off: 0x4_00, note: 'pad block middle (pre tutorial byte)'},
 	{off: 0x4_2b, note: 'pad immediately before tutorial byte'},
-	// Padding between tutorial and titles
-	{off: 0x4_2d, note: 'pad after tutorial byte'},
+	// Troop-colour bytes (0x42D/0x42E) are modeled bit-fields; the upper bit of
+	// 0x42E is preserved. 0x40 is real padding before titles.
 	{off: 0x4_40, note: 'pad before titles bitmask'},
 	{off: 0x4_44, note: 'pad before titles bitmask'},
 	// Padding between titles and mode-unlock byte

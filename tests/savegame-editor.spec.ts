@@ -32,8 +32,9 @@ test('starter preset opens all chapters and difficulties', async ({page}) => {
 	await page.getByRole('button', {name: 'New Save'}).click();
 
 	await expect(page.getByText('6 / 6')).toBeVisible();
-	// Normal + Hard difficulties both read "Open" right after a starter preset.
-	await expect(page.getByText('Open', {exact: true}).first()).toBeVisible();
+	// Normal + Hard difficulties both read "Playable" right after a starter
+	// preset (the per-difficulty UNLOCKED/playable tier, distinct from cleared).
+	await expect(page.getByText('Playable', {exact: true}).first()).toBeVisible();
 });
 
 test('downloads a valid 64KB .sav', async ({page}) => {

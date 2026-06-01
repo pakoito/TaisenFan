@@ -21,8 +21,17 @@ export type SaveProfile = {
 	 * the editor sees the whole save through one type.
 	 */
 	playerName: string;
+	/**
+	 * Prefecture code from the unencrypted header at 0x44 (e.g. 福岡→0x01,
+	 * 鳥取→0x28, 宮崎→44). Read-only passthrough: the editor surfaces it but
+	 * does not let the player change their region, and the original byte is
+	 * preserved on write.
+	 */
+	regionCode: number;
 	stats: PlayerStats;
 	training: TrainingProgress;
+	/** Unlocked selectable troop colours (部隊色). See TroopColors. */
+	troopColors: TroopColors;
 	campaign: CampaignProgress;
 	cards: CardCollection;
 	sages: SageCollection;
@@ -53,9 +62,21 @@ export type MasterySkills = {
 export type PlayerStats = {
 	offline: WinLossRecord;
 	online: WinLossRecord;
-	offlineRank: number; // 4-byte value
-	onlineRank: number; // 2-byte, max 12000
-	food: number; // Training mode currency (starts at 100)
+	offlineRank: number; // 0x0C u32 — offline 熟練度 XP (drives 級/品 ladder)
+	onlineRank: number; // 0x10 u32 — online rank XP (max 12000, drives Wi-Fi title)
+	/**
+	 * 0x14 u32 — spendable training currency (軍資金 / gold). Earned per drill
+	 * and spent in DUEL → Strategy Counter. Starts at 100. (The on-screen
+	 * 兵糧/provisions value is a live battle UI number, NOT a save field — what
+	 * earlier builds called "food" was actually the xp-tracking counter at 0x18.)
+	 */
+	currencyGold: number;
+	/**
+	 * 0x18 u32 — XP-tracking counter that mirrors offline XP (0x0C). Maintained
+	 * by the game; surfaced read-only so an uploaded save's value survives a
+	 * round-trip but the editor does not invite the player to desync it.
+	 */
+	xpTracking: number;
 	mastery: MasterySkills;
 };
 
@@ -70,6 +91,19 @@ export type Tutorials = {
 	tutorial4: boolean; // Sage Abilities
 };
 
+/**
+ * A single DUEL drill stage. The three facets are DISTINCT and must never be
+ * conflated (validated against the save format):
+ *
+ *  - `completed` — the explicit per-difficulty CLEARED bitmask bit
+ *    (Easy 0x24C / Normal 0x2EC / Hard 0x38C). A stage can be cleared with a
+ *    best score of 0. NEVER derive "completed" from "highScore > 0".
+ *  - `highScore` — the BEST SCORE u16 array
+ *    (Easy 0x25C / Normal 0x2FC / Hard 0x39C). S-rank threshold is 30000+.
+ *
+ * Whether a stage is even PLAYABLE (unlocked) is a per-difficulty tier gate
+ * held in TrainingProgress.normalUnlocked / hardUnlocked (0x455), not here.
+ */
 export type StageResult = {
 	completed: boolean;
 	highScore: number; // S-rank threshold is 30000+
@@ -83,6 +117,42 @@ export type TrainingProgress = {
 	// Key format: "Easy-01" through "Easy-20", "Normal-01" through "Normal-40", "Hard-01" through "Hard-20"
 	stages: Record<string, StageResult>;
 };
+
+// =============================================================================
+// TROOP COLOURS (部隊色)
+// =============================================================================
+
+/**
+ * The nine selectable troop colours. The three base colours are always
+ * available; the six extras are unlocked via DUEL all-clears and online-win
+ * milestones. Storage: profile 0x42D (bits) + 0x42E bit0 (white).
+ *
+ *  | colour  | byte.bit  | unlock trigger              |
+ *  |---------|-----------|-----------------------------|
+ *  | red     | 0x42D.0   | base (always)               |
+ *  | blue    | 0x42D.1   | base (always)               |
+ *  | green   | 0x42D.2   | base (always)               |
+ *  | purple  | 0x42D.3   | DUEL Normal (難) all-clear  |
+ *  | black   | 0x42D.4   | 20 online wins              |
+ *  | yellow  | 0x42D.5   | DUEL Easy (普) all-clear    |
+ *  | pink    | 0x42D.6   | 100 online wins             |
+ *  | cyan    | 0x42D.7   | DUEL Hard (激) all-clear    |
+ *  | white   | 0x42E.0   | 50 online wins              |
+ *
+ * Default 0x42D = 0x07 (red+blue+green). "All nine" = 0x42D = 0xFF, 0x42E |= 1.
+ */
+export type TroopColor =
+	| 'red'
+	| 'blue'
+	| 'green'
+	| 'purple'
+	| 'black'
+	| 'yellow'
+	| 'pink'
+	| 'cyan'
+	| 'white';
+
+export type TroopColors = Record<TroopColor, boolean>;
 
 // =============================================================================
 // CAMPAIGN MODE (CONQUEST)
@@ -111,6 +181,23 @@ export type WarringStatesProgress = {
 	highScore: number;
 };
 
+/**
+ * CONQUEST progress. Three facets are DISTINCT (never conflated):
+ *
+ *  - chapter/mode UNLOCKED — `chapters[n].unlocked`, bits 0-5 of 0x455
+ *    (playability), plus the Normal/Hard difficulty tier in 0x455 bits 6-7.
+ *  - EVENT VIEWED in the gallery — `SaveProfile.achievements`
+ *    `campaignEventsUnlocked` (profile bitmask at 0x1C), NOT a campaign field.
+ *  - mission CLEARED + SCORE — lives in the encrypted campaign block at
+ *    0x43C4 (per-stage records) / chapter-graph node mirror. That data is
+ *    a single-sample RAW structure: it is READ-ONLY / EXPERIMENTAL and the
+ *    editor must NOT mutate it. The `stageNCompleted` / `rewardCardObtained`
+ *    flags here drive the profile-block chapter-completion bitmask (0x456)
+ *    only — they are NOT the per-stage campaign-block records.
+ *
+ * The site is allowed to mutate the campaign block's `active` flag and the
+ * event gallery (0x1C) ONLY; the raw mission/score records are off-limits.
+ */
 export type CampaignProgress = {
 	chapters: {
 		chapter1: ChapterProgress; // Yellow Turban Rebellion

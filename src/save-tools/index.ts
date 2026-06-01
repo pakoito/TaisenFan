@@ -25,12 +25,14 @@ import {
 	freshHeader,
 	parseSav,
 	readPlayerName,
+	readRegionCode,
 	writePlayerName,
 } from './save-io';
 
 export {PATCHED_ROM_BASENAME} from './constants';
 export {
 	readPlayerName,
+	readRegionCode,
 	wrapDsv,
 	writePlayerName,
 } from './save-io';
@@ -68,6 +70,9 @@ export type {
 	StageResult,
 	// Training
 	TrainingProgress,
+	// Troop colours
+	TroopColor,
+	TroopColors,
 	Tutorials,
 	WarringStatesProgress,
 	WinLossRecord,
@@ -113,7 +118,13 @@ export {
 // CODEC EXPORTS
 // =============================================================================
 
-export {PROFILE_SIZE, readProfile, writeProfile} from './profile-codec';
+export {
+	ALL_TROOP_COLORS,
+	BASE_TROOP_COLORS,
+	PROFILE_SIZE,
+	readProfile,
+	writeProfile,
+} from './profile-codec';
 
 // =============================================================================
 // PUBLIC API
@@ -134,8 +145,8 @@ export function defaultProfile(): SaveProfile {
  *   - 'starter': All content unlocked (difficulties, chapters, cards,
  *                sages) with no completion or outcome flags set
  *   - 'full':    Maxed save — every chapter cleared, every duel stage at
- *                40k, every sage at level 20, all titles + events, full
- *                food and mastery
+ *                40k, every sage at level 20, all titles + events, all troop
+ *                colours, full gold and mastery
  */
 export function applyPreset(
 	profile: SaveProfile,
@@ -153,6 +164,7 @@ export async function extractProfile(sav: Uint8Array): Promise<SaveProfile> {
 	if (!profileBin) throw new Error('Profile block not found in save');
 	const profile = readProfile(profileBin);
 	profile.playerName = readPlayerName(parsed.header);
+	profile.regionCode = readRegionCode(parsed.header);
 	return profile;
 }
 

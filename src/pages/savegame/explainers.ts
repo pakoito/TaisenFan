@@ -8,8 +8,21 @@
 export const EXPLAINERS = {
 	// === Difficulty unlocks ===
 	normalUnlocked:
-		'Adds the Normal difficulty list (40 stages) to DUEL → Training.',
-	hardUnlocked: 'Adds the Hard difficulty list (20 stages) to DUEL → Training.',
+		'Makes the Normal difficulty list (40 stages) PLAYABLE in DUEL → Training. Independent of clearing or scoring any stage.',
+	hardUnlocked:
+		'Makes the Hard difficulty list (20 stages) PLAYABLE in DUEL → Training. Independent of clearing or scoring any stage.',
+
+	// === DUEL per-stage facets (kept DISTINCT) ===
+	stageCleared:
+		'The stage’s CLEARED flag — explicitly recorded by the game. A stage can be cleared with a best score of 0; this is never inferred from the score.',
+	stageScore:
+		'Your BEST SCORE on this stage (S-rank is 30000+). Separate from the cleared flag — a high score does not by itself mark the stage cleared.',
+	duelStages:
+		'Per-stage DUEL records. UNLOCKED (playable) is the difficulty tier above; CLEARED and BEST SCORE are tracked independently per stage.',
+
+	// === Troop colours (部隊色) ===
+	troopColors:
+		'Which 部隊色 (troop colours) are selectable in the colour picker. Three are always on; the rest are earned via DUEL all-clears and online-win milestones.',
 
 	// === Campaign unlocks ===
 	chapterUnlocked:
@@ -33,10 +46,13 @@ export const EXPLAINERS = {
 	sagesUnlockAll:
 		'Treats every Sage card as owned. They appear in the Sage selection screen.',
 	sageLevel:
-		'Sage level (1–20). Higher levels widen Tactics gauge and Formation range. Raise by spending Food.',
+		'Sage level (1–20). Higher levels widen Tactics gauge and Formation range. Raise by spending gold at the Strategy Counter.',
 
 	// === Stats ===
-	food: 'Training currency. Spend in DUEL → Strategy Counter to level Sages and roll training rewards. Starts at 100.',
+	currencyGold:
+		'Spendable training currency (gold). Earned per drill, spent in DUEL → Strategy Counter to level Sages and draw cards. Starts at 100.',
+	region:
+		'Prefecture you chose at first launch (read-only). Stored in the save header — changing it would invalidate the header checksum.',
 	offlineRank: 'Lifetime points from DUEL — visible on the title screen.',
 	onlineRank: 'Online rating (max 12,000) — dormant without Wi-Fi.',
 	winsLosses: 'Win / loss / draw totals shown on the player profile screen.',

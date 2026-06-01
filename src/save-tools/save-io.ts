@@ -43,6 +43,14 @@ const DSV_SNIP = '|<--Snip above here to create a raw sav';
 const NAME_OFFSET = 0x0c;
 const NAME_LENGTH = 12;
 
+/**
+ * The prefecture/region code lives in the unencrypted header at 0x44, a
+ * single byte (e.g. 福岡→0x01, 鳥取→0x28, 宮崎→44). It is part of the
+ * header window covered by the MD5+CRC footer, so changing it would require
+ * a footer refresh — but the editor treats it as read-only and only reads it.
+ */
+const REGION_OFFSET = 0x44;
+
 // Default footer block content (observed in all saves)
 const DEFAULT_FOOTER = new Uint8Array([
 	0x00, 0x10, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -195,6 +203,14 @@ export function readPlayerName(savOrHeader: Uint8Array): string {
 	return decodeShiftJis(
 		savOrHeader.slice(NAME_OFFSET, NAME_OFFSET + NAME_LENGTH),
 	);
+}
+
+/**
+ * Read the prefecture/region code from a raw 64KB .sav header (or any buffer
+ * whose first ≥0x45 bytes mirror the header). See REGION_OFFSET.
+ */
+export function readRegionCode(savOrHeader: Uint8Array): number {
+	return savOrHeader[REGION_OFFSET] ?? 0;
 }
 
 /**

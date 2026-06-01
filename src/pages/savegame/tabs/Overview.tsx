@@ -17,7 +17,7 @@ const PRESET_BUTTONS: PresetButton[] = [
 	{
 		preset: 'fresh',
 		label: 'Vanilla',
-		hint: 'Reset to a brand-new save — nothing unlocked, food 100, no completion records.',
+		hint: 'Reset to a brand-new save — nothing unlocked, gold 100, no completion records.',
 	},
 	{
 		preset: 'starter',
@@ -27,7 +27,7 @@ const PRESET_BUTTONS: PresetButton[] = [
 	{
 		preset: 'full',
 		label: 'Full',
-		hint: 'Maxed save: every duel S-ranked at 40k, every chapter cleared, every sage at level 20, all titles, full food, every flag on.',
+		hint: 'Maxed save: every duel S-ranked at 40k, every chapter cleared, every sage at level 20, all titles, all troop colours, full gold, every flag on.',
 	},
 ];
 
@@ -54,6 +54,14 @@ function countChaptersUnlocked(profile: SaveProfile): number {
 		.length;
 }
 
+function countStagesCleared(profile: SaveProfile): number {
+	return Object.values(profile.training.stages).filter(s => s.completed).length;
+}
+
+function countColorsUnlocked(profile: SaveProfile): number {
+	return Object.values(profile.troopColors).filter(Boolean).length;
+}
+
 export function Overview() {
 	const {profile, applyPresetReset} = useSave();
 	if (!profile) return null;
@@ -71,14 +79,22 @@ export function Overview() {
 			label: 'Chapters open',
 			value: `${countChaptersUnlocked(profile)} / 6`,
 		},
-		{label: 'Food (training)', value: String(profile.stats.food)},
+		{label: 'Gold (training)', value: String(profile.stats.currencyGold)},
+		{
+			label: 'DUEL stages cleared',
+			value: `${countStagesCleared(profile)} / 80`,
+		},
+		{
+			label: 'Troop colours',
+			value: `${countColorsUnlocked(profile)} / 9`,
+		},
 		{
 			label: 'DUEL Normal',
-			value: profile.training.normalUnlocked ? 'Open' : 'Locked',
+			value: profile.training.normalUnlocked ? 'Playable' : 'Locked',
 		},
 		{
 			label: 'DUEL Hard',
-			value: profile.training.hardUnlocked ? 'Open' : 'Locked',
+			value: profile.training.hardUnlocked ? 'Playable' : 'Locked',
 		},
 	];
 

@@ -33,6 +33,7 @@ import type {
 	SaveProfile,
 	StageResult,
 	TrainingProgress,
+	TroopColors,
 	Tutorials,
 } from './types';
 
@@ -41,6 +42,32 @@ import type {
 // =============================================================================
 
 export const PROFILE_SIZE = 0x4_5c; // 1116 bytes
+
+/** The three always-available base troop colours (default 0x42D = 0x07). */
+export const BASE_TROOP_COLORS: TroopColors = {
+	red: true,
+	blue: true,
+	green: true,
+	purple: false,
+	black: false,
+	yellow: false,
+	pink: false,
+	cyan: false,
+	white: false,
+};
+
+/** Every troop colour unlocked (0x42D = 0xFF, 0x42E |= 0x01). */
+export const ALL_TROOP_COLORS: TroopColors = {
+	red: true,
+	blue: true,
+	green: true,
+	purple: true,
+	black: true,
+	yellow: true,
+	pink: true,
+	cyan: true,
+	white: true,
+};
 
 // Offsets within profile block
 const OFF = {
@@ -53,9 +80,10 @@ const OFF = {
 	ONLINE_DRAWS: 0x0a,
 
 	// Ranks and stats
-	OFFLINE_RANK: 0x0c,
-	ONLINE_RANK: 0x10,
-	FOOD: 0x18,
+	OFFLINE_RANK: 0x0c, // u32 — offline 熟練度 XP
+	ONLINE_RANK: 0x10, // u32 — online rank XP (max 12000)
+	CURRENCY_GOLD: 0x14, // u32 — spendable training currency (gold)
+	XP_TRACKING: 0x18, // u32 — XP-tracking counter mirroring 0x0C (read-only)
 
 	// Campaign events (gallery) - 32 bytes bitmask (251 events)
 	CAMPAIGN_EVENTS: 0x1c,
@@ -86,14 +114,31 @@ const OFF = {
 	SAGE_DATA_BASE: 0x1_a4,
 	SAGE_ENTRY_SIZE: 8,
 
-	// Duel completion bitmask
-	DUEL_COMPLETION_BASE: 0x2_4c,
+	// DUEL drill records. Three per-difficulty structs at stride 0xA0:
+	//   Easy   @ 0x24C   Normal @ 0x2EC   Hard @ 0x38C
+	// Each struct: cleared bitmask (+0x00), cleared-bitmask copy (+0x08),
+	// best-score u16/stage array (+0x10). The CLEARED bit is explicit — a
+	// stage can be cleared with score 0, so completion is NEVER inferred
+	// from highScore > 0 (validated; the old "Hard @ 0x34C" was the tail
+	// after Normal's 40-stage score array, not Hard's scores).
+	DUEL_EASY_CLEARED: 0x2_4c, // bits 0-19 (20 stages, deckNo 2-21)
+	DUEL_EASY_CLEARED_COPY: 0x2_54, // +0x08 mirror
+	DUEL_SCORE_EASY: 0x2_5c, // +0x10 (20× u16)
+	DUEL_NORMAL_CLEARED: 0x2_ec, // bits 0-39 (40 stages, deckNo 22-61)
+	DUEL_NORMAL_CLEARED_COPY: 0x2_f4, // +0x08 mirror
+	DUEL_SCORE_NORMAL: 0x2_fc, // +0x10 (40× u16) — 29900 write confirmed
+	DUEL_HARD_CLEARED: 0x3_8c, // bits 0-19 (20 stages, deckNo 62-81)
+	DUEL_HARD_CLEARED_COPY: 0x3_94, // +0x08 mirror
+	DUEL_SCORE_HARD: 0x3_9c, // +0x10 (20× u16) — poke+read-watch confirmed
 
-	// Duel high scores (80× 16-bit)
-	DUEL_SCORE_BASE: 0x2_5c,
-
-	// Tutorial completion
+	// Tutorial completion (bitmask, bits 0-3)
 	TUTORIAL: 0x4_2c,
+
+	// Troop-colour unlock bitmask. 0x42D bits 0-2 are the base red/blue/green
+	// (default 0x07); bits 3-7 are purple/black/yellow/pink/cyan. 0x42E bit0
+	// is the white unlock. See TroopColors in types.ts for the full mapping.
+	TROOP_COLOR: 0x4_2d,
+	TROOP_COLOR_HI: 0x4_2e,
 
 	// Title unlocks (14 bytes bitmask, 110 titles)
 	TITLE_BASE: 0x4_45,
@@ -133,6 +178,18 @@ function w32(b: Uint8Array, o: number, v: number): void {
 	b[o + 3] = (v >>> 24) & 0xff;
 }
 
+/** Read bit `n` (0-based, little-endian byte order) of a cleared bitmask. */
+function readBit(b: Uint8Array, base: number, n: number): boolean {
+	return (b[base + (n >> 3)]! & (1 << (n & 7))) !== 0;
+}
+
+/** Set/clear bit `n` of a cleared bitmask in place. */
+function writeBit(b: Uint8Array, base: number, n: number, on: boolean): void {
+	const byte = base + (n >> 3);
+	const mask = 1 << (n & 7);
+	b[byte] = on ? b[byte]! | mask : b[byte]! & ~mask;
+}
+
 function byteToQty(b: number): CardQuantity {
 	// 0x31 = '1' = 1 copy, 0x32 = '2' = 2 copies, etc.
 	return b >= 0x31 && b <= 0x39 ? ((b - 0x30) as CardQuantity) : 0;
@@ -154,12 +211,14 @@ export function readProfile(buf: Uint8Array): SaveProfile {
 	}
 
 	return {
-		// playerName lives in the unencrypted header. Callers that route
-		// through `extractProfile` get the real name; calling readProfile
-		// directly on a profile-only buffer leaves it blank by default.
+		// playerName + regionCode live in the unencrypted header. Callers
+		// that route through `extractProfile` get the real values; calling
+		// readProfile directly on a profile-only buffer leaves them defaulted.
 		playerName: '',
+		regionCode: 0,
 		stats: readStats(buf),
 		training: readTraining(buf),
+		troopColors: readTroopColors(buf),
 		campaign: readCampaign(buf),
 		cards: readCards(buf),
 		sages: readSages(buf),
@@ -181,8 +240,9 @@ function readStats(buf: Uint8Array): PlayerStats {
 			draws: u16(buf, OFF.ONLINE_DRAWS),
 		},
 		offlineRank: u32(buf, OFF.OFFLINE_RANK),
-		onlineRank: u16(buf, OFF.ONLINE_RANK),
-		food: u32(buf, OFF.FOOD),
+		onlineRank: u32(buf, OFF.ONLINE_RANK),
+		currencyGold: u32(buf, OFF.CURRENCY_GOLD),
+		xpTracking: u32(buf, OFF.XP_TRACKING),
 		mastery: {
 			cavalry: u16(buf, OFF.SKILL_CAVALRY),
 			spear: u16(buf, OFF.SKILL_SPEAR),
@@ -207,20 +267,31 @@ function readTraining(buf: Uint8Array): TrainingProgress {
 		tutorial4: Boolean(tutByte & 0x08),
 	};
 
-	// Read duel completion and scores
+	// Read duel completion + scores. Completion comes from the EXPLICIT
+	// per-difficulty CLEARED bitmask (never inferred from score>0): a stage
+	// can be cleared with score 0. Scores are the per-difficulty best-score
+	// arrays at +0x10. Per-difficulty stage index is 0-based within its tier.
 	const stages: Record<string, StageResult> = {};
 
 	for (let deckNo = 2; deckNo <= 81; deckNo++) {
 		const stageId = DECKNO_TO_STAGE_ID[deckNo];
 		if (!stageId) continue;
 
-		const bitIndex = deckNo - 2;
-		const dwordIndex = Math.floor(bitIndex / 32);
-		const bitInDword = bitIndex % 32;
-
-		const completionDword = u32(buf, OFF.DUEL_COMPLETION_BASE + dwordIndex * 4);
-		const completed = (completionDword & (1 << bitInDword)) !== 0;
-		const highScore = u16(buf, OFF.DUEL_SCORE_BASE + (deckNo - 2) * 2);
+		let completed: boolean;
+		let highScore: number;
+		if (deckNo <= 21) {
+			const i = deckNo - 2; // Easy: stages 0-19
+			completed = readBit(buf, OFF.DUEL_EASY_CLEARED, i);
+			highScore = u16(buf, OFF.DUEL_SCORE_EASY + i * 2);
+		} else if (deckNo <= 61) {
+			const i = deckNo - 22; // Normal: stages 0-39
+			completed = readBit(buf, OFF.DUEL_NORMAL_CLEARED, i);
+			highScore = u16(buf, OFF.DUEL_SCORE_NORMAL + i * 2);
+		} else {
+			const i = deckNo - 62; // Hard: stages 0-19
+			completed = readBit(buf, OFF.DUEL_HARD_CLEARED, i);
+			highScore = u16(buf, OFF.DUEL_SCORE_HARD + i * 2);
+		}
 
 		stages[stageId] = {completed, highScore};
 	}
@@ -230,6 +301,22 @@ function readTraining(buf: Uint8Array): TrainingProgress {
 		hardUnlocked: Boolean(modeFlags & 0x80), // Unlocks Hard difficulty (20 stages)
 		tutorials,
 		stages,
+	};
+}
+
+function readTroopColors(buf: Uint8Array): TroopColors {
+	const lo = buf[OFF.TROOP_COLOR]!;
+	const hi = buf[OFF.TROOP_COLOR_HI]!;
+	return {
+		red: Boolean(lo & 0x01),
+		blue: Boolean(lo & 0x02),
+		green: Boolean(lo & 0x04),
+		purple: Boolean(lo & 0x08),
+		black: Boolean(lo & 0x10),
+		yellow: Boolean(lo & 0x20),
+		pink: Boolean(lo & 0x40),
+		cyan: Boolean(lo & 0x80),
+		white: Boolean(hi & 0x01),
 	};
 }
 
@@ -415,6 +502,7 @@ export function writeProfile(
 
 	writeStats(buf, profile.stats);
 	writeTraining(buf, profile.training);
+	writeTroopColors(buf, profile.troopColors);
 	writeCampaign(buf, profile.campaign);
 	writeCards(buf, profile.cards);
 	writeSages(buf, profile.sages);
@@ -432,8 +520,9 @@ function writeStats(buf: Uint8Array, stats: PlayerStats): void {
 	w16(buf, OFF.ONLINE_LOSSES, stats.online.losses);
 	w16(buf, OFF.ONLINE_DRAWS, stats.online.draws);
 	w32(buf, OFF.OFFLINE_RANK, stats.offlineRank);
-	w16(buf, OFF.ONLINE_RANK, stats.onlineRank);
-	w32(buf, OFF.FOOD, stats.food);
+	w32(buf, OFF.ONLINE_RANK, stats.onlineRank);
+	w32(buf, OFF.CURRENCY_GOLD, stats.currencyGold);
+	w32(buf, OFF.XP_TRACKING, stats.xpTracking);
 
 	w16(buf, OFF.SKILL_CAVALRY, stats.mastery.cavalry);
 	w16(buf, OFF.SKILL_SPEAR, stats.mastery.spear);
@@ -459,34 +548,67 @@ function writeTraining(buf: Uint8Array, training: TrainingProgress): void {
 	if (training.tutorials.tutorial4) tutBits |= 0x08;
 	buf[OFF.TUTORIAL] = (buf[OFF.TUTORIAL]! & 0xf0) | tutBits;
 
-	// Duel completion and scores
-	const completionDwords = [0, 0, 0];
+	// DUEL completion + scores. Completion is the EXPLICIT per-difficulty
+	// CLEARED bit (Easy 0x24C / Normal 0x2EC / Hard 0x38C), mirrored at +0x08;
+	// a stage can be cleared with score 0, so we never gate on highScore. We
+	// rebuild each difficulty's cleared bitmask from the stages map. Stages
+	// absent from the map are cleared to 0 (the codec re-reads the full set).
+	// Clear only the exact mask byte span per difficulty so we never disturb
+	// the reserved bytes that follow each mask (e.g. Easy's 0x250 pad). Easy
+	// and Hard use 20 bits (3 bytes); Normal uses 40 bits (5 bytes).
+	for (const [base, bytes] of [
+		[OFF.DUEL_EASY_CLEARED, 3],
+		[OFF.DUEL_NORMAL_CLEARED, 5],
+		[OFF.DUEL_HARD_CLEARED, 3],
+	] as const) {
+		for (let i = 0; i < bytes; i++) buf[base + i] = 0;
+	}
 
 	for (const [stageId, result] of Object.entries(training.stages)) {
 		const deckNo = STAGE_ID_TO_DECKNO[stageId];
 		if (deckNo === undefined) continue;
 
-		const bitIndex = deckNo - 2;
-		const dwordIndex = Math.floor(bitIndex / 32);
-		const bitInDword = bitIndex % 32;
-
-		if (result.completed) {
-			completionDwords[dwordIndex] =
-				(completionDwords[dwordIndex]! | (1 << bitInDword)) >>> 0;
+		if (deckNo <= 21) {
+			const i = deckNo - 2;
+			writeBit(buf, OFF.DUEL_EASY_CLEARED, i, result.completed);
+			w16(buf, OFF.DUEL_SCORE_EASY + i * 2, result.highScore);
+		} else if (deckNo <= 61) {
+			const i = deckNo - 22;
+			writeBit(buf, OFF.DUEL_NORMAL_CLEARED, i, result.completed);
+			w16(buf, OFF.DUEL_SCORE_NORMAL + i * 2, result.highScore);
+		} else {
+			const i = deckNo - 62;
+			writeBit(buf, OFF.DUEL_HARD_CLEARED, i, result.completed);
+			w16(buf, OFF.DUEL_SCORE_HARD + i * 2, result.highScore);
 		}
-
-		w16(buf, OFF.DUEL_SCORE_BASE + (deckNo - 2) * 2, result.highScore);
 	}
 
-	// DUEL completion: 80 bits (deck 2-81) across 3 dwords. The third dword
-	// only uses its low 16 bits (deck 66-81); bits 80-95 are unknown so we
-	// preserve whatever the buf already has.
-	w32(buf, OFF.DUEL_COMPLETION_BASE, completionDwords[0]! >>> 0);
-	w32(buf, OFF.DUEL_COMPLETION_BASE + 4, completionDwords[1]! >>> 0);
-	const tail = u32(buf, OFF.DUEL_COMPLETION_BASE + 8);
-	const merged =
-		((completionDwords[2]! & 0x00_00_ff_ff) | (tail & 0xff_ff_00_00)) >>> 0;
-	w32(buf, OFF.DUEL_COMPLETION_BASE + 8, merged);
+	// Mirror each cleared bitmask into its +0x08 copy (the game keeps both),
+	// matching each difficulty's exact mask width.
+	for (const [src, dst, bytes] of [
+		[OFF.DUEL_EASY_CLEARED, OFF.DUEL_EASY_CLEARED_COPY, 3],
+		[OFF.DUEL_NORMAL_CLEARED, OFF.DUEL_NORMAL_CLEARED_COPY, 5],
+		[OFF.DUEL_HARD_CLEARED, OFF.DUEL_HARD_CLEARED_COPY, 3],
+	] as const) {
+		for (let i = 0; i < bytes; i++) buf[dst + i] = buf[src + i]!;
+	}
+}
+
+function writeTroopColors(buf: Uint8Array, colors: TroopColors): void {
+	// 0x42D: base RGB (bits 0-2) + purple/black/yellow/pink/cyan (bits 3-7).
+	let lo = 0;
+	if (colors.red) lo |= 0x01;
+	if (colors.blue) lo |= 0x02;
+	if (colors.green) lo |= 0x04;
+	if (colors.purple) lo |= 0x08;
+	if (colors.black) lo |= 0x10;
+	if (colors.yellow) lo |= 0x20;
+	if (colors.pink) lo |= 0x40;
+	if (colors.cyan) lo |= 0x80;
+	buf[OFF.TROOP_COLOR] = lo;
+	// 0x42E: bit0 = white unlock; preserve the reserved upper bits.
+	buf[OFF.TROOP_COLOR_HI] =
+		(buf[OFF.TROOP_COLOR_HI]! & 0xfe) | (colors.white ? 0x01 : 0x00);
 }
 
 function writeCampaign(buf: Uint8Array, campaign: CampaignProgress): void {
@@ -703,12 +825,14 @@ export function defaultProfile(): SaveProfile {
 
 	return {
 		playerName: '',
+		regionCode: 0,
 		stats: {
 			offline: {wins: 0, losses: 0, draws: 0},
 			online: {wins: 0, losses: 0, draws: 0},
 			offlineRank: 0,
 			onlineRank: 0,
-			food: 100,
+			currencyGold: 100,
+			xpTracking: 0,
 			mastery: {
 				cavalry: 0,
 				spear: 0,
@@ -730,6 +854,7 @@ export function defaultProfile(): SaveProfile {
 			},
 			stages: defaultStages,
 		},
+		troopColors: {...BASE_TROOP_COLORS},
 		campaign: {
 			chapters: {
 				chapter1: {...defaultChapter}, // Game unlocks Ch.1 via tutorial — start locked
@@ -773,8 +898,9 @@ export function applyPreset(profile: SaveProfile, preset: string): SaveProfile {
 	switch (preset) {
 		case 'full': {
 			// "Have everything, beat everything." Every chapter complete, every
-			// duel stage S-ranked (40k), max food and ranks, all sages at level
-			// 20, all titles, all event galleries, all tutorials done.
+			// duel stage S-ranked (40k), max gold and ranks, all sages at level
+			// 20, all titles, all event galleries, all tutorials done, every
+			// troop colour unlocked.
 			const completeChapter: ChapterProgress = {
 				unlocked: true,
 				stage1Completed: true,
@@ -800,7 +926,8 @@ export function applyPreset(profile: SaveProfile, preset: string): SaveProfile {
 					online: {wins: 9999, losses: 0, draws: 0},
 					offlineRank: 99_999,
 					onlineRank: 12_000,
-					food: 9999,
+					currencyGold: 9999,
+					xpTracking: 99_999,
 					mastery: {
 						cavalry: 999,
 						spear: 999,
@@ -822,6 +949,7 @@ export function applyPreset(profile: SaveProfile, preset: string): SaveProfile {
 					},
 					stages: sRankedStages,
 				},
+				troopColors: {...ALL_TROOP_COLORS},
 				campaign: {
 					chapters: {
 						chapter1: {...completeChapter},
@@ -881,6 +1009,10 @@ export function applyPreset(profile: SaveProfile, preset: string): SaveProfile {
 					},
 					stages: {},
 				},
+				// All nine troop colours selectable in the 部隊色変更 picker (a
+				// "menu the player can tap"), without recording the underlying
+				// all-clear / online-win outcomes.
+				troopColors: {...ALL_TROOP_COLORS},
 				campaign: {
 					chapters: {
 						chapter1: {...openChapter},
