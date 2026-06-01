@@ -288,16 +288,16 @@ function TutorialsSection() {
 }
 
 /* ------------------------------------------------------------------------ */
-/* Training currency (gold)                                                 */
+/* Training currency (food / 兵糧)                                          */
 /* ------------------------------------------------------------------------ */
 
-function GoldSection() {
+function FoodSection() {
 	const {profile, mutate} = useSave();
 	const onChange = useCallback(
 		(e: React.ChangeEvent<HTMLInputElement>) => {
 			const value = Math.max(0, Math.min(99_999, Number(e.target.value) || 0));
 			mutate(draft => {
-				draft.stats.currencyGold = value;
+				draft.stats.food = value;
 			});
 		},
 		[mutate],
@@ -307,9 +307,9 @@ function GoldSection() {
 		<section className='gold-stroke flex flex-col gap-3 bg-surface-low p-4'>
 			<header>
 				<p className='font-medium font-serif text-gold text-sm uppercase tracking-wider'>
-					Gold (training currency)
+					Food (兵糧)
 				</p>
-				<p className='text-text-faint text-xs'>{EXPLAINERS.currencyGold}</p>
+				<p className='text-text-faint text-xs'>{EXPLAINERS.food}</p>
 			</header>
 			<Input
 				className='w-32 border-0 border-border-dim border-b bg-transparent font-mono text-base text-text'
@@ -318,7 +318,7 @@ function GoldSection() {
 				min={0}
 				onChange={onChange}
 				type='number'
-				value={profile.stats.currencyGold}
+				value={profile.stats.food}
 			/>
 		</section>
 	);
@@ -335,7 +335,7 @@ export function Duel() {
 			<DifficultyUnlocks />
 			<PerStageSection />
 			<TutorialsSection />
-			<GoldSection />
+			<FoodSection />
 		</div>
 	);
 }

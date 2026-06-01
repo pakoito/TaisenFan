@@ -84,7 +84,7 @@ export const OFF = {
 	// Ranks and stats
 	OFFLINE_RANK: 0x0c, // u32 — offline 熟練度 XP
 	ONLINE_RANK: 0x10, // u32 — online rank XP (max 12000)
-	CURRENCY_GOLD: 0x14, // u32 — spendable training currency (gold)
+	FOOD: 0x14, // u32 — 兵糧 training currency, +100/drill
 	XP_TRACKING: 0x18, // u32 — XP-tracking counter mirroring 0x0C (read-only)
 
 	// Campaign events (gallery) - 32 bytes bitmask (251 events)
@@ -243,7 +243,7 @@ function readStats(buf: Uint8Array): PlayerStats {
 		},
 		offlineRank: u32(buf, OFF.OFFLINE_RANK),
 		onlineRank: u32(buf, OFF.ONLINE_RANK),
-		currencyGold: u32(buf, OFF.CURRENCY_GOLD),
+		food: u32(buf, OFF.FOOD),
 		xpTracking: u32(buf, OFF.XP_TRACKING),
 		mastery: {
 			cavalry: u16(buf, OFF.SKILL_CAVALRY),
@@ -523,7 +523,7 @@ function writeStats(buf: Uint8Array, stats: PlayerStats): void {
 	w16(buf, OFF.ONLINE_DRAWS, stats.online.draws);
 	w32(buf, OFF.OFFLINE_RANK, stats.offlineRank);
 	w32(buf, OFF.ONLINE_RANK, stats.onlineRank);
-	w32(buf, OFF.CURRENCY_GOLD, stats.currencyGold);
+	w32(buf, OFF.FOOD, stats.food);
 	w32(buf, OFF.XP_TRACKING, stats.xpTracking);
 
 	w16(buf, OFF.SKILL_CAVALRY, stats.mastery.cavalry);
@@ -833,7 +833,7 @@ export function defaultProfile(): SaveProfile {
 			online: {wins: 0, losses: 0, draws: 0},
 			offlineRank: 0,
 			onlineRank: 0,
-			currencyGold: 100,
+			food: 100,
 			xpTracking: 0,
 			mastery: {
 				cavalry: 0,
@@ -928,7 +928,7 @@ export function applyPreset(profile: SaveProfile, preset: string): SaveProfile {
 					online: {wins: 9999, losses: 0, draws: 0},
 					offlineRank: 99_999,
 					onlineRank: 12_000,
-					currencyGold: 9999,
+					food: 9999,
 					xpTracking: 99_999,
 					mastery: {
 						cavalry: 999,

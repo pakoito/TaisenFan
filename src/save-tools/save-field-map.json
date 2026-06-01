@@ -158,7 +158,7 @@
     {
       "off": 20,
       "len": 4,
-      "name": "currency_gold",
+      "name": "food",
       "kind": "field",
       "confidence": "high",
       "val": "WP"

@@ -202,11 +202,11 @@ describe.skipIf(!haveFixtures)('Per-field codec round-trip', () => {
 		expect(round.stats.onlineRank).toBe(9876);
 	});
 
-	it('stats: gold currency (u32) persists', async () => {
+	it('stats: food currency (u32) persists', async () => {
 		const round = await withMutation(p => {
-			p.stats.currencyGold = 5432;
+			p.stats.food = 5432;
 		});
-		expect(round.stats.currencyGold).toBe(5432);
+		expect(round.stats.food).toBe(5432);
 	});
 
 	it('stats: troop-colour unlock bits persist independently', async () => {

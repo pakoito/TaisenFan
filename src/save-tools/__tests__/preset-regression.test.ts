@@ -413,7 +413,7 @@ describe('Upload round-trip', () => {
 			const generated = await buildPreset(preset);
 			const reExtracted = await extractProfile(generated);
 			// At least the easily-comparable scalars must round-trip
-			expect(typeof reExtracted.stats.currencyGold).toBe('number');
+			expect(typeof reExtracted.stats.food).toBe('number');
 			expect(typeof reExtracted.campaign.chapters.chapter1.unlocked).toBe(
 				'boolean',
 			);

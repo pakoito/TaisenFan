@@ -65,12 +65,12 @@ export type PlayerStats = {
 	offlineRank: number; // 0x0C u32 — offline 熟練度 XP (drives 級/品 ladder)
 	onlineRank: number; // 0x10 u32 — online rank XP (max 12000, drives Wi-Fi title)
 	/**
-	 * 0x14 u32 — spendable training currency (軍資金 / gold). Earned per drill
-	 * and spent in DUEL → Strategy Counter. Starts at 100. (The on-screen
-	 * 兵糧/provisions value is a live battle UI number, NOT a save field — what
-	 * earlier builds called "food" was actually the xp-tracking counter at 0x18.)
+	 * 0x14 u32 — 兵糧 training currency, +100/drill. Earned per drill and spent
+	 * in DUEL → Strategy Counter. Starts at 100. The on-screen 総兵糧 may be a
+	 * cumulative/derived total, distinct from this stored balance. (The
+	 * xp-tracking counter at 0x18 is NOT food.)
 	 */
-	currencyGold: number;
+	food: number;
 	/**
 	 * 0x18 u32 — XP-tracking counter that mirrors offline XP (0x0C). Maintained
 	 * by the game; surfaced read-only so an uploaded save's value survives a

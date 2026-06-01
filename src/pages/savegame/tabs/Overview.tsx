@@ -18,7 +18,7 @@ const PRESET_BUTTONS: PresetButton[] = [
 	{
 		preset: 'fresh',
 		label: 'Vanilla',
-		hint: 'Reset to a brand-new save — nothing unlocked, gold 100, no completion records.',
+		hint: 'Reset to a brand-new save — nothing unlocked, food 100, no completion records.',
 	},
 	{
 		preset: 'starter',
@@ -28,7 +28,7 @@ const PRESET_BUTTONS: PresetButton[] = [
 	{
 		preset: 'full',
 		label: 'Full',
-		hint: 'Maxed save: every duel S-ranked at 40k, every chapter cleared, every sage at level 20, all titles, all troop colours, full gold, every flag on.',
+		hint: 'Maxed save: every duel S-ranked at 40k, every chapter cleared, every sage at level 20, all titles, all troop colours, full food, every flag on.',
 	},
 ];
 
@@ -84,9 +84,9 @@ export function Overview() {
 			hint: 'CONQUEST chapters that are OPEN (tappable on the map) — separate from clearing their episodes. Edit on the CONQUEST tab.',
 		},
 		{
-			label: 'Gold (training)',
-			value: String(profile.stats.currencyGold),
-			hint: EXPLAINERS.currencyGold,
+			label: 'Food (兵糧)',
+			value: String(profile.stats.food),
+			hint: EXPLAINERS.food,
 		},
 		{
 			label: 'DUEL stages cleared',

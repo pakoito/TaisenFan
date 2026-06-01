@@ -136,8 +136,8 @@ describe('save-field-map drift guard (website codec ↔ canonical map)', () => {
 		expect(f('offline_rank_xp').len).toBe(4);
 		expect(OFF.ONLINE_RANK).toBe(f('online_rank_xp').off);
 		expect(f('online_rank_xp').len).toBe(4);
-		expect(OFF.CURRENCY_GOLD).toBe(f('currency_gold').off);
-		expect(f('currency_gold').len).toBe(4);
+		expect(OFF.FOOD).toBe(f('food').off);
+		expect(f('food').len).toBe(4);
 		expect(OFF.XP_TRACKING).toBe(f('xp_tracking_counter_tracks_0x0C').off);
 		expect(f('xp_tracking_counter_tracks_0x0C').len).toBe(4);
 	});

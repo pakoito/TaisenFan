@@ -24,11 +24,11 @@ const VANILLA = new Uint8Array(
 );
 
 const WHOLE_BYTE_WATCH: {off: number; note: string}[] = [
-	// onlineRank (0x10 u32) high word + currency_gold (0x14 u32) high bytes —
+	// onlineRank (0x10 u32) high word + food (0x14 u32) high bytes —
 	// modeled as full u32s now, so they read-then-write verbatim.
 	{off: 0x12, note: 'high word of onlineRank u32 (0x10)'},
-	{off: 0x15, note: 'byte of currency_gold u32 (0x14)'},
-	{off: 0x17, note: 'high byte of currency_gold u32 (0x14)'},
+	{off: 0x15, note: 'byte of food u32 (0x14)'},
+	{off: 0x17, note: 'high byte of food u32 (0x14)'},
 	// Sage card region: per-faction trailing slot has no card mapped
 	{off: 0x1_8e, note: 'Wei reserved slot in sage card region'},
 	{off: 0x1_94, note: 'Shu reserved slot in sage card region'},

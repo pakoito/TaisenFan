@@ -60,8 +60,8 @@ describe('starter preset', () => {
 		}
 	});
 
-	it('preserves default stats (gold=100, all mastery=0)', () => {
-		expect(profile.stats.currencyGold).toBe(100);
+	it('preserves default stats (food=100, all mastery=0)', () => {
+		expect(profile.stats.food).toBe(100);
 		expect(profile.stats.mastery.cavalry).toBe(0);
 		expect(profile.stats.mastery.duel).toBe(0);
 		expect(profile.stats.offline.wins).toBe(0);
@@ -71,8 +71,8 @@ describe('starter preset', () => {
 describe('full preset', () => {
 	const profile = applyPreset(defaultProfile(), 'full');
 
-	it('caps gold, ranks, and mastery skills', () => {
-		expect(profile.stats.currencyGold).toBe(9999);
+	it('caps food, ranks, and mastery skills', () => {
+		expect(profile.stats.food).toBe(9999);
 		expect(profile.stats.offlineRank).toBe(99_999);
 		expect(profile.stats.onlineRank).toBe(12_000);
 		expect(profile.stats.mastery.cavalry).toBe(999);
@@ -133,7 +133,7 @@ describe('fresh preset (vanilla)', () => {
 
 	it('matches the bare default profile', () => {
 		const def = defaultProfile();
-		expect(profile.stats.currencyGold).toBe(def.stats.currencyGold);
+		expect(profile.stats.food).toBe(def.stats.food);
 		expect(profile.training.normalUnlocked).toBe(def.training.normalUnlocked);
 		expect(profile.training.hardUnlocked).toBe(def.training.hardUnlocked);
 		expect(profile.cards.unlockAll ?? false).toBe(false);

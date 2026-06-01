@@ -46,11 +46,10 @@ export const EXPLAINERS = {
 	sagesUnlockAll:
 		'Treats every Sage card as owned. They appear in the Sage selection screen.',
 	sageLevel:
-		'Sage level (1–20). Higher levels widen Tactics gauge and Formation range. Raise by spending gold at the Strategy Counter.',
+		'Sage level (1–20). Higher levels widen Tactics gauge and Formation range. Raise by spending food at the Strategy Counter.',
 
 	// === Stats ===
-	currencyGold:
-		'Spendable training currency (gold). Earned per drill, spent in DUEL → Strategy Counter to level Sages and draw cards. Starts at 100.',
+	food: 'Food (兵糧) — training currency. Earned per drill, spent in DUEL → Strategy Counter to level Sages and draw cards. Starts at 100.',
 	region:
 		'Prefecture you chose at first launch (read-only). Stored in the save header — changing it would invalidate the header checksum.',
 	offlineRank: 'Lifetime points from DUEL — visible on the title screen.',
