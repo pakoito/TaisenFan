@@ -69,8 +69,10 @@ export const ALL_TROOP_COLORS: TroopColors = {
 	white: true,
 };
 
-// Offsets within profile block
-const OFF = {
+// Offsets within profile block. Exported so the field-map drift guard
+// (__tests__/field-map-sync.test.ts) can assert these stay aligned with the
+// canonical save-field-map.json.
+export const OFF = {
 	// Win/Loss records
 	OFFLINE_WINS: 0x00,
 	OFFLINE_LOSSES: 0x02,

@@ -1,0 +1,2127 @@
+{
+  "_doc": "Field registry for 100% byte accounting. kind: field|const|magic|checksum|pad|volatile|unknown. val (validation tag): WP=watchpoint/breakpoint-confirmed | CAP=live-capture (RAM read / before-after at live base) | DIFF=cohort byte-diff | DISASM=disassembly-only | SINGLE=single populated sample (mid_campaign) | INFER=structural inference (not cohort-observed) | STRUCT=structural const/pad. Offsets are within each block plaintext (header = unencrypted 0x80). Each block tiles 0..size-1 with no gaps/overlaps; gaps filled with kind:unknown runs. See FIELD_MAP.md for full prose, the WRITER table, and OPEN ITEMS.",
+  "header": [
+    {
+      "off": 0,
+      "len": 4,
+      "name": "signature_seed_F2D24D3F",
+      "kind": "const",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 4,
+      "len": 8,
+      "name": "magic_3GOKUTEN",
+      "kind": "magic",
+      "confidence": "high",
+      "val": "DISASM"
+    },
+    {
+      "off": 12,
+      "len": 56,
+      "name": "player_name_shiftjis_nulpad",
+      "kind": "field",
+      "confidence": "high",
+      "val": "CAP"
+    },
+    {
+      "off": 68,
+      "len": 1,
+      "name": "region_prefecture_code",
+      "kind": "field",
+      "confidence": "high",
+      "val": "CAP"
+    },
+    {
+      "off": 69,
+      "len": 1,
+      "name": "settings_control_mode_cardlink_value_N_selects_optN_plus_1",
+      "kind": "field",
+      "confidence": "high",
+      "val": "CAP"
+    },
+    {
+      "off": 70,
+      "len": 2,
+      "name": "reserved_zero_46",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT"
+    },
+    {
+      "off": 72,
+      "len": 6,
+      "name": "save_format_serial_0009BF",
+      "kind": "magic",
+      "confidence": "med",
+      "val": "DIFF"
+    },
+    {
+      "off": 78,
+      "len": 2,
+      "name": "reserved_zero_4E",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT"
+    },
+    {
+      "off": 80,
+      "len": 16,
+      "name": "header_md5",
+      "kind": "checksum",
+      "confidence": "high",
+      "val": "DISASM"
+    },
+    {
+      "off": 96,
+      "len": 4,
+      "name": "header_crc32",
+      "kind": "checksum",
+      "confidence": "high",
+      "val": "DISASM"
+    },
+    {
+      "off": 100,
+      "len": 28,
+      "name": "header_pad",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT"
+    }
+  ],
+  "player_records": [
+    {
+      "off": 0,
+      "len": 2,
+      "name": "offline_wins",
+      "kind": "field",
+      "confidence": "high",
+      "val": "CAP"
+    },
+    {
+      "off": 2,
+      "len": 2,
+      "name": "offline_losses",
+      "kind": "field",
+      "confidence": "high",
+      "val": "CAP"
+    },
+    {
+      "off": 4,
+      "len": 2,
+      "name": "offline_draws",
+      "kind": "field",
+      "confidence": "high",
+      "val": "CAP"
+    },
+    {
+      "off": 6,
+      "len": 2,
+      "name": "online_wins_gates_troop_colours_black20_white50_pink100",
+      "kind": "field",
+      "confidence": "high",
+      "val": "CAP"
+    },
+    {
+      "off": 8,
+      "len": 2,
+      "name": "online_losses",
+      "kind": "field",
+      "confidence": "high",
+      "val": "CAP"
+    },
+    {
+      "off": 10,
+      "len": 2,
+      "name": "online_draws",
+      "kind": "field",
+      "confidence": "high",
+      "val": "CAP"
+    },
+    {
+      "off": 12,
+      "len": 4,
+      "name": "offline_rank_xp",
+      "kind": "field",
+      "confidence": "high",
+      "val": "WP"
+    },
+    {
+      "off": 16,
+      "len": 4,
+      "name": "online_rank_xp",
+      "kind": "field",
+      "confidence": "high",
+      "val": "CAP"
+    },
+    {
+      "off": 20,
+      "len": 4,
+      "name": "currency_gold",
+      "kind": "field",
+      "confidence": "high",
+      "val": "WP"
+    },
+    {
+      "off": 24,
+      "len": 4,
+      "name": "xp_tracking_counter_tracks_0x0C",
+      "kind": "field",
+      "confidence": "high",
+      "val": "WP"
+    },
+    {
+      "off": 28,
+      "len": 32,
+      "name": "campaign_event_gallery_bitmask_251bits_bit0_ch1s1e1_prologue",
+      "kind": "field",
+      "confidence": "high",
+      "val": "CAP"
+    },
+    {
+      "off": 60,
+      "len": 8,
+      "name": "reserved_3C",
+      "kind": "pad",
+      "confidence": "med",
+      "val": "STRUCT"
+    },
+    {
+      "off": 68,
+      "len": 2,
+      "name": "skill_cavalry_kihei",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 70,
+      "len": 2,
+      "name": "skill_spear_souhei",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 72,
+      "len": 2,
+      "name": "skill_bow_kyuuhei",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 74,
+      "len": 2,
+      "name": "skill_defeat_gekiha",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 76,
+      "len": 2,
+      "name": "skill_siege_koujou",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 78,
+      "len": 2,
+      "name": "skill_defense_bouei",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 80,
+      "len": 2,
+      "name": "skill_duel_ikkiuchi",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 82,
+      "len": 338,
+      "name": "card_ownership_byte_per_card_indexed_by_CARDLIB_No_qty_ascii_31to39",
+      "kind": "field",
+      "confidence": "high",
+      "val": "CAP"
+    },
+    {
+      "off": 420,
+      "len": 168,
+      "name": "sage_records_21x8",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 588,
+      "len": 4,
+      "name": "duel_easy_cleared_bitmask",
+      "kind": "field",
+      "confidence": "high",
+      "val": "WP"
+    },
+    {
+      "off": 592,
+      "len": 4,
+      "name": "duel_easy_reserved_250",
+      "kind": "pad",
+      "confidence": "med",
+      "val": "STRUCT"
+    },
+    {
+      "off": 596,
+      "len": 4,
+      "name": "duel_easy_cleared_bitmask_copy",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 600,
+      "len": 4,
+      "name": "duel_easy_reserved_258",
+      "kind": "pad",
+      "confidence": "med",
+      "val": "STRUCT"
+    },
+    {
+      "off": 604,
+      "len": 40,
+      "name": "duel_easy_best_scores_u16x20",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 644,
+      "len": 104,
+      "name": "duel_easy_struct_tail",
+      "kind": "pad",
+      "confidence": "med",
+      "val": "STRUCT"
+    },
+    {
+      "off": 748,
+      "len": 4,
+      "name": "duel_normal_cleared_bitmask",
+      "kind": "field",
+      "confidence": "high",
+      "val": "WP"
+    },
+    {
+      "off": 752,
+      "len": 4,
+      "name": "duel_normal_reserved_2F0",
+      "kind": "pad",
+      "confidence": "med",
+      "val": "STRUCT"
+    },
+    {
+      "off": 756,
+      "len": 4,
+      "name": "duel_normal_cleared_bitmask_copy",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DISASM"
+    },
+    {
+      "off": 760,
+      "len": 4,
+      "name": "duel_normal_reserved_2F8",
+      "kind": "pad",
+      "confidence": "med",
+      "val": "STRUCT"
+    },
+    {
+      "off": 764,
+      "len": 80,
+      "name": "duel_normal_best_scores_u16x40",
+      "kind": "field",
+      "confidence": "high",
+      "val": "WP"
+    },
+    {
+      "off": 844,
+      "len": 64,
+      "name": "duel_normal_struct_tail",
+      "kind": "pad",
+      "confidence": "med",
+      "val": "STRUCT"
+    },
+    {
+      "off": 908,
+      "len": 4,
+      "name": "duel_hard_cleared_bitmask",
+      "kind": "field",
+      "confidence": "high",
+      "val": "WP"
+    },
+    {
+      "off": 912,
+      "len": 4,
+      "name": "duel_hard_reserved_390",
+      "kind": "pad",
+      "confidence": "med",
+      "val": "STRUCT"
+    },
+    {
+      "off": 916,
+      "len": 4,
+      "name": "duel_hard_cleared_bitmask_copy",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DISASM"
+    },
+    {
+      "off": 920,
+      "len": 4,
+      "name": "duel_hard_reserved_398",
+      "kind": "pad",
+      "confidence": "med",
+      "val": "STRUCT"
+    },
+    {
+      "off": 924,
+      "len": 40,
+      "name": "duel_hard_best_scores_u16x20",
+      "kind": "field",
+      "confidence": "high",
+      "val": "WP"
+    },
+    {
+      "off": 964,
+      "len": 104,
+      "name": "duel_hard_struct_tail",
+      "kind": "pad",
+      "confidence": "med",
+      "val": "STRUCT"
+    },
+    {
+      "off": 1068,
+      "len": 1,
+      "name": "tutorial_progress_bitmask_00_09_08_0F_across_milestones",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 1069,
+      "len": 1,
+      "name": "troop_color_unlock_bitmask_def07_b3purple_b4black_b5yellow_b6pink_b7cyan",
+      "kind": "field",
+      "confidence": "high",
+      "val": "CAP"
+    },
+    {
+      "off": 1070,
+      "len": 1,
+      "name": "troop_color_unlock_hi_bit0_white_rest_reserved",
+      "kind": "field",
+      "confidence": "high",
+      "val": "CAP"
+    },
+    {
+      "off": 1071,
+      "len": 2,
+      "name": "achievement_flags_42F_sub35E30_gradeA_milestone_unlock_NOT_tutorial_NOT_colour",
+      "kind": "field",
+      "confidence": "med",
+      "val": "DISASM"
+    },
+    {
+      "off": 1073,
+      "len": 1,
+      "name": "achievement_flags_431_sub35E30_gradeA_milestone_unlock",
+      "kind": "field",
+      "confidence": "med",
+      "val": "DISASM"
+    },
+    {
+      "off": 1074,
+      "len": 2,
+      "name": "reserved_432",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT"
+    },
+    {
+      "off": 1076,
+      "len": 1,
+      "name": "achievement_flags_434_sub35E30_gradeA_milestone_unlock",
+      "kind": "field",
+      "confidence": "med",
+      "val": "DISASM"
+    },
+    {
+      "off": 1077,
+      "len": 1,
+      "name": "achievement_flags_435_win_milestone_bits_set_by_footer02_at_20_50_100_sub3678C_sub35250",
+      "kind": "field",
+      "confidence": "med",
+      "val": "DISASM"
+    },
+    {
+      "off": 1078,
+      "len": 1,
+      "name": "reserved_436",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT"
+    },
+    {
+      "off": 1079,
+      "len": 1,
+      "name": "achievement_flags_437_sub35E30_gradeA_milestone_unlock_sub352A0",
+      "kind": "field",
+      "confidence": "med",
+      "val": "DISASM"
+    },
+    {
+      "off": 1080,
+      "len": 13,
+      "name": "reserved_438",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT"
+    },
+    {
+      "off": 1093,
+      "len": 14,
+      "name": "title_unlock_bitmask_which_shougou_selectable_zeroing_left_displayed_title",
+      "kind": "field",
+      "confidence": "high",
+      "val": "CAP"
+    },
+    {
+      "off": 1107,
+      "len": 2,
+      "name": "achievement_flags_453_sub35E30_gradeA_milestone_unlock_sub352F0",
+      "kind": "field",
+      "confidence": "med",
+      "val": "DISASM"
+    },
+    {
+      "off": 1109,
+      "len": 1,
+      "name": "mode_unlock_bitmask_bit7_hard_geki_bit6_normal_nan_bits0to5_chapter_unlock",
+      "kind": "field",
+      "confidence": "high",
+      "val": "CAP"
+    },
+    {
+      "off": 1110,
+      "len": 1,
+      "name": "chapter_completion_flags_NOT_chapter_list_visibility_zeroing_left_list_unchanged",
+      "kind": "field",
+      "confidence": "med",
+      "val": "CAP"
+    },
+    {
+      "off": 1111,
+      "len": 1,
+      "name": "reserved_457",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT"
+    },
+    {
+      "off": 1112,
+      "len": 2,
+      "name": "selected_displayed_lord_title_left_badge_idx_plus_19_0x14_to_0_falls_to_default_jukyuu",
+      "kind": "field",
+      "confidence": "high",
+      "val": "CAP"
+    },
+    {
+      "off": 1114,
+      "len": 2,
+      "name": "reserved_45A",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT"
+    }
+  ],
+  "deck_presets": [
+    {
+      "off": 0,
+      "len": 1,
+      "name": "deck0_card_list_len",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 1,
+      "len": 1,
+      "name": "deck0_unit_color",
+      "kind": "field",
+      "confidence": "high",
+      "val": "WP"
+    },
+    {
+      "off": 2,
+      "len": 2,
+      "name": "deck0_sage_cardid_le",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 4,
+      "len": 12,
+      "name": "deck0_name_shiftjis",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 16,
+      "len": 2,
+      "name": "deck0_pad",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT"
+    },
+    {
+      "off": 18,
+      "len": 16,
+      "name": "deck0_cards_8x2",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 34,
+      "len": 1,
+      "name": "deck1_card_list_len",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 35,
+      "len": 1,
+      "name": "deck1_unit_color",
+      "kind": "field",
+      "confidence": "high",
+      "val": "WP"
+    },
+    {
+      "off": 36,
+      "len": 2,
+      "name": "deck1_sage_cardid_le",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 38,
+      "len": 12,
+      "name": "deck1_name_shiftjis",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 50,
+      "len": 2,
+      "name": "deck1_pad",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT"
+    },
+    {
+      "off": 52,
+      "len": 16,
+      "name": "deck1_cards_8x2",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 68,
+      "len": 1,
+      "name": "deck2_card_list_len",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 69,
+      "len": 1,
+      "name": "deck2_unit_color",
+      "kind": "field",
+      "confidence": "high",
+      "val": "WP"
+    },
+    {
+      "off": 70,
+      "len": 2,
+      "name": "deck2_sage_cardid_le",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 72,
+      "len": 12,
+      "name": "deck2_name_shiftjis",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 84,
+      "len": 2,
+      "name": "deck2_pad",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT"
+    },
+    {
+      "off": 86,
+      "len": 16,
+      "name": "deck2_cards_8x2",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 102,
+      "len": 1,
+      "name": "deck3_card_list_len",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 103,
+      "len": 1,
+      "name": "deck3_unit_color",
+      "kind": "field",
+      "confidence": "high",
+      "val": "WP"
+    },
+    {
+      "off": 104,
+      "len": 2,
+      "name": "deck3_sage_cardid_le",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 106,
+      "len": 12,
+      "name": "deck3_name_shiftjis",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 118,
+      "len": 2,
+      "name": "deck3_pad",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT"
+    },
+    {
+      "off": 120,
+      "len": 16,
+      "name": "deck3_cards_8x2",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 136,
+      "len": 1,
+      "name": "deck4_card_list_len",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 137,
+      "len": 1,
+      "name": "deck4_unit_color",
+      "kind": "field",
+      "confidence": "high",
+      "val": "WP"
+    },
+    {
+      "off": 138,
+      "len": 2,
+      "name": "deck4_sage_cardid_le",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 140,
+      "len": 12,
+      "name": "deck4_name_shiftjis",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 152,
+      "len": 2,
+      "name": "deck4_pad",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT"
+    },
+    {
+      "off": 154,
+      "len": 16,
+      "name": "deck4_cards_8x2",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 170,
+      "len": 1,
+      "name": "deck5_card_list_len",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 171,
+      "len": 1,
+      "name": "deck5_unit_color",
+      "kind": "field",
+      "confidence": "high",
+      "val": "WP"
+    },
+    {
+      "off": 172,
+      "len": 2,
+      "name": "deck5_sage_cardid_le",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 174,
+      "len": 12,
+      "name": "deck5_name_shiftjis",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 186,
+      "len": 2,
+      "name": "deck5_pad",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT"
+    },
+    {
+      "off": 188,
+      "len": 16,
+      "name": "deck5_cards_8x2",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 204,
+      "len": 1,
+      "name": "deck6_card_list_len",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 205,
+      "len": 1,
+      "name": "deck6_unit_color",
+      "kind": "field",
+      "confidence": "high",
+      "val": "WP"
+    },
+    {
+      "off": 206,
+      "len": 2,
+      "name": "deck6_sage_cardid_le",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 208,
+      "len": 12,
+      "name": "deck6_name_shiftjis",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 220,
+      "len": 2,
+      "name": "deck6_pad",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT"
+    },
+    {
+      "off": 222,
+      "len": 16,
+      "name": "deck6_cards_8x2",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 238,
+      "len": 1,
+      "name": "deck7_card_list_len",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 239,
+      "len": 1,
+      "name": "deck7_unit_color",
+      "kind": "field",
+      "confidence": "high",
+      "val": "WP"
+    },
+    {
+      "off": 240,
+      "len": 2,
+      "name": "deck7_sage_cardid_le",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 242,
+      "len": 12,
+      "name": "deck7_name_shiftjis",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 254,
+      "len": 2,
+      "name": "deck7_pad",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT"
+    },
+    {
+      "off": 256,
+      "len": 16,
+      "name": "deck7_cards_8x2",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 272,
+      "len": 1,
+      "name": "deck8_card_list_len",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 273,
+      "len": 1,
+      "name": "deck8_unit_color",
+      "kind": "field",
+      "confidence": "high",
+      "val": "WP"
+    },
+    {
+      "off": 274,
+      "len": 2,
+      "name": "deck8_sage_cardid_le",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 276,
+      "len": 12,
+      "name": "deck8_name_shiftjis",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 288,
+      "len": 2,
+      "name": "deck8_pad",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT"
+    },
+    {
+      "off": 290,
+      "len": 16,
+      "name": "deck8_cards_8x2",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 306,
+      "len": 1,
+      "name": "deck9_card_list_len",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 307,
+      "len": 1,
+      "name": "deck9_unit_color",
+      "kind": "field",
+      "confidence": "high",
+      "val": "WP"
+    },
+    {
+      "off": 308,
+      "len": 2,
+      "name": "deck9_sage_cardid_le",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 310,
+      "len": 12,
+      "name": "deck9_name_shiftjis",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 322,
+      "len": 2,
+      "name": "deck9_pad",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT"
+    },
+    {
+      "off": 324,
+      "len": 16,
+      "name": "deck9_cards_8x2",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 340,
+      "len": 1,
+      "name": "deck10_card_list_len",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 341,
+      "len": 1,
+      "name": "deck10_unit_color",
+      "kind": "field",
+      "confidence": "high",
+      "val": "WP"
+    },
+    {
+      "off": 342,
+      "len": 2,
+      "name": "deck10_sage_cardid_le",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 344,
+      "len": 12,
+      "name": "deck10_name_shiftjis",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 356,
+      "len": 2,
+      "name": "deck10_pad",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT"
+    },
+    {
+      "off": 358,
+      "len": 16,
+      "name": "deck10_cards_8x2",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 374,
+      "len": 1,
+      "name": "deck11_card_list_len",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 375,
+      "len": 1,
+      "name": "deck11_unit_color",
+      "kind": "field",
+      "confidence": "high",
+      "val": "WP"
+    },
+    {
+      "off": 376,
+      "len": 2,
+      "name": "deck11_sage_cardid_le",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 378,
+      "len": 12,
+      "name": "deck11_name_shiftjis",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 390,
+      "len": 2,
+      "name": "deck11_pad",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT"
+    },
+    {
+      "off": 392,
+      "len": 16,
+      "name": "deck11_cards_8x2",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 408,
+      "len": 1,
+      "name": "deck12_card_list_len",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 409,
+      "len": 1,
+      "name": "deck12_unit_color",
+      "kind": "field",
+      "confidence": "high",
+      "val": "WP"
+    },
+    {
+      "off": 410,
+      "len": 2,
+      "name": "deck12_sage_cardid_le",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 412,
+      "len": 12,
+      "name": "deck12_name_shiftjis",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 424,
+      "len": 2,
+      "name": "deck12_pad",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT"
+    },
+    {
+      "off": 426,
+      "len": 16,
+      "name": "deck12_cards_8x2",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 442,
+      "len": 1,
+      "name": "deck13_card_list_len",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 443,
+      "len": 1,
+      "name": "deck13_unit_color",
+      "kind": "field",
+      "confidence": "high",
+      "val": "WP"
+    },
+    {
+      "off": 444,
+      "len": 2,
+      "name": "deck13_sage_cardid_le",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 446,
+      "len": 12,
+      "name": "deck13_name_shiftjis",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 458,
+      "len": 2,
+      "name": "deck13_pad",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT"
+    },
+    {
+      "off": 460,
+      "len": 16,
+      "name": "deck13_cards_8x2",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 476,
+      "len": 1,
+      "name": "deck14_card_list_len",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 477,
+      "len": 1,
+      "name": "deck14_unit_color",
+      "kind": "field",
+      "confidence": "high",
+      "val": "WP"
+    },
+    {
+      "off": 478,
+      "len": 2,
+      "name": "deck14_sage_cardid_le",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 480,
+      "len": 12,
+      "name": "deck14_name_shiftjis",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 492,
+      "len": 2,
+      "name": "deck14_pad",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT"
+    },
+    {
+      "off": 494,
+      "len": 16,
+      "name": "deck14_cards_8x2",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 510,
+      "len": 1,
+      "name": "deck15_card_list_len",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 511,
+      "len": 1,
+      "name": "deck15_unit_color",
+      "kind": "field",
+      "confidence": "high",
+      "val": "WP"
+    },
+    {
+      "off": 512,
+      "len": 2,
+      "name": "deck15_sage_cardid_le",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 514,
+      "len": 12,
+      "name": "deck15_name_shiftjis",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 526,
+      "len": 2,
+      "name": "deck15_pad",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT"
+    },
+    {
+      "off": 528,
+      "len": 16,
+      "name": "deck15_cards_8x2",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 544,
+      "len": 1,
+      "name": "deck16_card_list_len",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 545,
+      "len": 1,
+      "name": "deck16_unit_color",
+      "kind": "field",
+      "confidence": "high",
+      "val": "WP"
+    },
+    {
+      "off": 546,
+      "len": 2,
+      "name": "deck16_sage_cardid_le",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 548,
+      "len": 12,
+      "name": "deck16_name_shiftjis",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 560,
+      "len": 2,
+      "name": "deck16_pad",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT"
+    },
+    {
+      "off": 562,
+      "len": 16,
+      "name": "deck16_cards_8x2",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 578,
+      "len": 1,
+      "name": "deck17_card_list_len",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 579,
+      "len": 1,
+      "name": "deck17_unit_color",
+      "kind": "field",
+      "confidence": "high",
+      "val": "WP"
+    },
+    {
+      "off": 580,
+      "len": 2,
+      "name": "deck17_sage_cardid_le",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 582,
+      "len": 12,
+      "name": "deck17_name_shiftjis",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 594,
+      "len": 2,
+      "name": "deck17_pad",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT"
+    },
+    {
+      "off": 596,
+      "len": 16,
+      "name": "deck17_cards_8x2",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 612,
+      "len": 1,
+      "name": "deck18_card_list_len",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 613,
+      "len": 1,
+      "name": "deck18_unit_color",
+      "kind": "field",
+      "confidence": "high",
+      "val": "WP"
+    },
+    {
+      "off": 614,
+      "len": 2,
+      "name": "deck18_sage_cardid_le",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 616,
+      "len": 12,
+      "name": "deck18_name_shiftjis",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 628,
+      "len": 2,
+      "name": "deck18_pad",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT"
+    },
+    {
+      "off": 630,
+      "len": 16,
+      "name": "deck18_cards_8x2",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 646,
+      "len": 1,
+      "name": "deck19_card_list_len",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 647,
+      "len": 1,
+      "name": "deck19_unit_color",
+      "kind": "field",
+      "confidence": "high",
+      "val": "WP"
+    },
+    {
+      "off": 648,
+      "len": 2,
+      "name": "deck19_sage_cardid_le",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 650,
+      "len": 12,
+      "name": "deck19_name_shiftjis",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 662,
+      "len": 2,
+      "name": "deck19_pad",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT"
+    },
+    {
+      "off": 664,
+      "len": 16,
+      "name": "deck19_cards_8x2",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 680,
+      "len": 1,
+      "name": "deck20_card_list_len",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 681,
+      "len": 1,
+      "name": "deck20_unit_color",
+      "kind": "field",
+      "confidence": "high",
+      "val": "WP"
+    },
+    {
+      "off": 682,
+      "len": 2,
+      "name": "deck20_sage_cardid_le",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 684,
+      "len": 12,
+      "name": "deck20_name_shiftjis",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 696,
+      "len": 2,
+      "name": "deck20_pad",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT"
+    },
+    {
+      "off": 698,
+      "len": 16,
+      "name": "deck20_cards_8x2",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 714,
+      "len": 1,
+      "name": "deck21_card_list_len",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 715,
+      "len": 1,
+      "name": "deck21_unit_color",
+      "kind": "field",
+      "confidence": "high",
+      "val": "WP"
+    },
+    {
+      "off": 716,
+      "len": 2,
+      "name": "deck21_sage_cardid_le",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 718,
+      "len": 12,
+      "name": "deck21_name_shiftjis",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 730,
+      "len": 2,
+      "name": "deck21_pad",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT"
+    },
+    {
+      "off": 732,
+      "len": 16,
+      "name": "deck21_cards_8x2",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 748,
+      "len": 1,
+      "name": "deck22_card_list_len",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 749,
+      "len": 1,
+      "name": "deck22_unit_color",
+      "kind": "field",
+      "confidence": "high",
+      "val": "WP"
+    },
+    {
+      "off": 750,
+      "len": 2,
+      "name": "deck22_sage_cardid_le",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 752,
+      "len": 12,
+      "name": "deck22_name_shiftjis",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 764,
+      "len": 2,
+      "name": "deck22_pad",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT"
+    },
+    {
+      "off": 766,
+      "len": 16,
+      "name": "deck22_cards_8x2",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 782,
+      "len": 1,
+      "name": "deck23_card_list_len",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 783,
+      "len": 1,
+      "name": "deck23_unit_color",
+      "kind": "field",
+      "confidence": "high",
+      "val": "WP"
+    },
+    {
+      "off": 784,
+      "len": 2,
+      "name": "deck23_sage_cardid_le",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 786,
+      "len": 12,
+      "name": "deck23_name_shiftjis",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 798,
+      "len": 2,
+      "name": "deck23_pad",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT"
+    },
+    {
+      "off": 800,
+      "len": 16,
+      "name": "deck23_cards_8x2",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 816,
+      "len": 1,
+      "name": "deck24_card_list_len",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 817,
+      "len": 1,
+      "name": "deck24_unit_color",
+      "kind": "field",
+      "confidence": "high",
+      "val": "WP"
+    },
+    {
+      "off": 818,
+      "len": 2,
+      "name": "deck24_sage_cardid_le",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 820,
+      "len": 12,
+      "name": "deck24_name_shiftjis",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 832,
+      "len": 2,
+      "name": "deck24_pad",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT"
+    },
+    {
+      "off": 834,
+      "len": 16,
+      "name": "deck24_cards_8x2",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 850,
+      "len": 1,
+      "name": "selected_dirty_flag",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 851,
+      "len": 1,
+      "name": "user_deck_count",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 852,
+      "len": 1,
+      "name": "tutorial_flag",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 853,
+      "len": 3,
+      "name": "deck_tail_pad",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT"
+    }
+  ],
+  "jtnc_container": [
+    {
+      "off": 0,
+      "len": 4,
+      "name": "header_size_const_0x40",
+      "kind": "const",
+      "confidence": "high",
+      "val": "DIFF"
+    },
+    {
+      "off": 4,
+      "len": 4,
+      "name": "session_counter_battle_online_no_arm9_writer_inert_in_SP",
+      "kind": "volatile",
+      "confidence": "med",
+      "val": "DISASM"
+    },
+    {
+      "off": 8,
+      "len": 8,
+      "name": "session_nonce_battle_online_RNG_seed_no_arm9_writer_inert_in_SP",
+      "kind": "volatile",
+      "confidence": "med",
+      "val": "DISASM"
+    },
+    {
+      "off": 16,
+      "len": 20,
+      "name": "reserved_zero_pre_magic",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT"
+    },
+    {
+      "off": 36,
+      "len": 4,
+      "name": "magic_JTNC",
+      "kind": "magic",
+      "confidence": "high",
+      "val": "DISASM"
+    },
+    {
+      "off": 40,
+      "len": 20,
+      "name": "reserved_zero_post_magic",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT"
+    },
+    {
+      "off": 60,
+      "len": 4,
+      "name": "session_hash_digest_over_counter_nonce_no_arm9_writer_inert_in_SP",
+      "kind": "volatile",
+      "confidence": "med",
+      "val": "DISASM"
+    },
+    {
+      "off": 64,
+      "len": 2100,
+      "name": "reserved_record_area_zero",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT"
+    }
+  ],
+  "campaign": [
+    {
+      "off": 0,
+      "len": 1,
+      "name": "campaign_active_flag_drives_shinki_saikai_new_resume_prompt",
+      "kind": "field",
+      "confidence": "high",
+      "val": "CAP"
+    },
+    {
+      "off": 1,
+      "len": 9,
+      "name": "header_flags_zone_001",
+      "kind": "field",
+      "confidence": "low",
+      "val": "CAP"
+    },
+    {
+      "off": 10,
+      "len": 1,
+      "name": "companion_counter",
+      "kind": "field",
+      "confidence": "high",
+      "val": "CAP"
+    },
+    {
+      "off": 11,
+      "len": 3,
+      "name": "header_flags_zone_00B",
+      "kind": "field",
+      "confidence": "low",
+      "val": "CAP"
+    },
+    {
+      "off": 14,
+      "len": 1,
+      "name": "turn_month_counter",
+      "kind": "field",
+      "confidence": "high",
+      "val": "CAP"
+    },
+    {
+      "off": 15,
+      "len": 13,
+      "name": "header_globals_zone_00F",
+      "kind": "field",
+      "confidence": "low",
+      "val": "SINGLE"
+    },
+    {
+      "off": 28,
+      "len": 4,
+      "name": "current_chapter_u32",
+      "kind": "field",
+      "confidence": "high",
+      "val": "CAP"
+    },
+    {
+      "off": 32,
+      "len": 48,
+      "name": "header_globals_zone_020",
+      "kind": "field",
+      "confidence": "low",
+      "val": "SINGLE"
+    },
+    {
+      "off": 80,
+      "len": 8,
+      "name": "resume_param_zero",
+      "kind": "field",
+      "confidence": "low",
+      "val": "SINGLE"
+    },
+    {
+      "off": 88,
+      "len": 8,
+      "name": "resume_battle_params_turn_time_mission",
+      "kind": "field",
+      "confidence": "med",
+      "val": "SINGLE"
+    },
+    {
+      "off": 96,
+      "len": 28,
+      "name": "resume_params_zone_060",
+      "kind": "field",
+      "confidence": "low",
+      "val": "SINGLE"
+    },
+    {
+      "off": 124,
+      "len": 204,
+      "name": "resume_deck_A_player_count_u32_then_50cards_u32",
+      "kind": "field",
+      "confidence": "high",
+      "val": "SINGLE"
+    },
+    {
+      "off": 328,
+      "len": 204,
+      "name": "resume_deck_B_count_u32_then_50cards_u32",
+      "kind": "field",
+      "confidence": "high",
+      "val": "SINGLE"
+    },
+    {
+      "off": 532,
+      "len": 204,
+      "name": "resume_deck_C_count_u32_then_50cards_u32",
+      "kind": "field",
+      "confidence": "high",
+      "val": "SINGLE"
+    },
+    {
+      "off": 736,
+      "len": 112,
+      "name": "resume_board_unit_table_7x16",
+      "kind": "field",
+      "confidence": "med",
+      "val": "SINGLE"
+    },
+    {
+      "off": 848,
+      "len": 684,
+      "name": "resume_node_snapshot_graph_record_shape",
+      "kind": "field",
+      "confidence": "med",
+      "val": "SINGLE"
+    },
+    {
+      "off": 1532,
+      "len": 15640,
+      "name": "chapter_graph_23recs_x_0x2A8_0x0154_const_node_plus204_u32_battle_fought_flag_plus20C_scoreA_plus20D_scoreB_SINGLE",
+      "kind": "field",
+      "confidence": "high",
+      "val": "SINGLE"
+    },
+    {
+      "off": 17172,
+      "len": 62,
+      "name": "graph_terminator_zero",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT"
+    },
+    {
+      "off": 17234,
+      "len": 54,
+      "name": "resume_deck_D_count_pars_5cards_FFpad",
+      "kind": "field",
+      "confidence": "med",
+      "val": "SINGLE"
+    },
+    {
+      "off": 17288,
+      "len": 60,
+      "name": "resume_mission_progress_scratch_ticks_per_turn",
+      "kind": "field",
+      "confidence": "low",
+      "val": "SINGLE"
+    },
+    {
+      "off": 17348,
+      "len": 1020,
+      "name": "per_stage_mission_records_102x10_b3_scoreA_0_10_30_50_100_b6_played_F5_F6_b7_chapter_group_0to23_stage_i_mod_4",
+      "kind": "field",
+      "confidence": "med",
+      "val": "SINGLE"
+    },
+    {
+      "off": 18368,
+      "len": 4277,
+      "name": "event_table_empty_slots_tail",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT"
+    },
+    {
+      "off": 22645,
+      "len": 24,
+      "name": "progress_bitmap_24B_reserved_for_event_completion",
+      "kind": "field",
+      "confidence": "high",
+      "val": "CAP"
+    },
+    {
+      "off": 22669,
+      "len": 9,
+      "name": "bitmap_gap_zero",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT"
+    },
+    {
+      "off": 22678,
+      "len": 32,
+      "name": "unlock_bitmap_32B",
+      "kind": "field",
+      "confidence": "high",
+      "val": "CAP"
+    },
+    {
+      "off": 22710,
+      "len": 2,
+      "name": "par_array_gap_zero",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT"
+    },
+    {
+      "off": 22712,
+      "len": 80,
+      "name": "par_scores_20xu32_5000",
+      "kind": "const",
+      "confidence": "high",
+      "val": "CAP"
+    },
+    {
+      "off": 22792,
+      "len": 8,
+      "name": "trailing_flag1_u32_1",
+      "kind": "field",
+      "confidence": "med",
+      "val": "CAP"
+    },
+    {
+      "off": 22800,
+      "len": 8,
+      "name": "trailing_flag2_u32_1",
+      "kind": "field",
+      "confidence": "med",
+      "val": "CAP"
+    },
+    {
+      "off": 22808,
+      "len": 4,
+      "name": "save_serial_or_timestamp",
+      "kind": "volatile",
+      "confidence": "med",
+      "val": "SINGLE"
+    }
+  ],
+  "footer": [
+    {
+      "off": 0,
+      "len": 1,
+      "name": "runtime_u8_at_00_accessor_020356CE_never_mutated_default_reserved",
+      "kind": "field",
+      "confidence": "med",
+      "val": "DISASM"
+    },
+    {
+      "off": 1,
+      "len": 1,
+      "name": "configured_s8_index_level_scalar_at_01_range0_19_default16_getter_sub3571C",
+      "kind": "field",
+      "confidence": "med",
+      "val": "DISASM"
+    },
+    {
+      "off": 2,
+      "len": 2,
+      "name": "win_milestone_counter_u16_incr_arm9_0x28CBC_consumer_sub3678C_sets_achievement_435_at_20_50_100",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DISASM"
+    },
+    {
+      "off": 4,
+      "len": 4,
+      "name": "runtime_u32_at_04_accessor_020356CE_never_mutated_default_reserved",
+      "kind": "field",
+      "confidence": "med",
+      "val": "DISASM"
+    }
+  ]
+}

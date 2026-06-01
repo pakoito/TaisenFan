@@ -216,6 +216,12 @@
 			}
 		},
 		{
+			"includes": ["src/save-tools/save-field-map.json"],
+			"formatter": {
+				"enabled": false
+			}
+		},
+		{
 			"includes": ["public/**"],
 			"formatter": {
 				"enabled": false

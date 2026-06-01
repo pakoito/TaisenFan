@@ -6,6 +6,7 @@ import {
 	SAGE_COUNT,
 	type SaveProfile,
 } from '@/save-tools';
+import {EXPLAINERS} from '../explainers';
 
 type PresetButton = {
 	preset: PresetName;
@@ -66,35 +67,46 @@ export function Overview() {
 	const {profile, applyPresetReset} = useSave();
 	if (!profile) return null;
 
-	const stats = [
+	const stats: {label: string; value: string; hint: string}[] = [
 		{
 			label: 'Lords unlocked',
 			value: `${countUnlockedCards(profile)} / ${CARD_TOTAL_SLOTS}`,
+			hint: 'Lord cards owned (at least one copy). Edit on the Lords tab.',
 		},
 		{
 			label: 'Sages unlocked',
 			value: `${countUnlockedSages(profile)} / ${SAGE_COUNT}`,
+			hint: 'Sage cards owned. Edit on the Sages tab.',
 		},
 		{
 			label: 'Chapters open',
 			value: `${countChaptersUnlocked(profile)} / 6`,
+			hint: 'CONQUEST chapters that are OPEN (tappable on the map) — separate from clearing their episodes. Edit on the CONQUEST tab.',
 		},
-		{label: 'Gold (training)', value: String(profile.stats.currencyGold)},
+		{
+			label: 'Gold (training)',
+			value: String(profile.stats.currencyGold),
+			hint: EXPLAINERS.currencyGold,
+		},
 		{
 			label: 'DUEL stages cleared',
 			value: `${countStagesCleared(profile)} / 80`,
+			hint: 'DUEL stages with the CLEARED flag set (Easy 20 + Normal 40 + Hard 20). Not inferred from best score, and separate from a tier being playable. Edit per stage on the DUEL tab.',
 		},
 		{
 			label: 'Troop colours',
 			value: `${countColorsUnlocked(profile)} / 9`,
+			hint: EXPLAINERS.troopColors,
 		},
 		{
 			label: 'DUEL Normal',
 			value: profile.training.normalUnlocked ? 'Playable' : 'Locked',
+			hint: EXPLAINERS.normalUnlocked,
 		},
 		{
 			label: 'DUEL Hard',
 			value: profile.training.hardUnlocked ? 'Playable' : 'Locked',
+			hint: EXPLAINERS.hardUnlocked,
 		},
 	];
 
@@ -106,7 +118,11 @@ export function Overview() {
 				</h3>
 				<div className='grid grid-cols-2 gap-3 md:grid-cols-3'>
 					{stats.map(s => (
-						<div className='gold-stroke bg-surface-low p-3' key={s.label}>
+						<div
+							className='gold-stroke bg-surface-low p-3'
+							key={s.label}
+							title={s.hint}
+						>
 							<p className='font-sans text-[10px] text-text-faint uppercase tracking-wider'>
 								{s.label}
 							</p>
