@@ -37,6 +37,50 @@ test('starter preset opens all chapters and difficulties', async ({page}) => {
 	await expect(page.getByText('Playable', {exact: true}).first()).toBeVisible();
 });
 
+test('Full preset maxes food and clears every DUEL stage at 40k', async ({
+	page,
+}) => {
+	// Exercises the REAL UI -> applyPresetReset('full') -> render path, not an
+	// isolated applyPreset() call. The preset-regression unit tests assert the
+	// encoded bytes of `full`; this guards the wiring so a button -> wrong-key
+	// or context regression fails CI even while the byte-level tests pass.
+	await page.goto('./savegame-editor');
+	await page.getByRole('button', {name: 'New Save'}).click();
+
+	// The preset buttons live below the fold (and well below it on the Pixel 5
+	// viewport); Playwright scrolls into view before clicking.
+	await page.getByRole('button', {name: 'Full', exact: true}).click();
+
+	const overview = page.getByRole('tabpanel', {name: 'Overview'});
+
+	// Food (兵糧): full preset caps it at 9999. Scope to the FOOD stat card
+	// (the div holding the "Food (兵糧)" label) so we match its value, not any
+	// other 9999 on the page. The label text is uppercased via CSS only, so
+	// textContent is the mixed-case source string.
+	const foodCard = overview
+		.locator('div')
+		.filter({hasText: 'Food (兵糧)'})
+		.last();
+	await expect(foodCard).toContainText('9999');
+
+	// Every DUEL stage cleared: Easy 20 + Normal 40 + Hard 20 = 80.
+	await expect(overview.getByText('80 / 80')).toBeVisible();
+
+	// Drill into the DUEL tab's per-stage editor and confirm the cleared counts
+	// + best scores actually round-tripped into the per-stage read path.
+	await page.getByRole('tab', {name: 'DUEL'}).click();
+	const duel = page.getByRole('tabpanel', {name: 'DUEL'});
+	await duel.getByRole('button', {name: 'Edit stages'}).click();
+
+	await expect(duel.getByText('20/20 cleared')).toHaveCount(2); // Easy + Hard
+	await expect(duel.getByText('40/40 cleared')).toBeVisible(); // Normal
+
+	// Spot-check a best-score input reflects the 40000 S-rank score.
+	await expect(
+		duel.getByRole('spinbutton', {name: 'Easy-01 best score'}),
+	).toHaveValue('40000');
+});
+
 test('downloads a valid 64KB .sav', async ({page}) => {
 	await page.goto('./savegame-editor');
 	await page.getByRole('button', {name: 'New Save'}).click();
@@ -64,7 +108,7 @@ test('persists the loaded save across a full reload', async ({page}) => {
 	await page.reload();
 
 	// After a reload the dirty flag clears (nothing local to lose anymore)
-	// but the save itself is still loaded — the strip reads "New save".
+	// but the save itself is still loaded; the strip reads "New save".
 	await expect(slot.getByText(NEW_SAVE_LOADED)).toBeVisible();
 	await expect(slot.getByText('No save loaded')).toHaveCount(0);
 });
@@ -82,7 +126,7 @@ test('Discard wipes the save and shows the empty state', async ({page}) => {
 
 // A pre-field-map profile: it has `stats.food` but is missing the fields the
 // current codec requires (`troopColors`, `currencyGold`, `regionCode`). Kept
-// intentionally minimal — only enough to mimic what an older deploy persisted.
+// intentionally minimal: only enough to mimic what an older deploy persisted.
 const OLD_FORMAT_PROFILE = {
 	playerName: 'OldUser',
 	stats: {
