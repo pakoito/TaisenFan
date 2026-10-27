@@ -6,7 +6,13 @@ import {Button} from '@/components/ui/button';
 import {useRom} from '@/contexts/useRom';
 import {useSave} from '@/contexts/useSave';
 import {cn} from '@/lib/utils';
-import type {CardEntry, CardQuantity, SaveProfile} from '@/save-tools';
+import {
+	type CardCollection,
+	type CardEntry,
+	type CardQuantity,
+	cardObtained,
+	type SaveProfile,
+} from '@/save-tools';
 import {
 	FACTIONS,
 	type Faction,
@@ -14,6 +20,7 @@ import {
 	RARITIES,
 } from '@/types/gamedata';
 import {getFactionConfig, getFactionLabel} from '@/utils/faction';
+import {EXPLAINERS} from '../explainers';
 import {cardIdForLord} from '../lord-card-map';
 
 const RARITY_OPTS = RARITIES.map(r => ({value: r, label: r}));
@@ -27,6 +34,26 @@ function effectiveQuantity(profile: SaveProfile, cardId: string): CardQuantity {
 		return entry?.quantity ?? 1;
 	}
 	return profile.cards.cards[cardId]?.quantity ?? 0;
+}
+
+/**
+ * A card with 0 copies whose save byte still has the "obtained" flag: the
+ * game keeps that bit when the count drops to 0, and the editor keeps it too.
+ */
+function obtainedWithoutCopies(profile: SaveProfile, cardId: string): boolean {
+	if (profile.cards.unlockAll) return false;
+	const entry = profile.cards.cards[cardId];
+	return entry?.quantity === 0 && cardObtained(entry);
+}
+
+/** The entries left after setting every card to 0 copies: those with flags. */
+function withoutCopies(cards: CardCollection): Record<string, CardEntry> {
+	const kept: Record<string, CardEntry> = {};
+	if (cards.unlockAll) return kept;
+	for (const [id, entry] of Object.entries(cards.cards)) {
+		if (entry.flags) kept[id] = {...entry, quantity: 0};
+	}
+	return kept;
 }
 
 /**
@@ -50,22 +77,33 @@ function setCardQuantity(
 		}
 		draft.cards = {cards: explicit};
 	}
-	if (qty === 0) {
+	// Keep the entry's save flags: a card at 0 copies stays listed while it
+	// has any (the codec then writes them back unchanged).
+	const prev = draft.cards.cards[cardId];
+	if (qty === 0 && !prev?.flags) {
 		delete draft.cards.cards[cardId];
 	} else {
-		draft.cards.cards[cardId] = {quantity: qty, name: displayName};
+		draft.cards.cards[cardId] = {...prev, name: displayName, quantity: qty};
 	}
 }
 
 /* ------------------------------------------------------------------------ */
 
+function tileStateClass(owned: boolean, obtained: boolean): string {
+	if (owned) return 'border-gold bg-surface-low';
+	if (obtained) return 'border-dashed border-gold opacity-80';
+	return 'border-border-dim opacity-60';
+}
+
 function PortraitTile({
 	lord,
 	quantity,
+	obtained,
 	onChange,
 }: {
 	lord: LordCard;
 	quantity: CardQuantity;
+	obtained: boolean;
 	onChange: (q: CardQuantity) => void;
 }) {
 	const cfg = getFactionConfig(lord.faction);
@@ -77,8 +115,9 @@ function PortraitTile({
 		<div
 			className={cn(
 				'flex flex-col items-center gap-1 border p-1 transition-colors',
-				owned ? 'border-gold bg-surface-low' : 'border-border-dim opacity-60',
+				tileStateClass(owned, obtained),
 			)}
+			title={obtained ? EXPLAINERS.cardObtained : undefined}
 		>
 			<button
 				aria-label={`Toggle ${lord.name}`}
@@ -340,6 +379,7 @@ function FactionGroup({
 						<PortraitTile
 							key={cardId}
 							lord={lord}
+							obtained={obtainedWithoutCopies(profile, cardId)}
 							onChange={q => {
 								mutate(draft => {
 									setCardQuantity(draft, allLords, cardId, q, lord.name);
@@ -376,7 +416,7 @@ export function Cards() {
 				factionFilter={filters.factionFilter}
 				onLockAll={() => {
 					mutate(draft => {
-						draft.cards = {cards: {}};
+						draft.cards = {cards: withoutCopies(draft.cards)};
 					});
 				}}
 				onUnlockAll={() => {

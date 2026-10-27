@@ -246,7 +246,7 @@
     {
       "off": 82,
       "len": 338,
-      "name": "card_ownership_byte_per_card_indexed_by_CARDLIB_No_qty_ascii_31to39",
+      "name": "card_ownership_byte_per_card_indexed_by_CARDLIB_No_bitfield_lo4_copies_b4_obtained_b5_flag",
       "kind": "field",
       "confidence": "high",
       "val": "CAP"

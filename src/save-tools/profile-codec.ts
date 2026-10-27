@@ -192,13 +192,49 @@ function writeBit(b: Uint8Array, base: number, n: number, on: boolean): void {
 	b[byte] = on ? b[byte]! | mask : b[byte]! & ~mask;
 }
 
+/**
+ * The card ownership byte (cards at CARD_BASE + No, sages in the 24-byte
+ * region after them) is a bit field. arm9 accessors: get 0x02034FE0, set
+ * 0x02035000, add 0x02035050, test bit 4 0x02035070, set bit 5 0x02035090.
+ *   bits 0-3  copies owned. The setter clamps to 0..9 (0x0203500E).
+ *   bit 4     obtained. The setter sets it whenever the count is > 0
+ *             (0x02035020) and never clears it, so it stays when a card's
+ *             count drops back to 0. Read alone by some lists.
+ *   bit 5     set by the post-drill card draw and the deck editor.
+ * The 0x31..0x39 in the game's own saves are 0x30 | n, not ASCII digits;
+ * 0x10 | n is n copies too.
+ */
+export const CARD_OWN = {
+	COUNT_MASK: 0x0f,
+	FLAGS_MASK: 0xf0,
+	OBTAINED: 0x10,
+	BIT5: 0x20,
+	/** The byte the game writes for a freshly drawn single copy. */
+	ONE_DRAWN: 0x31,
+} as const;
+
 function byteToQty(b: number): CardQuantity {
-	// 0x31 = '1' = 1 copy, 0x32 = '2' = 2 copies, etc.
-	return b >= 0x31 && b <= 0x39 ? ((b - 0x30) as CardQuantity) : 0;
+	return Math.min(b & CARD_OWN.COUNT_MASK, 9) as CardQuantity;
 }
 
-function qtyToByte(q: CardQuantity): number {
-	return q === 0 ? 0x00 : q + 0x30;
+/** The entry's "obtained" flag (bit 4), as read from the save. */
+export function cardObtained(entry: CardEntry | undefined): boolean {
+	return ((entry?.flags ?? 0) & CARD_OWN.OBTAINED) !== 0;
+}
+
+/**
+ * The ownership byte with its count set to `q`, like the game's setter: the
+ * flag bits stay (or become `flags`, when given) and a count > 0 sets bit 4.
+ * A byte whose count and flags do not change is returned as it is. A slot
+ * with no flags that gains copies also gets bit 5, as the post-drill draw
+ * writes it (0x020E924E), which gives the 0x3n of the game's own saves.
+ */
+function setOwnedCount(old: number, q: CardQuantity, flags?: number): number {
+	const f = (flags ?? old) & CARD_OWN.FLAGS_MASK;
+	if (byteToQty(old) === q && (old & CARD_OWN.FLAGS_MASK) === f) return old;
+	if (q === 0) return f;
+	const kept = flags === undefined && f === 0 ? CARD_OWN.BIT5 : f;
+	return kept | CARD_OWN.OBTAINED | q;
 }
 
 // =============================================================================
@@ -368,19 +404,26 @@ function readCampaign(buf: Uint8Array): CampaignProgress {
 
 function readCards(buf: Uint8Array): CardCollection {
 	const cards: Record<string, CardEntry> = {};
-	let allOwned = true;
+	let allOneDrawn = true;
 
 	for (const entry of CARD_TABLE) {
-		const qty = byteToQty(buf[OFF.CARD_BASE + entry.no]!);
-		if (qty > 0) {
-			cards[entry.cardId] = {quantity: qty, name: entry.name};
-		} else {
-			allOwned = false;
+		const b = buf[OFF.CARD_BASE + entry.no]!;
+		if (b !== CARD_OWN.ONE_DRAWN) allOneDrawn = false;
+		// A card with 0 copies keeps an entry while it has flags (bit 4
+		// "obtained" survives the count dropping to 0).
+		if (b !== 0) {
+			cards[entry.cardId] = {
+				flags: b & CARD_OWN.FLAGS_MASK,
+				name: entry.name,
+				quantity: byteToQty(b),
+			};
 		}
 	}
 
-	// If all cards are owned, use unlockAll shorthand
-	if (allOwned) {
+	// The unlockAll shorthand ("1 copy each") only stands for a region the
+	// game would write that way: every card at exactly 0x31. Anything else
+	// (2+ copies, other flags) stays explicit so it round-trips and displays.
+	if (allOneDrawn) {
 		return {unlockAll: true, cards: {}};
 	}
 
@@ -406,7 +449,8 @@ function readSages(buf: Uint8Array): SageCollection {
 		// 0x18d even though no XP-entry flag is on.
 		const cardOff = SAGE_CARD_OFFSET[name];
 		const cardOwned =
-			cardOff !== undefined && buf[OFF.SAGE_CARD_BASE + cardOff] === 0x31;
+			cardOff !== undefined &&
+			byteToQty(buf[OFF.SAGE_CARD_BASE + cardOff]!) > 0;
 
 		// Unlocked if any of: card byte set, XP flag set, has leveled up, has XP.
 		const unlocked = cardOwned || flag !== 0 || level > 1 || xp > 0;
@@ -649,21 +693,37 @@ function writeCampaign(buf: Uint8Array, campaign: CampaignProgress): void {
 
 function writeCards(buf: Uint8Array, cards: CardCollection): void {
 	if (cards.unlockAll) {
-		// Flood every slot to 0x31, matching the in-game "all owned" state
-		// (some `no` positions don't correspond to a real card but the game's
-		// own fully-unlocked saves still write 0x31 there).
+		// One copy in every slot, matching the in-game "all owned" state (some
+		// `no` positions don't correspond to a real card but the game's own
+		// fully-unlocked saves still write 0x31 there). An empty slot becomes
+		// 0x31; a slot's flag bits are kept.
 		for (let no = 0; no < CARD_TOTAL_SLOTS; no++) {
-			buf[OFF.CARD_BASE + no] = 0x31;
+			buf[OFF.CARD_BASE + no] = setOwnedCount(buf[OFF.CARD_BASE + no]!, 1);
 		}
 		return;
 	}
 
 	// Touch only the 192 slots backed by CARD_TABLE. Unknown `no` positions
 	// (unused slots in the 232-byte region) are left as-is so any bytes the
-	// game put there in an uploaded save survive the round-trip.
+	// game put there in an uploaded save survive the round-trip. Setting a
+	// count keeps the byte's flag bits, as the game's setter does.
 	for (const entry of CARD_TABLE) {
 		const live = cards.cards[entry.cardId];
-		buf[OFF.CARD_BASE + entry.no] = live ? qtyToByte(live.quantity) : 0x00;
+		const at = OFF.CARD_BASE + entry.no;
+		buf[at] = setOwnedCount(buf[at]!, live?.quantity ?? 0, live?.flags);
+	}
+}
+
+/**
+ * A sage's card byte is an ownership bit field like a card's: an owned byte
+ * keeps its count, an empty one becomes 0x31, and the flag bits are kept.
+ */
+function writeSageOwned(buf: Uint8Array, at: number, owned: boolean): void {
+	const b = buf[at]!;
+	if (owned) {
+		if (byteToQty(b) === 0) buf[at] = setOwnedCount(b, 1);
+	} else {
+		buf[at] = setOwnedCount(b, 0);
 	}
 }
 
@@ -684,13 +744,13 @@ function writeSages(buf: Uint8Array, sages: SageCollection): void {
 		}
 	}
 
-	// Card-byte region. `isAll` floods all 24 bytes (matching the CLI cooker
-	// and the game's own "fully unlocked" state — the layout has 1 reserved
-	// byte per faction we'd otherwise leave at 0). Otherwise we write each
-	// real sage's slot per its known state and preserve reserved bytes.
+	// Card-byte region. `isAll` gives all 24 bytes a copy (matching the CLI
+	// cooker and the game's own "fully unlocked" state — the layout has 1
+	// reserved byte per faction we'd otherwise leave at 0). Otherwise we write
+	// each real sage's slot per its known state and preserve reserved bytes.
 	if (isAll) {
 		for (let i = 0; i < OFF.SAGE_CARD_COUNT; i++) {
-			buf[OFF.SAGE_CARD_BASE + i] = 0x31;
+			writeSageOwned(buf, OFF.SAGE_CARD_BASE + i, true);
 		}
 	}
 	for (const sage of SAGE_TABLE) {
@@ -698,7 +758,7 @@ function writeSages(buf: Uint8Array, sages: SageCollection): void {
 		if (off === undefined) continue;
 		const k = known[sage.name];
 		if (!k) continue;
-		buf[OFF.SAGE_CARD_BASE + off] = k.unlocked ? 0x31 : 0x00;
+		writeSageOwned(buf, OFF.SAGE_CARD_BASE + off, k.unlocked);
 	}
 
 	// XP / level / flag entries. Index 0 is the Advisor placeholder.

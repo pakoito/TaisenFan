@@ -43,6 +43,8 @@ export const EXPLAINERS = {
 		'Treats every Lord card as owned (1 copy). Browse the deck builder freely.',
 	cardQuantity:
 		'How many copies of this Lord you own. The game uses copies for trading and deck-building constraints.',
+	cardObtained:
+		'0 copies, but obtained before: the game keeps that flag when copies run out, and some card lists still show it.',
 	sagesUnlockAll:
 		'Treats every Sage card as owned. They appear in the Sage selection screen.',
 	sageLevel:

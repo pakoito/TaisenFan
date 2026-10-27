@@ -121,6 +121,8 @@ export {
 export {
 	ALL_TROOP_COLORS,
 	BASE_TROOP_COLORS,
+	CARD_OWN,
+	cardObtained,
 	PROFILE_SIZE,
 	readProfile,
 	writeProfile,

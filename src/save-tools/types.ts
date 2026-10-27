@@ -218,8 +218,16 @@ export type CampaignProgress = {
 export type CardQuantity = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 
 export type CardEntry = {
+	/** Copies owned: the ownership byte's low nibble. */
 	quantity: CardQuantity;
 	name?: string; // Optional - for display/reference only
+	/**
+	 * The ownership byte's flag bits (bits 4-7) as read: 0x10 = obtained (the
+	 * game sets it with any count > 0 and never clears it), 0x20 = set by the
+	 * post-drill draw and the deck editor. Omitted = keep the save's flags.
+	 * A card with 0 copies is listed only while it has flags.
+	 */
+	flags?: number;
 };
 
 export type CardCollection = {

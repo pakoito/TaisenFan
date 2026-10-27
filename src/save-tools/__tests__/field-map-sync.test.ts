@@ -19,7 +19,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {BLOCKS} from '@/save-tools/crypto';
-import {OFF, PROFILE_SIZE} from '@/save-tools/profile-codec';
+import {CARD_OWN, OFF, PROFILE_SIZE} from '@/save-tools/profile-codec';
 
 type MapEntry = {
 	off: number;
@@ -165,9 +165,18 @@ describe('save-field-map drift guard (website codec ↔ canonical map)', () => {
 
 	it('Card ownership region (byte-per-card, base 0x52)', () => {
 		expect(OFF.CARD_BASE).toBe(
-			f('card_ownership_byte_per_card_indexed_by_CARDLIB_No_qty_ascii_31to39')
-				.off,
+			f(
+				'card_ownership_byte_per_card_indexed_by_CARDLIB_No_bitfield_lo4_copies_b4_obtained_b5_flag',
+			).off,
 		);
+	});
+
+	// The map's field name carries the byte's layout (arm9 0x02034FE0..
+	// 0x020350A8); the codec must decode it the same way.
+	it('Card ownership byte: lo4 copies, b4 obtained, b5 flag', () => {
+		expect(CARD_OWN.COUNT_MASK).toBe(0x0f);
+		expect(CARD_OWN.OBTAINED).toBe(0x10);
+		expect(CARD_OWN.BIT5).toBe(0x20);
 	});
 
 	// === DUEL difficulty array — the field that regressed (Hard 0x34C bug) ===
