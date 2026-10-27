@@ -245,19 +245,27 @@
     },
     {
       "off": 82,
-      "len": 338,
+      "len": 314,
       "name": "card_ownership_byte_per_card_indexed_by_CARDLIB_No_bitfield_lo4_copies_b4_obtained_b5_flag",
       "kind": "field",
       "confidence": "high",
       "val": "CAP"
     },
     {
-      "off": 420,
-      "len": 168,
-      "name": "sage_records_21x8",
+      "off": 396,
+      "len": 24,
+      "name": "sage_card_ownership_byte_per_STAFFCARD_record_0x18C_plus_idx_slot0_placeholder_bitfield_lo4_copies_b4_obtained_b5_flag",
       "kind": "field",
       "confidence": "high",
-      "val": "DIFF"
+      "val": "DISASM"
+    },
+    {
+      "off": 420,
+      "len": 168,
+      "name": "sage_records_21x8_per_STAFFCARD_record_s8_level_u8_unread_s16_xp_s32_battles",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DISASM"
     },
     {
       "off": 588,

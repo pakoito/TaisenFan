@@ -25,7 +25,7 @@ const VANILLA = new Uint8Array(
 );
 
 const CARD_BASE = 0x52;
-const SAGE_CARD_BASE = 0x1_89;
+const SAGE_CARD_BASE = 0x1_8c;
 
 async function vanillaProfileBytes(): Promise<Uint8Array> {
 	const parsed = await parseSav(VANILLA);

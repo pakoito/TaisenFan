@@ -153,6 +153,12 @@ function refreshHeaderFooter(sav: Uint8Array): void {
 	sav[HEADER_CRC_OFFSET + 3] = (c >>> 24) & 0xff;
 }
 
+function sameBytes(a: Uint8Array, b: Uint8Array): boolean {
+	if (a.length !== b.length) return false;
+	for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return false;
+	return true;
+}
+
 /**
  * Build a .sav buffer from header + decrypted blocks.
  *
@@ -160,37 +166,52 @@ function refreshHeaderFooter(sav: Uint8Array): void {
  * the MD5+CRC footer at 0x50..0x63 is recomputed against them. Blocks
  * not in the map are taken from `baseSav` if provided, otherwise zeroed
  * (or DEFAULT_FOOTER for the footer block).
+ *
+ * With a `baseSav`, whatever does not change keeps the base's bytes: the
+ * bytes outside the blocks, a block whose plaintext is the base's, and the
+ * header when its payload is the base's. So an untouched round trip is
+ * byte-identical, even for a block whose stored CRC is wrong (two cooked
+ * saves on disk have one, which the game rejects with status 4): a block
+ * nobody edited is not rewritten. A changed block or header gets a fresh
+ * MD5 + CRC.
  */
 export async function buildSav(
 	header: Uint8Array,
 	blocks: Map<string, Uint8Array>,
 	baseSav?: Uint8Array,
 ): Promise<Uint8Array> {
-	const sav = new Uint8Array(SAV_SIZE).fill(0xff);
-
-	// Copy header verbatim. Footer (MD5+CRC at 0x50..0x63) gets
-	// overwritten by refreshHeaderFooter below to match the payload.
-	sav.set(header.slice(0, HEADER_SIZE));
+	const sav = baseSav
+		? new Uint8Array(baseSav)
+		: new Uint8Array(SAV_SIZE).fill(0xff);
 
 	for (const block of BLOCKS) {
 		let plaintext = blocks.get(block.name);
+		const base = baseSav ? (await verifyBlock(block, baseSav)).decrypted : null;
 
+		if (base && (!plaintext || sameBytes(plaintext, base))) continue;
 		if (!plaintext) {
-			if (baseSav) {
-				const {decrypted} = await verifyBlock(block, baseSav);
-				plaintext = decrypted;
-			} else if (block.name === 'footer') {
-				plaintext = new Uint8Array(DEFAULT_FOOTER);
-			} else {
-				plaintext = new Uint8Array(block.size);
-			}
+			plaintext =
+				block.name === 'footer'
+					? new Uint8Array(DEFAULT_FOOTER)
+					: new Uint8Array(block.size);
 		}
 
 		const fullBlock = await encryptBlock(block, plaintext);
 		sav.set(fullBlock, block.offset);
 	}
 
-	refreshHeaderFooter(sav);
+	const headerKept =
+		baseSav !== undefined &&
+		sameBytes(
+			header.slice(0, HEADER_DATA_SIZE),
+			baseSav.slice(0, HEADER_DATA_SIZE),
+		);
+	if (!headerKept) {
+		// Copy header verbatim. Footer (MD5+CRC at 0x50..0x63) gets
+		// overwritten by refreshHeaderFooter below to match the payload.
+		sav.set(header.slice(0, HEADER_SIZE));
+		refreshHeaderFooter(sav);
+	}
 	return sav;
 }
 

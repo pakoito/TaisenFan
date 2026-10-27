@@ -170,19 +170,31 @@ describe('Starter preset', () => {
 		}
 	});
 
-	it('all 24 sage card bytes are 0x31', () => {
-		for (let i = 0x1_89; i < 0x1_89 + 24; i++) {
-			expect(profile[i], `sage card byte at 0x${i.toString(16)}`).toBe(0x31);
+	// Sage i (STAFFCARD record i) owns byte 0x18C + i. Slot 0 is the 軍師
+	// placeholder record and 21-23 have no record: they stay as the template
+	// has them, like the 3 card slots 0x189..0x18B before them.
+	it('the 20 sage card bytes (0x18D..0x1A0) are 0x31, the rest untouched', () => {
+		for (let i = 1; i <= 20; i++) {
+			const at = 0x1_8c + i;
+			expect(profile[at], `sage card byte at 0x${at.toString(16)}`).toBe(0x31);
+		}
+		for (const at of [0x1_89, 0x1_8a, 0x1_8b, 0x1_8c, 0x1_a1, 0x1_a2, 0x1_a3]) {
+			expect(profile[at], `byte at 0x${at.toString(16)}`).toBe(0);
 		}
 	});
 
-	it('all 20 sage XP entries are unlocked at level 1', () => {
+	it('all 20 sage records are unlocked at level 1', () => {
 		for (let s = 1; s <= 20; s++) {
 			const base = 0x1_a4 + s * 8;
-			const level = profile[base]! | (profile[base + 1]! << 8);
-			const flag = profile[base + 4]! | (profile[base + 5]! << 8);
+			const level = profile[base]!;
+			const battles = new DataView(profile.buffer).getInt32(
+				profile.byteOffset + base + 4,
+				true,
+			);
 			expect(level, `sage ${s} level`).toBe(1);
-			expect(flag, `sage ${s} flag`).toBe(1);
+			// The preset gives each sage it unlocks 1 battle (+4, s32). Chen
+			// Qun (1) is already owned in the template, so his row is kept.
+			expect(battles, `sage ${s} battles`).toBe(s === 1 ? 0 : 1);
 		}
 	});
 
@@ -282,13 +294,17 @@ describe('Full preset', () => {
 		}
 	});
 
-	it('all 20 sage XP entries are level 20 with flag set', () => {
+	it('all 20 sage records are level 20 with 1 battle, all 20 owned', () => {
 		for (let s = 1; s <= 20; s++) {
 			const base = 0x1_a4 + s * 8;
-			const level = profile[base]! | (profile[base + 1]! << 8);
-			const flag = profile[base + 4]! | (profile[base + 5]! << 8);
+			const level = profile[base]!;
+			const battles = new DataView(profile.buffer).getInt32(
+				profile.byteOffset + base + 4,
+				true,
+			);
 			expect(level, `sage ${s} level`).toBe(20);
-			expect(flag, `sage ${s} flag`).toBe(1);
+			expect(battles, `sage ${s} battles`).toBe(1);
+			expect(profile[0x1_8c + s], `sage ${s} card byte`).toBe(0x31);
 		}
 	});
 

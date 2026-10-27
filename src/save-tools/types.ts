@@ -301,6 +301,12 @@ export type Achievements = {
 	campaignEventsRaw?: Uint8Array;
 	/** Raw 8-byte episode-completion bitmask preserved when state is 'partial' */
 	episodeCompletionRaw?: Uint8Array;
+	/**
+	 * The stored selected-title value when it is not `selectedTitle + 19`
+	 * (0xFFFF "none", or a value that encodes no title). Written back while
+	 * selectedTitle still decodes from it; drop it when the title is edited.
+	 */
+	selectedTitleRaw?: number;
 };
 
 // =============================================================================

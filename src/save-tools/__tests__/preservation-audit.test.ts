@@ -3,7 +3,7 @@
  *
  * Builds a synthetic profile with non-zero bytes salted into every
  * "we don't model this" position (padding gaps, unused bits of bytes
- * we partially own, XP and trailing pad of every sage XP entry, the
+ * we partially own, XP and the battle count of every sage row, the
  * unused upper 16 bits of the DUEL completion bitmask, etc.). A full
  * extract → replaceSave round-trip must preserve every salted byte.
  *
@@ -29,14 +29,16 @@ const WHOLE_BYTE_WATCH: {off: number; note: string}[] = [
 	{off: 0x12, note: 'high word of onlineRank u32 (0x10)'},
 	{off: 0x15, note: 'byte of food u32 (0x14)'},
 	{off: 0x17, note: 'high byte of food u32 (0x14)'},
-	// Sage card region: per-faction trailing slot has no card mapped
-	{off: 0x1_8e, note: 'Wei reserved slot in sage card region'},
-	{off: 0x1_94, note: 'Shu reserved slot in sage card region'},
-	{off: 0x1_9a, note: 'Wu reserved slot in sage card region'},
-	{off: 0x1_a0, note: 'Han reserved slot in sage card region'},
-	// Padding between sage card region and sage XP entries
-	{off: 0x1_a1, note: 'pad after sage card region'},
-	{off: 0x1_a3, note: 'pad before sage XP base'},
+	// The last card slots (311-313, COM-only records no CARD_TABLE entry
+	// maps), the 軍師 placeholder slot 0 and the unused sage slots 21-23.
+	{off: 0x1_89, note: 'card slot 311 (no CARD_TABLE entry)'},
+	{off: 0x1_8b, note: 'card slot 313 (no CARD_TABLE entry)'},
+	{off: 0x1_8c, note: 'sage card slot 0 (軍師 placeholder record)'},
+	{off: 0x1_a1, note: 'sage card slot 21 (no record)'},
+	{off: 0x1_a3, note: 'sage card slot 23 (no record)'},
+	// Sage record row 0 (the 軍師 placeholder): never written.
+	{off: 0x1_a4, note: 'sage row 0 level'},
+	{off: 0x1_a8, note: 'sage row 0 battles'},
 	// DUEL Easy struct reserved gaps the codec never touches: 0x250-0x253
 	// (between cleared mask and its copy) and 0x258-0x25B (after the copy,
 	// before the 0x25C score array).
@@ -75,8 +77,9 @@ describe('Region preservation', () => {
 		// Chapter-3 completion byte: bits 0-5 owned; bits 6-7 must survive.
 		profile[0x4_56] = (profile[0x4_56]! & 0x3f) | 0xc0;
 
-		// Sage XP entry for Chen Qun (sage index 1, base 0x1AC): we own +0
-		// (level) and +4 (flag); +2 (XP) and +6 (padding) must survive.
+		// Sage row for Chen Qun (sage index 1, base 0x1AC): +2 (XP) and the
+		// high half of the +4 s32 battle count must survive. He is owned in
+		// the template, so nothing of his is rewritten.
 		profile[0x1_ae] = 0x12;
 		profile[0x1_af] = 0x34;
 		profile[0x1_b2] = 0x56;

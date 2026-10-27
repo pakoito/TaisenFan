@@ -345,7 +345,10 @@ function TitlesSection() {
 						const v = values[0];
 						if (typeof v !== 'number') return;
 						mutate(d => {
-							d.achievements.selectedTitle = v - 1;
+							// An explicit pick replaces the stored value (e.g. the
+							// 0xFFFF "none" that also reads as title 1).
+							const {selectedTitleRaw: _stored, ...rest} = d.achievements;
+							d.achievements = {...rest, selectedTitle: v - 1};
 						});
 					}}
 					step={1}

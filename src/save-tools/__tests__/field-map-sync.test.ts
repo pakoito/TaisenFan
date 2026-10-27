@@ -19,7 +19,14 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {BLOCKS} from '@/save-tools/crypto';
-import {CARD_OWN, OFF, PROFILE_SIZE} from '@/save-tools/profile-codec';
+import {
+	CARD_OWN,
+	OFF,
+	PROFILE_SIZE,
+	readProfile,
+	SAGE_ROW,
+} from '@/save-tools/profile-codec';
+import {SAGE_CARD_OFFSET, SAGE_TABLE} from '@/save-tools/sage-table';
 
 type MapEntry = {
 	off: number;
@@ -177,6 +184,40 @@ describe('save-field-map drift guard (website codec ↔ canonical map)', () => {
 		expect(CARD_OWN.COUNT_MASK).toBe(0x0f);
 		expect(CARD_OWN.OBTAINED).toBe(0x10);
 		expect(CARD_OWN.BIT5).toBe(0x20);
+	});
+
+	// The 軍師 bytes follow the 314 card slots: sage i (STAFFCARD record i) at
+	// 0x52 + 314 + i = 0x18C + i (arm9 0x02034FE0, kind 1 adds 0x13A). The
+	// codec once put them at 0x189 + a per-faction table.
+	it('軍師 card ownership: 0x18C + STAFFCARD index, 24 slots', () => {
+		const cards = f(
+			'card_ownership_byte_per_card_indexed_by_CARDLIB_No_bitfield_lo4_copies_b4_obtained_b5_flag',
+		);
+		const sages = f(
+			'sage_card_ownership_byte_per_STAFFCARD_record_0x18C_plus_idx_slot0_placeholder_bitfield_lo4_copies_b4_obtained_b5_flag',
+		);
+		expect(cards.len).toBe(314);
+		expect(sages.off).toBe(cards.off + 314);
+		expect(OFF.SAGE_CARD_BASE).toBe(sages.off);
+		expect(OFF.SAGE_CARD_COUNT).toBe(sages.len);
+		for (const sage of SAGE_TABLE) {
+			expect(SAGE_CARD_OFFSET[sage.name], sage.name).toBe(sage.index);
+		}
+		// Decode probe: 0x18C + 8 owns Pang Tong (as in sage_ptong.sav).
+		const probe = new Uint8Array(PROFILE_SIZE);
+		probe[0x1_8c + 8] = 0x31;
+		const read = readProfile(probe).sages.sages;
+		expect(read['Pang Tong']?.unlocked).toBe(true);
+		expect(read['Ma Su']?.unlocked).toBe(false);
+	});
+
+	it('Sage records: 21 rows × 8 (s8 level, s16 XP, s32 battles)', () => {
+		const rows = f(
+			'sage_records_21x8_per_STAFFCARD_record_s8_level_u8_unread_s16_xp_s32_battles',
+		);
+		expect(OFF.SAGE_DATA_BASE).toBe(rows.off);
+		expect(OFF.SAGE_ROW_COUNT * OFF.SAGE_ENTRY_SIZE).toBe(rows.len);
+		expect([SAGE_ROW.LEVEL, SAGE_ROW.XP, SAGE_ROW.BATTLES]).toEqual([0, 2, 4]);
 	});
 
 	// === DUEL difficulty array — the field that regressed (Hard 0x34C bug) ===

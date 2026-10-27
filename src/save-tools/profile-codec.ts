@@ -8,7 +8,6 @@
 import {CARD_TABLE, CARD_TOTAL_SLOTS} from './card-table';
 import {
 	ALL_SAGE_NAMES,
-	SAGE_CARD_OFFSET,
 	SAGE_COUNT,
 	SAGE_INDEX_TO_NAME,
 	SAGE_TABLE,
@@ -105,16 +104,21 @@ export const OFF = {
 	SKILL_DEFENSE: 0x4e,
 	SKILL_DUEL: 0x50,
 
-	// Card unlock region (232 bytes)
+	// Card ownership bytes, one per CARDDATA record (314 slots, 232 used)
 	CARD_BASE: 0x52,
 
-	// Sage card bytes (24 bytes)
-	SAGE_CARD_BASE: 0x1_89,
+	// 軍師 card ownership bytes: the same array, from slot 314 on. Sage i
+	// (STAFFCARD record i, SAGE_CARD_OFFSET) is at 0x52 + 314 + i = 0x18C + i
+	// (arm9 0x02034FE0: kind 1 adds 0x13A). 24 slots; 0 is the 軍師
+	// placeholder record and 21-23 have no record, so only 1-20 are used.
+	SAGE_CARD_BASE: 0x1_8c,
 	SAGE_CARD_COUNT: 24,
 
-	// Sage XP/Level entries (21 sages × 8 bytes)
+	// Sage records: 21 rows × 8 bytes, row i = STAFFCARD record i (arm9
+	// 0x020350B0..0x02035110). See SAGE_ROW for the fields.
 	SAGE_DATA_BASE: 0x1_a4,
 	SAGE_ENTRY_SIZE: 8,
+	SAGE_ROW_COUNT: 21,
 
 	// DUEL drill records. Three per-difficulty structs at stride 0xA0:
 	//   Easy   @ 0x24C   Normal @ 0x2EC   Hard @ 0x38C
@@ -150,9 +154,28 @@ export const OFF = {
 	MODE_UNLOCK: 0x4_55,
 	CHAPTER3_UNLOCK: 0x4_56,
 
-	// Selected title
+	// Selected title, s16 (arm9 set 0x020351E8, get 0x020351F4). The profile
+	// init (0x02034A90) sets it to -1 (0xFFFF, none).
 	SELECTED_TITLE: 0x4_58,
 };
+
+/**
+ * Fields of a sage record row (OFF.SAGE_DATA_BASE + i * 8), as the arm9
+ * accessors read them:
+ *   +0 s8   level, set clamped to 1..20 (0x020350B0 / 0x020350BC). The
+ *           profile init sets every row to 1 (0x02034AC4).
+ *   +1      not read.
+ *   +2 s16  XP (0x020350D8 / 0x020350E4).
+ *   +4 s32  battles fought with the sage: the post-battle update adds 1
+ *           (0x0210D9C4), the setter clamps to 99,999 (0x02035100).
+ */
+export const SAGE_ROW = {
+	LEVEL: 0,
+	XP: 2,
+	BATTLES: 4,
+	LEVEL_MIN: 1,
+	LEVEL_MAX: 20,
+} as const;
 
 // =============================================================================
 // HELPERS
@@ -193,8 +216,8 @@ function writeBit(b: Uint8Array, base: number, n: number, on: boolean): void {
 }
 
 /**
- * The card ownership byte (cards at CARD_BASE + No, sages in the 24-byte
- * region after them) is a bit field. arm9 accessors: get 0x02034FE0, set
+ * The card ownership byte (cards at CARD_BASE + No, sages at SAGE_CARD_BASE +
+ * their STAFFCARD index) is a bit field. arm9 accessors: get 0x02034FE0, set
  * 0x02035000, add 0x02035050, test bit 4 0x02035070, set bit 5 0x02035090.
  *   bits 0-3  copies owned. The setter clamps to 0..9 (0x0203500E).
  *   bit 4     obtained. The setter sets it whenever the count is > 0
@@ -430,6 +453,35 @@ function readCards(buf: Uint8Array): CardCollection {
 	return {cards};
 }
 
+/** Sage `index`'s record row (SAGE_ROW) in the profile. */
+function sageRow(index: number): number {
+	return OFF.SAGE_DATA_BASE + index * OFF.SAGE_ENTRY_SIZE;
+}
+
+/** The level byte as the game reads it (s8), shown as at least 1. */
+function sageLevel(buf: Uint8Array, index: number): number {
+	const b = buf[sageRow(index) + SAGE_ROW.LEVEL]!;
+	return Math.max(SAGE_ROW.LEVEL_MIN, b > 0x7f ? b - 0x1_00 : b);
+}
+
+/**
+ * A sage's state as the editor shows it. The card byte at SAGE_CARD_BASE +
+ * index is the primary signal (a fresh save owns Chen Qun's 0x18D and no
+ * row of his is touched); a sage with battles, XP or a level above 1 counts
+ * too.
+ */
+function sageState(buf: Uint8Array, index: number): SageEntry {
+	const row = sageRow(index);
+	const level = sageLevel(buf, index);
+	const cardOwned = byteToQty(buf[OFF.SAGE_CARD_BASE + index]!) > 0;
+	const unlocked =
+		cardOwned ||
+		u32(buf, row + SAGE_ROW.BATTLES) !== 0 ||
+		level > 1 ||
+		u16(buf, row + SAGE_ROW.XP) !== 0;
+	return {unlocked, level};
+}
+
 function readSages(buf: Uint8Array): SageCollection {
 	const sages: Record<SageName, SageEntry> = {} as Record<SageName, SageEntry>;
 	let allUnlockedL1 = true;
@@ -439,22 +491,7 @@ function readSages(buf: Uint8Array): SageCollection {
 		const name = SAGE_INDEX_TO_NAME[i];
 		if (!name) continue;
 
-		const base = OFF.SAGE_DATA_BASE + i * OFF.SAGE_ENTRY_SIZE;
-		const level = Math.max(1, u16(buf, base));
-		const xp = u16(buf, base + 2);
-		const flag = u16(buf, base + 4);
-
-		// Sage-card ownership byte at SAGE_CARD_BASE + offset[name]. This is
-		// the primary signal: a real fresh save has Chen Qun's byte set at
-		// 0x18d even though no XP-entry flag is on.
-		const cardOff = SAGE_CARD_OFFSET[name];
-		const cardOwned =
-			cardOff !== undefined &&
-			byteToQty(buf[OFF.SAGE_CARD_BASE + cardOff]!) > 0;
-
-		// Unlocked if any of: card byte set, XP flag set, has leveled up, has XP.
-		const unlocked = cardOwned || flag !== 0 || level > 1 || xp > 0;
-
+		const {unlocked, level} = sageState(buf, i);
 		sages[name] = {unlocked, level};
 
 		if (unlocked) anyUnlocked = true;
@@ -516,7 +553,7 @@ function readAchievements(buf: Uint8Array): Achievements {
 
 	// Selected title: stored as index + 19; 0xFFFF (or anything <19) is "none"
 	const rawTitle = u16(buf, OFF.SELECTED_TITLE);
-	const selectedTitle = rawTitle >= 19 && rawTitle < 129 ? rawTitle - 19 : 0;
+	const selectedTitle = decodeSelectedTitle(rawTitle);
 
 	const result: Achievements = {
 		titlesUnlocked: titles.state,
@@ -527,7 +564,14 @@ function readAchievements(buf: Uint8Array): Achievements {
 	if (titles.raw) result.titlesRaw = titles.raw;
 	if (events.raw) result.campaignEventsRaw = events.raw;
 	if (episodes.raw) result.episodeCompletionRaw = episodes.raw;
+	// "None" (0xFFFF) and the other values that do not encode a title read as
+	// title 0 too; keep the stored value so a round trip writes it back.
+	if (rawTitle !== selectedTitle + 19) result.selectedTitleRaw = rawTitle;
 	return result;
+}
+
+function decodeSelectedTitle(raw: number): number {
+	return raw >= 19 && raw < 129 ? raw - 19 : 0;
 }
 
 // =============================================================================
@@ -538,7 +582,7 @@ export function writeProfile(
 	profile: SaveProfile,
 	baseBuf?: Uint8Array,
 ): Uint8Array {
-	const buf = baseBuf ? new Uint8Array(baseBuf) : new Uint8Array(PROFILE_SIZE);
+	const buf = baseBuf ? new Uint8Array(baseBuf) : freshProfileBuffer();
 
 	if (buf.length !== PROFILE_SIZE) {
 		throw new Error(
@@ -555,6 +599,20 @@ export function writeProfile(
 	writeAchievements(buf, profile.achievements);
 	// Decks are in a separate block, not written here
 
+	return buf;
+}
+
+/**
+ * The base for a profile written without one: zeros, with every sage row at
+ * level 1 as the game's profile init leaves them (0x02034AC4). The writers
+ * keep a field whose value does not change, so they would otherwise leave
+ * the levels at 0.
+ */
+function freshProfileBuffer(): Uint8Array {
+	const buf = new Uint8Array(PROFILE_SIZE);
+	for (let i = 0; i < OFF.SAGE_ROW_COUNT; i++) {
+		buf[sageRow(i) + SAGE_ROW.LEVEL] = SAGE_ROW.LEVEL_MIN;
+	}
 	return buf;
 }
 
@@ -596,18 +654,18 @@ function writeTraining(buf: Uint8Array, training: TrainingProgress): void {
 
 	// DUEL completion + scores. Completion is the EXPLICIT per-difficulty
 	// CLEARED bit (Easy 0x24C / Normal 0x2EC / Hard 0x38C), mirrored at +0x08;
-	// a stage can be cleared with score 0, so we never gate on highScore. We
-	// rebuild each difficulty's cleared bitmask from the stages map. Stages
-	// absent from the map are cleared to 0 (the codec re-reads the full set).
-	// Clear only the exact mask byte span per difficulty so we never disturb
-	// the reserved bytes that follow each mask (e.g. Easy's 0x250 pad). Easy
-	// and Hard use 20 bits (3 bytes); Normal uses 40 bits (5 bytes).
-	for (const [base, bytes] of [
-		[OFF.DUEL_EASY_CLEARED, 3],
-		[OFF.DUEL_NORMAL_CLEARED, 5],
-		[OFF.DUEL_HARD_CLEARED, 3],
-	] as const) {
-		for (let i = 0; i < bytes; i++) buf[base + i] = 0;
+	// a stage can be cleared with score 0, so we never gate on highScore. A
+	// stage absent from the map is not cleared. Only a stage whose cleared
+	// state changes is written, to the mask and its copy: the other bits of
+	// both masks (stages past the table, a copy that differs from its mask in
+	// an uploaded save) are kept as they are.
+	for (const stage of STAGE_TABLE) {
+		const [mask, copy, i] = duelBit(stage.deckNo);
+		const completed = training.stages[stage.stageId]?.completed ?? false;
+		if (readBit(buf, mask, i) !== completed) {
+			writeBit(buf, mask, i, completed);
+			writeBit(buf, copy, i, completed);
+		}
 	}
 
 	for (const [stageId, result] of Object.entries(training.stages)) {
@@ -615,29 +673,22 @@ function writeTraining(buf: Uint8Array, training: TrainingProgress): void {
 		if (deckNo === undefined) continue;
 
 		if (deckNo <= 21) {
-			const i = deckNo - 2;
-			writeBit(buf, OFF.DUEL_EASY_CLEARED, i, result.completed);
-			w16(buf, OFF.DUEL_SCORE_EASY + i * 2, result.highScore);
+			w16(buf, OFF.DUEL_SCORE_EASY + (deckNo - 2) * 2, result.highScore);
 		} else if (deckNo <= 61) {
-			const i = deckNo - 22;
-			writeBit(buf, OFF.DUEL_NORMAL_CLEARED, i, result.completed);
-			w16(buf, OFF.DUEL_SCORE_NORMAL + i * 2, result.highScore);
+			w16(buf, OFF.DUEL_SCORE_NORMAL + (deckNo - 22) * 2, result.highScore);
 		} else {
-			const i = deckNo - 62;
-			writeBit(buf, OFF.DUEL_HARD_CLEARED, i, result.completed);
-			w16(buf, OFF.DUEL_SCORE_HARD + i * 2, result.highScore);
+			w16(buf, OFF.DUEL_SCORE_HARD + (deckNo - 62) * 2, result.highScore);
 		}
 	}
+}
 
-	// Mirror each cleared bitmask into its +0x08 copy (the game keeps both),
-	// matching each difficulty's exact mask width.
-	for (const [src, dst, bytes] of [
-		[OFF.DUEL_EASY_CLEARED, OFF.DUEL_EASY_CLEARED_COPY, 3],
-		[OFF.DUEL_NORMAL_CLEARED, OFF.DUEL_NORMAL_CLEARED_COPY, 5],
-		[OFF.DUEL_HARD_CLEARED, OFF.DUEL_HARD_CLEARED_COPY, 3],
-	] as const) {
-		for (let i = 0; i < bytes; i++) buf[dst + i] = buf[src + i]!;
-	}
+/** A DUEL deckNo's cleared mask, the mask's copy and its bit index. */
+function duelBit(deckNo: number): [number, number, number] {
+	if (deckNo <= 21)
+		return [OFF.DUEL_EASY_CLEARED, OFF.DUEL_EASY_CLEARED_COPY, deckNo - 2];
+	if (deckNo <= 61)
+		return [OFF.DUEL_NORMAL_CLEARED, OFF.DUEL_NORMAL_CLEARED_COPY, deckNo - 22];
+	return [OFF.DUEL_HARD_CLEARED, OFF.DUEL_HARD_CLEARED_COPY, deckNo - 62];
 }
 
 function writeTroopColors(buf: Uint8Array, colors: TroopColors): void {
@@ -744,57 +795,36 @@ function writeSages(buf: Uint8Array, sages: SageCollection): void {
 		}
 	}
 
-	// Card-byte region. `isAll` gives all 24 bytes a copy (matching the CLI
-	// cooker and the game's own "fully unlocked" state — the layout has 1
-	// reserved byte per faction we'd otherwise leave at 0). Otherwise we write
-	// each real sage's slot per its known state and preserve reserved bytes.
-	if (isAll) {
-		for (let i = 0; i < OFF.SAGE_CARD_COUNT; i++) {
-			writeSageOwned(buf, OFF.SAGE_CARD_BASE + i, true);
-		}
-	}
+	// A sage whose state does not change keeps every byte: its card byte (at
+	// SAGE_CARD_BASE + its STAFFCARD index) and its row. The 軍師 placeholder
+	// (slot and row 0) and the unused slots 21-23 are never written. A sage
+	// that changes gets its card byte (owned: a copy, flags kept) and its
+	// level byte (+0, s8, clamped to 1..20 like the game's setter); the XP
+	// (+2) and the unread +1 byte are kept.
 	for (const sage of SAGE_TABLE) {
-		const off = SAGE_CARD_OFFSET[sage.name];
-		if (off === undefined) continue;
-		const k = known[sage.name];
-		if (!k) continue;
-		writeSageOwned(buf, OFF.SAGE_CARD_BASE + off, k.unlocked);
-	}
+		const want = known[sage.name];
+		if (!want) continue; // No explicit state — preserve buf bytes.
+		const have = sageState(buf, sage.index);
+		if (have.unlocked === want.unlocked && have.level === want.level) continue;
 
-	// XP / level / flag entries. Index 0 is the Advisor placeholder.
-	// We only own the level (+0) and flag (+4) bytes — XP (+2) and the
-	// trailing pair (+6) are preserved from the base buf so uploaded saves
-	// keep any in-game progress we don't model.
-	for (let i = 0; i <= SAGE_COUNT; i++) {
-		const base = OFF.SAGE_DATA_BASE + i * OFF.SAGE_ENTRY_SIZE;
-		if (i === 0) {
-			w16(buf, base, 1);
-			w16(buf, base + 4, 0);
-			continue;
+		writeSageOwned(buf, OFF.SAGE_CARD_BASE + sage.index, want.unlocked);
+		const row = sageRow(sage.index);
+		if (have.level !== want.level) {
+			buf[row + SAGE_ROW.LEVEL] = Math.min(
+				SAGE_ROW.LEVEL_MAX,
+				Math.max(SAGE_ROW.LEVEL_MIN, want.level),
+			);
 		}
-		const name = SAGE_INDEX_TO_NAME[i];
-		const entry = name ? known[name] : undefined;
-		if (!entry) continue; // No explicit state — preserve buf bytes.
 
-		w16(buf, base, entry.level);
-
-		// Flag (+4): vanilla saves have card_byte set yet flag=0 for the
-		// starter sage. We must not invent a flag=1 just because the user
-		// uploaded that save and re-downloaded it. Two cases set the flag:
-		//   1. Preset-driven unlocks (isAll: caller is asking for "fully
-		//      active" sages, matching how Starter/Full should look).
-		//   2. The user has leveled this sage above 1 — flag goes with level.
-		// In all other cases, preserve whatever the base buffer had.
-		const flagAlready = u16(buf, base + 4);
-		let nextFlag: number;
-		if (!entry.unlocked) {
-			nextFlag = 0;
-		} else if (isAll || entry.level > 1 || flagAlready !== 0) {
-			nextFlag = 1;
-		} else {
-			nextFlag = flagAlready;
+		// Battles (+4, s32). A locked sage has none (it would read as unlocked
+		// otherwise). A sage that a preset unlocks, or that is raised above
+		// level 1, is given 1 when it has none; an existing count is kept.
+		const battles = u32(buf, row + SAGE_ROW.BATTLES);
+		if (!want.unlocked) {
+			w32(buf, row + SAGE_ROW.BATTLES, 0);
+		} else if (battles === 0 && (isAll || want.level > 1)) {
+			w32(buf, row + SAGE_ROW.BATTLES, 1);
 		}
-		w16(buf, base + 4, nextFlag);
 	}
 }
 
@@ -848,8 +878,15 @@ function writeAchievements(buf: Uint8Array, achievements: Achievements): void {
 	);
 
 	// Selected title: when titles are locked the game uses the 0xFFFF sentinel
-	// ("none"); otherwise it stores the displayed index + 19.
+	// ("none"); otherwise it stores the displayed index + 19. A value read from
+	// the save that still decodes to the same title is written back as read.
+	const raw = achievements.selectedTitleRaw;
 	if (
+		raw !== undefined &&
+		decodeSelectedTitle(raw) === achievements.selectedTitle
+	) {
+		w16(buf, OFF.SELECTED_TITLE, raw);
+	} else if (
 		achievements.titlesUnlocked === 'none' &&
 		achievements.selectedTitle === 0
 	) {

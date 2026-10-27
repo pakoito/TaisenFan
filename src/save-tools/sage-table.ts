@@ -4,7 +4,9 @@
  * The save file stores 21 sage entries (index 0 is the "Advisor" placeholder).
  * Real sages are indices 1-20.
  *
- * Order matches STAFFLIB.TBL in the game data.
+ * Order matches STAFFCARD.TBL / STAFFLIB.TBL in the game data: the index is
+ * the record index, used for the sage-card byte (0x18C + index) and the
+ * sage-record row (0x1A4 + index * 8).
  */
 
 import type {SageName} from './types';
@@ -83,34 +85,27 @@ export const SAGE_COUNT = 20;
 export const SAGE_TOTAL_ENTRIES = 21;
 
 /**
- * Byte position (0-23) within the 24-byte sage-card region at 0x189
- * for each sage. Layout is 4 factions × 6 byte slots; within each
- * faction the slot index is `(cardId & 0xF) - 1` (so Wei 0x2001 ⇒
- * faction-slot 0, Wei 0x2005 ⇒ faction-slot 4). The trailing byte
- * in each faction's run is reserved (no 0x_006 card exists).
+ * Byte position (0-23) of each sage within the 24-byte sage-card region at
+ * profile 0x18C (OFF.SAGE_CARD_BASE): the sage's STAFFCARD record index,
+ * which is also its sage-record row and this table's `index`.
  *
- * Faction order is Wei → Shu → Wu → Han, matching the sage_table
- * indexing convention.
+ * The ownership accessors (arm9 get 0x02034FE0, set 0x02035000, test bit 4
+ * 0x02035070, set bit 5 0x02035090) take (kind, index) and add 0x13A (314,
+ * the card slots) to the index when kind == 1, so sage i is at
+ * 0x52 + 314 + i = 0x18C + i. The index comes from 0x02033E48, which looks
+ * the CardId up in the 21 STAFFCARD records. Slot 0 is the 軍師 placeholder
+ * record (CardId 0), slots 21-23 have no record.
  *
- * Wei is empirically verified: a clean MelonDS save has byte 4 set
- * to 0x31 and exposes Chen Qun (0x2005) as the only owned sage
- * card. Shu / Wu / Han ordering is our best guess by convention.
+ * Saves agree: every fresh save has 0x18D (Chen Qun, index 1) = 0x31;
+ * sage_ptong.sav adds 0x194 (Pang Tong, index 8, also levelled in its row 8)
+ * and 0x196 (Fa Zheng, index 10); the "all sages" Action Replay code writes
+ * 0x39 to 0x18D..0x1A0 and 0 to 0x18C and 0x1A1..0x1A3.
  */
-const FACTION_BYTE_BASE: Record<string, number> = {
-	Wei: 0,
-	Shu: 6,
-	Wu: 12,
-	Han: 18,
-};
-
 export const SAGE_CARD_OFFSET: Record<SageName, number> = {} as Record<
 	SageName,
 	number
 >;
 
 for (const entry of SAGE_TABLE) {
-	const base = FACTION_BYTE_BASE[entry.faction];
-	if (base === undefined) continue;
-	const slot = (entry.cardId & 0x00_0f) - 1;
-	SAGE_CARD_OFFSET[entry.name] = base + slot;
+	SAGE_CARD_OFFSET[entry.name] = entry.index;
 }
