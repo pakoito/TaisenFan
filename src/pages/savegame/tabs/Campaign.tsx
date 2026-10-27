@@ -151,9 +151,9 @@ export function Campaign() {
 				<span className='text-text-muted'>VIEWED</span> in the gallery, and
 				missions being <span className='text-text-muted'>CLEARED</span> with a
 				score. The toggles below edit the chapter open/completion flags and the
-				event gallery. The raw per-mission clear/score records inside the
-				campaign block are experimental and left read-only, so they are not
-				editable here.
+				event gallery. The campaign save block (a campaign in progress, and each
+				scenario's clear count and best score) is kept as it is: this editor
+				does not change it.
 			</section>
 			<div className='flex flex-col gap-3'>
 				{CHAPTERS.map(c => (

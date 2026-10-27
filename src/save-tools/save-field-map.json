@@ -1,5 +1,5 @@
 {
-  "_doc": "Field registry for 100% byte accounting. kind: field|const|magic|checksum|pad|volatile|unknown. val (validation tag): WP=watchpoint/breakpoint-confirmed | CAP=live-capture (RAM read / before-after at live base) | DIFF=cohort byte-diff | DISASM=disassembly-only | SINGLE=single populated sample (mid_campaign) | INFER=structural inference (not cohort-observed) | STRUCT=structural const/pad. Offsets are within each block plaintext (header = unencrypted 0x80). Each block tiles 0..size-1 with no gaps/overlaps; gaps filled with kind:unknown runs. See FIELD_MAP.md for full prose, the WRITER table, and OPEN ITEMS.",
+  "_doc": "Field registry for 100% byte accounting. kind: field|const|magic|checksum|pad|volatile|unknown. val (validation tag): WP=watchpoint/breakpoint-confirmed | CAP=live-capture (RAM read / before-after at live base) | DIFF=cohort byte-diff | DISASM=disassembly-only | SINGLE=single populated sample (mid_campaign) | INFER=structural inference (not cohort-observed) | STRUCT=structural const/pad. Offsets are within each block plaintext (header = unencrypted 0x80). Each block tiles 0..size-1 with no gaps/overlaps; gaps filled with kind:unknown runs. The campaign block also carries tag (A = read in the code, B = observed in the emulator or a save sample, C = a guess; A/B = code + observed, A/C = located in code, meaning guessed; from sgst-port docs/modding/campaign-save.md) and type (s8/s16/u32/..., little-endian). A repeated structure is one entry with record = {count, stride, fields}: record i starts at off + i*stride and its fields (offsets relative to the record) tile 0..stride-1. See SAVE_FIELD_MAP.md for full prose, the WRITER table, and OPEN ITEMS.",
   "header": [
     {
       "off": 0,
@@ -1860,242 +1860,1940 @@
     {
       "off": 0,
       "len": 1,
-      "name": "campaign_active_flag_drives_shinki_saikai_new_resume_prompt",
+      "name": "campaign_in_progress_drives_shinki_saikai_prompt",
       "kind": "field",
       "confidence": "high",
-      "val": "CAP"
+      "val": "CAP",
+      "tag": "A/B",
+      "type": "s8"
     },
     {
       "off": 1,
-      "len": 9,
-      "name": "header_flags_zone_001",
+      "len": 1,
+      "name": "loaded_with_campaign_flag_set_at_load_write_only",
       "kind": "field",
-      "confidence": "low",
-      "val": "CAP"
+      "confidence": "high",
+      "val": "CAP",
+      "tag": "A/B",
+      "type": "s8"
+    },
+    {
+      "off": 2,
+      "len": 2,
+      "name": "pad_0002",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT",
+      "tag": "A"
+    },
+    {
+      "off": 4,
+      "len": 2,
+      "name": "scenario_0_19",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DISASM",
+      "tag": "A",
+      "type": "s16"
+    },
+    {
+      "off": 6,
+      "len": 2,
+      "name": "chapter_scenario_div3",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DISASM",
+      "tag": "A",
+      "type": "s16"
+    },
+    {
+      "off": 8,
+      "len": 2,
+      "name": "scenario_in_chapter_mod3",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DISASM",
+      "tag": "A",
+      "type": "s16"
     },
     {
       "off": 10,
-      "len": 1,
-      "name": "companion_counter",
+      "len": 2,
+      "name": "months_elapsed",
       "kind": "field",
       "confidence": "high",
-      "val": "CAP"
+      "val": "CAP",
+      "tag": "A/B",
+      "type": "s16"
     },
     {
-      "off": 11,
-      "len": 3,
-      "name": "header_flags_zone_00B",
+      "off": 12,
+      "len": 2,
+      "name": "calendar_year",
       "kind": "field",
-      "confidence": "low",
-      "val": "CAP"
+      "confidence": "high",
+      "val": "CAP",
+      "tag": "A/B",
+      "type": "s16"
     },
     {
       "off": 14,
-      "len": 1,
-      "name": "turn_month_counter",
+      "len": 2,
+      "name": "calendar_month_1_12",
       "kind": "field",
       "confidence": "high",
-      "val": "CAP"
+      "val": "CAP",
+      "tag": "A/B",
+      "type": "s16"
     },
     {
-      "off": 15,
-      "len": 13,
-      "name": "header_globals_zone_00F",
+      "off": 16,
+      "len": 2,
+      "name": "month_limit_months_left_eq_limit_minus_elapsed",
       "kind": "field",
-      "confidence": "low",
-      "val": "SINGLE"
+      "confidence": "high",
+      "val": "CAP",
+      "tag": "A/B",
+      "type": "s16"
+    },
+    {
+      "off": 18,
+      "len": 1,
+      "name": "home_territory",
+      "kind": "field",
+      "confidence": "high",
+      "val": "SINGLE",
+      "tag": "A/B",
+      "type": "s8"
+    },
+    {
+      "off": 19,
+      "len": 1,
+      "name": "pad_0013",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT",
+      "tag": "A"
+    },
+    {
+      "off": 20,
+      "len": 2,
+      "name": "home_garrison_cost_sum_at_start",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DISASM",
+      "tag": "A",
+      "type": "s16"
+    },
+    {
+      "off": 22,
+      "len": 2,
+      "name": "pad_0016",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT",
+      "tag": "A"
+    },
+    {
+      "off": 24,
+      "len": 4,
+      "name": "clear_condition_type_0_5",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DISASM",
+      "tag": "A",
+      "type": "u32"
     },
     {
       "off": 28,
       "len": 4,
-      "name": "current_chapter_u32",
+      "name": "clear_condition_param_target_territory",
       "kind": "field",
       "confidence": "high",
-      "val": "CAP"
+      "val": "CAP",
+      "tag": "A/B",
+      "type": "s32"
     },
     {
       "off": 32,
-      "len": 48,
-      "name": "header_globals_zone_020",
+      "len": 24,
+      "name": "must_capture_flags_per_territory_type3",
       "kind": "field",
-      "confidence": "low",
-      "val": "SINGLE"
+      "confidence": "high",
+      "val": "DISASM",
+      "tag": "A",
+      "type": "s8[24]"
+    },
+    {
+      "off": 56,
+      "len": 4,
+      "name": "pad_0038",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT",
+      "tag": "A"
+    },
+    {
+      "off": 60,
+      "len": 4,
+      "name": "events_played_bitmap_bit_e_minus_1",
+      "kind": "field",
+      "confidence": "high",
+      "val": "CAP",
+      "tag": "A/B",
+      "type": "u32"
+    },
+    {
+      "off": 64,
+      "len": 4,
+      "name": "pending_event_id",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DISASM",
+      "tag": "A",
+      "type": "u32"
+    },
+    {
+      "off": 68,
+      "len": 4,
+      "name": "type3_event_id",
+      "kind": "field",
+      "confidence": "med",
+      "val": "DISASM",
+      "tag": "A/C",
+      "type": "u32"
+    },
+    {
+      "off": 72,
+      "len": 2,
+      "name": "event_map_marker",
+      "kind": "field",
+      "confidence": "med",
+      "val": "DISASM",
+      "tag": "A/C",
+      "type": "s16"
+    },
+    {
+      "off": 74,
+      "len": 2,
+      "name": "event_trigger_timing_2_before_battle_3_after",
+      "kind": "field",
+      "confidence": "high",
+      "val": "CAP",
+      "tag": "A/B",
+      "type": "s16"
+    },
+    {
+      "off": 76,
+      "len": 4,
+      "name": "event_system_state",
+      "kind": "field",
+      "confidence": "med",
+      "val": "DISASM",
+      "tag": "A/C",
+      "type": "u32"
     },
     {
       "off": 80,
-      "len": 8,
-      "name": "resume_param_zero",
+      "len": 1,
+      "name": "battle_result_pending_on_map",
       "kind": "field",
-      "confidence": "low",
-      "val": "SINGLE"
+      "confidence": "high",
+      "val": "CAP",
+      "tag": "A/B",
+      "type": "s8"
+    },
+    {
+      "off": 81,
+      "len": 1,
+      "name": "pad_0051",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT",
+      "tag": "A"
+    },
+    {
+      "off": 82,
+      "len": 2,
+      "name": "com_turn_value",
+      "kind": "field",
+      "confidence": "med",
+      "val": "DISASM",
+      "tag": "A/C",
+      "type": "s16"
+    },
+    {
+      "off": 84,
+      "len": 4,
+      "name": "battle_attacker_kind_word",
+      "kind": "field",
+      "confidence": "med",
+      "val": "CAP",
+      "tag": "A/C",
+      "type": "u32"
     },
     {
       "off": 88,
-      "len": 8,
-      "name": "resume_battle_params_turn_time_mission",
+      "len": 7,
+      "name": "force_alliance_matrix_7_rows_bitmask_symmetric_diagonal_set",
       "kind": "field",
-      "confidence": "med",
-      "val": "SINGLE"
+      "confidence": "high",
+      "val": "DISASM",
+      "tag": "A",
+      "type": "u8[7]"
+    },
+    {
+      "off": 95,
+      "len": 1,
+      "name": "pad_005f",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT",
+      "tag": "A"
     },
     {
       "off": 96,
-      "len": 28,
-      "name": "resume_params_zone_060",
+      "len": 4,
+      "name": "campaign_sage_card_id",
       "kind": "field",
-      "confidence": "low",
-      "val": "SINGLE"
+      "confidence": "high",
+      "val": "SINGLE",
+      "tag": "A/B",
+      "type": "u32"
+    },
+    {
+      "off": 100,
+      "len": 4,
+      "name": "sage_derived_byte",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DISASM",
+      "tag": "A",
+      "type": "u32"
+    },
+    {
+      "off": 104,
+      "len": 1,
+      "name": "monthly_command12_lock",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DISASM",
+      "tag": "A",
+      "type": "s8"
+    },
+    {
+      "off": 105,
+      "len": 3,
+      "name": "pad_0069",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT",
+      "tag": "A"
+    },
+    {
+      "off": 108,
+      "len": 4,
+      "name": "funds_capped_999999",
+      "kind": "field",
+      "confidence": "high",
+      "val": "CAP",
+      "tag": "A/B",
+      "type": "u32"
+    },
+    {
+      "off": 112,
+      "len": 2,
+      "name": "deck_cost_cap_minus1_scenario_row",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DISASM",
+      "tag": "A",
+      "type": "s16"
+    },
+    {
+      "off": 114,
+      "len": 2,
+      "name": "pad_0072",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT",
+      "tag": "A"
+    },
+    {
+      "off": 116,
+      "len": 4,
+      "name": "last_drawn_officer_card_id_minus1_none",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DISASM",
+      "tag": "A",
+      "type": "s32"
+    },
+    {
+      "off": 120,
+      "len": 1,
+      "name": "officer_draws_this_month",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DISASM",
+      "tag": "A",
+      "type": "s8"
+    },
+    {
+      "off": 121,
+      "len": 1,
+      "name": "pool_officers_at_start",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DISASM",
+      "tag": "A",
+      "type": "s8"
+    },
+    {
+      "off": 122,
+      "len": 1,
+      "name": "pool_total",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DISASM",
+      "tag": "A",
+      "type": "s8"
+    },
+    {
+      "off": 123,
+      "len": 1,
+      "name": "pool_officers_drawn",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DISASM",
+      "tag": "A",
+      "type": "s8"
     },
     {
       "off": 124,
-      "len": 204,
-      "name": "resume_deck_A_player_count_u32_then_50cards_u32",
+      "len": 612,
+      "name": "officer_pools_3",
       "kind": "field",
       "confidence": "high",
-      "val": "SINGLE"
-    },
-    {
-      "off": 328,
-      "len": 204,
-      "name": "resume_deck_B_count_u32_then_50cards_u32",
-      "kind": "field",
-      "confidence": "high",
-      "val": "SINGLE"
-    },
-    {
-      "off": 532,
-      "len": 204,
-      "name": "resume_deck_C_count_u32_then_50cards_u32",
-      "kind": "field",
-      "confidence": "high",
-      "val": "SINGLE"
+      "val": "DISASM",
+      "tag": "A",
+      "type": "record[3]",
+      "record": {
+        "count": 3,
+        "stride": 204,
+        "fields": [
+          {
+            "off": 0,
+            "len": 1,
+            "name": "count",
+            "kind": "field",
+            "confidence": "high",
+            "val": "DISASM",
+            "tag": "A",
+            "type": "s8"
+          },
+          {
+            "off": 1,
+            "len": 1,
+            "name": "draw_cursor",
+            "kind": "field",
+            "confidence": "high",
+            "val": "DISASM",
+            "tag": "A",
+            "type": "s8"
+          },
+          {
+            "off": 2,
+            "len": 2,
+            "name": "pad_02",
+            "kind": "pad",
+            "confidence": "high",
+            "val": "STRUCT",
+            "tag": "A"
+          },
+          {
+            "off": 4,
+            "len": 200,
+            "name": "card_ids_50",
+            "kind": "field",
+            "confidence": "high",
+            "val": "DISASM",
+            "tag": "A",
+            "type": "u32[50]"
+          }
+        ]
+      }
     },
     {
       "off": 736,
       "len": 112,
-      "name": "resume_board_unit_table_7x16",
+      "name": "forces_7_force0_player",
       "kind": "field",
-      "confidence": "med",
-      "val": "SINGLE"
+      "confidence": "high",
+      "val": "SINGLE",
+      "tag": "A/B",
+      "type": "record[7]",
+      "record": {
+        "count": 7,
+        "stride": 16,
+        "fields": [
+          {
+            "off": 0,
+            "len": 2,
+            "name": "com_deck_cost_cap_div10",
+            "kind": "field",
+            "confidence": "high",
+            "val": "DISASM",
+            "tag": "A",
+            "type": "s16"
+          },
+          {
+            "off": 2,
+            "len": 2,
+            "name": "refresh_month_99_never",
+            "kind": "field",
+            "confidence": "high",
+            "val": "DISASM",
+            "tag": "A",
+            "type": "s16"
+          },
+          {
+            "off": 4,
+            "len": 4,
+            "name": "card_id_ruler_or_minus1",
+            "kind": "field",
+            "confidence": "med",
+            "val": "DISASM",
+            "tag": "A/C",
+            "type": "s32"
+          },
+          {
+            "off": 8,
+            "len": 8,
+            "name": "name_shiftjis",
+            "kind": "field",
+            "confidence": "high",
+            "val": "SINGLE",
+            "tag": "A/B",
+            "type": "char[8]"
+          }
+        ]
+      }
     },
     {
       "off": 848,
-      "len": 684,
-      "name": "resume_node_snapshot_graph_record_shape",
-      "kind": "field",
-      "confidence": "med",
-      "val": "SINGLE"
-    },
-    {
-      "off": 1532,
-      "len": 15640,
-      "name": "chapter_graph_23recs_x_0x2A8_0x0154_const_node_plus204_u32_battle_fought_flag_plus20C_scoreA_plus20D_scoreB_SINGLE",
+      "len": 2,
+      "name": "territories_in_play_count",
       "kind": "field",
       "confidence": "high",
-      "val": "SINGLE"
+      "val": "SINGLE",
+      "tag": "A/B",
+      "type": "s16"
+    },
+    {
+      "off": 850,
+      "len": 2,
+      "name": "pad_0352",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT",
+      "tag": "A"
+    },
+    {
+      "off": 852,
+      "len": 16320,
+      "name": "territories_24_conquest_map_nodes",
+      "kind": "field",
+      "confidence": "high",
+      "val": "CAP",
+      "tag": "A/B",
+      "type": "record[24]",
+      "record": {
+        "count": 24,
+        "stride": 680,
+        "fields": [
+          {
+            "off": 0,
+            "len": 1,
+            "name": "index_t_minus1_before_setup",
+            "kind": "field",
+            "confidence": "high",
+            "val": "DISASM",
+            "tag": "A",
+            "type": "s8"
+          },
+          {
+            "off": 1,
+            "len": 1,
+            "name": "battle_stage",
+            "kind": "field",
+            "confidence": "high",
+            "val": "DISASM",
+            "tag": "A",
+            "type": "s8"
+          },
+          {
+            "off": 2,
+            "len": 1,
+            "name": "battle_map_type",
+            "kind": "field",
+            "confidence": "high",
+            "val": "DISASM",
+            "tag": "A",
+            "type": "s8"
+          },
+          {
+            "off": 3,
+            "len": 1,
+            "name": "alt_draw_flag",
+            "kind": "field",
+            "confidence": "med",
+            "val": "DISASM",
+            "tag": "A/C",
+            "type": "s8"
+          },
+          {
+            "off": 4,
+            "len": 4,
+            "name": "neighbours_4_territory_ids_minus1_none",
+            "kind": "field",
+            "confidence": "high",
+            "val": "DISASM",
+            "tag": "A",
+            "type": "s8[4]"
+          },
+          {
+            "off": 8,
+            "len": 4,
+            "name": "map_x",
+            "kind": "field",
+            "confidence": "high",
+            "val": "SINGLE",
+            "tag": "A/B",
+            "type": "u32"
+          },
+          {
+            "off": 12,
+            "len": 4,
+            "name": "map_y",
+            "kind": "field",
+            "confidence": "high",
+            "val": "SINGLE",
+            "tag": "A/B",
+            "type": "u32"
+          },
+          {
+            "off": 16,
+            "len": 1,
+            "name": "map_drawing_byte",
+            "kind": "field",
+            "confidence": "med",
+            "val": "DISASM",
+            "tag": "A/C",
+            "type": "s8"
+          },
+          {
+            "off": 17,
+            "len": 1,
+            "name": "owner_force_0_5_7_nobody",
+            "kind": "field",
+            "confidence": "high",
+            "val": "CAP",
+            "tag": "A/B",
+            "type": "s8"
+          },
+          {
+            "off": 18,
+            "len": 2,
+            "name": "castle_hp_0_340",
+            "kind": "field",
+            "confidence": "high",
+            "val": "CAP",
+            "tag": "A/B",
+            "type": "s16"
+          },
+          {
+            "off": 20,
+            "len": 1,
+            "name": "in_play_class_gt0_in_scenario",
+            "kind": "field",
+            "confidence": "med",
+            "val": "SINGLE",
+            "tag": "A/C",
+            "type": "s8"
+          },
+          {
+            "off": 21,
+            "len": 1,
+            "name": "pad_015",
+            "kind": "pad",
+            "confidence": "high",
+            "val": "STRUCT",
+            "tag": "A"
+          },
+          {
+            "off": 22,
+            "len": 2,
+            "name": "income_per_turn",
+            "kind": "field",
+            "confidence": "med",
+            "val": "DISASM",
+            "tag": "A/C",
+            "type": "s16"
+          },
+          {
+            "off": 24,
+            "len": 1,
+            "name": "garrison_count_A_max12",
+            "kind": "field",
+            "confidence": "high",
+            "val": "CAP",
+            "tag": "A/B",
+            "type": "s8"
+          },
+          {
+            "off": 25,
+            "len": 3,
+            "name": "unused_019",
+            "kind": "pad",
+            "confidence": "high",
+            "val": "STRUCT",
+            "tag": "A"
+          },
+          {
+            "off": 28,
+            "len": 240,
+            "name": "garrison_A_12_officers",
+            "kind": "field",
+            "confidence": "high",
+            "val": "CAP",
+            "tag": "A/B",
+            "type": "record[12]",
+            "record": {
+              "count": 12,
+              "stride": 20,
+              "fields": [
+                {
+                  "off": 0,
+                  "len": 4,
+                  "name": "state_0_empty_1_ready_2_marching_5_acted",
+                  "kind": "field",
+                  "confidence": "high",
+                  "val": "CAP",
+                  "tag": "A/B",
+                  "type": "u32"
+                },
+                {
+                  "off": 4,
+                  "len": 4,
+                  "name": "card_id_carddata_low16_com_members_0xfffff0nn_minus1_removed",
+                  "kind": "field",
+                  "confidence": "high",
+                  "val": "CAP",
+                  "tag": "A/B",
+                  "type": "u32"
+                },
+                {
+                  "off": 8,
+                  "len": 2,
+                  "name": "com_army_id_cpustory_record_minus1_player",
+                  "kind": "field",
+                  "confidence": "high",
+                  "val": "DISASM",
+                  "tag": "A",
+                  "type": "s16"
+                },
+                {
+                  "off": 10,
+                  "len": 2,
+                  "name": "gold_paid_last_command",
+                  "kind": "field",
+                  "confidence": "med",
+                  "val": "DISASM",
+                  "tag": "A/C",
+                  "type": "s16"
+                },
+                {
+                  "off": 12,
+                  "len": 2,
+                  "name": "action_counter_negative_left_out_of_decks",
+                  "kind": "field",
+                  "confidence": "high",
+                  "val": "DISASM",
+                  "tag": "A",
+                  "type": "s16"
+                },
+                {
+                  "off": 14,
+                  "len": 1,
+                  "name": "unknown_0e_copied_only",
+                  "kind": "field",
+                  "confidence": "med",
+                  "val": "DISASM",
+                  "tag": "A/C",
+                  "type": "s8"
+                },
+                {
+                  "off": 15,
+                  "len": 1,
+                  "name": "territory_A_t_B_origin",
+                  "kind": "field",
+                  "confidence": "high",
+                  "val": "CAP",
+                  "tag": "A/B",
+                  "type": "s8"
+                },
+                {
+                  "off": 16,
+                  "len": 1,
+                  "name": "cost_tenths_carddata_18",
+                  "kind": "field",
+                  "confidence": "high",
+                  "val": "CAP",
+                  "tag": "A/B",
+                  "type": "s8"
+                },
+                {
+                  "off": 17,
+                  "len": 1,
+                  "name": "strength_carddata_1b_lo",
+                  "kind": "field",
+                  "confidence": "high",
+                  "val": "CAP",
+                  "tag": "A/B",
+                  "type": "s8"
+                },
+                {
+                  "off": 18,
+                  "len": 1,
+                  "name": "intellect_carddata_1b_hi",
+                  "kind": "field",
+                  "confidence": "high",
+                  "val": "CAP",
+                  "tag": "A/B",
+                  "type": "s8"
+                },
+                {
+                  "off": 19,
+                  "len": 1,
+                  "name": "pad_13",
+                  "kind": "pad",
+                  "confidence": "high",
+                  "val": "STRUCT",
+                  "tag": "A"
+                }
+              ]
+            }
+          },
+          {
+            "off": 268,
+            "len": 1,
+            "name": "marching_count_B",
+            "kind": "field",
+            "confidence": "high",
+            "val": "CAP",
+            "tag": "A/B",
+            "type": "s8"
+          },
+          {
+            "off": 269,
+            "len": 3,
+            "name": "unused_10d",
+            "kind": "pad",
+            "confidence": "high",
+            "val": "STRUCT",
+            "tag": "A"
+          },
+          {
+            "off": 272,
+            "len": 240,
+            "name": "marching_in_B_12_officers",
+            "kind": "field",
+            "confidence": "high",
+            "val": "CAP",
+            "tag": "A/B",
+            "type": "record[12]",
+            "record": {
+              "count": 12,
+              "stride": 20,
+              "fields": [
+                {
+                  "off": 0,
+                  "len": 4,
+                  "name": "state_0_empty_1_ready_2_marching_5_acted",
+                  "kind": "field",
+                  "confidence": "high",
+                  "val": "CAP",
+                  "tag": "A/B",
+                  "type": "u32"
+                },
+                {
+                  "off": 4,
+                  "len": 4,
+                  "name": "card_id_carddata_low16_com_members_0xfffff0nn_minus1_removed",
+                  "kind": "field",
+                  "confidence": "high",
+                  "val": "CAP",
+                  "tag": "A/B",
+                  "type": "u32"
+                },
+                {
+                  "off": 8,
+                  "len": 2,
+                  "name": "com_army_id_cpustory_record_minus1_player",
+                  "kind": "field",
+                  "confidence": "high",
+                  "val": "DISASM",
+                  "tag": "A",
+                  "type": "s16"
+                },
+                {
+                  "off": 10,
+                  "len": 2,
+                  "name": "gold_paid_last_command",
+                  "kind": "field",
+                  "confidence": "med",
+                  "val": "DISASM",
+                  "tag": "A/C",
+                  "type": "s16"
+                },
+                {
+                  "off": 12,
+                  "len": 2,
+                  "name": "action_counter_negative_left_out_of_decks",
+                  "kind": "field",
+                  "confidence": "high",
+                  "val": "DISASM",
+                  "tag": "A",
+                  "type": "s16"
+                },
+                {
+                  "off": 14,
+                  "len": 1,
+                  "name": "unknown_0e_copied_only",
+                  "kind": "field",
+                  "confidence": "med",
+                  "val": "DISASM",
+                  "tag": "A/C",
+                  "type": "s8"
+                },
+                {
+                  "off": 15,
+                  "len": 1,
+                  "name": "territory_A_t_B_origin",
+                  "kind": "field",
+                  "confidence": "high",
+                  "val": "CAP",
+                  "tag": "A/B",
+                  "type": "s8"
+                },
+                {
+                  "off": 16,
+                  "len": 1,
+                  "name": "cost_tenths_carddata_18",
+                  "kind": "field",
+                  "confidence": "high",
+                  "val": "CAP",
+                  "tag": "A/B",
+                  "type": "s8"
+                },
+                {
+                  "off": 17,
+                  "len": 1,
+                  "name": "strength_carddata_1b_lo",
+                  "kind": "field",
+                  "confidence": "high",
+                  "val": "CAP",
+                  "tag": "A/B",
+                  "type": "s8"
+                },
+                {
+                  "off": 18,
+                  "len": 1,
+                  "name": "intellect_carddata_1b_hi",
+                  "kind": "field",
+                  "confidence": "high",
+                  "val": "CAP",
+                  "tag": "A/B",
+                  "type": "s8"
+                },
+                {
+                  "off": 19,
+                  "len": 1,
+                  "name": "pad_13",
+                  "kind": "pad",
+                  "confidence": "high",
+                  "val": "STRUCT",
+                  "tag": "A"
+                }
+              ]
+            }
+          },
+          {
+            "off": 512,
+            "len": 2,
+            "name": "marching_B_cost_total_tenths",
+            "kind": "field",
+            "confidence": "high",
+            "val": "CAP",
+            "tag": "A/B",
+            "type": "s16"
+          },
+          {
+            "off": 514,
+            "len": 2,
+            "name": "unused_202",
+            "kind": "pad",
+            "confidence": "high",
+            "val": "STRUCT",
+            "tag": "A"
+          },
+          {
+            "off": 516,
+            "len": 80,
+            "name": "com_armies_C_stationed",
+            "kind": "field",
+            "confidence": "high",
+            "val": "CAP",
+            "tag": "A/B",
+            "type": "record[4]",
+            "record": {
+              "count": 4,
+              "stride": 20,
+              "fields": [
+                {
+                  "off": 0,
+                  "len": 4,
+                  "name": "state_0_empty_1_stationed_3_moved",
+                  "kind": "field",
+                  "confidence": "high",
+                  "val": "DISASM",
+                  "tag": "A",
+                  "type": "u32"
+                },
+                {
+                  "off": 4,
+                  "len": 1,
+                  "name": "byte4_7_when_created",
+                  "kind": "field",
+                  "confidence": "med",
+                  "val": "DISASM",
+                  "tag": "A/C",
+                  "type": "s8"
+                },
+                {
+                  "off": 5,
+                  "len": 1,
+                  "name": "territory_C_t_D_marched_from_minus1_empty",
+                  "kind": "field",
+                  "confidence": "high",
+                  "val": "DISASM",
+                  "tag": "A",
+                  "type": "s8"
+                },
+                {
+                  "off": 6,
+                  "len": 2,
+                  "name": "army_id_army_table_index_minus1_empty_slot",
+                  "kind": "field",
+                  "confidence": "high",
+                  "val": "CAP",
+                  "tag": "A/B",
+                  "type": "s16"
+                },
+                {
+                  "off": 8,
+                  "len": 3,
+                  "name": "army_record_bytes_7_8_9_copy",
+                  "kind": "field",
+                  "confidence": "high",
+                  "val": "DISASM",
+                  "tag": "A",
+                  "type": "s8[3]"
+                },
+                {
+                  "off": 11,
+                  "len": 1,
+                  "name": "member_count",
+                  "kind": "field",
+                  "confidence": "high",
+                  "val": "SINGLE",
+                  "tag": "A/B",
+                  "type": "s8"
+                },
+                {
+                  "off": 12,
+                  "len": 1,
+                  "name": "first_member_unit_type",
+                  "kind": "field",
+                  "confidence": "high",
+                  "val": "SINGLE",
+                  "tag": "A/B",
+                  "type": "s8"
+                },
+                {
+                  "off": 13,
+                  "len": 1,
+                  "name": "unknown_0d_copied_only",
+                  "kind": "field",
+                  "confidence": "med",
+                  "val": "DISASM",
+                  "tag": "A/C",
+                  "type": "s8"
+                },
+                {
+                  "off": 14,
+                  "len": 2,
+                  "name": "total_cost_tenths",
+                  "kind": "field",
+                  "confidence": "high",
+                  "val": "SINGLE",
+                  "tag": "A/B",
+                  "type": "s16"
+                },
+                {
+                  "off": 16,
+                  "len": 2,
+                  "name": "total_strength",
+                  "kind": "field",
+                  "confidence": "high",
+                  "val": "SINGLE",
+                  "tag": "A/B",
+                  "type": "s16"
+                },
+                {
+                  "off": 18,
+                  "len": 2,
+                  "name": "power_cost_div10_plus_strength",
+                  "kind": "field",
+                  "confidence": "high",
+                  "val": "SINGLE",
+                  "tag": "A/B",
+                  "type": "s16"
+                }
+              ]
+            }
+          },
+          {
+            "off": 596,
+            "len": 80,
+            "name": "com_armies_D_marching_in",
+            "kind": "field",
+            "confidence": "high",
+            "val": "DISASM",
+            "tag": "A",
+            "type": "record[4]",
+            "record": {
+              "count": 4,
+              "stride": 20,
+              "fields": [
+                {
+                  "off": 0,
+                  "len": 4,
+                  "name": "state_0_empty_1_stationed_3_moved",
+                  "kind": "field",
+                  "confidence": "high",
+                  "val": "DISASM",
+                  "tag": "A",
+                  "type": "u32"
+                },
+                {
+                  "off": 4,
+                  "len": 1,
+                  "name": "byte4_7_when_created",
+                  "kind": "field",
+                  "confidence": "med",
+                  "val": "DISASM",
+                  "tag": "A/C",
+                  "type": "s8"
+                },
+                {
+                  "off": 5,
+                  "len": 1,
+                  "name": "territory_C_t_D_marched_from_minus1_empty",
+                  "kind": "field",
+                  "confidence": "high",
+                  "val": "DISASM",
+                  "tag": "A",
+                  "type": "s8"
+                },
+                {
+                  "off": 6,
+                  "len": 2,
+                  "name": "army_id_army_table_index_minus1_empty_slot",
+                  "kind": "field",
+                  "confidence": "high",
+                  "val": "CAP",
+                  "tag": "A/B",
+                  "type": "s16"
+                },
+                {
+                  "off": 8,
+                  "len": 3,
+                  "name": "army_record_bytes_7_8_9_copy",
+                  "kind": "field",
+                  "confidence": "high",
+                  "val": "DISASM",
+                  "tag": "A",
+                  "type": "s8[3]"
+                },
+                {
+                  "off": 11,
+                  "len": 1,
+                  "name": "member_count",
+                  "kind": "field",
+                  "confidence": "high",
+                  "val": "SINGLE",
+                  "tag": "A/B",
+                  "type": "s8"
+                },
+                {
+                  "off": 12,
+                  "len": 1,
+                  "name": "first_member_unit_type",
+                  "kind": "field",
+                  "confidence": "high",
+                  "val": "SINGLE",
+                  "tag": "A/B",
+                  "type": "s8"
+                },
+                {
+                  "off": 13,
+                  "len": 1,
+                  "name": "unknown_0d_copied_only",
+                  "kind": "field",
+                  "confidence": "med",
+                  "val": "DISASM",
+                  "tag": "A/C",
+                  "type": "s8"
+                },
+                {
+                  "off": 14,
+                  "len": 2,
+                  "name": "total_cost_tenths",
+                  "kind": "field",
+                  "confidence": "high",
+                  "val": "SINGLE",
+                  "tag": "A/B",
+                  "type": "s16"
+                },
+                {
+                  "off": 16,
+                  "len": 2,
+                  "name": "total_strength",
+                  "kind": "field",
+                  "confidence": "high",
+                  "val": "SINGLE",
+                  "tag": "A/B",
+                  "type": "s16"
+                },
+                {
+                  "off": 18,
+                  "len": 2,
+                  "name": "power_cost_div10_plus_strength",
+                  "kind": "field",
+                  "confidence": "high",
+                  "val": "SINGLE",
+                  "tag": "A/B",
+                  "type": "s16"
+                }
+              ]
+            }
+          },
+          {
+            "off": 676,
+            "len": 1,
+            "name": "battles_here_this_turn",
+            "kind": "field",
+            "confidence": "high",
+            "val": "CAP",
+            "tag": "A/B",
+            "type": "s8"
+          },
+          {
+            "off": 677,
+            "len": 3,
+            "name": "unused_2a5",
+            "kind": "pad",
+            "confidence": "high",
+            "val": "STRUCT",
+            "tag": "A"
+          }
+        ]
+      }
     },
     {
       "off": 17172,
-      "len": 62,
-      "name": "graph_terminator_zero",
+      "len": 1,
+      "name": "battle_handoff_kind_0_player_attacks",
+      "kind": "field",
+      "confidence": "high",
+      "val": "CAP",
+      "tag": "A/B",
+      "type": "s8"
+    },
+    {
+      "off": 17173,
+      "len": 1,
+      "name": "battle_handoff_territory",
+      "kind": "field",
+      "confidence": "high",
+      "val": "CAP",
+      "tag": "A/B",
+      "type": "s8"
+    },
+    {
+      "off": 17174,
+      "len": 8,
+      "name": "battle_handoff_com_army_slots_C_indices_minus1_end",
+      "kind": "field",
+      "confidence": "high",
+      "val": "CAP",
+      "tag": "A/B",
+      "type": "s16[4]"
+    },
+    {
+      "off": 17182,
+      "len": 2,
+      "name": "pad_431e",
       "kind": "pad",
       "confidence": "high",
-      "val": "STRUCT"
+      "val": "STRUCT",
+      "tag": "A"
+    },
+    {
+      "off": 17184,
+      "len": 48,
+      "name": "battle_deck_12_slot_index_or_card_id_minus1",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DISASM",
+      "tag": "A",
+      "type": "u32[12]"
+    },
+    {
+      "off": 17232,
+      "len": 2,
+      "name": "battle_deck_cost",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DISASM",
+      "tag": "A",
+      "type": "s16"
     },
     {
       "off": 17234,
-      "len": 54,
-      "name": "resume_deck_D_count_pars_5cards_FFpad",
+      "len": 1,
+      "name": "map_cursor_last_territory_minus1_none",
       "kind": "field",
-      "confidence": "med",
-      "val": "SINGLE"
+      "confidence": "high",
+      "val": "SINGLE",
+      "tag": "A/B",
+      "type": "s8"
+    },
+    {
+      "off": 17235,
+      "len": 1,
+      "name": "pad_4353",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT",
+      "tag": "A"
+    },
+    {
+      "off": 17236,
+      "len": 2,
+      "name": "player_castle_max_hp_340",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DISASM",
+      "tag": "A",
+      "type": "s16"
+    },
+    {
+      "off": 17238,
+      "len": 2,
+      "name": "player_castle_hp",
+      "kind": "field",
+      "confidence": "high",
+      "val": "CAP",
+      "tag": "A/B",
+      "type": "s16"
+    },
+    {
+      "off": 17240,
+      "len": 48,
+      "name": "starting_deck_12_card_ids_minus1_unused",
+      "kind": "field",
+      "confidence": "high",
+      "val": "SINGLE",
+      "tag": "A/B",
+      "type": "u32[12]"
     },
     {
       "off": 17288,
-      "len": 60,
-      "name": "resume_mission_progress_scratch_ticks_per_turn",
-      "kind": "field",
-      "confidence": "low",
-      "val": "SINGLE"
+      "len": 1,
+      "name": "return_point_valid_cleared_at_load",
+      "kind": "volatile",
+      "confidence": "high",
+      "val": "CAP",
+      "tag": "A/B",
+      "type": "s8"
     },
     {
-      "off": 17348,
-      "len": 1020,
-      "name": "per_stage_mission_records_102x10_b3_scoreA_0_10_30_50_100_b6_played_F5_F6_b7_chapter_group_0to23_stage_i_mod_4",
+      "off": 17289,
+      "len": 1,
+      "name": "return_point_acting_force_also_own_get_set",
       "kind": "field",
-      "confidence": "med",
-      "val": "SINGLE"
+      "confidence": "high",
+      "val": "DISASM",
+      "tag": "A",
+      "type": "s8"
     },
     {
-      "off": 18368,
-      "len": 4277,
-      "name": "event_table_empty_slots_tail",
+      "off": 17290,
+      "len": 2,
+      "name": "pad_438a",
       "kind": "pad",
       "confidence": "high",
-      "val": "STRUCT"
+      "val": "STRUCT",
+      "tag": "A"
+    },
+    {
+      "off": 17292,
+      "len": 4,
+      "name": "return_point_map_task_state",
+      "kind": "volatile",
+      "confidence": "high",
+      "val": "CAP",
+      "tag": "A/B",
+      "type": "u32"
+    },
+    {
+      "off": 17296,
+      "len": 2,
+      "name": "return_point_map_phase",
+      "kind": "volatile",
+      "confidence": "high",
+      "val": "CAP",
+      "tag": "A/B",
+      "type": "s16"
+    },
+    {
+      "off": 17298,
+      "len": 2,
+      "name": "return_point_map_sub_state",
+      "kind": "volatile",
+      "confidence": "high",
+      "val": "CAP",
+      "tag": "A/B",
+      "type": "s16"
+    },
+    {
+      "off": 17300,
+      "len": 1,
+      "name": "return_point_selected_territory",
+      "kind": "volatile",
+      "confidence": "high",
+      "val": "CAP",
+      "tag": "A/B",
+      "type": "s8"
+    },
+    {
+      "off": 17301,
+      "len": 1,
+      "name": "pad_4395",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT",
+      "tag": "A"
+    },
+    {
+      "off": 17302,
+      "len": 2,
+      "name": "return_point_map_flag",
+      "kind": "volatile",
+      "confidence": "high",
+      "val": "CAP",
+      "tag": "A/B",
+      "type": "s16"
+    },
+    {
+      "off": 17304,
+      "len": 2,
+      "name": "com_phase_record_unused_4398",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT",
+      "tag": "A"
+    },
+    {
+      "off": 17306,
+      "len": 1,
+      "name": "com_phase_passes_left",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DISASM",
+      "tag": "A",
+      "type": "s8"
+    },
+    {
+      "off": 17307,
+      "len": 1,
+      "name": "com_phase_decision_step",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DISASM",
+      "tag": "A",
+      "type": "s8"
+    },
+    {
+      "off": 17308,
+      "len": 14,
+      "name": "com_phase_record_unused_439c",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT",
+      "tag": "A"
+    },
+    {
+      "off": 17322,
+      "len": 1,
+      "name": "com_decision_byte0_write_only",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DISASM",
+      "tag": "A",
+      "type": "s8"
+    },
+    {
+      "off": 17323,
+      "len": 1,
+      "name": "com_decision_target_territory",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DISASM",
+      "tag": "A",
+      "type": "s8"
+    },
+    {
+      "off": 17324,
+      "len": 1,
+      "name": "com_decision_origin_territory_minus1_none",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DISASM",
+      "tag": "A",
+      "type": "s8"
+    },
+    {
+      "off": 17325,
+      "len": 1,
+      "name": "pad_43ad",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT",
+      "tag": "A"
+    },
+    {
+      "off": 17326,
+      "len": 8,
+      "name": "com_decision_army_ids_minus1_none",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DISASM",
+      "tag": "A",
+      "type": "s16[4]"
+    },
+    {
+      "off": 17334,
+      "len": 5280,
+      "name": "army_table_528_one_per_cpustory_record",
+      "kind": "field",
+      "confidence": "high",
+      "val": "SINGLE",
+      "tag": "A/B",
+      "type": "record[528]",
+      "record": {
+        "count": 528,
+        "stride": 10,
+        "fields": [
+          {
+            "off": 0,
+            "len": 1,
+            "name": "state_ge0_month_appears_lt0_gone_minus11_no_record",
+            "kind": "field",
+            "confidence": "med",
+            "val": "DISASM",
+            "tag": "A/C",
+            "type": "s8"
+          },
+          {
+            "off": 1,
+            "len": 1,
+            "name": "group_home_territory_i_minus1_div4",
+            "kind": "field",
+            "confidence": "high",
+            "val": "DISASM",
+            "tag": "A",
+            "type": "s8"
+          },
+          {
+            "off": 2,
+            "len": 1,
+            "name": "cpustory_row_40_battle_stage",
+            "kind": "field",
+            "confidence": "high",
+            "val": "DISASM",
+            "tag": "A",
+            "type": "s8"
+          },
+          {
+            "off": 3,
+            "len": 1,
+            "name": "cpustory_row_41_map_type",
+            "kind": "field",
+            "confidence": "high",
+            "val": "DISASM",
+            "tag": "A",
+            "type": "s8"
+          },
+          {
+            "off": 4,
+            "len": 2,
+            "name": "cpustory_record_id_eq_i",
+            "kind": "field",
+            "confidence": "high",
+            "val": "SINGLE",
+            "tag": "A/B",
+            "type": "s16"
+          },
+          {
+            "off": 6,
+            "len": 1,
+            "name": "cpustory_row_56",
+            "kind": "field",
+            "confidence": "high",
+            "val": "DISASM",
+            "tag": "A",
+            "type": "s8"
+          },
+          {
+            "off": 7,
+            "len": 1,
+            "name": "cpustory_row_48",
+            "kind": "field",
+            "confidence": "high",
+            "val": "DISASM",
+            "tag": "A",
+            "type": "s8"
+          },
+          {
+            "off": 8,
+            "len": 1,
+            "name": "cpustory_row_4a",
+            "kind": "field",
+            "confidence": "high",
+            "val": "DISASM",
+            "tag": "A",
+            "type": "s8"
+          },
+          {
+            "off": 9,
+            "len": 1,
+            "name": "cpustory_row_4c",
+            "kind": "field",
+            "confidence": "high",
+            "val": "DISASM",
+            "tag": "A",
+            "type": "s8"
+          }
+        ]
+      }
+    },
+    {
+      "off": 22614,
+      "len": 1,
+      "name": "event_mode_scenario18",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DISASM",
+      "tag": "A",
+      "type": "s8"
+    },
+    {
+      "off": 22615,
+      "len": 1,
+      "name": "pad_5857",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT",
+      "tag": "A"
+    },
+    {
+      "off": 22616,
+      "len": 2,
+      "name": "event_clear_type_7_while_running",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DISASM",
+      "tag": "A",
+      "type": "s16"
+    },
+    {
+      "off": 22618,
+      "len": 1,
+      "name": "event_target_territory_minus1_none",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DISASM",
+      "tag": "A",
+      "type": "s8"
+    },
+    {
+      "off": 22619,
+      "len": 1,
+      "name": "pad_585b",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT",
+      "tag": "A"
+    },
+    {
+      "off": 22620,
+      "len": 2,
+      "name": "event_reward",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DISASM",
+      "tag": "A",
+      "type": "s16"
+    },
+    {
+      "off": 22622,
+      "len": 2,
+      "name": "event_duration_months",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DISASM",
+      "tag": "A",
+      "type": "s16"
+    },
+    {
+      "off": 22624,
+      "len": 2,
+      "name": "event_start_month",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DISASM",
+      "tag": "A",
+      "type": "s16"
+    },
+    {
+      "off": 22626,
+      "len": 2,
+      "name": "event_end_month",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DISASM",
+      "tag": "A",
+      "type": "s16"
+    },
+    {
+      "off": 22628,
+      "len": 2,
+      "name": "events_started_max10",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DISASM",
+      "tag": "A",
+      "type": "s16"
+    },
+    {
+      "off": 22630,
+      "len": 2,
+      "name": "events_won",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DISASM",
+      "tag": "A",
+      "type": "s16"
+    },
+    {
+      "off": 22632,
+      "len": 2,
+      "name": "event_bonus",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DISASM",
+      "tag": "A",
+      "type": "s16"
+    },
+    {
+      "off": 22634,
+      "len": 2,
+      "name": "pad_586a",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT",
+      "tag": "A"
+    },
+    {
+      "off": 22636,
+      "len": 4,
+      "name": "event_score_total",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DISASM",
+      "tag": "A",
+      "type": "u32"
+    },
+    {
+      "off": 22640,
+      "len": 2,
+      "name": "result_screen_value",
+      "kind": "field",
+      "confidence": "med",
+      "val": "DISASM",
+      "tag": "A/C",
+      "type": "s16"
+    },
+    {
+      "off": 22642,
+      "len": 1,
+      "name": "new_best_score_flag_read_and_clear",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DISASM",
+      "tag": "A",
+      "type": "s8"
+    },
+    {
+      "off": 22643,
+      "len": 1,
+      "name": "new_scenario_unlocked_flag_read_and_clear",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DISASM",
+      "tag": "A",
+      "type": "s8"
+    },
+    {
+      "off": 22644,
+      "len": 1,
+      "name": "territory_fifo_length",
+      "kind": "field",
+      "confidence": "high",
+      "val": "CAP",
+      "tag": "A/B",
+      "type": "s8"
     },
     {
       "off": 22645,
       "len": 24,
-      "name": "progress_bitmap_24B_reserved_for_event_completion",
+      "name": "territory_fifo_ids_minus1_empty",
       "kind": "field",
-      "confidence": "high",
-      "val": "CAP"
+      "confidence": "med",
+      "val": "CAP",
+      "tag": "A/C",
+      "type": "s8[24]"
     },
     {
       "off": 22669,
-      "len": 9,
-      "name": "bitmap_gap_zero",
+      "len": 3,
+      "name": "pad_588d_end_of_discard_memset",
       "kind": "pad",
       "confidence": "high",
-      "val": "STRUCT"
+      "val": "STRUCT",
+      "tag": "A"
     },
     {
-      "off": 22678,
-      "len": 32,
-      "name": "unlock_bitmap_32B",
+      "off": 22672,
+      "len": 40,
+      "name": "keep_scenario_state_20_minus1_locked_0_open_n_clears",
       "kind": "field",
       "confidence": "high",
-      "val": "CAP"
-    },
-    {
-      "off": 22710,
-      "len": 2,
-      "name": "par_array_gap_zero",
-      "kind": "pad",
-      "confidence": "high",
-      "val": "STRUCT"
+      "val": "CAP",
+      "tag": "A/B",
+      "type": "s16[20]"
     },
     {
       "off": 22712,
       "len": 80,
-      "name": "par_scores_20xu32_5000",
-      "kind": "const",
+      "name": "keep_scenario_best_score_20_default_5000",
+      "kind": "field",
       "confidence": "high",
-      "val": "CAP"
+      "val": "DISASM",
+      "tag": "A",
+      "type": "u32[20]"
     },
     {
       "off": 22792,
-      "len": 8,
-      "name": "trailing_flag1_u32_1",
+      "len": 1,
+      "name": "keep_part_initialised",
       "kind": "field",
-      "confidence": "med",
-      "val": "CAP"
+      "confidence": "high",
+      "val": "DISASM",
+      "tag": "A",
+      "type": "s8"
+    },
+    {
+      "off": 22793,
+      "len": 3,
+      "name": "pad_5909",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT",
+      "tag": "A"
+    },
+    {
+      "off": 22796,
+      "len": 1,
+      "name": "acting_force_0_player",
+      "kind": "field",
+      "confidence": "high",
+      "val": "DISASM",
+      "tag": "A",
+      "type": "s8"
+    },
+    {
+      "off": 22797,
+      "len": 3,
+      "name": "pad_590d",
+      "kind": "pad",
+      "confidence": "high",
+      "val": "STRUCT",
+      "tag": "A"
     },
     {
       "off": 22800,
-      "len": 8,
-      "name": "trailing_flag2_u32_1",
+      "len": 4,
+      "name": "map_variant_always_1_survives_shinki",
       "kind": "field",
-      "confidence": "med",
-      "val": "CAP"
+      "confidence": "high",
+      "val": "CAP",
+      "tag": "A/B",
+      "type": "u32"
+    },
+    {
+      "off": 22804,
+      "len": 4,
+      "name": "selected_scenario_min_chapter_x3_plus_stage_19",
+      "kind": "field",
+      "confidence": "high",
+      "val": "CAP",
+      "tag": "A/B",
+      "type": "u32"
     },
     {
       "off": 22808,
       "len": 4,
-      "name": "save_serial_or_timestamp",
+      "name": "map_work_memory_heap_pointer_meaningless_in_file",
       "kind": "volatile",
-      "confidence": "med",
-      "val": "SINGLE"
+      "confidence": "high",
+      "val": "CAP",
+      "tag": "A/B",
+      "type": "u32"
     }
   ],
   "footer": [

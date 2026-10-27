@@ -33,6 +33,8 @@ type MapEntry = {
 	len: number;
 	name: string;
 	kind: string;
+	/** A repeated structure: record i at off + i * stride. */
+	record?: {count: number; stride: number; fields: MapEntry[]};
 };
 type FieldMap = Record<string, MapEntry[] | string>;
 
@@ -110,6 +112,32 @@ describe('save-field-map drift guard (website codec ↔ canonical map)', () => {
 			).toBe(codecSize);
 		});
 	}
+
+	// The campaign block's repeated structures (territories, officer and army
+	// entries, the army table, pools, forces) are nested records: each must
+	// tile its stride, at every level, and count × stride must be its length.
+	it('nested records tile their stride', () => {
+		function check(entries: MapEntry[], where: string): void {
+			for (const e of entries) {
+				if (!e.record) continue;
+				const at = `${where}.${e.name}`;
+				expect(e.record.count * e.record.stride, at).toBe(e.len);
+				let cursor = 0;
+				for (const f of e.record.fields) {
+					expect(f.off, `${at} not contiguous at "${f.name}"`).toBe(cursor);
+					cursor = f.off + f.len;
+				}
+				expect(cursor, `${at} fields end`).toBe(e.record.stride);
+				check(e.record.fields, at);
+			}
+		}
+		for (const name of Object.keys(BLOCK_SIZE)) check(block(name), name);
+		const territories = block('campaign').find(
+			e => e.name === 'territories_24_conquest_map_nodes',
+		);
+		expect(territories?.off).toBe(0x3_54);
+		expect(territories?.record?.stride).toBe(0x2_a8);
+	});
 
 	// =========================================================================
 	// 2. player_records field offsets/lengths (the codec's OFF table)

@@ -188,15 +188,18 @@ export type WarringStatesProgress = {
  *    (playability), plus the Normal/Hard difficulty tier in 0x455 bits 6-7.
  *  - EVENT VIEWED in the gallery — `SaveProfile.achievements`
  *    `campaignEventsUnlocked` (profile bitmask at 0x1C), NOT a campaign field.
- *  - mission CLEARED + SCORE — lives in the encrypted campaign block at
- *    0x43C4 (per-stage records) / chapter-graph node mirror. That data is
- *    a single-sample RAW structure: it is READ-ONLY / EXPERIMENTAL and the
- *    editor must NOT mutate it. The `stageNCompleted` / `rewardCardObtained`
- *    flags here drive the profile-block chapter-completion bitmask (0x456)
- *    only — they are NOT the per-stage campaign-block records.
+ *  - scenario CLEARED + SCORE — the campaign ("history") block's keep part:
+ *    s16[20] per-scenario state at 0x5890 (-1 locked, 0 open, n = times
+ *    cleared) and u32[20] best scores at 0x58B8, which survive 新規 (sgst-port
+ *    docs/modding/campaign-save.md; the old "0x43C4 mission records" were a
+ *    misaligned view of the army table). The `stageNCompleted` /
+ *    `rewardCardObtained` flags here drive the profile-block
+ *    chapter-completion bitmask (0x456) only. Whether the 0x455 / 0x456 bits
+ *    gate the 戦略ノ章 scenario list was not traced; the scenario select reads
+ *    the keep part.
  *
- * The site is allowed to mutate the campaign block's `active` flag and the
- * event gallery (0x1C) ONLY; the raw mission/score records are off-limits.
+ * The editor writes the profile block and the header's name only; the
+ * campaign block is passed through untouched (round-trip-identity.test.ts).
  */
 export type CampaignProgress = {
 	chapters: {
