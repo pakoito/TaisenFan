@@ -18,6 +18,7 @@ import {
 	extractProfile,
 	readPlayerName,
 	replaceSave,
+	setCampaignEntryListed,
 } from '@/save-tools';
 import {parseSav} from '@/save-tools/save-io';
 
@@ -311,22 +312,21 @@ describe.skipIf(!haveFixtures)('Per-field codec round-trip', () => {
 		});
 	});
 
-	it('campaign: chapter unlock + completion bits persist', async () => {
+	it('campaign: list flags, stage III and keep-part records persist', async () => {
 		const round = await withMutation(p => {
-			p.campaign.chapters.chapter1.unlocked = true;
-			p.campaign.chapters.chapter1.stage1Completed = true;
-			p.campaign.chapters.chapter1.stage2Completed = true;
-			p.campaign.chapters.chapter1.stage3Completed = true;
-			p.campaign.chapters.chapter1.rewardCardObtained = true;
-			p.campaign.chapters.chapter4.unlocked = true;
-			p.campaign.chapters.chapter6.unlocked = true;
+			setCampaignEntryListed(p.campaign, 'chapter4', true);
+			p.campaign.chapters.chapter1.stage3 = true;
+			p.campaign.chapters.chapter1.stages[1].clears = 7;
+			p.campaign.chapters.chapter3.stages[2].bestScore = 123_456;
 		});
-		expect(round.campaign.chapters.chapter1.unlocked).toBe(true);
-		expect(round.campaign.chapters.chapter1.stage1Completed).toBe(true);
-		expect(round.campaign.chapters.chapter4.unlocked).toBe(true);
-		expect(round.campaign.chapters.chapter6.unlocked).toBe(true);
-		expect(round.campaign.chapters.chapter2.unlocked).toBe(false);
-		expect(round.campaign.chapters.chapter3.unlocked).toBe(false);
+		expect(round.campaign.chapters.chapter4.listed).toBe(true);
+		expect(round.campaign.chapters.chapter2.listed).toBe(true);
+		expect(round.campaign.chapters.chapter5.listed).toBe(false);
+		expect(round.campaign.chapters.chapter1.stage3).toBe(true);
+		expect(round.campaign.chapters.chapter1.stages[1].clears).toBe(7);
+		expect(round.campaign.chapters.chapter4.stages[0].clears).toBe(0);
+		expect(round.campaign.chapters.chapter5.stages[0].clears).toBeNull();
+		expect(round.campaign.chapters.chapter3.stages[2].bestScore).toBe(123_456);
 	});
 
 	it('cards: setting quantities round-trips at byte level', async () => {

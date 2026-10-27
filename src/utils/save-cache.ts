@@ -87,7 +87,7 @@ function txDelete(db: IDBDatabase, key: string): Promise<void> {
  * Whether a persisted profile matches the SaveProfile shape the current code
  * expects. The codec field map changes between releases (e.g. the 0x14 field
  * was renamed `currencyGold` → `food`, and `troopColors` / `regionCode` were
- * added).
+ * added; the campaign gained its keep-part records).
  * A cached profile written by an older deploy is missing those fields, which
  * makes the editor throw at render time (`Object.values(profile.troopColors)`
  * etc.). We do NOT migrate stale state — we detect it and drop it.
@@ -98,10 +98,16 @@ function isProfileShapeCurrent(profile: unknown): profile is SaveProfile {
 		troopColors?: unknown;
 		regionCode?: unknown;
 		stats?: {food?: unknown};
+		campaign?: {
+			chapters?: {chapter1?: {stages?: unknown}};
+			warringStates?: {record?: unknown};
+		};
 	};
 	if (typeof p.troopColors !== 'object' || p.troopColors === null) return false;
 	if (typeof p.regionCode !== 'number') return false;
 	if (typeof p.stats?.food !== 'number') return false;
+	if (!Array.isArray(p.campaign?.chapters?.chapter1?.stages)) return false;
+	if (typeof p.campaign?.warringStates?.record !== 'object') return false;
 	return true;
 }
 

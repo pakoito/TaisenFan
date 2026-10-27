@@ -52,11 +52,17 @@ describe('vanilla template round-trip', () => {
 		}
 	});
 
-	it('extracts vanilla state correctly (no chapters open, no titles, food=100)', async () => {
+	it('extracts vanilla state correctly (chapter 1 only, no titles, food=100)', async () => {
 		const original = new Uint8Array(fs.readFileSync(VANILLA_TEMPLATE));
 		const profile = await extractProfile(original);
 		expect(profile.stats.food).toBe(100);
-		expect(profile.campaign.chapters.chapter1.unlocked).toBe(false);
+		expect(profile.campaign.chapters.chapter1.listed).toBe(true);
+		expect(profile.campaign.chapters.chapter2.listed).toBe(false);
+		expect(profile.campaign.chapters.chapter1.stages[0]).toEqual({
+			clears: 0,
+			bestScore: 5000,
+		});
+		expect(profile.campaign.chapters.chapter2.stages[0].clears).toBeNull();
 		expect(profile.training.normalUnlocked).toBe(false);
 		expect(profile.achievements.titlesUnlocked).toBe('none');
 		expect(profile.achievements.campaignEventsUnlocked).toBe('none');

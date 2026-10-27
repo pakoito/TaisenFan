@@ -81,6 +81,50 @@ test('Full preset maxes food and clears every DUEL stage at 40k', async ({
 	).toHaveValue('40000');
 });
 
+test('CONQUEST tab lists chapters as a prefix and edits clear counts', async ({
+	page,
+}) => {
+	await page.goto('./savegame-editor');
+	await page.getByRole('button', {name: 'New Save'}).click();
+	await page.getByRole('tab', {name: 'CONQUEST'}).click();
+	const conquest = page.getByRole('tabpanel', {name: 'CONQUEST'});
+
+	// Starter: every chapter-list entry is listed.
+	await expect(
+		conquest.getByRole('switch', {name: 'Warring States listed'}),
+	).toBeChecked();
+	await expect(
+		conquest.getByRole('switch', {name: 'Chapter 1 listed'}),
+	).toBeDisabled();
+
+	// Unlisting Chapter 4 unlists everything after it, as the game's list is
+	// a prefix of 0x455 bits; Chapter 3 stays.
+	await conquest.getByRole('switch', {name: 'Chapter 4 listed'}).click();
+	await Promise.all(
+		['Chapter 4', 'Chapter 5', 'Chapter 6', 'Warring States'].map(name =>
+			expect(
+				conquest.getByRole('switch', {name: `${name} listed`}),
+			).not.toBeChecked(),
+		),
+	);
+	await expect(
+		conquest.getByRole('switch', {name: 'Chapter 3 listed'}),
+	).toBeChecked();
+	await expect(
+		conquest.getByRole('spinbutton', {name: 'Chapter 4 Stage I clears'}),
+	).toBeDisabled();
+
+	// Clear counts are keep-part records.
+	const clears = conquest.getByRole('spinbutton', {
+		name: 'Chapter 1 Stage II clears',
+	});
+	await clears.fill('3');
+	await expect(clears).toHaveValue('3');
+
+	await page.getByRole('tab', {name: 'Overview'}).click();
+	await expect(page.getByText('3 / 6')).toBeVisible();
+});
+
 test('downloads a valid 64KB .sav', async ({page}) => {
 	await page.goto('./savegame-editor');
 	await page.getByRole('button', {name: 'New Save'}).click();
@@ -190,6 +234,27 @@ async function seedCachedProfile(
 	}, profile);
 }
 
+// A profile from the deploy before the campaign keep part: every other field
+// is current, but its campaign is the old chapter-flag shape.
+const OLD_CAMPAIGN_PROFILE = {
+	...OLD_FORMAT_PROFILE,
+	regionCode: 0,
+	troopColors: {red: true, blue: true, green: true},
+	campaign: {
+		chapters: {
+			chapter1: {
+				unlocked: true,
+				stage1Completed: false,
+				stage2Completed: false,
+				stage3Completed: false,
+				rewardCardObtained: false,
+			},
+		},
+		chapter3Variants: {},
+		warringStates: {unlocked: false, completed: false, highScore: 0},
+	},
+};
+
 // Regression: a returning user whose IndexedDB holds a profile written by an
 // OLDER deploy must NOT crash the editor. The old code rehydrated the stale
 // profile verbatim and `Object.values(profile.troopColors)` threw
@@ -210,5 +275,15 @@ test('discards an incompatible old-format cached save without crashing', async (
 	await expect(slot.getByText('No save loaded')).toBeVisible();
 	await expect(page.getByRole('button', {name: 'New Save'})).toBeVisible();
 	// The error boundary must NOT have fired.
+	await expect(page.getByText('Something went wrong')).toHaveCount(0);
+});
+
+test('discards a cached save with the old campaign shape', async ({page}) => {
+	await page.goto('./savegame-editor');
+	await seedCachedProfile(page, OLD_CAMPAIGN_PROFILE);
+	await page.reload();
+
+	const slot = page.getByRole('region', {name: 'Save slot'});
+	await expect(slot.getByText('No save loaded')).toBeVisible();
 	await expect(page.getByText('Something went wrong')).toHaveCount(0);
 });

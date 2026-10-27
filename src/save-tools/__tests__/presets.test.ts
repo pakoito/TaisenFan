@@ -24,22 +24,16 @@ describe('starter preset', () => {
 		expect(Object.keys(profile.training.stages)).toHaveLength(0);
 	});
 
-	it('opens every campaign chapter with no completion', () => {
+	it('lists every chapter and Warring States, stage III offered, nothing cleared', () => {
 		for (const chapter of Object.values(profile.campaign.chapters)) {
-			expect(chapter.unlocked).toBe(true);
-			expect(chapter.stage1Completed).toBe(false);
-			expect(chapter.stage2Completed).toBe(false);
-			expect(chapter.stage3Completed).toBe(false);
-			expect(chapter.rewardCardObtained).toBe(false);
+			expect(chapter.listed).toBe(true);
+			expect(chapter.stage3).toBe(true);
+			for (const stage of chapter.stages) {
+				expect(stage).toEqual({clears: 0, bestScore: 5000});
+			}
 		}
-	});
-
-	it('leaves chapter 3 variants and warring states locked', () => {
-		for (const variant of Object.values(profile.campaign.chapter3Variants)) {
-			expect(variant).toBe(false);
-		}
-		expect(profile.campaign.warringStates.unlocked).toBe(false);
-		expect(profile.campaign.warringStates.completed).toBe(false);
+		expect(profile.campaign.warringStates.listed).toBe(true);
+		expect(profile.campaign.warringStates.record.clears).toBe(0);
 	});
 
 	it('unlocks all cards and sages without per-entry overrides', () => {
@@ -85,19 +79,17 @@ describe('full preset', () => {
 		}
 	});
 
-	it('completes every chapter and Chapter-3 variant', () => {
+	it('lists every chapter and clears every scenario once', () => {
 		for (const chapter of Object.values(profile.campaign.chapters)) {
-			expect(chapter.unlocked).toBe(true);
-			expect(chapter.stage1Completed).toBe(true);
-			expect(chapter.stage2Completed).toBe(true);
-			expect(chapter.stage3Completed).toBe(true);
-			expect(chapter.rewardCardObtained).toBe(true);
+			expect(chapter.listed).toBe(true);
+			expect(chapter.stage3).toBe(true);
+			for (const stage of chapter.stages) {
+				expect(stage.clears).toBe(1);
+				expect(stage.bestScore).toBe(5000);
+			}
 		}
-		for (const variant of Object.values(profile.campaign.chapter3Variants)) {
-			expect(variant).toBe(true);
-		}
-		expect(profile.campaign.warringStates.unlocked).toBe(true);
-		expect(profile.campaign.warringStates.completed).toBe(true);
+		expect(profile.campaign.warringStates.listed).toBe(true);
+		expect(profile.campaign.warringStates.record.clears).toBe(1);
 	});
 
 	it('S-ranks every DUEL stage at 40k', () => {

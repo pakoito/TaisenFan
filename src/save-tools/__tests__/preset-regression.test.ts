@@ -156,12 +156,28 @@ describe('Starter preset', () => {
 		expect(profile[0x4_55]! & 0xc0).toBe(0xc0);
 	});
 
-	it('unlocks all 6 chapters (bits 0-5 of 0x455)', () => {
+	it('lists 第二章..第六章 and 戦乱 (bits 0-5 of 0x455)', () => {
 		expect(profile[0x4_55]! & 0x3f).toBe(0x3f);
 	});
 
-	it('records no chapter completions (0x456 = 0)', () => {
-		expect(profile[0x4_56]).toBe(0);
+	it('offers stage III of every chapter (0x456 bits 0-5)', () => {
+		expect(profile[0x4_56]).toBe(0x3f);
+	});
+
+	it('writes the pending copies too (0x453 = 0xFF, 0x454 = 0x3F)', () => {
+		expect(profile[0x4_53]).toBe(0xff);
+		expect(profile[0x4_54]).toBe(0x3f);
+	});
+
+	it('opens every scenario in the keep part with 0 clears', async () => {
+		const out = await buildPreset('starter');
+		const history = (await parseSav(out)).blocks.get('history')!;
+		const view = new DataView(history.buffer, history.byteOffset);
+		for (let s = 0; s < 20; s++) {
+			expect(view.getInt16(0x58_90 + s * 2, true), `scenario ${s}`).toBe(0);
+			expect(view.getUint32(0x58_b8 + s * 4, true)).toBe(5000);
+		}
+		expect(history[0x59_08]).toBe(1);
 	});
 
 	it('all 232 lord card bytes are 0x31 (1 copy each)', () => {
@@ -251,21 +267,19 @@ describe('Starter preset', () => {
 		expect(profile[0x4_2e]! & 0x01).toBe(0x01);
 	});
 
-	it('non-profile blocks match the vanilla template', async () => {
+	it('non-profile blocks match the vanilla template, but the keep states', async () => {
 		const out = await buildPreset('starter');
 		const a = await parseSav(VANILLA);
 		const b = await parseSav(out);
-		for (const name of [
-			'deck_slots',
-			'account',
-			'history',
-			'footer',
-		] as const) {
+		for (const name of ['deck_slots', 'account', 'footer'] as const) {
 			expect(
 				blockDiffs(a.blocks.get(name)!, b.blocks.get(name)!).count,
 				`Block "${name}"`,
 			).toBe(0);
 		}
+		// Scenarios 3..18 go from -1 (0xFFFF) to 0: 32 bytes at 0x5896..0x58B5.
+		const diff = blockDiffs(a.blocks.get('history')!, b.blocks.get('history')!);
+		expect(diff).toEqual({count: 32, first: 0x58_96});
 	});
 });
 
@@ -284,8 +298,18 @@ describe('Full preset', () => {
 		expect(profile[0x4_55]).toBe(0xff);
 	});
 
-	it('marks every chapter as completed (0x456 = 0x3F = bits 0-5)', () => {
+	it('offers stage III of every chapter (0x456 = 0x3F = bits 0-5)', () => {
 		expect(profile[0x4_56]).toBe(0x3f);
+	});
+
+	it('records one clear of every scenario but the prologue', async () => {
+		const out = await buildPreset('full');
+		const history = (await parseSav(out)).blocks.get('history')!;
+		const view = new DataView(history.buffer, history.byteOffset);
+		for (let s = 0; s < 19; s++) {
+			expect(view.getInt16(0x58_90 + s * 2, true), `scenario ${s}`).toBe(1);
+		}
+		expect(view.getInt16(0x58_90 + 19 * 2, true)).toBe(0);
 	});
 
 	it('all 232 lord card bytes are 0x31', () => {
@@ -430,7 +454,7 @@ describe('Upload round-trip', () => {
 			const reExtracted = await extractProfile(generated);
 			// At least the easily-comparable scalars must round-trip
 			expect(typeof reExtracted.stats.food).toBe('number');
-			expect(typeof reExtracted.campaign.chapters.chapter1.unlocked).toBe(
+			expect(typeof reExtracted.campaign.chapters.chapter1.listed).toBe(
 				'boolean',
 			);
 			expect(typeof reExtracted.training.normalUnlocked).toBe('boolean');

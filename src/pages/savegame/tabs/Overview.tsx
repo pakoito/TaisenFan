@@ -23,12 +23,12 @@ const PRESET_BUTTONS: PresetButton[] = [
 	{
 		preset: 'starter',
 		label: 'Starter',
-		hint: 'Every DUEL difficulty, CONQUEST chapter, episode, Lord, and Sage unlocked; no completion or outcomes recorded.',
+		hint: 'Every DUEL difficulty, CONQUEST chapter and stage III, Lord, and Sage unlocked; no completion or outcomes recorded.',
 	},
 	{
 		preset: 'full',
 		label: 'Full',
-		hint: 'Maxed save: every duel S-ranked at 40k, every chapter cleared, every sage at level 20, all titles, all troop colours, full food, every flag on.',
+		hint: 'Maxed save: every duel S-ranked at 40k, every CONQUEST stage cleared once, every sage at level 20, all titles, all troop colours, full food, every flag on.',
 	},
 ];
 
@@ -51,8 +51,7 @@ function countUnlockedSages(profile: SaveProfile): number {
 }
 
 function countChaptersUnlocked(profile: SaveProfile): number {
-	return Object.values(profile.campaign.chapters).filter(c => c.unlocked)
-		.length;
+	return Object.values(profile.campaign.chapters).filter(c => c.listed).length;
 }
 
 function countStagesCleared(profile: SaveProfile): number {
@@ -81,7 +80,7 @@ export function Overview() {
 		{
 			label: 'Chapters open',
 			value: `${countChaptersUnlocked(profile)} / 6`,
-			hint: 'CONQUEST chapters that are OPEN (tappable on the map), separate from clearing their episodes. Edit on the CONQUEST tab.',
+			hint: 'CONQUEST chapters in the chapter list (Chapter 1 always is), separate from how often their stages were cleared. Edit on the CONQUEST tab.',
 		},
 		{
 			label: 'Food (兵糧)',

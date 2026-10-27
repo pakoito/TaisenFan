@@ -155,63 +155,82 @@ export type TroopColor =
 export type TroopColors = Record<TroopColor, boolean>;
 
 // =============================================================================
-// CAMPAIGN MODE (CONQUEST)
+// CAMPAIGN MODE (CONQUEST, 戦略ノ章)
 // =============================================================================
 
-export type ChapterProgress = {
-	unlocked: boolean; // Can play this chapter (bit in 0x455)
-	stage1Completed: boolean;
-	stage2Completed: boolean;
-	stage3Completed: boolean; // "Hero's Campaign" - hardest
-	rewardCardObtained: boolean;
-};
-
-export type Chapter3Variants = {
-	yellowTurbanRebellion: boolean; // 黄巾の乱
-	tyrantDemonKing: boolean; // 暴虐の魔王
-	rivalWarlords: boolean; // 群雄割拠
-	redCliffs: boolean; // 赤壁の戦い
-	threeKingdomsDivision: boolean; // 天下三分
-	mightiestWarrior: boolean; // 最強の武
-};
-
-export type WarringStatesProgress = {
-	unlocked: boolean;
-	completed: boolean;
-	highScore: number;
+/**
+ * One 戦略ノ章 scenario's record in the campaign ("history") block's keep
+ * part, which survives 新規 and the scenario result's discard (sgst-port
+ * docs/modding/campaign-save.md §3, keep part).
+ */
+export type ScenarioRecord = {
+	/**
+	 * Times cleared, the stage list's クリア回数: s16 at H+0x5890 + 2s. A clear
+	 * adds 1 (ov001 0x020F776C). `null` is the game's −1, "never opened": the
+	 * stage list shows it as 0, and starting the scenario sets it to 0
+	 * (0x020F4280). It also decides whether a clear is a NEW unlock: a clear
+	 * of chapter c raises the next chapter's list flag only while that
+	 * chapter's first scenario is still −1 (0x020F77B0).
+	 */
+	clears: number | null;
+	/** Best score, the stage list's 最高得点: u32 at H+0x58B8 + 4s. Default 5000. */
+	bestScore: number;
 };
 
 /**
- * CONQUEST progress. Three facets are DISTINCT (never conflated):
+ * A chapter of the 戦略ノ章 chapter list (第一章..第六章). Chapter n holds
+ * scenarios 3(n−1) + 0..2, its stages I, II and III.
+ */
+export type ChapterProgress = {
+	/**
+	 * In the chapter list. 第一章 is always listed (this reads true and is not
+	 * written). 第n章 (n = 2..6) is profile 0x455 bit n−2: the list shows
+	 * 序章, 第一章 and one entry per bit up to the highest bit set (ov001
+	 * 0x02154550..0x021545BC). The game sets it after a clear in chapter n−1,
+	 * through its pending copy 0x453 and the unlock notice.
+	 */
+	listed: boolean;
+	/**
+	 * Stage III offered in the stage list: profile 0x456 bit n−1 (bit 8+n−1
+	 * of the array at 0x455; ov001 0x02155634). Stages I and II are always
+	 * offered. The game sets it at a scenario result once stages I and II
+	 * have both been cleared (0x0214F4CC..0x0214F570), through 0x454.
+	 */
+	stage3: boolean;
+	/** Stages I, II and III. */
+	stages: [ScenarioRecord, ScenarioRecord, ScenarioRecord];
+};
+
+/**
+ * 戦略ノ章 progress. What the scenario select shows and allows, as the code
+ * reads it (sgst-port docs/modding/campaign-save.md §3, keep part):
  *
- *  - chapter/mode UNLOCKED — `chapters[n].unlocked`, bits 0-5 of 0x455
- *    (playability), plus the Normal/Hard difficulty tier in 0x455 bits 6-7.
- *  - EVENT VIEWED in the gallery — `SaveProfile.achievements`
- *    `campaignEventsUnlocked` (profile bitmask at 0x1C), NOT a campaign field.
- *  - scenario CLEARED + SCORE — the campaign ("history") block's keep part:
- *    s16[20] per-scenario state at 0x5890 (-1 locked, 0 open, n = times
- *    cleared) and u32[20] best scores at 0x58B8, which survive 新規 (sgst-port
- *    docs/modding/campaign-save.md; the old "0x43C4 mission records" were a
- *    misaligned view of the army table). The `stageNCompleted` /
- *    `rewardCardObtained` flags here drive the profile-block
- *    chapter-completion bitmask (0x456) only. Whether the 0x455 / 0x456 bits
- *    gate the 戦略ノ章 scenario list was not traced; the scenario select reads
- *    the keep part.
+ *  - The chapter LIST: profile 0x455 bits 0..5 (第二章..第六章, 戦乱).
+ *    序章 (scenario 19) and 第一章 are always listed.
+ *  - STAGE III of chapter n: profile 0x456 bit n−1.
+ *  - Clear counts and best scores: the campaign block's keep part.
  *
- * The editor writes the profile block and the header's name only; the
- * campaign block is passed through untouched (round-trip-identity.test.ts).
+ * The keep part alone does not open a chapter: a save whose keep part says
+ * "open" but whose 0x455 bit is clear does not list it, and a later clear
+ * does not list it either, because the clear only raises the flag while the
+ * next chapter's first scenario is −1. The editor keeps them together
+ * (setCampaignEntryListed). The event gallery (`achievements`
+ * campaignEventsUnlocked, profile 0x1C) is a separate thing.
  */
 export type CampaignProgress = {
 	chapters: {
-		chapter1: ChapterProgress; // Yellow Turban Rebellion
-		chapter2: ChapterProgress; // The Tyrant Demon King
-		chapter3: ChapterProgress; // Warlord Era
-		chapter4: ChapterProgress; // The Strongest Warrior
-		chapter5: ChapterProgress; // Battle of Red Cliffs
-		chapter6: ChapterProgress; // Three Kingdoms
+		chapter1: ChapterProgress; // 黄巾の乱
+		chapter2: ChapterProgress; // 暴虐の魔王
+		chapter3: ChapterProgress; // 群雄割拠
+		chapter4: ChapterProgress; // 最強の武
+		chapter5: ChapterProgress; // 赤壁の戦い
+		chapter6: ChapterProgress; // 天下三分
 	};
-	chapter3Variants: Chapter3Variants;
-	warringStates: WarringStatesProgress;
+	/**
+	 * 戦乱 (Warring States), scenario 18: the list's last entry, profile 0x455
+	 * bit 5. The game lists it after a clear in 第六章.
+	 */
+	warringStates: {listed: boolean; record: ScenarioRecord};
 };
 
 // =============================================================================

@@ -8,9 +8,9 @@
 export const EXPLAINERS = {
 	// === Difficulty unlocks ===
 	normalUnlocked:
-		'Makes the Normal difficulty list (40 stages) PLAYABLE in DUEL → Training. Independent of clearing or scoring any stage.',
+		'Makes the Normal difficulty list (40 stages) PLAYABLE in DUEL → Training (profile 0x455 bit 6). The game sets it once every Easy stage is cleared.',
 	hardUnlocked:
-		'Makes the Hard difficulty list (20 stages) PLAYABLE in DUEL → Training. Independent of clearing or scoring any stage.',
+		'Makes the Hard difficulty list (20 stages) PLAYABLE in DUEL → Training (profile 0x455 bit 7). The game sets it once every Normal stage is cleared.',
 
 	// === DUEL per-stage facets (kept DISTINCT) ===
 	stageCleared:
@@ -24,19 +24,19 @@ export const EXPLAINERS = {
 	troopColors:
 		'Which 部隊色 (troop colours) are selectable in the colour picker. Three are always on; the rest are earned via DUEL all-clears and online-win milestones.',
 
-	// === Campaign unlocks ===
-	chapterUnlocked:
-		'Lets you tap this chapter from the CONQUEST map. You still need to clear its stages.',
-	chapterStage1: 'Marks Episode 1 of the chapter as cleared.',
-	chapterStage2: 'Marks Episode 2 of the chapter as cleared.',
+	// === Campaign (戦略ノ章) ===
+	chapterListed:
+		'Shows the chapter in the CONQUEST chapter list (profile 0x455). The game lists it after a clear in the chapter before it. Listing one lists the chapters before it.',
+	chapterAlwaysListed:
+		'Chapter 1 and the prologue are always in the CONQUEST chapter list.',
 	chapterStage3:
-		'Marks the bonus Episode (Hero’s Campaign) as cleared. Requires Episodes 1 + 2 already done.',
-	chapterReward:
-		'Records the reward Lord card as obtained for this chapter. Does not add the card on its own.',
-	chapter3Variants:
-		'Branch-specific Chapter 3 stages (Yellow Turban, Red Cliffs, etc.), unlocked through Chapter 3 play.',
+		'Offers stage III in the chapter’s stage list (profile 0x456). The game opens it once stages I and II have both been cleared.',
+	scenarioClears:
+		'Times cleared (クリア回数), shown in the stage list. Kept in the campaign save block.',
+	scenarioBest:
+		'Best score (最高得点), shown in the stage list. 5000 until beaten. Kept in the campaign save block.',
 	warringStates:
-		'Endgame Warring States mode, accessible after clearing the main campaign.',
+		'The last entry of the CONQUEST chapter list (profile 0x455 bit 5). The game lists it after a clear in Chapter 6.',
 
 	// === Cards / sages ===
 	cardsUnlockAll:

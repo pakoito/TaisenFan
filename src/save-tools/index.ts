@@ -6,6 +6,10 @@
  *   extractProfile(sav)                 → parse .sav buffer → SaveProfile JSON
  *   createSave(profile)                 → SaveProfile JSON → .sav buffer
  *   replaceSave(sav, profile)           → write full profile into existing .sav
+ *
+ * A SaveProfile is the profile block plus the 戦略ノ章 records of the
+ * campaign ("history") block's keep part (campaign-codec.ts); the rest of
+ * the campaign block is passed through.
  *   patchSave(sav, patch)               → deep-merge partial changes into .sav
  *   applyPreset(profile, preset)        → apply a preset to a profile
  *
@@ -13,6 +17,8 @@
  * Works in both Node.js and browsers.
  */
 
+import {writeCampaignHistory} from './campaign-codec';
+import {getBlock} from './crypto';
 import {deepMerge} from './deep-merge';
 import {
 	applyPreset as applyPresetImpl,
@@ -23,12 +29,23 @@ import {
 import {
 	buildSav,
 	freshHeader,
+	type ParsedSave,
 	parseSav,
 	readPlayerName,
 	readRegionCode,
 	writePlayerName,
 } from './save-io';
 
+export {
+	CAMPAIGN,
+	CAMPAIGN_ENTRIES,
+	type CampaignEntry,
+	CHAPTER_KEYS,
+	type ChapterKey,
+	openWholeCampaign,
+	readCampaign,
+	setCampaignEntryListed,
+} from './campaign-codec';
 export {PATCHED_ROM_BASENAME} from './constants';
 export {
 	readPlayerName,
@@ -52,7 +69,6 @@ export type {
 	CardCollection,
 	CardEntry,
 	CardQuantity,
-	Chapter3Variants,
 	ChapterProgress,
 	// Decks
 	DeckSlot,
@@ -67,6 +83,7 @@ export type {
 	SageName,
 	// Core profile type
 	SaveProfile,
+	ScenarioRecord,
 	StageResult,
 	// Training
 	TrainingProgress,
@@ -74,7 +91,6 @@ export type {
 	TroopColor,
 	TroopColors,
 	Tutorials,
-	WarringStatesProgress,
 	WinLossRecord,
 } from './types';
 
@@ -164,7 +180,7 @@ export async function extractProfile(sav: Uint8Array): Promise<SaveProfile> {
 	const parsed = await parseSav(sav);
 	const profileBin = parsed.blocks.get('profile');
 	if (!profileBin) throw new Error('Profile block not found in save');
-	const profile = readProfile(profileBin);
+	const profile = readProfile(profileBin, parsed.blocks.get('history'));
 	profile.playerName = readPlayerName(parsed.header);
 	profile.regionCode = readRegionCode(parsed.header);
 	return profile;
@@ -180,6 +196,9 @@ export async function createSave(profile: SaveProfile): Promise<Uint8Array> {
 	writePlayerName(header, profile.playerName);
 	const blocks = new Map<string, Uint8Array>();
 	blocks.set('profile', profileBin);
+	const history = new Uint8Array(getBlock('history').size);
+	writeCampaignHistory(history, profile.campaign);
+	blocks.set('history', history);
 	return buildSav(header, blocks);
 }
 
@@ -196,6 +215,7 @@ export async function replaceSave(
 	if (!profileBin) throw new Error('Profile block not found in save');
 	const newProfileBin = writeProfile(profile, profileBin);
 	parsed.blocks.set('profile', newProfileBin);
+	writeHistory(parsed, profile);
 	writePlayerName(parsed.header, profile.playerName);
 	return buildSav(parsed.header, parsed.blocks, parsed.rawSav);
 }
@@ -212,11 +232,25 @@ export async function patchSave(
 	const parsed = await parseSav(sav);
 	const profileBin = parsed.blocks.get('profile');
 	if (!profileBin) throw new Error('Profile block not found in save');
-	const existing = readProfile(profileBin);
+	const existing = readProfile(profileBin, parsed.blocks.get('history'));
 	const merged = deepMerge<SaveProfile>(existing, patch);
 	const newProfileBin = writeProfile(merged, profileBin);
 	parsed.blocks.set('profile', newProfileBin);
+	writeHistory(parsed, merged);
 	return buildSav(parsed.header, parsed.blocks, parsed.rawSav);
+}
+
+/**
+ * Write the profile's 戦略ノ章 records into the parsed save's campaign
+ * ("history") block. Only records that change are written; an unchanged
+ * block keeps its encrypted bytes (buildSav).
+ */
+function writeHistory(parsed: ParsedSave, profile: SaveProfile): void {
+	const history = parsed.blocks.get('history');
+	if (!history) throw new Error('History block not found in save');
+	const next = new Uint8Array(history);
+	writeCampaignHistory(next, profile.campaign);
+	parsed.blocks.set('history', next);
 }
 
 /**

@@ -18,6 +18,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import {CAMPAIGN} from '@/save-tools/campaign-codec';
 import {BLOCKS} from '@/save-tools/crypto';
 import {
 	CARD_OWN,
@@ -308,19 +309,40 @@ describe('save-field-map drift guard (website codec ↔ canonical map)', () => {
 		expect(OFF.TITLE_END - OFF.TITLE_BASE + 1).toBe(titleUnlock.len);
 	});
 
-	it('Mode-unlock (0x455) + chapter-completion (0x456) bytes', () => {
-		expect(OFF.MODE_UNLOCK).toBe(
-			f(
-				'mode_unlock_bitmask_bit7_hard_geki_bit6_normal_nan_bits0to5_chapter_unlock',
-			).off,
+	it('Unlock bit array (0x455..0x456) and its pending copy (0x453..0x454)', () => {
+		const pending = f(
+			'unlock_pending_bits_copied_to_0x455_by_the_unlock_notice',
 		);
-		// Website codec calls 0x456 CHAPTER3_UNLOCK; the map calls it
-		// chapter_completion_flags. Same offset.
-		expect(OFF.CHAPTER3_UNLOCK).toBe(
-			f(
-				'chapter_completion_flags_NOT_chapter_list_visibility_zeroing_left_list_unchanged',
-			).off,
+		const list = f(
+			'unlock_bits_0to5_conquest_chapter_list_ch2_to_ch6_senran_6_duel_normal_7_duel_hard',
 		);
+		const stage3 = f(
+			'unlock_bits_0to5_conquest_stage3_of_ch1_to_ch6_6to7_unused',
+		);
+		expect(OFF.MODE_PENDING).toBe(pending.off);
+		expect(pending.len).toBe(2);
+		expect(OFF.MODE_UNLOCK).toBe(list.off);
+		expect(OFF.CHAPTER3_UNLOCK).toBe(stage3.off);
+		expect(CAMPAIGN.LISTED).toBe(list.off);
+		expect(CAMPAIGN.LISTED_PENDING).toBe(pending.off);
+		expect(CAMPAIGN.STAGE3).toBe(stage3.off);
+		expect(CAMPAIGN.STAGE3_PENDING).toBe(pending.off + 1);
+	});
+
+	it('Campaign keep part (campaign-codec.ts) matches the campaign block map', () => {
+		const campaign = block('campaign');
+		const at = (name: string) => {
+			const e = campaign.find(x => x.name === name);
+			if (!e) throw new Error(`campaign map has no field "${name}"`);
+			return e;
+		};
+		const state = at('keep_scenario_state_20_minus1_locked_0_open_n_clears');
+		const best = at('keep_scenario_best_score_20_default_5000');
+		expect(CAMPAIGN.KEEP_STATE).toBe(state.off);
+		expect(CAMPAIGN.SCENARIOS * 2).toBe(state.len);
+		expect(CAMPAIGN.KEEP_BEST).toBe(best.off);
+		expect(CAMPAIGN.SCENARIOS * 4).toBe(best.len);
+		expect(CAMPAIGN.KEEP_INIT).toBe(at('keep_part_initialised').off);
 	});
 
 	it('Selected/displayed lord title (u16, stores idx+19) at 0x458', () => {

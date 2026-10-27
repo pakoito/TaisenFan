@@ -5,6 +5,12 @@
  * user-friendly SaveProfile JSON structure.
  */
 
+import {
+	defaultCampaign,
+	openWholeCampaign,
+	readCampaign,
+	writeCampaignProfile,
+} from './campaign-codec';
 import {CARD_TABLE, CARD_TOTAL_SLOTS} from './card-table';
 import {
 	ALL_SAGE_NAMES,
@@ -20,11 +26,9 @@ import {
 import type {
 	AchievementBitfield,
 	Achievements,
-	CampaignProgress,
 	CardCollection,
 	CardEntry,
 	CardQuantity,
-	ChapterProgress,
 	PlayerStats,
 	SageCollection,
 	SageEntry,
@@ -90,8 +94,9 @@ export const OFF = {
 	CAMPAIGN_EVENTS: 0x1c,
 	CAMPAIGN_EVENTS_END: 0x3b,
 
-	// Campaign episode completion (8 bytes, 6 chapters × 3 episodes)
-	// Required for Episode 3 to be playable (not just displayed).
+	// 8 bytes after the event gallery, written by the presets only. They do
+	// not gate 戦略ノ章 stage III (that is 0x456, campaign-codec.ts). The
+	// gallery's bit index (group·15 + item, ov001 0x021574A0) reaches 0x3F.
 	EPISODE_COMPLETION: 0x3c,
 	EPISODE_COMPLETION_END: 0x43,
 
@@ -150,7 +155,13 @@ export const OFF = {
 	TITLE_BASE: 0x4_45,
 	TITLE_END: 0x4_52,
 
-	// Mode/Campaign unlocks
+	// The bit array the game's unlock notice sets (arm9 test 0x0203532C, set
+	// 0x02035318), and its pending copy at 0x453 (0x020352F0 / 0x02035304):
+	//   0x455 bits 0-5  戦略ノ章 chapter list: 第二章..第六章, 戦乱
+	//   0x455 bit 6     DUEL NORMAL (難) tab; bit 7 the HARD (激) tab
+	//   0x456 bits 0-5  stage III of 第一章..第六章 (array bits 8-13)
+	// See campaign-codec.ts for the 戦略ノ章 bits.
+	MODE_PENDING: 0x4_53,
 	MODE_UNLOCK: 0x4_55,
 	CHAPTER3_UNLOCK: 0x4_56,
 
@@ -264,7 +275,14 @@ function setOwnedCount(old: number, q: CardQuantity, flags?: number): number {
 // READ: Binary → SaveProfile
 // =============================================================================
 
-export function readProfile(buf: Uint8Array): SaveProfile {
+/**
+ * Decode a profile block. `history`, the campaign block, gives the 戦略ノ章
+ * clear counts and best scores; without it they read as a fresh save's.
+ */
+export function readProfile(
+	buf: Uint8Array,
+	history?: Uint8Array,
+): SaveProfile {
 	if (buf.length !== PROFILE_SIZE) {
 		throw new Error(
 			`Invalid profile size: ${buf.length}, expected ${PROFILE_SIZE}`,
@@ -280,7 +298,7 @@ export function readProfile(buf: Uint8Array): SaveProfile {
 		stats: readStats(buf),
 		training: readTraining(buf),
 		troopColors: readTroopColors(buf),
-		campaign: readCampaign(buf),
+		campaign: readCampaign(buf, history),
 		cards: readCards(buf),
 		sages: readSages(buf),
 		achievements: readAchievements(buf),
@@ -378,50 +396,6 @@ function readTroopColors(buf: Uint8Array): TroopColors {
 		pink: Boolean(lo & 0x40),
 		cyan: Boolean(lo & 0x80),
 		white: Boolean(hi & 0x01),
-	};
-}
-
-function readCampaign(buf: Uint8Array): CampaignProgress {
-	const modeFlags = buf[OFF.MODE_UNLOCK]!;
-	const ch3Flags = buf[OFF.CHAPTER3_UNLOCK]!;
-
-	// Bits 0-5 of MODE_UNLOCK control chapter unlock status
-	// Bits of CHAPTER3_UNLOCK control chapter completion
-	function chapterFromBit(bit: number): ChapterProgress {
-		const unlocked = Boolean(modeFlags & (1 << bit));
-		const completed = Boolean(ch3Flags & (1 << bit));
-		return {
-			unlocked,
-			stage1Completed: completed,
-			stage2Completed: completed,
-			stage3Completed: completed,
-			rewardCardObtained: completed,
-		};
-	}
-
-	return {
-		chapters: {
-			chapter1: chapterFromBit(0),
-			chapter2: chapterFromBit(1),
-			chapter3: chapterFromBit(2),
-			chapter4: chapterFromBit(3),
-			chapter5: chapterFromBit(4),
-			chapter6: chapterFromBit(5),
-		},
-		// chapter3Variants kept for API compatibility - derived from completion flags
-		chapter3Variants: {
-			yellowTurbanRebellion: Boolean(ch3Flags & 0x01),
-			tyrantDemonKing: Boolean(ch3Flags & 0x02),
-			rivalWarlords: Boolean(ch3Flags & 0x04),
-			redCliffs: Boolean(ch3Flags & 0x08),
-			threeKingdomsDivision: Boolean(ch3Flags & 0x10),
-			mightiestWarrior: Boolean(ch3Flags & 0x20),
-		},
-		warringStates: {
-			unlocked: false,
-			completed: false,
-			highScore: 0,
-		},
 	};
 }
 
@@ -593,7 +567,7 @@ export function writeProfile(
 	writeStats(buf, profile.stats);
 	writeTraining(buf, profile.training);
 	writeTroopColors(buf, profile.troopColors);
-	writeCampaign(buf, profile.campaign);
+	writeCampaignProfile(buf, profile.campaign);
 	writeCards(buf, profile.cards);
 	writeSages(buf, profile.sages);
 	writeAchievements(buf, profile.achievements);
@@ -638,11 +612,18 @@ function writeStats(buf: Uint8Array, stats: PlayerStats): void {
 }
 
 function writeTraining(buf: Uint8Array, training: TrainingProgress): void {
-	// Mode flags
-	let modeFlags = buf[OFF.MODE_UNLOCK]! & 0x3f; // Preserve campaign bits
-	if (training.normalUnlocked) modeFlags |= 0x40;
-	if (training.hardUnlocked) modeFlags |= 0x80;
-	buf[OFF.MODE_UNLOCK] = modeFlags;
+	// DUEL tabs: 0x455 bit 6 opens NORMAL, bit 7 HARD (ov001 0x021058A4..
+	// 0x021058BE). A bit that changes is written to the pending copy at 0x453
+	// too: the game's unlock notice would copy a pending bit back.
+	const tiers = [
+		[6, training.normalUnlocked],
+		[7, training.hardUnlocked],
+	] as const;
+	for (const [n, on] of tiers) {
+		if (readBit(buf, OFF.MODE_UNLOCK, n) === on) continue;
+		writeBit(buf, OFF.MODE_UNLOCK, n, on);
+		writeBit(buf, OFF.MODE_PENDING, n, on);
+	}
 
 	// Tutorials: bits 0-3 of 0x42C. Bits 4-7 are unknown — preserve them.
 	let tutBits = 0;
@@ -706,40 +687,6 @@ function writeTroopColors(buf: Uint8Array, colors: TroopColors): void {
 	// 0x42E: bit0 = white unlock; preserve the reserved upper bits.
 	buf[OFF.TROOP_COLOR_HI] =
 		(buf[OFF.TROOP_COLOR_HI]! & 0xfe) | (colors.white ? 0x01 : 0x00);
-}
-
-function writeCampaign(buf: Uint8Array, campaign: CampaignProgress): void {
-	const chapters = [
-		campaign.chapters.chapter1,
-		campaign.chapters.chapter2,
-		campaign.chapters.chapter3,
-		campaign.chapters.chapter4,
-		campaign.chapters.chapter5,
-		campaign.chapters.chapter6,
-	];
-
-	// Write chapter unlock flags to bits 0-5 of 0x455
-	// Preserve training mode bits (6-7)
-	let modeFlags = buf[OFF.MODE_UNLOCK]! & 0xc0;
-	for (let i = 0; i < 6; i++) {
-		if (chapters[i]!.unlocked) {
-			modeFlags |= 1 << i;
-		}
-	}
-	buf[OFF.MODE_UNLOCK] = modeFlags;
-
-	// Write chapter-completion flags into bits 0-5 of 0x456. Bits 6-7 are
-	// unknown — preserve them.
-	let ch3Flags = 0;
-	for (let i = 0; i < 6; i++) {
-		const ch = chapters[i]!;
-		// Chapter is complete if all 3 stages are done
-		if (ch.stage1Completed && ch.stage2Completed && ch.stage3Completed) {
-			ch3Flags |= 1 << i;
-		}
-	}
-	buf[OFF.CHAPTER3_UNLOCK] =
-		(buf[OFF.CHAPTER3_UNLOCK]! & 0xc0) | (ch3Flags & 0x3f);
 }
 
 function writeCards(buf: Uint8Array, cards: CardCollection): void {
@@ -914,14 +861,6 @@ export function defaultProfile(): SaveProfile {
 		defaultStages[stage.stageId] = {completed: false, highScore: 0};
 	}
 
-	const defaultChapter: ChapterProgress = {
-		unlocked: false,
-		stage1Completed: false,
-		stage2Completed: false,
-		stage3Completed: false,
-		rewardCardObtained: false,
-	};
-
 	return {
 		playerName: '',
 		regionCode: 0,
@@ -954,29 +893,8 @@ export function defaultProfile(): SaveProfile {
 			stages: defaultStages,
 		},
 		troopColors: {...BASE_TROOP_COLORS},
-		campaign: {
-			chapters: {
-				chapter1: {...defaultChapter}, // Game unlocks Ch.1 via tutorial — start locked
-				chapter2: {...defaultChapter}, // Ch.2+ start locked
-				chapter3: {...defaultChapter},
-				chapter4: {...defaultChapter},
-				chapter5: {...defaultChapter},
-				chapter6: {...defaultChapter},
-			},
-			chapter3Variants: {
-				yellowTurbanRebellion: false,
-				tyrantDemonKing: false,
-				rivalWarlords: false,
-				redCliffs: false,
-				threeKingdomsDivision: false,
-				mightiestWarrior: false,
-			},
-			warringStates: {
-				unlocked: false,
-				completed: false,
-				highScore: 0,
-			},
-		},
+		// 序章 and 第一章 only, the keep part as the game initialises it.
+		campaign: defaultCampaign(),
 		cards: {cards: {}},
 		sages: {sages: defaultSages},
 		achievements: {
@@ -1000,13 +918,10 @@ export function applyPreset(profile: SaveProfile, preset: string): SaveProfile {
 			// duel stage S-ranked (40k), max gold and ranks, all sages at level
 			// 20, all titles, all event galleries, all tutorials done, every
 			// troop colour unlocked.
-			const completeChapter: ChapterProgress = {
-				unlocked: true,
-				stage1Completed: true,
-				stage2Completed: true,
-				stage3Completed: true,
-				rewardCardObtained: true,
-			};
+			// Every chapter-list entry and stage III offered, every scenario
+			// cleared once (best scores kept).
+			const campaign = structuredClone(profile.campaign);
+			openWholeCampaign(campaign, 1);
 			const maxedSages: Record<SageName, SageEntry> = {} as Record<
 				SageName,
 				SageEntry
@@ -1049,29 +964,7 @@ export function applyPreset(profile: SaveProfile, preset: string): SaveProfile {
 					stages: sRankedStages,
 				},
 				troopColors: {...ALL_TROOP_COLORS},
-				campaign: {
-					chapters: {
-						chapter1: {...completeChapter},
-						chapter2: {...completeChapter},
-						chapter3: {...completeChapter},
-						chapter4: {...completeChapter},
-						chapter5: {...completeChapter},
-						chapter6: {...completeChapter},
-					},
-					chapter3Variants: {
-						yellowTurbanRebellion: true,
-						tyrantDemonKing: true,
-						rivalWarlords: true,
-						redCliffs: true,
-						threeKingdomsDivision: true,
-						mightiestWarrior: true,
-					},
-					warringStates: {
-						unlocked: true,
-						completed: true,
-						highScore: 40_000,
-					},
-				},
+				campaign,
 				cards: {unlockAll: true, cards: {}},
 				// Explicit per-sage entries (no unlockAll shortcut) so writeSages
 				// honors the level=20 from maxedSages instead of falling back to 1.
@@ -1088,13 +981,10 @@ export function applyPreset(profile: SaveProfile, preset: string): SaveProfile {
 		case 'starter': {
 			// "All content, no outcomes": every menu the player can tap is open,
 			// but every "you beat this" flag is zero. The game still must be played.
-			const openChapter: ChapterProgress = {
-				unlocked: true,
-				stage1Completed: false,
-				stage2Completed: false,
-				stage3Completed: false,
-				rewardCardObtained: false,
-			};
+			// Every chapter-list entry and stage III offered, each scenario
+			// open with the clears it already has (0 for a fresh save).
+			const campaign = structuredClone(profile.campaign);
+			openWholeCampaign(campaign, 0);
 			return {
 				...profile,
 				training: {
@@ -1112,29 +1002,7 @@ export function applyPreset(profile: SaveProfile, preset: string): SaveProfile {
 				// "menu the player can tap"), without recording the underlying
 				// all-clear / online-win outcomes.
 				troopColors: {...ALL_TROOP_COLORS},
-				campaign: {
-					chapters: {
-						chapter1: {...openChapter},
-						chapter2: {...openChapter},
-						chapter3: {...openChapter},
-						chapter4: {...openChapter},
-						chapter5: {...openChapter},
-						chapter6: {...openChapter},
-					},
-					chapter3Variants: {
-						yellowTurbanRebellion: false,
-						tyrantDemonKing: false,
-						rivalWarlords: false,
-						redCliffs: false,
-						threeKingdomsDivision: false,
-						mightiestWarrior: false,
-					},
-					warringStates: {
-						unlocked: false,
-						completed: false,
-						highScore: 0,
-					},
-				},
+				campaign,
 				cards: {unlockAll: true, cards: {}},
 				sages: {unlockAll: true, sages: {} as Record<SageName, SageEntry>},
 				achievements: {

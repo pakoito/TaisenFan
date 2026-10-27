@@ -19,9 +19,10 @@ describe('save round-trip', () => {
 		expect(round.training.normalUnlocked).toBe(
 			original.training.normalUnlocked,
 		);
-		// A vanilla profile starts with every chapter locked — the game's own
-		// tutorial flips Chapter 1's bit during first launch.
-		expect(round.campaign.chapters.chapter1.unlocked).toBe(false);
+		// A fresh save lists 序章 and 第一章 only; chapter 1 is always listed.
+		expect(round.campaign.chapters.chapter1.listed).toBe(true);
+		expect(round.campaign.chapters.chapter2.listed).toBe(false);
+		expect(round.campaign.chapters.chapter2.stages[0].clears).toBeNull();
 		expect(round.cards.unlockAll ?? false).toBe(false);
 	});
 
@@ -32,9 +33,12 @@ describe('save round-trip', () => {
 
 		expect(round.training.normalUnlocked).toBe(true);
 		expect(round.training.hardUnlocked).toBe(true);
-		expect(round.campaign.chapters.chapter1.unlocked).toBe(true);
-		expect(round.campaign.chapters.chapter6.unlocked).toBe(true);
-		expect(round.campaign.chapters.chapter1.stage1Completed).toBe(false);
+		expect(round.campaign.chapters.chapter6.listed).toBe(true);
+		expect(round.campaign.chapters.chapter6.stage3).toBe(true);
+		expect(round.campaign.warringStates.listed).toBe(true);
+		// createSave writes the keep part into a blank campaign block.
+		expect(round.campaign.chapters.chapter6.stages[2].clears).toBe(0);
+		expect(round.campaign.chapters.chapter1.stages[0].clears).toBe(0);
 		expect(round.cards.unlockAll).toBe(true);
 		expect(round.sages.unlockAll).toBe(true);
 		expect(round.achievements.titlesUnlocked).toBe('none');
