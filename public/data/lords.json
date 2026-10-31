@@ -4656,7 +4656,7 @@
       "description": "Revives all of your dead Units and raises their POW. But this Unit dies on activation.",
       "shortDescription": "Revives all dead allies, raises POW\nThis Unit then dies",
       "duration": "Scales with INT",
-      "range": "board"
+      "range": "all"
     },
     "bustupKey": "kpcbustup:BU_7012.KPC",
     "miniBustupKey": "minibustup:BUH_7012.ABP",
@@ -4692,7 +4692,7 @@
       "description": "Revives all of your dead Rams and raises their SPD.",
       "shortDescription": "Revives all Rams and raises their SPD",
       "duration": "Scales with INT",
-      "range": "board"
+      "range": "all"
     },
     "bustupKey": "kpcbustup:BU_7013.KPC",
     "miniBustupKey": "minibustup:BUH_7013.ABP",
